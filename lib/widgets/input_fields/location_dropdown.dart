@@ -10,6 +10,7 @@ class LocationDropdown extends StatelessWidget {
   final List<String> items;
   final String? selectedItem;
   final ValueChanged<String?> onChanged;
+  final FormFieldValidator<String>? validator;
 
   const LocationDropdown({
     super.key,
@@ -17,6 +18,7 @@ class LocationDropdown extends StatelessWidget {
     required this.items,
     this.selectedItem,
     required this.onChanged,
+    this.validator,
     this.icon,
   });
 
@@ -33,6 +35,7 @@ class LocationDropdown extends StatelessWidget {
           fontSize: 14,
         ),
       ),
+      validator: validator,
       items: items.map((item) {
         return DropdownMenuItem<String>(
           value: item,
@@ -88,7 +91,7 @@ class LocationDropdown extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(
-            color: AppColors.midnight,
+            color: AppColors.red,
           ),
         ),
       ),

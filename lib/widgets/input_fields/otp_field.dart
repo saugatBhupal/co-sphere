@@ -71,7 +71,7 @@ class _OtpFieldState extends State<OtpField> {
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
-                    color: AppColors.midnight,
+                    color: AppColors.red,
                   ),
                 ),
               ),

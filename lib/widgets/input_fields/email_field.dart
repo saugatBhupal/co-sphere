@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class EmailField extends StatelessWidget {
   final TextEditingController emailController;
+  final FormFieldValidator<String>? validator;
   final String label;
   final String? icon;
 
@@ -13,6 +14,7 @@ class EmailField extends StatelessWidget {
     required this.emailController,
     required this.label,
     this.icon,
+    this.validator,
   });
 
   @override
@@ -21,9 +23,8 @@ class EmailField extends StatelessWidget {
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
       cursorColor: AppColors.grey,
-      // validator: (val) {
-      //   return FormValidator.validateEmail(val);
-      // },
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       style: const TextStyle(
         color: AppColors.midnight,
         fontFamily: AppFonts.albertSans,
@@ -78,7 +79,7 @@ class EmailField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(
-            color: AppColors.midnight,
+            color: AppColors.red,
           ),
         ),
       ),

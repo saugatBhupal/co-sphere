@@ -3,6 +3,7 @@ import 'package:cosphere/constants/app_assets.dart';
 import 'package:cosphere/constants/app_colors.dart';
 import 'package:cosphere/constants/app_fonts.dart';
 import 'package:cosphere/constants/app_strings.dart';
+import 'package:cosphere/constants/utils/form_validator.dart';
 import 'package:cosphere/widgets/appbar/authentication_appbar.dart';
 import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/widgets/input_fields/email_field.dart';
@@ -21,6 +22,8 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -38,52 +41,69 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 26),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const AuthenticationAppbar(),
-              const SizedBox(height: 20),
-              const AuthMessage(
-                  title: AppStrings.signinTitle,
-                  subtitle: AppStrings.signinSubtitle),
-              const SizedBox(height: 40),
-              EmailField(
-                emailController: _emailController,
-                label: "${AppStrings.email}/${AppStrings.phone}",
-                icon: AppIcons.user,
-              ),
-              const SizedBox(height: 25),
-              PasswordField(
-                passwordController: _passwordController,
-                label: AppStrings.password,
-                icon: AppIcons.user,
-              ),
-              const SizedBox(height: 15),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  AppStrings.forgot,
-                  style: TextStyle(
-                    fontFamily: AppFonts.albertSans,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.midnight,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 26),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AuthenticationAppbar(),
+                  const SizedBox(height: 20),
+                  const AuthMessage(
+                      title: AppStrings.signinTitle,
+                      subtitle: AppStrings.signinSubtitle),
+                  const SizedBox(height: 40),
+                  EmailField(
+                    emailController: _emailController,
+                    label: "${AppStrings.email}/${AppStrings.phone}",
+                    icon: AppIcons.user,
+                    validator: (val) {
+                      return FormValidator.validateEmail(val);
+                    },
                   ),
-                ),
+                  const SizedBox(height: 25),
+                  PasswordField(
+                    passwordController: _passwordController,
+                    label: AppStrings.password,
+                    icon: AppIcons.user,
+                    validator: (value) => FormValidator.validatePassword(value),
+                  ),
+                  const SizedBox(height: 15),
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      AppStrings.forgot,
+                      style: TextStyle(
+                        fontFamily: AppFonts.albertSans,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.midnight,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 35),
+                  DarkRoundedButton(
+                    title: AppStrings.signin,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.of(context).pushNamed(AppRoutes.home);
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                  AccountTextspan(
+                    infoText: AppStrings.notHaveAccount,
+                    functionText: AppStrings.signup,
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(AppRoutes.signup),
+                  )
+                ],
               ),
-              const SizedBox(height: 35),
-              const DarkRoundedButton(title: AppStrings.signin),
-              const SizedBox(height: 15),
-              AccountTextspan(
-                infoText: AppStrings.notHaveAccount,
-                functionText: AppStrings.signup,
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(AppRoutes.signup),
-              )
-            ],
+            ),
           ),
         ),
       ),

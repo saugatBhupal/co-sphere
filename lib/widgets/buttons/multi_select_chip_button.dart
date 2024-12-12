@@ -20,35 +20,38 @@ class _MultiSelectChipButtonState extends State<MultiSelectChipButton> {
   List<Widget> _buildInterestList() {
     return widget.interestList.map((item) {
       bool isSelected = selectedInterests.contains(item);
-      return Container(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-        child: ChoiceChip(
-          label: Text(item),
-          labelStyle: TextStyle(
-            color: isSelected ? AppColors.plaster : AppColors.midnight,
-            fontFamily: AppFonts.albertSans,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
-          labelPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 1),
-          showCheckmark: false,
-          side: BorderSide.none,
-          shape: RoundedRectangleBorder(
+      return Column(children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+          child: ChoiceChip(
+            label: Text(item),
+            labelStyle: TextStyle(
+              color: isSelected ? AppColors.plaster : AppColors.midnight,
+              fontFamily: AppFonts.albertSans,
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
+            labelPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 1),
+            showCheckmark: false,
             side: BorderSide.none,
-            borderRadius: BorderRadius.circular(32.0),
+            shape: RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.circular(32.0),
+            ),
+            backgroundColor: AppColors.plaster,
+            selectedColor: AppColors.midnight,
+            selected: isSelected,
+            onSelected: (selected) {
+              setState(() {
+                selectedInterests.contains(item)
+                    ? selectedInterests.remove(item)
+                    : selectedInterests.add(item);
+              });
+            },
           ),
-          backgroundColor: AppColors.plaster,
-          selectedColor: AppColors.midnight,
-          selected: isSelected,
-          onSelected: (selected) {
-            setState(() {
-              selectedInterests.contains(item)
-                  ? selectedInterests.remove(item)
-                  : selectedInterests.add(item);
-            });
-          },
         ),
-      );
+      ]);
     }).toList();
   }
 

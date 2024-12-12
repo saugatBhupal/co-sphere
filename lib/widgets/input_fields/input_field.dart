@@ -1,10 +1,12 @@
 import 'package:cosphere/constants/app_colors.dart';
 import 'package:cosphere/constants/app_fonts.dart';
 import 'package:cosphere/constants/app_strings.dart';
+import 'package:cosphere/constants/utils/form_validator.dart';
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController textController;
+  final FormFieldValidator<String>? validator;
   final String label;
   final String? icon;
 
@@ -13,6 +15,7 @@ class InputField extends StatelessWidget {
     required this.textController,
     required this.label,
     this.icon,
+    this.validator,
   });
 
   @override
@@ -21,9 +24,8 @@ class InputField extends StatelessWidget {
       controller: textController,
       keyboardType: TextInputType.name,
       cursorColor: AppColors.grey,
-      // validator: (val) {
-      //   return FormValidator.validateEmail(val);
-      // },
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       style: const TextStyle(
         color: AppColors.midnight,
         fontFamily: AppFonts.albertSans,
@@ -78,7 +80,7 @@ class InputField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(
-            color: AppColors.midnight,
+            color: AppColors.red,
           ),
         ),
       ),

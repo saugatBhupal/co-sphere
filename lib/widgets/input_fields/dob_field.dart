@@ -1,6 +1,8 @@
 import 'package:cosphere/constants/app_colors.dart';
 import 'package:cosphere/constants/app_fonts.dart';
 import 'package:cosphere/constants/app_strings.dart';
+import 'package:cosphere/constants/utils/auto_hypen_formattor.dart';
+import 'package:cosphere/constants/utils/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,10 +21,12 @@ class DobField extends StatelessWidget {
     return TextFormField(
       controller: dobController,
       keyboardType: TextInputType.datetime,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       cursorColor: AppColors.grey,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'\d| - ')),
-        LengthLimitingTextInputFormatter(12),
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9\- ]')),
+        AutoHyphenFormatter(),
+        LengthLimitingTextInputFormatter(10),
       ],
       style: const TextStyle(
         color: AppColors.midnight,
@@ -67,19 +71,12 @@ class DobField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(
-            color: AppColors.midnight,
+            color: AppColors.red,
           ),
         ),
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Date of birth is required';
-        }
-        final regex = RegExp(r'^\d{2} - \d{2} - \d{4}$');
-        if (!regex.hasMatch(value)) {
-          return 'Invalid format. Use DD - MM - YYYY';
-        }
-        return null;
+      validator: (val) {
+        return FormValidator.validateDOB(val);
       },
     );
   }

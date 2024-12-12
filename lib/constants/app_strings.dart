@@ -42,4 +42,13 @@ class AppStrings {
   static const String resend = "Resend";
   static const String confirm = "Confirm";
   static const String emailEx = "youremail@gmail.com";
+  // Validation Message
+  static const String fieldRequired = "is required";
+  static const String validEmail = "Please enter valid email address";
+  static const String passwordLength =
+      "Make sure your password is atleast 6 letters long.";
+  static const String passwordMatch = "Password does not match";
+  static const otpLength = "OTP must be 6 characters long";
+  static const invalidDob = "Invalid format. Use DD - MM - YYYY";
+  static const invalidPassword = "Must include a number and special character";
 }

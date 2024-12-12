@@ -1,16 +1,20 @@
 import 'package:cosphere/constants/app_colors.dart';
 import 'package:cosphere/constants/app_fonts.dart';
 import 'package:cosphere/constants/app_strings.dart';
+import 'package:cosphere/constants/utils/form_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PhoneField extends StatelessWidget {
   final TextEditingController phoneController;
+  final FormFieldValidator<String>? validator;
   final String label;
   final String? icon;
 
   const PhoneField({
     super.key,
     required this.phoneController,
+    this.validator,
     required this.label,
     this.icon,
   });
@@ -21,9 +25,9 @@ class PhoneField extends StatelessWidget {
       controller: phoneController,
       keyboardType: TextInputType.number,
       cursorColor: AppColors.grey,
-      // validator: (val) {
-      //   return FormValidator.validateEmail(val);
-      // },
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      inputFormatters: [LengthLimitingTextInputFormatter(10)],
       style: const TextStyle(
         color: AppColors.midnight,
         fontFamily: AppFonts.albertSans,
@@ -87,7 +91,7 @@ class PhoneField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(
-            color: AppColors.midnight,
+            color: AppColors.red,
           ),
         ),
       ),

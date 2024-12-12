@@ -10,4 +10,5 @@ class AppRoutes {
   static const String otp = "/otp";
   static const String password = "/password";
   static const String interest = "/interest";
+  static const String home = "/home";
 }

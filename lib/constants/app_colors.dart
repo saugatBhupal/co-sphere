@@ -4,6 +4,7 @@ class AppColors {
   AppColors._();
 
   static const Color dim = Color(0xFFBEB6B6);
+  static const Color red = Color(0xFFC31818);
   static const Color grey = Color(0xFF716C6C);
   static const Color urban = Color(0xFFD9D9D9);
   static const Color black = Color(0xFF000000);

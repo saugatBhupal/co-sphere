@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
   final TextEditingController passwordController;
+  final FormFieldValidator<String>? validator;
   final String label;
   final String? icon;
 
   const PasswordField({
     super.key,
     required this.passwordController,
+    this.validator,
     required this.label,
     this.icon,
   });
@@ -22,9 +24,8 @@ class PasswordField extends StatelessWidget {
       obscuringCharacter: "•",
       keyboardType: TextInputType.visiblePassword,
       cursorColor: AppColors.grey,
-      // validator: (val) {
-      //   return FormValidator.validateEmail(val);
-      // },
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       style: const TextStyle(
         color: AppColors.midnight,
         fontFamily: AppFonts.albertSans,
@@ -79,7 +80,7 @@ class PasswordField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
           borderSide: const BorderSide(
-            color: AppColors.midnight,
+            color: AppColors.red,
           ),
         ),
       ),
