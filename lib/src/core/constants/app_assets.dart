@@ -15,4 +15,9 @@ class AppIcons {
   static const String briefcaseS = "$_iconsPath/briefcase.svg";
   static const String user = "$_iconsPath/user.png";
   static const String dropdown = "$_iconsPath/dropdown.png";
+  static const String dashboard = "$_iconsPath/dashboard.svg";
+  static const String explore = "$_iconsPath/explore.svg";
+  static const String create = "$_iconsPath/create.svg";
+  static const String task = "$_iconsPath/task.svg";
+  static const String profile = "$_iconsPath/profile.svg";
 }

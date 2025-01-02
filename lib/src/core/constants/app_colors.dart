@@ -11,6 +11,7 @@ class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color satin = Color(0xFFF7F9FC);
+  static const Color silver = Color(0xFF868383);
   static const Color plaster = Color(0xFFE9E9E9);
   static const Color offWhite = Color(0xFFFFF8F8);
   static const Color midnight = Color(0xFF0D0D52);

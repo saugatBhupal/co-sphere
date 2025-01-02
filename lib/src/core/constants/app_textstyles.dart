@@ -10,7 +10,31 @@ class AppTextStyles {
     return TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight);
   }
 
-  static TextStyle thinStyle({Color? color}) {
+  static TextStyle labelSmall({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.subLight,
+      fontWeight: FontThickness.regular,
+    );
+  }
+
+  static TextStyle labelLarge({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.light,
+      fontWeight: FontThickness.regular,
+    );
+  }
+
+  static TextStyle bodySmall({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.subLabel,
+      fontWeight: FontThickness.light,
+    );
+  }
+
+  static TextStyle bodyLarge({Color? color}) {
     return _setStyle(
       color: color,
       fontSize: FontSize.label,
@@ -18,59 +42,59 @@ class AppTextStyles {
     );
   }
 
-  static TextStyle extraLightStyle({Color? color}) {
-    return _setStyle(
-      color: color,
-      fontSize: FontSize.light,
-      fontWeight: FontThickness.extraLight,
-    );
-  }
-
-  static TextStyle lightStyle({Color? color}) {
-    return _setStyle(
-      color: color,
-      fontSize: FontSize.light,
-      fontWeight: FontThickness.light,
-    );
-  }
-
-  static TextStyle regularStyle({Color? color}) {
+  static TextStyle titleSmall({Color? color}) {
     return _setStyle(
       color: color,
       fontSize: FontSize.details,
+      fontWeight: FontThickness.medium,
+    );
+  }
+
+  static TextStyle titleMedium({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.details,
+      fontWeight: FontThickness.semiBold,
+    );
+  }
+
+  static TextStyle titleLarge({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.body,
       fontWeight: FontThickness.regular,
     );
   }
 
-  static TextStyle mediumStyle({Color? color}) {
-    return _setStyle(
-      color: color,
-      fontSize: FontSize.body,
-      fontWeight: FontThickness.medium,
-    );
-  }
-
-  static TextStyle semiBoldStyle({Color? color}) {
+  static TextStyle headlineSmall({Color? color}) {
     return _setStyle(
       color: color,
       fontSize: FontSize.subTitle,
-      fontWeight: FontThickness.medium,
+      fontWeight: FontThickness.regular,
     );
   }
 
-  static TextStyle boldStyle({Color? color}) {
-    return _setStyle(
-      color: color,
-      fontSize: FontSize.subTitle,
-      fontWeight: FontThickness.bold,
-    );
-  }
-
-  static TextStyle blackStyle({Color? color}) {
+  static TextStyle headlineLarge({Color? color}) {
     return _setStyle(
       color: color,
       fontSize: FontSize.title,
-      fontWeight: FontThickness.extraBold,
+      fontWeight: FontThickness.semiBold,
+    );
+  }
+
+  static TextStyle displaySmall({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.display,
+      fontWeight: FontThickness.semiBold,
+    );
+  }
+
+  static TextStyle displayLarge({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.headline,
+      fontWeight: FontThickness.medium,
     );
   }
 }
