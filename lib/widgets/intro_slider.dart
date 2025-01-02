@@ -1,7 +1,7 @@
-import 'package:cosphere/core/constants/app_assets.dart';
-import 'package:cosphere/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/constants/app_assets.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
-import 'package:cosphere/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_colors.dart';
 
 class IntroSlider extends StatefulWidget {
   const IntroSlider({super.key});

@@ -1,6 +1,6 @@
 
-import 'package:cosphere/core/constants/app_strings.dart';
-import 'package:cosphere/core/utils/text_utils.dart';
+import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/utils/text_utils.dart';
 
 class FormValidator {
   static String? validateEmail(String? val, [bool supportEmpty = false]) {

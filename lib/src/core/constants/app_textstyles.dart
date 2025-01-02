@@ -1,4 +1,4 @@
-import 'package:cosphere/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class AppTextStyles {

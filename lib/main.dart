@@ -1,4 +1,4 @@
-import 'package:cosphere/config/app.dart';
+import 'package:cosphere/src/config/app.dart';
 import 'package:flutter/material.dart';
 
 void main() {

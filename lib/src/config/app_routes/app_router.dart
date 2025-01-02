@@ -1,5 +1,5 @@
-import 'package:cosphere/config/app_routes/app_routes.dart';
-import 'package:cosphere/config/app_routes/no_route_found.dart';
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/app_routes/no_route_found.dart';
 import 'package:cosphere/views/home/home_screen.dart';
 import 'package:cosphere/views/interests/interest_screen.dart';
 import 'package:cosphere/views/onboarding/onboarding_screen.dart';

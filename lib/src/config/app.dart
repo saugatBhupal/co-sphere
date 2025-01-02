@@ -1,5 +1,5 @@
-import 'package:cosphere/config/app_routes/app_router.dart';
-import 'package:cosphere/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/app_routes/app_router.dart';
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
