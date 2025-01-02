@@ -3,6 +3,9 @@ class AppImages {
   static const String _imagesPath = "assets/images";
   static const String appLogo = "$_imagesPath/app-logo.png";
   static const String carousel1 = "$_imagesPath/carousel-1.png";
+  static const String user = "$_imagesPath/user-default.png";
+  static const String profile =
+      "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg";
 }
 
 class AppIcons {

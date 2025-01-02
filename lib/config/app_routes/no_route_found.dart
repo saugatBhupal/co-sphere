@@ -1,4 +1,4 @@
-import 'package:cosphere/constants/app_strings.dart';
+import 'package:cosphere/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class NoRouteFound extends StatelessWidget {

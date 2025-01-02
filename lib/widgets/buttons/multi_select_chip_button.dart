@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:cosphere/constants/app_colors.dart';
-import 'package:cosphere/constants/app_fonts.dart';
+import 'package:cosphere/core/constants/app_colors.dart';
+import 'package:cosphere/core/constants/app_fonts.dart';
 
 class MultiSelectChipButton extends StatefulWidget {
   final List<String> interestList;

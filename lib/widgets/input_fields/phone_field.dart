@@ -1,7 +1,7 @@
-import 'package:cosphere/constants/app_colors.dart';
-import 'package:cosphere/constants/app_fonts.dart';
-import 'package:cosphere/constants/app_strings.dart';
-import 'package:cosphere/constants/utils/form_validator.dart';
+import 'package:cosphere/core/constants/app_colors.dart';
+import 'package:cosphere/core/constants/app_fonts.dart';
+import 'package:cosphere/core/constants/app_strings.dart';
+import 'package:cosphere/core/utils/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

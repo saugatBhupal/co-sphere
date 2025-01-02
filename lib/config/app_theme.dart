@@ -1,5 +1,6 @@
-import 'package:cosphere/constants/app_colors.dart';
-import 'package:cosphere/constants/app_fonts.dart';
+import 'package:cosphere/core/constants/app_colors.dart';
+import 'package:cosphere/core/constants/app_fonts.dart';
+import 'package:cosphere/core/constants/app_textstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,6 +29,15 @@ class AppTheme {
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.midnight,
+      ),
+      textTheme: TextTheme(
+        labelSmall: AppTextStyles.thinStyle(color: AppColors.midnight),
+        bodySmall: AppTextStyles.lightStyle(color: AppColors.black),
+        bodyMedium: AppTextStyles.regularStyle(color: AppColors.black),
+        bodyLarge: AppTextStyles.semiBoldStyle(color: AppColors.black),
+        titleMedium: AppTextStyles.mediumStyle(color: AppColors.black),
+        titleLarge: AppTextStyles.boldStyle(color: AppColors.black),
+        headlineMedium: AppTextStyles.blackStyle(color: AppColors.black),
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: const TextStyle(

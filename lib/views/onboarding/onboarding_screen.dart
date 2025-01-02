@@ -1,8 +1,8 @@
 import 'package:cosphere/config/app_routes/app_routes.dart';
-import 'package:cosphere/constants/app_assets.dart';
-import 'package:cosphere/constants/app_colors.dart';
-import 'package:cosphere/constants/app_fonts.dart';
-import 'package:cosphere/constants/app_strings.dart';
+import 'package:cosphere/core/constants/app_assets.dart';
+import 'package:cosphere/core/constants/app_colors.dart';
+import 'package:cosphere/core/constants/app_fonts.dart';
+import 'package:cosphere/core/constants/app_strings.dart';
 import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/widgets/buttons/light_rounded_button.dart';
 import 'package:cosphere/widgets/intro_slider.dart';

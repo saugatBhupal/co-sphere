@@ -1,6 +1,6 @@
 import 'package:cosphere/config/app_routes/app_routes.dart';
-import 'package:cosphere/constants/app_strings.dart';
-import 'package:cosphere/constants/utils/form_validator.dart';
+import 'package:cosphere/core/constants/app_strings.dart';
+import 'package:cosphere/core/utils/form_validator.dart';
 import 'package:cosphere/widgets/appbar/authentication_appbar.dart';
 import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/widgets/input_fields/dob_field.dart';

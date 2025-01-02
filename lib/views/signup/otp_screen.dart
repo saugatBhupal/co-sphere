@@ -1,7 +1,7 @@
 import 'package:cosphere/config/app_routes/app_routes.dart';
-import 'package:cosphere/constants/app_colors.dart';
-import 'package:cosphere/constants/app_fonts.dart';
-import 'package:cosphere/constants/app_strings.dart';
+import 'package:cosphere/core/constants/app_colors.dart';
+import 'package:cosphere/core/constants/app_fonts.dart';
+import 'package:cosphere/core/constants/app_strings.dart';
 import 'package:cosphere/widgets/appbar/authentication_appbar.dart';
 import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/widgets/input_fields/otp_field.dart';
