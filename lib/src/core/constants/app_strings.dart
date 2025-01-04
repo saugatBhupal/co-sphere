@@ -5,7 +5,9 @@ class AppStrings {
   static const String appName = "Co-Sphere";
   static const String version = "V.1.1";
   static const String inaing = "inaing";
+  static const String hi = "Hi ";
   static const String welcome = "Welcome to ";
+  static const String welcomeBack = "Welcome back ";
   static const String skip = "Skip";
   static const String onboardMsg = "Find interesting projects easily";
   static const String signinTitle = "Sign in to your Account";

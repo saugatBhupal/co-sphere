@@ -20,4 +20,7 @@ class AppIcons {
   static const String create = "$_iconsPath/create.svg";
   static const String task = "$_iconsPath/task.svg";
   static const String profile = "$_iconsPath/profile.svg";
+  static const String search = "$_iconsPath/search.svg";
+  static const String chat = "$_iconsPath/chat.svg";
+  static const String notification = "$_iconsPath/notification.svg";
 }
