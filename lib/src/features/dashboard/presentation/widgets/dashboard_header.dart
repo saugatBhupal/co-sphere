@@ -3,8 +3,8 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:flutter/material.dart';
 
-class DashboardHeader extends StatelessWidget implements PreferredSizeWidget {
-  const DashboardHeader({super.key});
+class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const DashboardAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +13,9 @@ class DashboardHeader extends StatelessWidget implements PreferredSizeWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: AppBar(
+        forceMaterialTransparency: true,
+        backgroundColor: AppColors.satin,
+        foregroundColor: AppColors.satin,
         elevation: 0,
         automaticallyImplyLeading: false,
         titleSpacing: 0,

@@ -60,4 +60,14 @@ class AppStrings {
   static const tasks = "Tasks";
   static const clients = "Unique Clients";
   static const applicants = "Applicants";
+  static const rejected = "Rejected";
+  static const hired = "Hired";
+  static const likes = "Likes";
+  static const created = "Created By Me";
+  static const assigned = "Assigned To Me";
+  static const application = "My Applications";
+  static const deadline = "Deadline";
+  static const timeSpent = "Time Spent";
+  static const completion = "Completion";
+  static const view = "View All";
 }
