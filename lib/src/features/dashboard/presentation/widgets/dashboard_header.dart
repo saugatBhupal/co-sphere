@@ -9,21 +9,26 @@ class DashboardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "${AppStrings.hi} User,",
-              style: _textTheme.headlineSmall,
-            ),
-            Text(AppStrings.welcomeBack, style: _textTheme.titleSmall),
-          ],
-        ),
-        CircleImageAvatar(radius: 30),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${AppStrings.hi} User,",
+                style: _textTheme.headlineSmall,
+              ),
+              Text(AppStrings.welcomeBack,
+                  style: _textTheme.headlineLarge!
+                      .copyWith(color: AppColors.midnight)),
+            ],
+          ),
+          const CircleImageAvatar(radius: 28),
+        ],
+      ),
     );
   }
 }
