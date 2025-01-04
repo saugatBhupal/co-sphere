@@ -1,4 +1,7 @@
-import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_header.dart';
+import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/features/dashboard/presentation/widgets/components/completion_container.dart';
+import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_functions.dart';
+import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_metrics.dart';
 import 'package:flutter/material.dart';
 
 class DashboardBody extends StatelessWidget {
@@ -7,14 +10,16 @@ class DashboardBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              DashboardHeader(),
-            ],
-          ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 16),
+            DashboardFunctions(),
+            DashboardMetrics(),
+          ],
         ),
       ),
     );

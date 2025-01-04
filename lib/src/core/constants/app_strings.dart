@@ -53,4 +53,11 @@ class AppStrings {
   static const otpLength = "OTP must be 6 characters long";
   static const invalidDob = "Invalid format. Use DD - MM - YYYY";
   static const invalidPassword = "Must include a number and special character";
+  static const searchPh = "Search user, company or job";
+  static const level = "My level";
+  static const success = "Success";
+  static const rating = "Rating";
+  static const tasks = "Tasks";
+  static const clients = "Unique Clients";
+  static const applicants = "Applicants";
 }
