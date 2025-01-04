@@ -8,19 +8,17 @@ class SkipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
         color: AppColors.errigalWhite,
         borderRadius: BorderRadius.circular(5),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: const Text(
+      child: Text(
         AppStrings.skip,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          fontFamily: AppFonts.albertSans,
-        ),
+        style: _theme.textTheme.titleSmall!
+            .copyWith(fontWeight: FontThickness.medium, color: AppColors.black),
       ),
     );
   }

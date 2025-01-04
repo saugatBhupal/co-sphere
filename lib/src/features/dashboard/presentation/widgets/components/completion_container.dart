@@ -15,6 +15,8 @@ class CompletionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double completionRatio = completed / total;
+    print("Completion Ratio: $completionRatio");
+
     return Container(
       width: 32,
       height: 100,
@@ -27,18 +29,29 @@ class CompletionContainer extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: color,
+              color: const Color(0xFFECE6E6),
               borderRadius: BorderRadius.circular(32),
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: completionRatio * 100,
-            decoration: const BoxDecoration(
-              color: Color(0xFFECE6E6),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(32),
-                topRight: Radius.circular(32),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.infinity,
+              height: completionRatio > 0.7 && completionRatio < 1.0
+                  ? completionRatio * 100 - 30
+                  : completionRatio * 100,
+              decoration: BoxDecoration(
+                color: color, // Completed color
+                borderRadius: BorderRadius.only(
+                  bottomLeft: const Radius.circular(32),
+                  bottomRight: const Radius.circular(32),
+                  topLeft: completionRatio == 1.0
+                      ? const Radius.circular(32)
+                      : Radius.zero,
+                  topRight: completionRatio == 1.0
+                      ? const Radius.circular(32)
+                      : Radius.zero,
+                ),
               ),
             ),
           ),

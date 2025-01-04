@@ -49,8 +49,8 @@ class DashboardMetrics extends StatelessWidget {
                 subtitle: "6",
                 bottom: true,
                 widget: const CompletionContainer(
-                  total: 10,
-                  completed: 4,
+                  total: 23,
+                  completed: 3,
                   color: AppColors.midnight,
                 ),
               ),
@@ -60,7 +60,7 @@ class DashboardMetrics extends StatelessWidget {
                 subtitle: "4.0",
                 right: true,
                 widget: const CompletionContainer(
-                  total: 10,
+                  total: 20,
                   completed: 4,
                   color: AppColors.blue,
                 ),
