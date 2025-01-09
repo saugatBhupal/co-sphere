@@ -45,8 +45,8 @@ class ProfileSkills extends StatelessWidget {
                 6,
                 (index) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: const BoxDecoration(
                       color: AppColors.genie,
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -63,7 +63,7 @@ class ProfileSkills extends StatelessWidget {
               ),
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: AppColors.plaster,
                   borderRadius: BorderRadius.circular(8.0),

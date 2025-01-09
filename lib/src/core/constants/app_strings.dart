@@ -75,4 +75,12 @@ class AppStrings {
   static const chat = "Chat";
   static const skill = "Skills";
   static const more = "More";
+  static const about = "About";
+  static const experience = "Experience";
+  static const education = "Education";
+  static const history = "History";
+  static const reviews = "Reviews";
+  static const address = "Address";
+  static const joined = "Joined";
+  static const contact = "Contact";
 }
