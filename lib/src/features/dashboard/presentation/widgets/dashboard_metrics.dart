@@ -50,7 +50,7 @@ class DashboardMetrics extends StatelessWidget {
                 bottom: true,
                 widget: const CompletionContainer(
                   total: 23,
-                  completed: 3,
+                  completed: 13,
                   color: AppColors.midnight,
                 ),
               ),
