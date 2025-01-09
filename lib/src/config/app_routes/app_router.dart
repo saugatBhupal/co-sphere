@@ -1,6 +1,7 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/app_routes/no_route_found.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/views/home/home_screen.dart';
 import 'package:cosphere/views/interests/interest_screen.dart';
 import 'package:cosphere/views/onboarding/onboarding_screen.dart';
@@ -40,6 +41,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case AppRoutes.dashboard:
         return MaterialPageRoute(builder: (context) => const DashboardScreen());
+      case AppRoutes.profile:
+        return MaterialPageRoute(builder: (context) => const ProfileScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

@@ -25,4 +25,7 @@ class AppIcons {
   static const String notification = "$_iconsPath/notification.svg";
   static const String trophy = "$_iconsPath/trophy.svg";
   static const String location = "$_iconsPath/location.svg";
+  static const String badge = "$_iconsPath/badge.svg";
+  static const String web = "$_iconsPath/web.svg";
+  static const String like = "$_iconsPath/like.svg";
 }

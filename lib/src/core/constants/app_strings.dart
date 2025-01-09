@@ -70,4 +70,9 @@ class AppStrings {
   static const timeSpent = "Time Spent";
   static const completion = "Completion";
   static const view = "View All";
+  static const job = "Job Success";
+  static const links = "Links";
+  static const chat = "Chat";
+  static const skill = "Skills";
+  static const more = "More";
 }
