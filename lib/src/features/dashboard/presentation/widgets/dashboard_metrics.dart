@@ -97,7 +97,7 @@ Widget _buildGridItem(
   Widget? widget,
   String? total,
   double? font,
-  bool right = false,
+  bool right = false, 
   bool bottom = false,
 }) {
   return Container(

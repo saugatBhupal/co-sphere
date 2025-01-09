@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/application_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/assigned_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/created_card.dart';
@@ -23,34 +24,44 @@ class DashboardBody extends StatelessWidget {
               const SizedBox(height: 16),
               const DashboardFunctions(),
               const DashboardMetrics(),
-              const DashboardTitle(title: AppStrings.created),
+              const DashboardTitle(
+                  title: AppStrings.created, option: AppStrings.view),
               SizedBox(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
-                  itemBuilder: (context, index) => const CreatedCard(),
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 4);
-                  },
-                ),
-              ),
-              const DashboardTitle(title: AppStrings.assigned),
-              SizedBox(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
-                  itemBuilder: (context, index) => const AssignedCard(),
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 4);
+                height: context.height * 0.17,
+                child: GridView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 14.0,
+                    childAspectRatio: 0.38,
+                  ),
+                  itemCount: 4,
+                  itemBuilder: (BuildContext context, int index) {
+                    return const CreatedCard();
                   },
                 ),
               ),
               const DashboardTitle(
-                title: AppStrings.application,
-                option: AppStrings.view,
+                  title: AppStrings.assigned, option: AppStrings.view),
+              SizedBox(
+                height: context.height * 0.17,
+                child: GridView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 14.0,
+                    childAspectRatio: 0.38,
+                  ),
+                  itemCount: 4,
+                  itemBuilder: (BuildContext context, int index) {
+                    return const AssignedCard();
+                  },
+                ),
               ),
+              const DashboardTitle(
+                  title: AppStrings.application, option: AppStrings.view),
               SizedBox(
                 child: ListView.separated(
                   shrinkWrap: true,
