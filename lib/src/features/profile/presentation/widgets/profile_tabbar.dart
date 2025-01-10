@@ -32,7 +32,7 @@ class ProfileTabbar extends StatelessWidget {
                   fontWeight: FontThickness.semiBold,
                   color: AppColors.midnight),
               labelPadding:
-                  const EdgeInsets.symmetric(vertical: 0, horizontal: 6),
+                  const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),
               splashFactory: NoSplash.splashFactory,
               tabs: const [
                 Tab(text: AppStrings.about),
@@ -42,16 +42,19 @@ class ProfileTabbar extends StatelessWidget {
                 Tab(text: AppStrings.reviews),
               ],
             ),
-            SizedBox(
-              height: context.height - 250,
-              child: const TabBarView(
-                children: [
-                  AboutView(),
-                  ExperienceView(),
-                  EducationView(),
-                  HistoryView(),
-                  ReviewsView(),
-                ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: SizedBox(
+                height: context.height - 250,
+                child: const TabBarView(
+                  children: [
+                    AboutView(),
+                    ExperienceView(),
+                    EducationView(),
+                    HistoryView(),
+                    ReviewsView(),
+                  ],
+                ),
               ),
             ),
           ],

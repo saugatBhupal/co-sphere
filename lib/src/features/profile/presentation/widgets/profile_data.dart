@@ -12,7 +12,7 @@ class ProfileData extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Sarina Magar",
+            "Kimmy Jimmel",
             style: _textTheme.titleLarge!
                 .copyWith(height: 1.2, fontWeight: FontThickness.medium),
           ),
