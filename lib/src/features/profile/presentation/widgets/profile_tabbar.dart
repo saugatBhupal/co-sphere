@@ -31,6 +31,9 @@ class ProfileTabbar extends StatelessWidget {
               labelStyle: _textTheme.bodyLarge!.copyWith(
                   fontWeight: FontThickness.semiBold,
                   color: AppColors.midnight),
+              unselectedLabelStyle: _textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontThickness.medium,
+                  color: AppColors.dim.withOpacity(0.2)),
               labelPadding:
                   const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),
               splashFactory: NoSplash.splashFactory,
@@ -43,7 +46,7 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: SizedBox(
                 height: context.height - 250,
                 child: const TabBarView(

@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSkills extends StatelessWidget {
@@ -10,12 +11,12 @@ class ProfileSkills extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14.0),
+            padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 6),
             child: RichText(
               text: TextSpan(
                 children: [
@@ -37,46 +38,55 @@ class ProfileSkills extends StatelessWidget {
               ),
             ),
           ),
-          Wrap(
-            spacing: 8,
-            runSpacing: 12,
-            children: [
-              ...List.generate(
-                6,
-                (index) {
-                  return Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: const BoxDecoration(
-                      color: AppColors.genie,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    ),
-                    child: Text(
-                      "Flutter",
-                      style: _textTheme.bodySmall!.copyWith(
-                        color: AppColors.midnight,
-                        fontWeight: FontThickness.semiBold,
+          Container(
+            width: context.width,
+            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              border: Border.all(width: 0.6, color: AppColors.plaster),
+            ),
+            child: Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                ...List.generate(
+                  5,
+                  (index) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      decoration: const BoxDecoration(
+                        color: AppColors.genie,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
-                    ),
-                  );
-                },
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: AppColors.plaster,
-                  borderRadius: BorderRadius.circular(8.0),
+                      child: Text(
+                        "React JS",
+                        style: _textTheme.bodySmall!.copyWith(
+                          color: AppColors.midnight,
+                          fontWeight: FontThickness.semiBold,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                child: Text(
-                  "+ ${AppStrings.more}",
-                  style: _textTheme.bodySmall!.copyWith(
-                    color: AppColors.black,
-                    fontWeight: FontThickness.semiBold,
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: AppColors.plaster,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Text(
+                    "+ ${AppStrings.more}",
+                    style: _textTheme.bodySmall!.copyWith(
+                      color: AppColors.black,
+                      fontWeight: FontThickness.semiBold,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

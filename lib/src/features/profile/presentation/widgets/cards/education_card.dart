@@ -4,17 +4,15 @@ import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:cosphere/widgets/buttons/status_button.dart';
 import 'package:flutter/material.dart';
 
-class ExperienceCard extends StatelessWidget {
+class EducationCard extends StatelessWidget {
   final String position;
   final String organization;
-  final String role;
   final String from;
   final String to;
-  const ExperienceCard({
+  const EducationCard({
     super.key,
     required this.position,
     required this.organization,
-    required this.role,
     required this.from,
     required this.to,
   });
@@ -62,7 +60,6 @@ class ExperienceCard extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        StatusButton(label: role)
       ],
     );
   }

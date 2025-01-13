@@ -34,7 +34,7 @@ class DashboardBody extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
                     mainAxisSpacing: 14.0,
-                    childAspectRatio: 0.38,
+                    childAspectRatio: 0.40,
                   ),
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {
@@ -52,7 +52,7 @@ class DashboardBody extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
                     mainAxisSpacing: 14.0,
-                    childAspectRatio: 0.38,
+                    childAspectRatio: 0.40,
                   ),
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {

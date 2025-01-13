@@ -21,7 +21,7 @@ class AppColors {
   static const Color orange = Color(0xFFF8E3D1);
   static const Color winter = Color(0xFF001B6C);
   static const Color plaster = Color(0xFFE9E9E9);
-  static const Color pumpkin = Color(0xFFE3984E);
+  static const Color pumpkin = Color(0xFFE67300);
   static const Color midnight = Color(0xFF0D0D52);
   static const Color offWhite = Color(0xFFFFF8F8);
   static const Color errigalWhite = Color(0xFFF1F0F0);

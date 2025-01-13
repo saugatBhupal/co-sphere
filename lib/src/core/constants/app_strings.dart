@@ -84,5 +84,6 @@ class AppStrings {
   static const joined = "Joined";
   static const contact = "Contact";
   static const overview = "Overview";
+  static const employer = "Employer";
   static const professional = "Professional";
 }
