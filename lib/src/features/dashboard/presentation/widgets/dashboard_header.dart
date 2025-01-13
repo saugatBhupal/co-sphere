@@ -11,7 +11,7 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
     final _textTheme = Theme.of(context).textTheme;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: 26),
       child: AppBar(
         forceMaterialTransparency: true,
         backgroundColor: AppColors.satin,
@@ -20,7 +20,7 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
         automaticallyImplyLeading: false,
         titleSpacing: 0,
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -49,5 +49,5 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(75);
+  Size get preferredSize => const Size.fromHeight(95);
 }

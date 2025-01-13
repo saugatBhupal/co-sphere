@@ -41,7 +41,7 @@ class ReviewsView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 3,
                 itemBuilder: (context, index) => const ReviewCard(
-                  rating: 3,
+                  rating: 2,
                   organization: "Odoma",
                   review:
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris viverra pharetra ligula, nec mattis quam porta vitae nec mattis quam porta vitae.",

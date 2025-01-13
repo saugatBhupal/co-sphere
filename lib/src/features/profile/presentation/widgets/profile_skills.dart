@@ -64,7 +64,7 @@ class ProfileSkills extends StatelessWidget {
                         "React JS",
                         style: _textTheme.bodySmall!.copyWith(
                           color: AppColors.midnight,
-                          fontWeight: FontThickness.semiBold,
+                          fontWeight: FontThickness.medium,
                         ),
                       ),
                     );
@@ -81,7 +81,7 @@ class ProfileSkills extends StatelessWidget {
                     "+ ${AppStrings.more}",
                     style: _textTheme.bodySmall!.copyWith(
                       color: AppColors.black,
-                      fontWeight: FontThickness.semiBold,
+                      fontWeight: FontThickness.medium,
                     ),
                   ),
                 ),

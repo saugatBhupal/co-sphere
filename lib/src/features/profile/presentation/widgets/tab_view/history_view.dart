@@ -2,7 +2,7 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/cards/education_card.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/cards/experience_card.dart';
 import 'package:flutter/material.dart';
 
 class HistoryView extends StatelessWidget {
@@ -24,11 +24,11 @@ class HistoryView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            AppStrings.education,
+            "${AppStrings.appName} ${AppStrings.history}",
             style: _textTheme.bodyLarge!.copyWith(
-              fontWeight: FontThickness.semiBold,
-              color: AppColors.grey,
-            ),
+                fontWeight: FontThickness.semiBold,
+                color: AppColors.grey,
+                wordSpacing: -1),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 18.0),
@@ -37,9 +37,10 @@ class HistoryView extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 3,
-                itemBuilder: (context, index) => const EducationCard(
+                itemBuilder: (context, index) => const ExperienceCard(
                   position: "UI|UX Developer",
                   organization: "Odama Studios",
+                  status: "OnTime",
                   from: "2023",
                   to: "2024",
                 ),

@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 class ExperienceCard extends StatelessWidget {
   final String position;
   final String organization;
-  final String role;
+  final String status;
   final String from;
   final String to;
   const ExperienceCard({
     super.key,
     required this.position,
     required this.organization,
-    required this.role,
+    required this.status,
     required this.from,
     required this.to,
   });
@@ -62,7 +62,7 @@ class ExperienceCard extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        StatusButton(label: role)
+        StatusButton(label: status)
       ],
     );
   }

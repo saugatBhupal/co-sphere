@@ -56,7 +56,7 @@ class ExperienceView extends StatelessWidget {
                 itemBuilder: (context, index) => const ExperienceCard(
                   position: "UI|UX Developer",
                   organization: "Odama Studios",
-                  role: "intern",
+                  status: "intern",
                   from: "2023",
                   to: "2024",
                 ),

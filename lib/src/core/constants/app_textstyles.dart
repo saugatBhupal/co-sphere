@@ -86,7 +86,7 @@ class AppTextStyles {
     return _setStyle(
       color: color,
       fontSize: FontSize.display,
-      fontWeight: FontThickness.semiBold,
+      fontWeight: FontThickness.medium,
     );
   }
 

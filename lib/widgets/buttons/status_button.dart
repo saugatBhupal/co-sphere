@@ -13,8 +13,7 @@ class StatusButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
-    String formattedLabel =
-        label[0].toUpperCase() + label.substring(1).toLowerCase();
+    String formattedLabel = label[0].toUpperCase() + label.substring(1);
 
     Color background;
     Color foreground;
@@ -25,12 +24,14 @@ class StatusButton extends StatelessWidget {
         foreground = AppColors.pumpkin;
         break;
       case "Rejected":
+      case "Delayed":
       case "Associate":
         background = AppColors.casa;
         foreground = AppColors.red;
         break;
       case "Active":
       case "Junior":
+      case "OnTime":
         background = AppColors.green;
         foreground = AppColors.frog;
         break;
@@ -39,6 +40,7 @@ class StatusButton extends StatelessWidget {
         foreground = AppColors.frog;
         break;
       case "Senior":
+      case "Early":
         background = AppColors.genie;
         foreground = AppColors.winter;
         break;

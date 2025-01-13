@@ -35,7 +35,7 @@ class _DashboardFunctionsState extends State<DashboardFunctions> {
           controller: _searchController,
         )),
         Padding(
-          padding: EdgeInsets.only(right: 14, left: 22),
+          padding: const EdgeInsets.only(right: 14, left: 22),
           child: SvgPicture.asset(
             AppIcons.chat,
           ),
