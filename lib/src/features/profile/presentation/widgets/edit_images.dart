@@ -14,7 +14,7 @@ class EditImages extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
+      margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border.all(width: 0.6, color: AppColors.plaster),

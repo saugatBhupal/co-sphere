@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_images.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_links.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_skills.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -24,15 +25,19 @@ class EditProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const EditImages(),
-            _buildTitle(context, title: AppStrings.links),
-            const EditLinks(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const EditImages(),
+              _buildTitle(context, title: AppStrings.links),
+              const EditLinks(),
+              _buildTitle(context, title: AppStrings.skill),
+              const EditSkills()
+            ],
+          ),
         ),
       ),
     );
@@ -41,7 +46,7 @@ class EditProfileScreen extends StatelessWidget {
 
 Widget _buildTitle(BuildContext context, {required String title}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 18.0, bottom: 12),
+    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14),
     child: Text(
       title,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(

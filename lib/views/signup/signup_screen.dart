@@ -74,9 +74,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 25),
                   InputField(
                     textController: _nameController,
-                    label: AppStrings.name,
+                    label: AppStrings.fullName,
                     validator: (val) {
-                      return FormValidator.validateTitle(val, AppStrings.name);
+                      return FormValidator.validateTitle(
+                          val, AppStrings.fullName);
                     },
                   ),
                   const SizedBox(height: 25),

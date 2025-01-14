@@ -33,7 +33,7 @@ class AppStrings {
   static const String phone = "Phone Number";
   static const String password = "Password";
   static const String forgot = "Forgot Password?";
-  static const String name = "Full Name";
+  static const String fullName = "Full Name";
   static const String dob = "Date of Birth";
   static const String code = "+977";
   static const String enter = "Enter your";
@@ -100,4 +100,5 @@ class AppStrings {
   static const instagramLink = "https://www.instagram.com";
   static const facebookLink = "https://www.facebook.com";
   static const add = "+ Add";
+  static const skillName = "Skill Name";
 }
