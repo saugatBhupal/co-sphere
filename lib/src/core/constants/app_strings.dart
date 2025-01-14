@@ -93,4 +93,11 @@ class AppStrings {
   static const photoDisplay = "This will be displayed in your profile";
   static const upload = "Upload New";
   static const save = "Save";
+  static const linkedIn = "LinkedIn";
+  static const instagram = "Instagram";
+  static const facebook = "Facebook";
+  static const linkedInLink = "https://www.linkedin.com";
+  static const instagramLink = "https://www.instagram.com";
+  static const facebookLink = "https://www.facebook.com";
+  static const add = "+ Add";
 }

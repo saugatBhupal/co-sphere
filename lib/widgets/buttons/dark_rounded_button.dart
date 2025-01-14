@@ -7,6 +7,7 @@ class DarkRoundedButton extends StatelessWidget {
   final String title;
   final String? icon;
   final double fontSize;
+  final double? height;
 
   final EdgeInsetsGeometry? padding;
   final Function()? onPressed;
@@ -16,6 +17,7 @@ class DarkRoundedButton extends StatelessWidget {
     this.onPressed,
     this.fontSize = 18,
     this.padding,
+    this.height,
     this.icon,
   });
 
@@ -23,6 +25,7 @@ class DarkRoundedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
+      height: height,
       child: Material(
         color: AppColors.midnight,
         borderRadius: const BorderRadius.all(Radius.circular(32)),
@@ -49,9 +52,10 @@ class DarkRoundedButton extends StatelessWidget {
                   child: Text(
                     title,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: AppColors.white,
-                        fontWeight: FontThickness.medium,
-                        fontSize: fontSize),
+                          color: AppColors.white,
+                          fontWeight: FontThickness.medium,
+                          fontSize: fontSize,
+                        ),
                   ),
                 ),
               ],

@@ -72,7 +72,7 @@ class EditImages extends StatelessWidget {
                       width: context.width / 3.8,
                       child: const LightRoundedButton(
                         title: AppStrings.upload,
-                        fontSize: 14,
+                        fontSize: 13,
                         padding: EdgeInsets.symmetric(vertical: 8),
                       ),
                     ),
@@ -81,7 +81,7 @@ class EditImages extends StatelessWidget {
                       width: context.width / 5.8,
                       child: const DarkRoundedButton(
                         title: AppStrings.save,
-                        fontSize: 14,
+                        fontSize: 13,
                         padding:
                             EdgeInsets.symmetric(vertical: 8, horizontal: 6),
                       ),

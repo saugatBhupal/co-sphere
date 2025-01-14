@@ -1,5 +1,4 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
@@ -8,36 +7,30 @@ class InputField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final String label;
   final String? icon;
+  final String? hintText;
 
-  const InputField({
+  InputField({
     super.key,
     required this.textController,
     required this.label,
     this.icon,
+    this.hintText,
     this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
+    final _textTheme = Theme.of(context).textTheme;
     return TextFormField(
       controller: textController,
       keyboardType: TextInputType.name,
       cursorColor: AppColors.grey,
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      style: const TextStyle(
-        color: AppColors.midnight,
-        fontFamily: AppFonts.albertSans,
-        fontWeight: FontWeight.w500,
-      ),
+      style: _textTheme.titleSmall!
+          .copyWith(fontSize: 15, color: AppColors.midnight),
       decoration: InputDecoration(
-        hintText: "${AppStrings.enter} ${label.toLowerCase()}",
-        hintStyle: const TextStyle(
-          color: AppColors.dim,
-          fontFamily: AppFonts.albertSans,
-          fontWeight: FontWeight.w300,
-          fontSize: 14,
-        ),
+        hintText: hintText ?? "${AppStrings.enter} ${label.toLowerCase()}",
         prefixIcon: icon != null
             ? Padding(
                 padding: const EdgeInsets.only(right: 10, left: 18),
@@ -49,39 +42,7 @@ class InputField extends StatelessWidget {
                 ),
               )
             : null,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         labelText: label,
-        labelStyle: const TextStyle(
-          color: AppColors.grey,
-          fontFamily: AppFonts.albertSans,
-          fontSize: 15,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.red,
-          ),
-        ),
       ),
     );
   }
