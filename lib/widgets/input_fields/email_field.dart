@@ -7,12 +7,14 @@ class EmailField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final String label;
   final String? icon;
+  final Color? color;
 
   const EmailField({
     super.key,
     required this.emailController,
     required this.label,
     this.icon,
+    this.color,
     this.validator,
   });
 
@@ -26,7 +28,7 @@ class EmailField extends StatelessWidget {
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: _textTheme.titleSmall!
-          .copyWith(fontSize: 15, color: AppColors.midnight),
+          .copyWith(fontSize: 15, color: color ?? AppColors.midnight),
       decoration: InputDecoration(
         hintText: "${AppStrings.enter} ${AppStrings.email.toLowerCase()}",
         prefixIcon: icon != null

@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_images.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_links.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_personal_details.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_skills.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,9 @@ class EditProfileScreen extends StatelessWidget {
               _buildTitle(context, title: AppStrings.links),
               const EditLinks(),
               _buildTitle(context, title: AppStrings.skill),
-              const EditSkills()
+              const EditSkills(),
+              _buildTitle(context, title: AppStrings.personal),
+              const EditPersonalDetails(),
             ],
           ),
         ),

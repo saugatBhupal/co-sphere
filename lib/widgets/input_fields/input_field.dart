@@ -8,12 +8,14 @@ class InputField extends StatelessWidget {
   final String label;
   final String? icon;
   final String? hintText;
+  final Color? color;
 
   InputField({
     super.key,
     required this.textController,
     required this.label,
     this.icon,
+    this.color,
     this.hintText,
     this.validator,
   });
@@ -28,7 +30,7 @@ class InputField extends StatelessWidget {
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: _textTheme.titleSmall!
-          .copyWith(fontSize: 15, color: AppColors.midnight),
+          .copyWith(fontSize: 15, color: color ?? AppColors.midnight),
       decoration: InputDecoration(
         hintText: hintText ?? "${AppStrings.enter} ${label.toLowerCase()}",
         prefixIcon: icon != null

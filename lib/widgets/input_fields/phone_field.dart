@@ -1,7 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,6 +9,7 @@ class PhoneField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final String label;
   final String? icon;
+  final Color? color;
 
   const PhoneField({
     super.key,
@@ -17,10 +17,12 @@ class PhoneField extends StatelessWidget {
     this.validator,
     required this.label,
     this.icon,
+    this.color,
   });
 
   @override
   Widget build(BuildContext context) {
+    final _textTheme = Theme.of(context).textTheme;
     return TextFormField(
       controller: phoneController,
       keyboardType: TextInputType.number,
@@ -28,19 +30,10 @@ class PhoneField extends StatelessWidget {
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       inputFormatters: [LengthLimitingTextInputFormatter(10)],
-      style: const TextStyle(
-        color: AppColors.midnight,
-        fontFamily: AppFonts.albertSans,
-        fontWeight: FontWeight.w500,
-      ),
+      style: _textTheme.titleSmall!
+          .copyWith(fontSize: 15, color: color ?? AppColors.midnight),
       decoration: InputDecoration(
         hintText: "${AppStrings.enter} ${AppStrings.phone.toLowerCase()}",
-        hintStyle: const TextStyle(
-          color: AppColors.dim,
-          fontFamily: AppFonts.albertSans,
-          fontWeight: FontWeight.w300,
-          fontSize: 14,
-        ),
         prefix: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -61,39 +54,7 @@ class PhoneField extends StatelessWidget {
           fontFamily: AppFonts.albertSans,
           fontSize: 16,
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         labelText: label,
-        labelStyle: const TextStyle(
-          color: AppColors.grey,
-          fontFamily: AppFonts.albertSans,
-          fontSize: 15,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.red,
-          ),
-        ),
       ),
     );
   }

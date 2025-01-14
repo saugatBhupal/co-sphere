@@ -101,4 +101,6 @@ class AppStrings {
   static const facebookLink = "https://www.facebook.com";
   static const add = "+ Add";
   static const skillName = "Skill Name";
+  static const personal = "Personal Details";
+  static const contactPer = "Show my contact number";
 }
