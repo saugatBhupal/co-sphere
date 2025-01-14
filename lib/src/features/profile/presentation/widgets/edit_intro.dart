@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+
 import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/widgets/input_fields/textspan_field.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _EditIntroState extends State<EditIntro> {
 
   @override
   Widget build(BuildContext context) {
-    final _gap = const SizedBox(height: 20);
+    final _gap = SizedBox(height: 20);
     return Container(
       width: context.width,
       padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 16),

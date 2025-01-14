@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+
 import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/widgets/input_fields/link_field.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _EditLinksState extends State<EditLinks> {
 
   @override
   Widget build(BuildContext context) {
-    const _gap = SizedBox(height: 20);
+    final _gap = SizedBox(height: 20);
     return Container(
       width: context.width,
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),

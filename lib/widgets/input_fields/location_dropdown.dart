@@ -24,75 +24,40 @@ class LocationDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      value: selectedItem,
-      hint: Text(
-        "${AppStrings.enter} ${label.toLowerCase()}",
-        style: const TextStyle(
-          color: AppColors.dim,
-          fontFamily: AppFonts.albertSans,
-          fontWeight: FontWeight.w300,
-          fontSize: 14,
-        ),
-      ),
-      validator: validator,
-      items: items.map((item) {
-        return DropdownMenuItem<String>(
-          value: item,
+    final _textTheme = Theme.of(context).textTheme;
+    return Center(
+      child: DropdownButtonFormField<String>(
+        value: selectedItem,
+        alignment: AlignmentDirectional.bottomEnd,
+        hint: Align(
+          alignment: Alignment.centerLeft,
           child: Text(
-            item,
-            style: const TextStyle(
-              color: AppColors.grey,
-              fontFamily: AppFonts.albertSans,
+            "${AppStrings.enter} ${label.toLowerCase()}",
+            style: _textTheme.bodyLarge!
+                .copyWith(fontWeight: FontWeight.w300, color: AppColors.dim),
+          ),
+        ),
+        validator: validator,
+        elevation: 2,
+        isExpanded: true,
+        items: items.map((item) {
+          return DropdownMenuItem<String>(
+            value: item,
+            child: Text(
+              item,
+              style: _textTheme.bodyLarge!.copyWith(color: AppColors.grey),
             ),
-          ),
-        );
-      }).toList(),
-      onChanged: onChanged,
-      icon: const SizedBox.shrink(),
-      borderRadius: BorderRadius.circular(32),
-      dropdownColor: AppColors.plaster,
-      decoration: InputDecoration(
-        suffixIcon: Padding(
-          padding: const EdgeInsets.only(right: 18, left: 12),
-          child: Image.asset(
-            AppIcons.dropdown,
-            height: 12,
-            width: 12,
-          ),
+          );
+        }).toList(),
+        onChanged: onChanged,
+        icon: const Icon(
+          Icons.keyboard_arrow_down_sharp,
+          color: AppColors.dim,
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        labelText: label,
-        labelStyle: const TextStyle(
-          color: AppColors.grey,
-          fontFamily: AppFonts.albertSans,
-          fontSize: 15,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.dim,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: const BorderSide(
-            color: AppColors.red,
-          ),
+        borderRadius: BorderRadius.circular(12),
+        dropdownColor: AppColors.satin,
+        decoration: InputDecoration(
+          labelText: label,
         ),
       ),
     );

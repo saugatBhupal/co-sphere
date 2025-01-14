@@ -111,4 +111,5 @@ class AppStrings {
   static const qualification = "Qualification";
   static const from = "From";
   static const to = "To";
+  static const post = "Post";
 }

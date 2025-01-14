@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:cosphere/src/core/constants/app_colors.dart';
@@ -13,7 +14,6 @@ class ReviewCard extends StatelessWidget {
     required this.organization,
     required this.rating,
   }) : super(key: key);
-  final _gap = const SizedBox(height: 6);
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
@@ -50,7 +50,7 @@ class ReviewCard extends StatelessWidget {
                   );
                 }),
               ),
-              _gap,
+              const SizedBox(height: 6),
               Text(
                 organization,
                 style: _textTheme.bodySmall!.copyWith(

@@ -14,8 +14,8 @@ struct _MyApplication {
 
 G_DEFINE_TYPE(MyApplication, my_application, GTK_TYPE_APPLICATION)
 
-// Implements GApplication::activate.
-static void my_application_activate(GApplication* application) {
+// Implements SizedBoxplication::activate.
+static void my_application_activate(SizedBoxplication* application) {
   MyApplication* self = MY_APPLICATION(application);
   GtkWindow* window =
       GTK_WINDOW(gtk_application_window_new(GTK_APPLICATION(application)));
@@ -62,8 +62,8 @@ static void my_application_activate(GApplication* application) {
   gtk_widget_grab_focus(GTK_WIDGET(view));
 }
 
-// Implements GApplication::local_command_line.
-static gboolean my_application_local_command_line(GApplication* application, gchar*** arguments, int* exit_status) {
+// Implements SizedBoxplication::local_command_line.
+static gboolean my_application_local_command_line(SizedBoxplication* application, gchar*** arguments, int* exit_status) {
   MyApplication* self = MY_APPLICATION(application);
   // Strip out the first argument as it is the binary name.
   self->dart_entrypoint_arguments = g_strdupv(*arguments + 1);
@@ -81,8 +81,8 @@ static gboolean my_application_local_command_line(GApplication* application, gch
   return TRUE;
 }
 
-// Implements GApplication::startup.
-static void my_application_startup(GApplication* application) {
+// Implements SizedBoxplication::startup.
+static void my_application_startup(SizedBoxplication* application) {
   //MyApplication* self = MY_APPLICATION(object);
 
   // Perform any actions required at application startup.
@@ -90,8 +90,8 @@ static void my_application_startup(GApplication* application) {
   G_APPLICATION_CLASS(my_application_parent_class)->startup(application);
 }
 
-// Implements GApplication::shutdown.
-static void my_application_shutdown(GApplication* application) {
+// Implements SizedBoxplication::shutdown.
+static void my_application_shutdown(SizedBoxplication* application) {
   //MyApplication* self = MY_APPLICATION(object);
 
   // Perform any actions required at application shutdown.

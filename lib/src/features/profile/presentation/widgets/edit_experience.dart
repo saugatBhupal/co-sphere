@@ -1,8 +1,11 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+
+import 'package:cosphere/src/features/profile/presentation/widgets/cards/experience_card.dart';
 import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/widgets/input_fields/input_field.dart';
+import 'package:cosphere/widgets/input_fields/location_dropdown.dart';
 import 'package:flutter/material.dart';
 
 class EditExperience extends StatefulWidget {
@@ -41,6 +44,8 @@ class _EditExperienceState extends State<EditExperience> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> posts = ["Intern", "Associate", "Junior", "Mid", "Senior"];
+    String? selectedValue = posts[0];
     final _gap = SizedBox(height: 20);
     return Container(
       width: context.width,
@@ -84,12 +89,38 @@ class _EditExperienceState extends State<EditExperience> {
             ],
           ),
           _gap,
+          LocationDropdown(
+            label: AppStrings.post,
+            items: posts,
+            onChanged: (value) {
+              selectedValue = value;
+            },
+          ),
+          _gap,
           DarkRoundedButton(
             title:
                 "${AppStrings.add} ${AppStrings.experience} ${AppStrings.history}",
             height: context.height / 20,
             fontSize: 14,
             padding: const EdgeInsets.symmetric(vertical: 8),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            child: ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 3,
+              itemBuilder: (context, index) => const ExperienceCard(
+                position: "UI|UX Developer",
+                organization: "Odama Studios",
+                status: "intern",
+                from: "2023",
+                to: "2024",
+              ),
+              separatorBuilder: (context, index) {
+                return const SizedBox(height: 24);
+              },
+            ),
           ),
         ],
       ),

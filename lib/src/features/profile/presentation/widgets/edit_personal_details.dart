@@ -22,7 +22,7 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
   late final TextEditingController _dobController;
   late final TextEditingController _emailController;
   late final TextEditingController _addressController;
-  bool showContact = false; 
+  bool showContact = false;
 
   @override
   void initState() {
