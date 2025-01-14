@@ -42,6 +42,7 @@ class AppStrings {
   static const String province = "Province";
   static const String city = "City";
   static const String resend = "Resend";
+  static const String intro = "Intro";
   static const String confirm = "Confirm";
   static const String emailEx = "youremail@gmail.com";
   // Validation Message

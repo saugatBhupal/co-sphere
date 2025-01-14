@@ -33,7 +33,7 @@ class _EditSkillsState extends State<EditSkills> {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: const BorderRadius.all(Radius.circular(16)),

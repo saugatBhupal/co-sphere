@@ -38,7 +38,7 @@ class _EditLinksState extends State<EditLinks> {
     const _gap = SizedBox(height: 20);
     return Container(
       width: context.width,
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: const BorderRadius.all(Radius.circular(12)),

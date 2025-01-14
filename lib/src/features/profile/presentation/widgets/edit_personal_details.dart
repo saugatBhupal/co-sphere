@@ -51,7 +51,7 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
