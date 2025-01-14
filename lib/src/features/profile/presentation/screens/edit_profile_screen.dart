@@ -1,6 +1,8 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_education.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_experience.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_images.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_intro.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_links.dart';
@@ -42,6 +44,10 @@ class EditProfileScreen extends StatelessWidget {
               const EditPersonalDetails(),
               _buildTitle(context, title: AppStrings.intro),
               const EditIntro(),
+              _buildTitle(context, title: AppStrings.education),
+              const EditEducation(),
+              _buildTitle(context, title: AppStrings.experience),
+              const EditExperience(),
             ],
           ),
         ),

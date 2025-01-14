@@ -31,9 +31,10 @@ class AppStrings {
   static const String signup = "Sign up";
   static const String email = "Email Address";
   static const String phone = "Phone Number";
+  static const String name = "Name";
   static const String password = "Password";
   static const String forgot = "Forgot Password?";
-  static const String fullName = "Full Name";
+  static const String fullName = "Full $name";
   static const String dob = "Date of Birth";
   static const String code = "+977";
   static const String enter = "Enter your";
@@ -101,7 +102,13 @@ class AppStrings {
   static const instagramLink = "https://www.instagram.com";
   static const facebookLink = "https://www.facebook.com";
   static const add = "+ Add";
-  static const skillName = "Skill Name";
+  static const skillName = "Skill $name";
   static const personal = "Personal Details";
   static const contactPer = "Show my contact number";
+  static const school = "School $name";
+  static const company = "Company $name";
+  static const degree = "Degree";
+  static const qualification = "Qualification";
+  static const from = "From";
+  static const to = "To";
 }
