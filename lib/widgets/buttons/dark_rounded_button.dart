@@ -6,11 +6,16 @@ import 'package:flutter/material.dart';
 class DarkRoundedButton extends StatelessWidget {
   final String title;
   final String? icon;
+  final double fontSize;
+
+  final EdgeInsetsGeometry? padding;
   final Function()? onPressed;
   const DarkRoundedButton({
     super.key,
     required this.title,
     this.onPressed,
+    this.fontSize = 18,
+    this.padding,
     this.icon,
   });
 
@@ -18,7 +23,6 @@ class DarkRoundedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
-      margin: const EdgeInsets.only(bottom: 10),
       child: Material(
         color: AppColors.midnight,
         borderRadius: const BorderRadius.all(Radius.circular(32)),
@@ -37,18 +41,17 @@ class DarkRoundedButton extends StatelessWidget {
                     width: 24.0,
                   ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                  padding: padding ??
+                      const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                   child: Text(
                     title,
-                    style: const TextStyle(
-                      color: AppColors.white,
-                      fontFamily: AppFonts.albertSans,
-                      fontSize: 20,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: AppColors.white,
+                        fontWeight: FontThickness.medium,
+                        fontSize: fontSize),
                   ),
                 ),
               ],

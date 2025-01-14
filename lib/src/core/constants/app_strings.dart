@@ -86,4 +86,11 @@ class AppStrings {
   static const overview = "Overview";
   static const employer = "Employer";
   static const professional = "Professional";
+  static const edit = "Edit";
+  static const profile = "Profile";
+  static const your = "Your";
+  static const photo = "Photo";
+  static const photoDisplay = "This will be displayed in your profile";
+  static const upload = "Upload New";
+  static const save = "Save";
 }

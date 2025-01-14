@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 
 class LightRoundedButton extends StatelessWidget {
   final String title;
+  final double fontSize;
+
+  final EdgeInsetsGeometry? padding;
   final Function()? onPressed;
+
   const LightRoundedButton({
     super.key,
     required this.title,
+    this.fontSize = 18,
+    this.padding,
     this.onPressed,
   });
 
@@ -24,19 +30,19 @@ class LightRoundedButton extends StatelessWidget {
           splashColor: AppColors.errigalWhite,
           borderRadius: const BorderRadius.all(Radius.circular(32)),
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+            padding: padding ??
+                const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: Center(
               child: Text(
                 title,
-                style: const TextStyle(
-                  color: AppColors.midnight,
-                  fontFamily: AppFonts.albertSans,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: AppColors.midnight,
+                      fontWeight: FontThickness.medium,
+                      fontSize: fontSize,
+                    ),
               ),
             ),
           ),
