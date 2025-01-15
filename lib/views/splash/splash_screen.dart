@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
     _timer = Timer(
       const Duration(milliseconds: AppConstants.navigateTime),
       () => Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.dashboard,
+        AppRoutes.onboarding,
         (route) => false,
       ),
     );
