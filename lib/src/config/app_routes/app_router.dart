@@ -9,7 +9,7 @@ import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_s
 import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/views/home/home_screen.dart';
-import 'package:cosphere/views/interests/interest_screen.dart';
+import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
 import 'package:cosphere/views/onboarding/onboarding_screen.dart';
 import 'package:cosphere/views/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
