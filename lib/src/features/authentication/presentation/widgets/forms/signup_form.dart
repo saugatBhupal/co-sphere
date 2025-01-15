@@ -1,12 +1,11 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/utils/form_validator.dart';
-import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
-import 'package:cosphere/widgets/input_fields/dob_field.dart';
-import 'package:cosphere/widgets/input_fields/email_field.dart';
-import 'package:cosphere/widgets/input_fields/input_field.dart';
-import 'package:cosphere/widgets/input_fields/phone_field.dart';
-import 'package:cosphere/widgets/textSpan.dart/account_textspan.dart';
+import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
+import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
+import 'package:cosphere/src/core/widgets/input_fields/email_field.dart';
+import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
+import 'package:cosphere/src/core/widgets/input_fields/phone_field.dart';
 import 'package:flutter/material.dart';
 
 class SignupForm extends StatefulWidget {

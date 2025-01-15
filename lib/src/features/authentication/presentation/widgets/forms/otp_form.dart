@@ -1,8 +1,8 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
-import 'package:cosphere/widgets/input_fields/otp_field.dart';
-import 'package:cosphere/widgets/textSpan.dart/account_textspan.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
+import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
+import 'package:cosphere/src/core/widgets/input_fields/otp_field.dart';
 import 'package:flutter/material.dart';
 
 class OtpForm extends StatefulWidget {

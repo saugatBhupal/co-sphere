@@ -3,9 +3,9 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 
 import 'package:cosphere/src/features/profile/presentation/widgets/cards/experience_card.dart';
-import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
-import 'package:cosphere/widgets/input_fields/input_field.dart';
-import 'package:cosphere/widgets/input_fields/location_dropdown.dart';
+import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
+import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
+import 'package:cosphere/src/core/widgets/input_fields/location_dropdown.dart';
 import 'package:flutter/material.dart';
 
 class EditExperience extends StatefulWidget {

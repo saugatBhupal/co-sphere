@@ -1,7 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
-import 'package:cosphere/widgets/buttons/status_button.dart';
+import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:flutter/material.dart';
 
 class EducationCard extends StatelessWidget {

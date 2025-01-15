@@ -1,10 +1,10 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/authentication/presentation/widgets/account_textspan.dart';
-import 'package:cosphere/src/features/authentication/presentation/widgets/auth_message.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/auth_message.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/forms/otp_form.dart';
-import 'package:cosphere/widgets/appbar/authentication_appbar.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
 import 'package:flutter/material.dart';
 
 class OtpScreen extends StatelessWidget {

@@ -1,13 +1,13 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/authentication/presentation/widgets/forms/signup_form.dart';
-import 'package:cosphere/widgets/appbar/authentication_appbar.dart';
-import 'package:cosphere/widgets/textSpan.dart/account_textspan.dart';
-import 'package:cosphere/widgets/textSpan.dart/auth_message.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/auth_message.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/forms/signin_form.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
 import 'package:flutter/material.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class SigninScreen extends StatelessWidget {
+  const SigninScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +23,17 @@ class SignupScreen extends StatelessWidget {
                 const AuthenticationAppbar(),
                 const SizedBox(height: 20),
                 const AuthMessage(
-                  title: AppStrings.signupTitle,
-                  subtitle: AppStrings.signinSubtitle,
-                ),
+                    title: AppStrings.signinTitle,
+                    subtitle: AppStrings.signinSubtitle),
                 const SizedBox(height: 40),
-                const SignupForm(),
+                const SigninForm(),
                 const SizedBox(height: 15),
                 AccountTextspan(
-                  infoText: AppStrings.haveAccount,
-                  functionText: AppStrings.signin,
+                  infoText: AppStrings.notHaveAccount,
+                  functionText: AppStrings.signup,
                   onPressed: () =>
-                      Navigator.of(context).pushNamed(AppRoutes.signin),
-                ),
+                      Navigator.of(context).pushNamed(AppRoutes.signup),
+                )
               ],
             ),
           ),

@@ -1,10 +1,10 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/widgets/appbar/authentication_appbar.dart';
-import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
-import 'package:cosphere/widgets/buttons/multi_select_chip_button.dart';
-import 'package:cosphere/widgets/textSpan.dart/account_textspan.dart';
-import 'package:cosphere/widgets/textSpan.dart/auth_message.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/auth_message.dart';
+import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
+import 'package:cosphere/src/core/widgets/buttons/multi_select_chip_button.dart';
 import 'package:flutter/material.dart';
 
 class InterestScreen extends StatelessWidget {

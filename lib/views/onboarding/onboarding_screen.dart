@@ -3,11 +3,11 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/widgets/buttons/dark_rounded_button.dart';
-import 'package:cosphere/widgets/buttons/light_rounded_button.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
+import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
+import 'package:cosphere/src/core/widgets/buttons/light_rounded_button.dart';
 import 'package:cosphere/widgets/intro_slider.dart';
-import 'package:cosphere/widgets/buttons/skip_button.dart';
-import 'package:cosphere/widgets/textSpan.dart/account_textspan.dart';
+import 'package:cosphere/src/core/widgets/buttons/skip_button.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatelessWidget {
