@@ -59,8 +59,8 @@ class InterestScreen extends StatelessWidget {
                     children: [
                       DarkRoundedButton(
                           title: AppStrings.continueBtn,
-                          onPressed: () =>
-                              Navigator.of(context).pushNamed(AppRoutes.home)),
+                          onPressed: () => Navigator.of(context)
+                              .pushNamed(AppRoutes.dashboard)),
                       const SizedBox(height: 10),
                       AccountTextspan(
                         infoText: AppStrings.haveAccount,
