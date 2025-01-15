@@ -1,6 +1,7 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/app_routes/no_route_found.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/location_screen.dart';
+import 'package:cosphere/src/features/authentication/presentation/screens/otp_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signup_screen.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_screen.dart';
@@ -9,7 +10,6 @@ import 'package:cosphere/views/home/home_screen.dart';
 import 'package:cosphere/views/interests/interest_screen.dart';
 import 'package:cosphere/views/onboarding/onboarding_screen.dart';
 import 'package:cosphere/views/signin/signin_screen.dart';
-import 'package:cosphere/views/signup/otp_screen.dart';
 import 'package:cosphere/views/signup/password_screen.dart';
 import 'package:cosphere/views/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
