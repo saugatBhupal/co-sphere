@@ -1,10 +1,17 @@
-import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+
 class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const DashboardAppbar({super.key});
+  final User user;
+  const DashboardAppbar({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${AppStrings.hi} User,",
+                      "${AppStrings.hi} ${user.name},",
                       style: _textTheme.headlineSmall!.copyWith(height: 1.2),
                     ),
                     Text(

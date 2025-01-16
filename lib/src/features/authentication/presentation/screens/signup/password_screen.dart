@@ -6,14 +6,9 @@ import 'package:cosphere/src/features/authentication/presentation/widgets/forms/
 import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
 import 'package:flutter/material.dart';
 
-class PasswordScreen extends StatefulWidget {
+class PasswordScreen extends StatelessWidget {
   const PasswordScreen({super.key});
 
-  @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
-}
-
-class _PasswordScreenState extends State<PasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

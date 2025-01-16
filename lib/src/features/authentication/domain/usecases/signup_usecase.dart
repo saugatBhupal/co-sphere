@@ -39,6 +39,24 @@ class SignupParams extends Equatable {
         dob = '',
         address = '',
         password = '';
+  SignupParams copyWith({
+    String? email,
+    String? name,
+    String? phone,
+    String? dob,
+    String? address,
+    String? password,
+  }) {
+    return SignupParams(
+      email: email ?? this.email,
+      name: name ?? this.name,
+      phone: phone ?? this.phone,
+      dob: dob ?? this.dob,
+      address: address ?? this.address,
+      password: password ?? this.password,
+    );
+  } 
+
   @override
   List<Object?> get props => [email, name, phone, dob, address, password];
 }

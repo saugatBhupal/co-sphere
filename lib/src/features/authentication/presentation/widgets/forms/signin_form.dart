@@ -1,4 +1,3 @@
-import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
@@ -6,7 +5,10 @@ import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/email_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/password_field.dart';
+import 'package:cosphere/src/features/authentication/domain/usecases/signin_usecase.dart';
+import 'package:cosphere/src/features/authentication/presentation/viewmodels/signin/sign_in_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SigninForm extends StatefulWidget {
   const SigninForm({super.key});
@@ -69,7 +71,14 @@ class _SigninFormState extends State<SigninForm> {
             title: AppStrings.signin,
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                Navigator.of(context).pushNamed(AppRoutes.dashboard);
+                // Navigator.of(context).pushNamed(AppRoutes.dashboard);
+                context.read<SignInBloc>().add(
+                      AuthSignIn(
+                        params: SigninParams(
+                            email: _emailController.text,
+                            password: _passwordController.text),
+                      ),
+                    );
               }
             },
           ),

@@ -1,40 +1,13 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/auth_message.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/forms/location_form.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
-import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
-import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
-import 'package:cosphere/src/core/widgets/input_fields/location_dropdown.dart';
 import 'package:flutter/material.dart';
 
-class LocationScreen extends StatefulWidget {
+class LocationScreen extends StatelessWidget {
   const LocationScreen({super.key});
-
-  @override
-  State<LocationScreen> createState() => _LocationScreenState();
-}
-
-class _LocationScreenState extends State<LocationScreen> {
-  late final TextEditingController _cityController;
-  final _formKey = GlobalKey<FormState>();
-  List<String> countries = ["India", "Nepal", "China"];
-  List<String> provinces = ["India", "Nepal", "China"];
-  String? selectedCountry;
-  String? selectedProvince;
-  @override
-  void initState() {
-    super.initState();
-    _cityController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _cityController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

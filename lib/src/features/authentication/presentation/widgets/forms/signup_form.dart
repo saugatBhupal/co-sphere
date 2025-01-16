@@ -6,7 +6,9 @@ import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/email_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/phone_field.dart';
+import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -43,47 +45,59 @@ class _SignupFormState extends State<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          EmailField(
-            emailController: _emailController,
-            label: AppStrings.email,
-            validator: (val) {
-              return FormValidator.validateEmail(val);
-            },
+    return BlocBuilder<SignUpBloc, SignUpState>(
+      builder: (context, state) {
+        return Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              EmailField(
+                emailController: _emailController,
+                label: AppStrings.email,
+                validator: (val) {
+                  return FormValidator.validateEmail(val);
+                },
+              ),
+              const SizedBox(height: 25),
+              InputField(
+                textController: _nameController,
+                label: AppStrings.name,
+                validator: (val) {
+                  return FormValidator.validateTitle(val, AppStrings.name);
+                },
+              ),
+              const SizedBox(height: 25),
+              PhoneField(
+                phoneController: _phoneController,
+                label: AppStrings.phone,
+                validator: (val) {
+                  return FormValidator.validateTitle(val, AppStrings.phone);
+                },
+              ),
+              const SizedBox(height: 25),
+              DobField(dobController: _dobController),
+              const SizedBox(height: 45),
+              DarkRoundedButton(
+                title: AppStrings.continueBtn,
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    context.read<SignUpBloc>().add(UpdateSignupParams(
+                          state.params.copyWith(
+                            email: _emailController.text,
+                            name: _nameController.text,
+                            phone: _phoneController.text,
+                            dob: _dobController.text,
+                          ),
+                        ));
+                    Navigator.of(context).pushNamed(AppRoutes.location);
+                  }
+                },
+              ),
+            ],
           ),
-          const SizedBox(height: 25),
-          InputField(
-            textController: _nameController,
-            label: AppStrings.name,
-            validator: (val) {
-              return FormValidator.validateTitle(val, AppStrings.name);
-            },
-          ),
-          const SizedBox(height: 25),
-          PhoneField(
-            phoneController: _phoneController,
-            label: AppStrings.phone,
-            validator: (val) {
-              return FormValidator.validateTitle(val, AppStrings.phone);
-            },
-          ),
-          const SizedBox(height: 25),
-          DobField(dobController: _dobController),
-          const SizedBox(height: 45),
-          DarkRoundedButton(
-            title: AppStrings.continueBtn,
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                Navigator.of(context).pushNamed(AppRoutes.location);
-              }
-            },
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
