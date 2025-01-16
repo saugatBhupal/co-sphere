@@ -17,28 +17,16 @@ class SigninUsecase implements UsecaseWithParams<User, SigninParams> {
 
 class SigninParams extends Equatable {
   final String email;
-  final String name;
-  final String phone;
-  final String dob;
-  final String address;
   final String password;
 
   const SigninParams({
     required this.email,
-    required this.name,
-    required this.phone,
-    required this.dob,
-    required this.address,
     required this.password,
   });
 
   const SigninParams.initial()
       : email = '',
-        name = '',
-        phone = '',
-        dob = '',
-        address = '',
         password = '';
   @override
-  List<Object?> get props => [email, name, phone, dob, address, password];
+  List<Object?> get props => [email, password];
 }

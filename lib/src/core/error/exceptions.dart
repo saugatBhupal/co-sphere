@@ -8,9 +8,11 @@ class ServerException implements Exception {
     this.message = "Server Error Occured",
   });
 }
+
 class HiveException implements Exception {
   final String message;
-  HiveException({
-    this.message = "Hive Connection Error",
-  });
+  HiveException([this.message = "An error occurred while signing in."]);
+
+  @override
+  String toString() => message;
 }
