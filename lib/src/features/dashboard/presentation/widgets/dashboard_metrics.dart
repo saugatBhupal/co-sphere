@@ -1,9 +1,7 @@
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/completion_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -51,8 +49,8 @@ class DashboardMetrics extends StatelessWidget {
                 subtitle: "6",
                 bottom: true,
                 widget: const CompletionContainer(
-                  total: 23,
-                  completed: 13,
+                  total: 10,
+                  completed: 9,
                   color: AppColors.midnight,
                 ),
               ),

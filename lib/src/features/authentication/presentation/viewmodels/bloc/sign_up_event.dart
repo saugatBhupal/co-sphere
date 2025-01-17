@@ -10,7 +10,7 @@ sealed class SignUpEvent extends Equatable {
 class AuthSignUp extends SignUpEvent {
   final SignupParams params;
 
-  AuthSignUp({required this.params});
+  const AuthSignUp({required this.params});
   @override
   List<Object> get props => [params];
 }
@@ -18,7 +18,7 @@ class AuthSignUp extends SignUpEvent {
 class UpdateSignupParams extends SignUpEvent {
   final SignupParams params;
 
-  UpdateSignupParams(this.params);
+  const UpdateSignupParams(this.params);
 
   @override
   List<Object> get props => [params];

@@ -9,7 +9,7 @@ class User extends Equatable {
   final String password;
   final bool verified;
 
-  User({
+  const User({
     required this.uid,
     required this.email,
     required this.name,

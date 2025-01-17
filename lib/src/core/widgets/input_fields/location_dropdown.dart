@@ -1,10 +1,8 @@
-import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
-class LocationDropdown extends StatelessWidget {
+class CustomDropdown extends StatelessWidget {
   final String label;
   final String? icon;
   final List<String> items;
@@ -12,7 +10,7 @@ class LocationDropdown extends StatelessWidget {
   final ValueChanged<String?> onChanged;
   final FormFieldValidator<String>? validator;
 
-  const LocationDropdown({
+  const CustomDropdown({
     super.key,
     required this.label,
     required this.items,

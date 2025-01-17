@@ -5,7 +5,7 @@ class AppImages {
   static const String carousel1 = "$_imagesPath/carousel-1.png";
   static const String user = "$_imagesPath/user-default.png";
   static const String profile =
-      "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg";
+      "https://e7.pngegg.com/pngimages/261/608/png-clipart-esewa-zone-office-bayalbas-google-play-iphone-iphone-electronics-text-thumbnail.png";
 }
 
 class AppIcons {

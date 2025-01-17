@@ -1,7 +1,5 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
-import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/features/authentication/domain/usecases/signup_usecase.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
@@ -72,7 +70,6 @@ class InterestScreen extends StatelessWidget {
                         infoText: AppStrings.haveAccount,
                         functionText: AppStrings.signin,
                         onPressed: () =>
-                            // Navigator.of(context).pushNamed(AppRoutes.signin),
                             context
                                 .read<SignUpBloc>()
                                 .add(AuthSignUp(params: params)),

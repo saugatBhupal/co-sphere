@@ -71,7 +71,6 @@ class _SigninFormState extends State<SigninForm> {
             title: AppStrings.signin,
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                // Navigator.of(context).pushNamed(AppRoutes.dashboard);
                 context.read<SignInBloc>().add(
                       AuthSignIn(
                         params: SigninParams(

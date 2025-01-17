@@ -10,7 +10,7 @@ class LinkField extends StatelessWidget {
   final String? icon;
   final String? hintText;
 
-  LinkField({
+  const LinkField({
     super.key,
     required this.textController,
     required this.label,

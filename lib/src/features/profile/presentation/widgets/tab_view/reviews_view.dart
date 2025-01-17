@@ -2,8 +2,6 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/cards/education_card.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/cards/experience_card.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/cards/review_card.dart';
 import 'package:flutter/material.dart';
 

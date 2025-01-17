@@ -18,10 +18,10 @@ class CompletionContainer extends StatelessWidget {
     print("Completion Ratio: $completionRatio");
 
     return Container(
-      width: 32,
+      width: 28,
       height: 100,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Stack(
         children: [
@@ -30,7 +30,7 @@ class CompletionContainer extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
               color: const Color(0xFFECE6E6),
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
           Align(
@@ -43,13 +43,13 @@ class CompletionContainer extends StatelessWidget {
               decoration: BoxDecoration(
                 color: color, // Completed color
                 borderRadius: BorderRadius.only(
-                  bottomLeft: const Radius.circular(32),
-                  bottomRight: const Radius.circular(32),
+                  bottomLeft: const Radius.circular(8),
+                  bottomRight: const Radius.circular(8),
                   topLeft: completionRatio == 1.0
-                      ? const Radius.circular(32)
+                      ? const Radius.circular(8)
                       : Radius.zero,
                   topRight: completionRatio == 1.0
-                      ? const Radius.circular(32)
+                      ? const Radius.circular(8)
                       : Radius.zero,
                 ),
               ),

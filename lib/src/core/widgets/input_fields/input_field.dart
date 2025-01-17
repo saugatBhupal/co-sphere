@@ -10,7 +10,7 @@ class InputField extends StatelessWidget {
   final String? hintText;
   final Color? color;
 
-  InputField({
+  const InputField({
     super.key,
     required this.textController,
     required this.label,

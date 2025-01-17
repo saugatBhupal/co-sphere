@@ -43,7 +43,7 @@ class _LocationFormState extends State<LocationForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              LocationDropdown(
+              CustomDropdown(
                 label: AppStrings.country,
                 items: countries,
                 onChanged: (value) {
@@ -53,7 +53,7 @@ class _LocationFormState extends State<LocationForm> {
                     FormValidator.validateTitle(value, AppStrings.country),
               ),
               const SizedBox(height: 30),
-              LocationDropdown(
+              CustomDropdown(
                 label: AppStrings.province,
                 items: provinces,
                 onChanged: (value) {
