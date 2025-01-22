@@ -20,6 +20,7 @@ class MessageTile extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        margin: const EdgeInsets.symmetric(horizontal: 1),
         decoration: BoxDecoration(
           color: unread ? AppColors.snow : AppColors.white,
           border: Border(
@@ -38,7 +39,7 @@ class MessageTile extends StatelessWidget {
               Row(
                 children: [
                   const CircleImageAvatar(
-                    radius: 20,
+                    radius: 18,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
@@ -46,7 +47,7 @@ class MessageTile extends StatelessWidget {
                       "Leslie Alexander",
                       style: _textTheme.titleLarge!.copyWith(
                           fontWeight: FontThickness.medium,
-                          color: unread ? AppColors.winter : AppColors.black),
+                          color: AppColors.black),
                     ),
                   ),
                   const Spacer(),
@@ -57,6 +58,7 @@ class MessageTile extends StatelessWidget {
                   )
                 ],
               ),
+              const SizedBox(height: 6),
               Text(
                 "Thank you! I will see you tomorrow....",
                 style: _textTheme.titleSmall!.copyWith(

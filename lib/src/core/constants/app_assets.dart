@@ -28,4 +28,5 @@ class AppIcons {
   static const String badge = "$_iconsPath/badge.svg";
   static const String web = "$_iconsPath/web.svg";
   static const String like = "$_iconsPath/like.svg";
+  static const String send = "$_iconsPath/send.svg";
 }

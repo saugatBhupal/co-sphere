@@ -112,4 +112,5 @@ class AppStrings {
   static const from = "From";
   static const to = "To";
   static const post = "Post";
+  static const messageHint = "Enter Message ...";
 }

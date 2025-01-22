@@ -12,7 +12,7 @@ class DashboardFunctions extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Expanded(child: SearchTextField()),
+        Expanded(child: const SearchTextField()),
         Padding(
           padding: const EdgeInsets.only(right: 14, left: 22),
           child: GestureDetector(

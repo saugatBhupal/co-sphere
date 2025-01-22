@@ -4,8 +4,8 @@ import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:flutter/material.dart';
 
-class ReceivedTile extends StatelessWidget {
-  const ReceivedTile({
+class SentTile extends StatelessWidget {
+  const SentTile({
     super.key,
     required this.message,
   });
@@ -19,22 +19,18 @@ class ReceivedTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.centerRight,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 12.0),
-              child: CircleImageAvatar(radius: 18),
-            ),
-            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
                   constraints: BoxConstraints(maxWidth: context.width * 0.7),
                   decoration: const BoxDecoration(
-                    color: AppColors.genie,
+                    color: AppColors.winter,
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
                   ),
                   child: Padding(
@@ -43,7 +39,7 @@ class ReceivedTile extends StatelessWidget {
                     child: Text(
                       message,
                       style: _textTheme.bodySmall!.copyWith(
-                        color: AppColors.black,
+                        color: AppColors.white,
                         fontWeight: FontThickness.regular,
                       ),
                       softWrap: true,
@@ -56,6 +52,11 @@ class ReceivedTile extends StatelessWidget {
                   style: _textTheme.labelLarge,
                 ),
               ],
+            ),
+            const SizedBox(width: 12),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 12.0),
+              child: CircleImageAvatar(radius: 18),
             ),
           ],
         ),
