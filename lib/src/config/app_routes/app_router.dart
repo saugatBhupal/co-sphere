@@ -14,6 +14,7 @@ import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_s
 import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
+import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:cosphere/views/onboarding/onboarding_screen.dart';
 import 'package:cosphere/views/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class AppRouter {
   AppRouter._();
   static final _signUpBloc = sl<SignUpBloc>();
   static final _signInBloc = sl<SignInBloc>();
+  static final _profileBloc = sl<ProfileBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.root:
@@ -76,7 +78,12 @@ class AppRouter {
             builder: (context) =>
                 DashboardScreen(user: settings.arguments as User));
       case AppRoutes.profile:
-        return MaterialPageRoute(builder: (context) => const ProfileScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<ProfileBloc>.value(
+            value: _profileBloc,
+            child: const ProfileScreen(),
+          ),
+        );
       case AppRoutes.editProfile:
         return MaterialPageRoute(
             builder: (context) => const EditProfileScreen());

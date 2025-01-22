@@ -13,15 +13,17 @@ class ExperienceView extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
-      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+      margin: const EdgeInsets.symmetric(horizontal: 14),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        border: Border.all(width: 0.6, color: AppColors.plaster),
+        border: Border.all(width: 0.4, color: AppColors.plaster),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "${AppStrings.professional} ${AppStrings.overview}",
@@ -52,7 +54,7 @@ class ExperienceView extends StatelessWidget {
               child: ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 3,
+                itemCount: 6,
                 itemBuilder: (context, index) => const ExperienceCard(
                   position: "UI|UX Developer",
                   organization: "Odama Studios",

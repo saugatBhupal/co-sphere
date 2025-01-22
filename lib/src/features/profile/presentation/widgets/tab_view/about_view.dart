@@ -12,6 +12,7 @@ class AboutView extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
+      margin: const EdgeInsets.symmetric(horizontal: 14),
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -19,6 +20,7 @@ class AboutView extends StatelessWidget {
         border: Border.all(width: 0.4, color: AppColors.plaster),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildInfo(

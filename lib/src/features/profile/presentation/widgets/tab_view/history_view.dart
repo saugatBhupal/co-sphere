@@ -13,6 +13,7 @@ class HistoryView extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
+      margin: const EdgeInsets.symmetric(horizontal: 14),
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -22,6 +23,7 @@ class HistoryView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "${AppStrings.appName} ${AppStrings.history}",
