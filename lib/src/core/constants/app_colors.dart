@@ -9,6 +9,7 @@ class AppColors {
   static const Color grey = Color(0xFF716C6C);
   static const Color blue = Color(0xFF3C66E3);
   static const Color calm = Color(0xFFDEF5F8);
+  static const Color snow = Color(0xFFF0F0F0);
   static const Color frog = Color(0xFF0D6722);
   static const Color casa = Color(0xFFFFD2CB);
   static const Color genie = Color(0xFFC9DEF0);

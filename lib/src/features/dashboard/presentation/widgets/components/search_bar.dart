@@ -5,16 +5,33 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SearchTextField extends StatelessWidget {
-  final TextEditingController controller;
+class SearchTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final String? icon;
   const SearchTextField({
     super.key,
-    required this.controller,
     this.validator,
     this.icon,
   });
+
+  @override
+  State<SearchTextField> createState() => _SearchTextFieldState();
+}
+
+class _SearchTextFieldState extends State<SearchTextField> {
+  late final TextEditingController _searchController;
+
+  @override
+  void initState() {
+    _searchController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +39,8 @@ class SearchTextField extends StatelessWidget {
     return SizedBox(
       height: 36,
       child: TextFormField(
-        controller: controller,
-        validator: validator,
+        controller: _searchController,
+        validator: widget.validator,
         keyboardType: TextInputType.text,
         cursorColor: AppColors.grey,
         style: _textTheme.titleSmall!

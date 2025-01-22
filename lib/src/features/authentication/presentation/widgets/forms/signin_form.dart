@@ -25,8 +25,8 @@ class _SigninFormState extends State<SigninForm> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    _emailController = TextEditingController(text: "sarina@gmail.com");
+    _passwordController = TextEditingController(text: "sarina@123");
   }
 
   @override
