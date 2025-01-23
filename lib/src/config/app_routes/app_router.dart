@@ -10,9 +10,10 @@ import 'package:cosphere/src/features/authentication/presentation/screens/signup
 import 'package:cosphere/src/features/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/signin/sign_in_bloc.dart';
-import 'package:cosphere/src/features/chat/presentation/screens/chat_logs.dart';
-import 'package:cosphere/src/features/chat/presentation/screens/chat_room.dart';
+import 'package:cosphere/src/features/chat/presentation/screens/chat_logs_screen.dart';
+import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
@@ -90,9 +91,12 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => const EditProfileScreen());
       case AppRoutes.chatLogs:
-        return MaterialPageRoute(builder: (context) => const ChatLogs());
+        return MaterialPageRoute(builder: (context) => const ChatLogsScreen());
       case AppRoutes.chatRoom:
-        return MaterialPageRoute(builder: (context) => const ChatRoom());
+        return MaterialPageRoute(builder: (context) => const ChatRoomScreen());
+      case AppRoutes.notifications:
+        return MaterialPageRoute(
+            builder: (context) => const NotificationsScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

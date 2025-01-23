@@ -3,8 +3,8 @@ import 'package:cosphere/src/features/chat/presentation/widgets/message_tile.dar
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/search_bar.dart';
 import 'package:flutter/material.dart';
 
-class ChatLogs extends StatelessWidget {
-  const ChatLogs({super.key});
+class ChatLogsScreen extends StatelessWidget {
+  const ChatLogsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

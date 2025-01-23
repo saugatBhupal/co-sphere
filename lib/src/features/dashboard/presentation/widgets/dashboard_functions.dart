@@ -12,22 +12,21 @@ class DashboardFunctions extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: const SearchTextField()),
+        const Expanded(child: SearchTextField()),
         Padding(
           padding: const EdgeInsets.only(right: 14, left: 22),
           child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                AppRoutes.chatLogs,
-              );
-            },
+            onTap: () => Navigator.of(context).pushNamed(AppRoutes.chatLogs),
             child: SvgPicture.asset(
               AppIcons.chat,
             ),
           ),
         ),
-        SvgPicture.asset(
-          AppIcons.notification,
+        GestureDetector(
+          onTap: () => Navigator.of(context).pushNamed(AppRoutes.notifications),
+          child: SvgPicture.asset(
+            AppIcons.notification,
+          ),
         ),
       ],
     );

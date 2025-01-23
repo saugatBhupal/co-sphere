@@ -15,4 +15,5 @@ class AppRoutes {
   static const String editProfile = "/editProfile";
   static const String chatLogs = "/chatLogs";
   static const String chatRoom = "/chatRoom";
+  static const String notifications = "/notifications";
 }

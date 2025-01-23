@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_education.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_experience.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_images.dart';
@@ -17,21 +18,11 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.midnight,
-        iconTheme: const IconThemeData(color: AppColors.white),
-        centerTitle: true,
-        title: Text(
-          "${AppStrings.edit} ${AppStrings.profile}",
-          style: _textTheme.titleLarge!.copyWith(
-            color: AppColors.white,
-            fontWeight: FontThickness.medium,
-          ),
-        ),
-      ),
+      appBar:
+          const CommonAppbar(title: "${AppStrings.edit} ${AppStrings.profile}"),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.0),
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

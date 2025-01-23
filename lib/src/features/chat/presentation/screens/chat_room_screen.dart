@@ -5,14 +5,14 @@ import 'package:cosphere/src/features/chat/presentation/widgets/received_tile.da
 import 'package:cosphere/src/features/chat/presentation/widgets/sent_tile.dart';
 import 'package:flutter/material.dart';
 
-class ChatRoom extends StatefulWidget {
-  const ChatRoom({super.key});
+class ChatRoomScreen extends StatefulWidget {
+  const ChatRoomScreen({super.key});
 
   @override
-  State<ChatRoom> createState() => _ChatRoomState();
+  State<ChatRoomScreen> createState() => _ChatRoomScreenState();
 }
 
-class _ChatRoomState extends State<ChatRoom> {
+class _ChatRoomScreenState extends State<ChatRoomScreen> {
   final ScrollController _scrollController = ScrollController();
 
   @override
