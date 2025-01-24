@@ -24,7 +24,7 @@ class MessageTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: unread ? AppColors.snow : AppColors.white,
           border: Border(
-            bottom: const BorderSide(color: AppColors.plaster, width: 1.4),
+            bottom: const BorderSide(color: AppColors.plaster, width: 1.5),
             right: unread
                 ? const BorderSide(color: AppColors.winter, width: 6)
                 : BorderSide.none,
@@ -41,27 +41,25 @@ class MessageTile extends StatelessWidget {
                   const CircleImageAvatar(
                     radius: 18,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      "Leslie Alexander",
-                      style: _textTheme.titleLarge!.copyWith(
-                          fontWeight: FontThickness.medium,
-                          color: AppColors.black),
+                  const SizedBox(width: 8),
+                  Text(
+                    "Leslie Alexander",
+                    style: _textTheme.titleSmall!.copyWith(
+                      fontWeight: FontThickness.medium,
+                      color: AppColors.black,
                     ),
                   ),
                   const Spacer(),
                   Text(
                     "1h",
-                    style: _textTheme.bodyLarge!.copyWith(
-                        color: AppColors.grey, fontWeight: FontThickness.light),
+                    style: _textTheme.bodySmall,
                   )
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 2),
               Text(
                 "Thank you! I will see you tomorrow....",
-                style: _textTheme.titleSmall!.copyWith(
+                style: _textTheme.bodyLarge!.copyWith(
                   fontWeight: FontThickness.light,
                   color: AppColors.grey,
                 ),

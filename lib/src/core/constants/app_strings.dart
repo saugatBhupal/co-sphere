@@ -114,4 +114,6 @@ class AppStrings {
   static const post = "Post";
   static const messageHint = "Enter Message ...";
   static const notifications = "Notifications";
+  static const read = "Mark all as read";
+  static const clear = "Clear all";
 }

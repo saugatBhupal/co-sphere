@@ -28,7 +28,6 @@ class ReviewsView extends StatelessWidget {
             "${AppStrings.employer} ${AppStrings.reviews}",
             style: _textTheme.bodyLarge!.copyWith(
               fontWeight: FontThickness.semiBold,
-              color: AppColors.grey.withOpacity(0.9),
               wordSpacing: 0,
             ),
           ),

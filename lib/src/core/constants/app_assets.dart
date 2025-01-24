@@ -5,7 +5,7 @@ class AppImages {
   static const String carousel1 = "$_imagesPath/carousel-1.png";
   static const String user = "$_imagesPath/user-default.png";
   static const String profile =
-      "https://e7.pngegg.com/pngimages/261/608/png-clipart-esewa-zone-office-bayalbas-google-play-iphone-iphone-electronics-text-thumbnail.png";
+      "https://static.vecteezy.com/system/resources/thumbnails/053/189/214/small/black-cat-with-intense-gaze-against-a-dark-background-free-photo.jpg";
 }
 
 class AppIcons {
@@ -29,4 +29,6 @@ class AppIcons {
   static const String web = "$_iconsPath/web.svg";
   static const String like = "$_iconsPath/like.svg";
   static const String send = "$_iconsPath/send.svg";
+  static const String tick = "$_iconsPath/tick.svg";
+  static const String trash = "$_iconsPath/trash.svg";
 }

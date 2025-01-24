@@ -2,7 +2,10 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/button/more_button.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/cards/edit_pop_up.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/cards/education_card.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_education.dart';
 import 'package:flutter/material.dart';
 
 class EducationView extends StatelessWidget {
@@ -22,23 +25,22 @@ class EducationView extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             AppStrings.education,
             style: _textTheme.bodyLarge!.copyWith(
               fontWeight: FontThickness.semiBold,
-              color: AppColors.grey,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 18.0),
+            padding: const EdgeInsets.symmetric(vertical: 18.0),
             child: SizedBox(
               child: ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 15,
+                itemCount: 5,
                 itemBuilder: (context, index) => const EducationCard(
                   position: "UI|UX Developer",
                   organization: "Odama Studios",
@@ -49,6 +51,14 @@ class EducationView extends StatelessWidget {
                   return const SizedBox(height: 24);
                 },
               ),
+            ),
+          ),
+          Center(
+            child: MoreButton(
+              title: "${AppStrings.add} ${AppStrings.more}",
+              onPressed: () {
+                showEditDialog(context: context, child: const EditEducation());
+              },
             ),
           ),
         ],

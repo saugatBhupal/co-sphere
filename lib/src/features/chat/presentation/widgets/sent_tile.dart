@@ -24,34 +24,36 @@ class SentTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  constraints: BoxConstraints(maxWidth: context.width * 0.7),
-                  decoration: const BoxDecoration(
-                    color: AppColors.winter,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 12.8),
-                    child: Text(
-                      message,
-                      style: _textTheme.bodySmall!.copyWith(
-                        color: AppColors.white,
-                        fontWeight: FontThickness.regular,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxWidth: context.width * 0.7),
+                    decoration: const BoxDecoration(
+                      color: AppColors.winter,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 12.8),
+                      child: Text(
+                        message,
+                        style: _textTheme.bodySmall!.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontThickness.regular,
+                        ),
+                        softWrap: true,
+                        overflow: TextOverflow.visible,
                       ),
-                      softWrap: true,
-                      overflow: TextOverflow.visible,
                     ),
                   ),
-                ),
-                Text(
-                  "2:36 pm",
-                  style: _textTheme.labelLarge,
-                ),
-              ],
+                  Text(
+                    "2:36 pm",
+                    style: _textTheme.labelLarge,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(width: 12),
             const Padding(

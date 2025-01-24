@@ -1,9 +1,6 @@
-import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/edit_education.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/edit_experience.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_images.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_intro.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_links.dart';
@@ -17,6 +14,7 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
+    final _gap = SizedBox(height: 30);
     return Scaffold(
       appBar:
           const CommonAppbar(title: "${AppStrings.edit} ${AppStrings.profile}"),
@@ -35,10 +33,7 @@ class EditProfileScreen extends StatelessWidget {
               const EditPersonalDetails(),
               _buildTitle(context, title: AppStrings.intro),
               const EditIntro(),
-              _buildTitle(context, title: AppStrings.education),
-              const EditEducation(),
-              _buildTitle(context, title: AppStrings.experience),
-              const EditExperience(),
+              _gap
             ],
           ),
         ),

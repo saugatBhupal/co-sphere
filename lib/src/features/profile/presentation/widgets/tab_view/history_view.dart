@@ -27,10 +27,8 @@ class HistoryView extends StatelessWidget {
         children: [
           Text(
             "${AppStrings.appName} ${AppStrings.history}",
-            style: _textTheme.bodyLarge!.copyWith(
-                fontWeight: FontThickness.semiBold,
-                color: AppColors.grey,
-                wordSpacing: -1),
+            style: _textTheme.bodyLarge!
+                .copyWith(fontWeight: FontThickness.semiBold, wordSpacing: -1),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 18.0),

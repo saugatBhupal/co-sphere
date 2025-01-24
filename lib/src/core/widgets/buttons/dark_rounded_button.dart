@@ -23,7 +23,7 @@ class DarkRoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: context.width,
       height: height,
       child: Material(
@@ -31,7 +31,7 @@ class DarkRoundedButton extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(32)),
         child: InkWell(
           onTap: onPressed,
-          splashColor: AppColors.errigalWhite,
+          splashColor: AppColors.winter,
           borderRadius: const BorderRadius.all(Radius.circular(32)),
           child: Center(
             child: Row(

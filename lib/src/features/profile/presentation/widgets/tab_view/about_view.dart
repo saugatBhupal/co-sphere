@@ -55,7 +55,6 @@ Widget _buildInfo(String title, String subtitle, BuildContext context) {
         title,
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
               fontWeight: FontThickness.semiBold,
-              color: AppColors.grey,
             ),
       ),
       const SizedBox(height: 4),

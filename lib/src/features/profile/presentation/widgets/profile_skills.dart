@@ -2,6 +2,7 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/button/more_button.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSkills extends StatelessWidget {
@@ -23,7 +24,6 @@ class ProfileSkills extends StatelessWidget {
                   TextSpan(
                     text: "${AppStrings.skill} ",
                     style: _textTheme.bodyLarge!.copyWith(
-                      color: AppColors.grey,
                       fontWeight: FontThickness.medium,
                     ),
                   ),
@@ -70,21 +70,7 @@ class ProfileSkills extends StatelessWidget {
                     );
                   },
                 ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.plaster,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Text(
-                    "+ ${AppStrings.more}",
-                    style: _textTheme.bodySmall!.copyWith(
-                      color: AppColors.black,
-                      fontWeight: FontThickness.medium,
-                    ),
-                  ),
-                ),
+                const MoreButton(title: "+ ${AppStrings.more}"),
               ],
             ),
           ),

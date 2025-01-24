@@ -103,24 +103,6 @@ class _EditExperienceState extends State<EditExperience> {
             fontSize: 14,
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
-          const SizedBox(height: 30),
-          SizedBox(
-            child: ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              itemBuilder: (context, index) => const ExperienceCard(
-                position: "UI|UX Developer",
-                organization: "Odama Studios",
-                status: "intern",
-                from: "2023",
-                to: "2024",
-              ),
-              separatorBuilder: (context, index) {
-                return const SizedBox(height: 24);
-              },
-            ),
-          ),
         ],
       ),
     );
