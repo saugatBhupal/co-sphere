@@ -6,7 +6,7 @@ class User extends Equatable {
   final String? profileImage;
   final String email;
   final String phone;
-  final String password;
+  final String? password;
   final bool verified;
   final String dob;
   final String country;
@@ -19,7 +19,7 @@ class User extends Equatable {
     this.profileImage,
     required this.email,
     required this.phone,
-    required this.password,
+     this.password,
     required this.verified,
     required this.dob,
     required this.country,

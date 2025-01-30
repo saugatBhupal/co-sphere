@@ -8,7 +8,7 @@ sealed class SignInEvent extends Equatable {
 }
 
 class AuthSignIn extends SignInEvent {
-  final SigninParams params;
+  final SigninRequestDto params;
 
   const AuthSignIn({required this.params});
   @override

@@ -1,11 +1,11 @@
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/core/models/local/user_hive_model.dart';
+import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
 
-extension UserHiveModelExtension on UserHiveModel {
+extension UserApiModelExtension on UserApiModel {
   User toDomain() => User(
-        uid: uid!,
+        uid: uid,
         email: email,
-        fullname: name,
+        fullname: fullname,
         dob: dob,
         phone: phone,
         country: country,
@@ -13,14 +13,15 @@ extension UserHiveModelExtension on UserHiveModel {
         city: city,
         password: password,
         verified: verified,
+        profileImage: profileImage ?? ""
       );
 }
 
 extension UserExtension on User {
-  UserHiveModel fromDomain() => UserHiveModel(
+  UserApiModel fromDomain() => UserApiModel(
         uid: uid,
         email: email,
-        name: fullname,
+        fullname: fullname,
         dob: dob,
         phone: phone,
         country: country,
@@ -28,5 +29,6 @@ extension UserExtension on User {
         city: city,
         password: password ?? "",
         verified: verified,
+        profileImage: profileImage ?? ""
       );
 }

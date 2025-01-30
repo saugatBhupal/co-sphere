@@ -15,6 +15,22 @@ class AuthSignUp extends SignUpEvent {
   List<Object> get props => [params];
 }
 
+class VerifyOtp extends SignUpEvent {
+  final OtpRequestDto dto;
+
+  const VerifyOtp({required this.dto});
+  @override
+  List<Object> get props => [dto];
+}
+
+class CreatePassword extends SignUpEvent {
+  final CreatePasswordRequestDto dto;
+
+  const CreatePassword({required this.dto});
+  @override
+  List<Object> get props => [dto];
+}
+
 class UpdateSignUpRequestDto extends SignUpEvent {
   final SignUpRequestDto params;
 

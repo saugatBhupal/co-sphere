@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_in/sign_in_request_dto.dart';
 import 'package:cosphere/src/features/authentication/domain/usecases/signin_usecase.dart';
 import 'package:equatable/equatable.dart';
 

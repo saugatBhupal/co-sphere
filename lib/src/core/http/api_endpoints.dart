@@ -11,6 +11,8 @@ class ApiEndpoints {
   // ====================== Auth Routes ======================
   static const String login = "$baseUrl/v1/auth/login";
   static const String register = "$baseUrl/v1/auth/register";
+  static const String verifyOtp = "$baseUrl/v1/auth/verify-otp";
+  static const String createPassword = "$baseUrl/v1/auth/create-password";
   static const String resetPassword = "$baseUrl/v1/auth/resetPassword";
 
   // ====================== User Routes ======================

@@ -1,3 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
@@ -7,12 +12,13 @@ import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/location_dropdown.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LocationForm extends StatefulWidget {
-  const LocationForm({super.key});
+  final String email;
+  const LocationForm({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
 
   @override
   State<LocationForm> createState() => _LocationFormState();
@@ -55,7 +61,7 @@ class _LocationFormState extends State<LocationForm> {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoutes.otp,
             (route) => false,
-            arguments: state.email,
+            arguments: widget.email,
           );
         }
       },

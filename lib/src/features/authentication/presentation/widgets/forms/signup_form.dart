@@ -90,7 +90,10 @@ class _SignupFormState extends State<SignupForm> {
                             dob: _dobController.text,
                           ),
                         ));
-                    Navigator.of(context).pushNamed(AppRoutes.location);
+                    Navigator.of(context).pushNamed(
+                      AppRoutes.location,
+                      arguments: _emailController.text,
+                    );
                   }
                 },
               ),

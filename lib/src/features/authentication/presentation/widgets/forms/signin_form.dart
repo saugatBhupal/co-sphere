@@ -5,7 +5,7 @@ import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/email_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/password_field.dart';
-import 'package:cosphere/src/features/authentication/domain/usecases/signin_usecase.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_in/sign_in_request_dto.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/signin/sign_in_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,7 +73,7 @@ class _SigninFormState extends State<SigninForm> {
               if (_formKey.currentState!.validate()) {
                 context.read<SignInBloc>().add(
                       AuthSignIn(
-                        params: SigninParams(
+                        params: SigninRequestDto(
                             email: _emailController.text,
                             password: _passwordController.text),
                       ),

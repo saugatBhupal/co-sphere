@@ -6,12 +6,14 @@ import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/password_field.dart';
+import 'package:cosphere/src/features/authentication/data/dto/create_password/create_password_request_dto.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PasswordForm extends StatefulWidget {
-  const PasswordForm({super.key});
+  final String email;
+  const PasswordForm({super.key, required this.email});
 
   @override
   State<PasswordForm> createState() => _PasswordFormState();
@@ -41,13 +43,11 @@ class _PasswordFormState extends State<PasswordForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpBloc, SignUpState>(
       listener: (context, state) {
-        if (state is AuthSignupError) {
+        if (state is CreatePasswordError) {
           buildToast(toastType: ToastType.error, msg: state.message);
         }
-        if (state is AuthSignUpSuccess) {
-          buildToast(
-              toastType: ToastType.success,
-              msg: "User Registered in Successfully");
+        if (state is CreatePasswordSuccess) {
+          buildToast(toastType: ToastType.success, msg: state.message);
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoutes.signin,
             (route) => false,
@@ -80,18 +80,10 @@ class _PasswordFormState extends State<PasswordForm> {
                   title: AppStrings.continueBtn,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<SignUpBloc>().add(UpdateSignUpRequestDto(
-                            state.params.copyWith(
-                              password: _confirmController.text,
-                            ),
-                          ));
-
-                      Navigator.of(context).pushNamed(
-                        AppRoutes.interest,
-                        arguments: state.params.copyWith(
-                          password: _confirmController.text,
-                        ),
-                      );
+                      context.read<SignUpBloc>().add(CreatePassword(
+                          dto: CreatePasswordRequestDto(
+                              email: widget.email,
+                              password: _confirmController.text)));
                     }
                   }),
             ],

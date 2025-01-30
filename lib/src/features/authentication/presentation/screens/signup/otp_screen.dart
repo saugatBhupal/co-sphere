@@ -38,7 +38,7 @@ class OtpScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const OtpForm(),
+              OtpForm(email: email),
               const SizedBox(height: 15),
               AccountTextspan(
                 infoText: AppStrings.haveAccount,

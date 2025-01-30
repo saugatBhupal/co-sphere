@@ -1,6 +1,6 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/authentication/data/dto/sign_up_request_dto.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_up/sign_up_request_dto.dart';
 
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
