@@ -1,10 +1,13 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/location_dropdown.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,10 +21,13 @@ class LocationForm extends StatefulWidget {
 class _LocationFormState extends State<LocationForm> {
   late final TextEditingController _cityController;
   final _formKey = GlobalKey<FormState>();
+
   List<String> countries = ["India", "Nepal", "China"];
-  List<String> provinces = ["India", "Nepal", "China"];
+  List<String> provinces = ["Province 1", "Province 2", "Province 3"];
+
   String? selectedCountry;
   String? selectedProvince;
+
   @override
   void initState() {
     super.initState();
@@ -36,7 +42,23 @@ class _LocationFormState extends State<LocationForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(
+    return BlocConsumer<SignUpBloc, SignUpState>(
+      listener: (context, state) {
+        if (state is AuthSignupError) {
+          buildToast(toastType: ToastType.error, msg: state.message);
+        }
+        if (state is AuthSignUpSuccess) {
+          buildToast(
+            toastType: ToastType.success,
+            msg: "User Registered Successfully",
+          );
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutes.otp,
+            (route) => false,
+            arguments: state.email,
+          );
+        }
+      },
       builder: (context, state) {
         return Form(
           key: _formKey,
@@ -47,7 +69,9 @@ class _LocationFormState extends State<LocationForm> {
                 label: AppStrings.country,
                 items: countries,
                 onChanged: (value) {
-                  selectedCountry = value;
+                  setState(() {
+                    selectedCountry = value;
+                  });
                 },
                 validator: (value) =>
                     FormValidator.validateTitle(value, AppStrings.country),
@@ -57,7 +81,9 @@ class _LocationFormState extends State<LocationForm> {
                 label: AppStrings.province,
                 items: provinces,
                 onChanged: (value) {
-                  selectedProvince = value;
+                  setState(() {
+                    selectedProvince = value;
+                  });
                 },
                 validator: (value) =>
                     FormValidator.validateTitle(value, AppStrings.province),
@@ -70,20 +96,30 @@ class _LocationFormState extends State<LocationForm> {
                     FormValidator.validateTitle(value, AppStrings.city),
               ),
               const SizedBox(height: 45),
-              DarkRoundedButton(
-                title: AppStrings.continueBtn,
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    context.read<SignUpBloc>().add(UpdateSignupParams(
-                          state.params.copyWith(
-                              country: selectedCountry,
-                              province: selectedProvince,
-                              city: _cityController.text),
-                        ));
-                    Navigator.of(context).pushNamed(AppRoutes.otp);
-                  }
-                },
-              ),
+              if (state is AuthSignUpLoading)
+                const DarkRoundedButton(
+                  isLoading: true,
+                  title: AppStrings.continueBtn,
+                  onPressed: null,
+                ),
+              if (!(state is AuthSignUpLoading))
+                DarkRoundedButton(
+                  isLoading: false,
+                  title: AppStrings.continueBtn,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<SignUpBloc>().add(
+                            AuthSignUp(
+                              params: state.params.copyWith(
+                                country: selectedCountry ?? "",
+                                province: selectedProvince ?? "",
+                                city: _cityController.text,
+                              ),
+                            ),
+                          );
+                    }
+                  },
+                ),
             ],
           ),
         );

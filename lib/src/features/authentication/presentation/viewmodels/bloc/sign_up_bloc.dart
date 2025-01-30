@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
-import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_up_request_dto.dart';
 import 'package:cosphere/src/features/authentication/domain/usecases/signup_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
@@ -18,7 +18,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       if (event is AuthSignUp) {
         await _signup(event, emit);
       }
-      if (event is UpdateSignupParams) {
+      if (event is UpdateSignUpRequestDto) {
         await _updateParams(event, emit);
       }
       if (event is NavLocationScreen) {
@@ -32,7 +32,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final result = await signupUsecase(event.params);
     result.fold(
       (failure) => emit(AuthSignupError(failure.message)),
-      (success) => emit(AuthSignUpSuccess()),
+      (success) => emit(AuthSignUpSuccess(email: success)),
     );
   }
 
@@ -41,13 +41,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   Future<void> _updateParams(
-      UpdateSignupParams event, Emitter<SignUpState> emit) async {
-    final updatedParams = SignupParams(
+      UpdateSignUpRequestDto event, Emitter<SignUpState> emit) async {
+    final updatedParams = SignUpRequestDto(
       email: event.params.email.isNotEmpty
           ? event.params.email
           : state.params.email,
-      name:
-          event.params.name.isNotEmpty ? event.params.name : state.params.name,
+      fullname: event.params.fullname.isNotEmpty
+          ? event.params.fullname
+          : state.params.fullname,
       phone: event.params.phone.isNotEmpty
           ? event.params.phone
           : state.params.phone,
@@ -60,9 +61,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           : state.params.province,
       city:
           event.params.city.isNotEmpty ? event.params.city : state.params.city,
-      password: event.params.password.isNotEmpty
-          ? event.params.password
-          : state.params.password,
     );
     emit(state.copyWith(params: updatedParams));
   }

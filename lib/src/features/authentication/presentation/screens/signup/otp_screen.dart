@@ -1,14 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
+import 'package:cosphere/src/features/authentication/presentation/widgets/forms/otp_form.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/auth_message.dart';
-import 'package:cosphere/src/features/authentication/presentation/widgets/forms/otp_form.dart';
-import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
-import 'package:flutter/material.dart';
 
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+  final String email;
+  const OtpScreen({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +32,7 @@ class OtpScreen extends StatelessWidget {
               const SizedBox(height: 10),
               Center(
                 child: Text(
-                  AppStrings.emailEx,
+                  email,
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: AppColors.midnight, fontWeight: FontWeight.w500),
                 ),

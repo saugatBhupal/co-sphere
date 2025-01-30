@@ -28,10 +28,10 @@ class _SignupFormState extends State<SignupForm> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _nameController = TextEditingController();
-    _phoneController = TextEditingController();
-    _dobController = TextEditingController();
+    _emailController = TextEditingController(text: "saugatsingh89@gmail.com");
+    _nameController = TextEditingController(text: "saugat");
+    _phoneController = TextEditingController(text: "9818733646");
+    _dobController = TextEditingController(text: "09-09-2000");
   }
 
   @override
@@ -82,10 +82,10 @@ class _SignupFormState extends State<SignupForm> {
                 title: AppStrings.continueBtn,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    context.read<SignUpBloc>().add(UpdateSignupParams(
+                    context.read<SignUpBloc>().add(UpdateSignUpRequestDto(
                           state.params.copyWith(
                             email: _emailController.text,
-                            name: _nameController.text,
+                            fullname: _nameController.text,
                             phone: _phoneController.text,
                             dob: _dobController.text,
                           ),

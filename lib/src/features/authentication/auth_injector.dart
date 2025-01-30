@@ -1,7 +1,9 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/features/authentication/data/datasources/local/auth_local_datasource.dart';
 import 'package:cosphere/src/features/authentication/data/datasources/local/auth_local_datasource_impl.dart';
-import 'package:cosphere/src/features/authentication/data/repositories/auth_local_repository.dart';
+import 'package:cosphere/src/features/authentication/data/datasources/remote/auth_remote_datasource.dart';
+import 'package:cosphere/src/features/authentication/data/datasources/remote/auth_remote_datasource_impl.dart';
+import 'package:cosphere/src/features/authentication/data/repositories/auth_remote_repository.dart';
 import 'package:cosphere/src/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:cosphere/src/features/authentication/domain/usecases/signin_usecase.dart';
 import 'package:cosphere/src/features/authentication/domain/usecases/signup_usecase.dart';
@@ -11,8 +13,10 @@ import 'package:cosphere/src/features/authentication/presentation/viewmodels/sig
 void initAuth() {
   sl.registerLazySingleton<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(hive: sl()));
+  sl.registerLazySingleton<AuthRemoteDatasource>(
+      () => AuthRemoteDatasourceImpl(dio: sl()));
   sl.registerLazySingleton<AuthRepository>(
-      () => AuthLocalRepository(authLocalDataSource: sl()));
+      () => AuthRemoteRepository(authRemoteDatasource: sl()));
   sl.registerLazySingleton<SignupUsecase>(
       () => SignupUsecase(authRepository: sl()));
   sl.registerLazySingleton<SigninUsecase>(

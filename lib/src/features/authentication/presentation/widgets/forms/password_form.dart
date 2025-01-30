@@ -45,7 +45,9 @@ class _PasswordFormState extends State<PasswordForm> {
           buildToast(toastType: ToastType.error, msg: state.message);
         }
         if (state is AuthSignUpSuccess) {
-          buildToast(toastType: ToastType.success, msg: "User Registered in Successfully");
+          buildToast(
+              toastType: ToastType.success,
+              msg: "User Registered in Successfully");
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoutes.signin,
             (route) => false,
@@ -78,16 +80,12 @@ class _PasswordFormState extends State<PasswordForm> {
                   title: AppStrings.continueBtn,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<SignUpBloc>().add(UpdateSignupParams(
+                      context.read<SignUpBloc>().add(UpdateSignUpRequestDto(
                             state.params.copyWith(
                               password: _confirmController.text,
                             ),
                           ));
-                      context.read<SignUpBloc>().add(AuthSignUp(
-                            params: state.params.copyWith(
-                              password: _confirmController.text,
-                            ),
-                          ));
+
                       Navigator.of(context).pushNamed(
                         AppRoutes.interest,
                         arguments: state.params.copyWith(

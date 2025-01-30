@@ -1,6 +1,7 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/authentication/domain/usecases/signup_usecase.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_up_request_dto.dart';
+
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InterestScreen extends StatelessWidget {
-  final SignupParams params;
+  final SignUpRequestDto params;
   const InterestScreen({super.key, required this.params});
 
   @override

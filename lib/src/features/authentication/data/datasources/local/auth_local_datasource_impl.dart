@@ -3,8 +3,8 @@ import 'package:cosphere/src/core/models/local/user_hive_model.dart';
 import 'package:cosphere/src/core/network/hive_service.dart';
 import 'package:cosphere/src/core/utils/hash_password.dart';
 import 'package:cosphere/src/features/authentication/data/datasources/local/auth_local_datasource.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_up_request_dto.dart';
 import 'package:cosphere/src/features/authentication/domain/usecases/signin_usecase.dart';
-import 'package:cosphere/src/features/authentication/domain/usecases/signup_usecase.dart';
 import 'package:uuid/uuid.dart';
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
@@ -27,14 +27,13 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  Future<UserHiveModel> signUp(SignupParams params) async {
+  Future<UserHiveModel> signUp(SignUpRequestDto params) async {
     try {
-      String hashedPassword = hashPassword(params.password);
       UserHiveModel user = UserHiveModel(
         uid: const Uuid().v4(),
-        name: params.name,
+        name: params.fullname,
         email: params.email,
-        password: hashedPassword,
+        password: "",
         phone: params.phone,
         dob: params.dob,
         country: params.country,

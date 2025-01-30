@@ -2,7 +2,7 @@ import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/app_routes/no_route_found.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/features/authentication/domain/usecases/signup_usecase.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_up_request_dto.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signin/signin_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signup/location_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signup/otp_screen.dart';
@@ -60,7 +60,7 @@ class AppRouter {
         );
       case AppRoutes.otp:
         return MaterialPageRoute(
-          builder: (context) => const OtpScreen(),
+          builder: (context) => OtpScreen(email: settings.arguments as String),
         );
       case AppRoutes.password:
         return MaterialPageRoute(
@@ -73,7 +73,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => BlocProvider<SignUpBloc>.value(
             value: _signUpBloc,
-            child: InterestScreen(params: settings.arguments as SignupParams),
+            child:
+                InterestScreen(params: settings.arguments as SignUpRequestDto),
           ),
         );
       case AppRoutes.dashboard:
