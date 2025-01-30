@@ -2,7 +2,7 @@ import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
 
 extension UserApiModelExtension on UserApiModel {
-  User toDomain() => User(
+  User toDomain() => User.initial().copyWith(
         uid: uid,
         email: email,
         fullname: fullname,
@@ -13,12 +13,12 @@ extension UserApiModelExtension on UserApiModel {
         city: city,
         password: password,
         verified: verified,
-        profileImage: profileImage ?? ""
+        profileImage: profileImage,
       );
 }
 
 extension UserExtension on User {
-  UserApiModel fromDomain() => UserApiModel(
+  UserApiModel toApiModel() => UserApiModel(
         uid: uid,
         email: email,
         fullname: fullname,
@@ -27,8 +27,8 @@ extension UserExtension on User {
         country: country,
         province: province,
         city: city,
-        password: password ?? "",
+        password: password,
         verified: verified,
-        profileImage: profileImage ?? ""
+        profileImage: profileImage,
       );
 }

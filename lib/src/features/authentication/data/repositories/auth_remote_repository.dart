@@ -14,16 +14,6 @@ class AuthRemoteRepository implements AuthRepository {
   final AuthRemoteDatasource authRemoteDatasource;
 
   AuthRemoteRepository({required this.authRemoteDatasource});
-  @override
-  Future<Either<Failure, User>> signin(SigninRequestDto signInParams) async {
-    try {
-      final UserApiModel userApiModel =
-          await authRemoteDatasource.signIn(signInParams);
-      return Right(userApiModel.toDomain());
-    } catch (e) {
-      return Left(Failure(message: e.toString()));
-    }
-  }
 
   @override
   Future<Either<Failure, String>> signup(SignUpRequestDto signUpDto) async {
@@ -51,6 +41,17 @@ class AuthRemoteRepository implements AuthRepository {
     try {
       final String message = await authRemoteDatasource.createPassword(dto);
       return Right(message);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> signin(SigninRequestDto signInParams) async {
+    try {
+      final UserApiModel userApiModel =
+          await authRemoteDatasource.signIn(signInParams);
+      return Right(userApiModel.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

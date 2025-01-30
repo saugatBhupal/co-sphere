@@ -19,7 +19,7 @@ class User extends Equatable {
     this.profileImage,
     required this.email,
     required this.phone,
-     this.password,
+    this.password,
     required this.verified,
     required this.dob,
     required this.country,
@@ -27,6 +27,21 @@ class User extends Equatable {
     required this.city,
   });
 
+  factory User.initial() {
+    return const User(
+      uid: '',
+      fullname: 'Unknown',
+      profileImage: null,
+      email: '',
+      phone: '',
+      password: '',
+      verified: false,
+      dob: '2000-01-01',
+      country: 'Unknown',
+      province: 'Unknown',
+      city: 'Unknown',
+    );
+  }
   User copyWith({
     String? uid,
     String? fullname,

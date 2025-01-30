@@ -9,7 +9,7 @@ class UserApiModel extends Equatable {
   final String? profileImage;
   final String email;
   final String phone;
-  final String password;
+  final String? password;
   final bool verified;
   final String dob;
   final String country;
@@ -22,7 +22,7 @@ class UserApiModel extends Equatable {
     this.profileImage,
     required this.email,
     required this.phone,
-    required this.password,
+    this.password,
     required this.verified,
     required this.dob,
     required this.country,
@@ -32,19 +32,20 @@ class UserApiModel extends Equatable {
 
   factory UserApiModel.fromJson(Map<String, dynamic> json) {
     return UserApiModel(
-      uid: json['_id'],
-      fullname: json['fullname'],
-      profileImage: json['profileImage'],
-      email: json['email'],
-      phone: json['phone'],
-      password: json['password'],
-      verified: json['verified'],
-      dob: json['dob'],
-      country: json['country'],
-      province: json['province'],
-      city: json['city'],
+      uid: json['_id'] as String? ?? '',
+      fullname: json['fullname'] as String? ?? 'Unknown',
+      profileImage: json['profileImage'] as String?,
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      password: json['password'] as String?,
+      verified: json['verified'] as bool? ?? false,
+      dob: json['dob'] as String? ?? '',
+      country: json['country'] as String? ?? 'Unknown',
+      province: json['province'] as String? ?? 'Unknown',
+      city: json['city'] as String? ?? 'Unknown',
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
       '_id': uid,
