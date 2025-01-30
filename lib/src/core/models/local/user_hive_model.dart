@@ -16,20 +16,29 @@ class UserHiveModel extends Equatable {
   @HiveField(3)
   final String dob;
   @HiveField(4)
-  final String address;
+  final String country;
   @HiveField(5)
-  final String password;
+  final String province;
   @HiveField(6)
+  final String city;
+  @HiveField(7)
+  final String password;
+  @HiveField(8)
   final bool verified;
+  @HiveField(9)
+  final String phone;
 
   UserHiveModel({
     String? uid,
     required this.email,
     required this.name,
     required this.dob,
-    required this.address,
+    required this.country,
+    required this.province,
+    required this.city,
     required this.password,
     required this.verified,
+    required this.phone,
   }) : uid = uid ?? const Uuid().v4();
   @override
   List<Object?> get props => [];

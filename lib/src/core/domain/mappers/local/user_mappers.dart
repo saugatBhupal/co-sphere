@@ -5,9 +5,12 @@ extension UserHiveModelExtension on UserHiveModel {
   User toDomain() => User(
         uid: uid!,
         email: email,
-        name: name,
+        fullname: name,
         dob: dob,
-        address: address,
+        phone: phone,
+        country: country,
+        province: province,
+        city: city,
         password: password,
         verified: verified,
       );
@@ -17,9 +20,12 @@ extension UserExtension on User {
   UserHiveModel fromDomain() => UserHiveModel(
         uid: uid,
         email: email,
-        name: name,
+        name: fullname,
         dob: dob,
-        address: address,
+        phone: phone,
+        country: country,
+        province: province,
+        city: city,
         password: password,
         verified: verified,
       );

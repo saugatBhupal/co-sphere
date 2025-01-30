@@ -34,7 +34,7 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${AppStrings.hi} ${user.name},",
+                      "${AppStrings.hi} ${user.fullname},",
                       style: _textTheme.headlineSmall!.copyWith(height: 1.2),
                     ),
                     Text(

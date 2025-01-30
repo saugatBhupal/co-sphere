@@ -14,7 +14,7 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-    final _gap = SizedBox(height: 30);
+    const _gap = SizedBox(height: 30);
     return Scaffold(
       appBar:
           const CommonAppbar(title: "${AppStrings.edit} ${AppStrings.profile}"),

@@ -74,16 +74,11 @@ class _LocationFormState extends State<LocationForm> {
                 title: AppStrings.continueBtn,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    final address = [
-                      selectedCountry,
-                      selectedProvince,
-                      _cityController.text,
-                    ]
-                        .where(
-                            (element) => element != null && element.isNotEmpty)
-                        .join(', ');
                     context.read<SignUpBloc>().add(UpdateSignupParams(
-                          state.params.copyWith(address: address),
+                          state.params.copyWith(
+                              country: selectedCountry,
+                              province: selectedProvince,
+                              city: _cityController.text),
                         ));
                     Navigator.of(context).pushNamed(AppRoutes.otp);
                   }

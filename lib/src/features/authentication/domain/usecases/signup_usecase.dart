@@ -20,7 +20,9 @@ class SignupParams extends Equatable {
   final String name;
   final String phone;
   final String dob;
-  final String address;
+  final String country;
+  final String province;
+  final String city;
   final String password;
 
   const SignupParams({
@@ -28,7 +30,9 @@ class SignupParams extends Equatable {
     required this.name,
     required this.phone,
     required this.dob,
-    required this.address,
+    required this.country,
+    required this.province,
+    required this.city,
     required this.password,
   });
 
@@ -37,14 +41,18 @@ class SignupParams extends Equatable {
         name = '',
         phone = '',
         dob = '',
-        address = '',
+        country = '',
+        province = '',
+        city = '',
         password = '';
   SignupParams copyWith({
     String? email,
     String? name,
     String? phone,
     String? dob,
-    String? address,
+    String? country,
+    String? province,
+    String? city,
     String? password,
   }) {
     return SignupParams(
@@ -52,11 +60,13 @@ class SignupParams extends Equatable {
       name: name ?? this.name,
       phone: phone ?? this.phone,
       dob: dob ?? this.dob,
-      address: address ?? this.address,
+      country: country ?? this.country,
+      province: province ?? this.province,
+      city: city ?? this.city,
       password: password ?? this.password,
     );
-  } 
+  }
 
   @override
-  List<Object?> get props => [email, name, phone, dob, address, password];
+  List<Object?> get props => [email, name, phone, dob, country, password];
 }

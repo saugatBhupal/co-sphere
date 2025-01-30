@@ -35,8 +35,11 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
         name: params.name,
         email: params.email,
         password: hashedPassword,
+        phone: params.phone,
         dob: params.dob,
-        address: params.address,
+        country: params.country,
+        province: params.province,
+        city: params.city,
         verified: false,
       );
       await hive.addUserToBox(user);

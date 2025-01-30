@@ -52,9 +52,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           ? event.params.phone
           : state.params.phone,
       dob: event.params.dob.isNotEmpty ? event.params.dob : state.params.dob,
-      address: event.params.address.isNotEmpty
-          ? event.params.address
-          : state.params.address,
+      country: event.params.country.isNotEmpty
+          ? event.params.country
+          : state.params.country,
+      province: event.params.province.isNotEmpty
+          ? event.params.province
+          : state.params.province,
+      city:
+          event.params.city.isNotEmpty ? event.params.city : state.params.city,
       password: event.params.password.isNotEmpty
           ? event.params.password
           : state.params.password,
