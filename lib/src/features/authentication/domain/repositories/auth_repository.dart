@@ -5,6 +5,6 @@ import 'package:cosphere/src/features/authentication/domain/usecases/signup_usec
 import 'package:dartz/dartz.dart';
 
 abstract interface class AuthRepository {
-  Future<Either<Failure, User>> signup(SignupParams signUpParams);
+  Future<Either<Failure, void>> signup(SignupParams signUpParams);
   Future<Either<Failure, User>> signin(SigninParams signInParams);
 }

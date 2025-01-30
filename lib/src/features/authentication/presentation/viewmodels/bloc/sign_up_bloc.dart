@@ -32,7 +32,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final result = await signupUsecase(event.params);
     result.fold(
       (failure) => emit(AuthSignupError(failure.message)),
-      (success) => emit(AuthSignUpSuccess(user: success)),
+      (success) => emit(AuthSignUpSuccess()),
     );
   }
 

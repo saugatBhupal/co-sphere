@@ -24,11 +24,10 @@ class AuthLocalRepository implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User>> signup(SignupParams signUpParams) async {
+  Future<Either<Failure, void>> signup(SignupParams signUpParams) async {
     try {
-      final UserHiveModel userHiveModel =
-          await authLocalDataSource.signUp(signUpParams);
-      return Right(userHiveModel.toDomain());
+      await authLocalDataSource.signUp(signUpParams);
+      return const Right(null);
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

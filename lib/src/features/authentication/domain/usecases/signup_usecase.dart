@@ -5,12 +5,12 @@ import 'package:cosphere/src/features/authentication/domain/repositories/auth_re
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class SignupUsecase implements UsecaseWithParams<User, SignupParams> {
+class SignupUsecase implements UsecaseWithParams<void, SignupParams> {
   final AuthRepository authRepository;
 
   SignupUsecase({required this.authRepository});
   @override
-  Future<Either<Failure, User>> call(SignupParams params) {
+  Future<Either<Failure, void>> call(SignupParams params) {
     return authRepository.signup(params);
   }
 }

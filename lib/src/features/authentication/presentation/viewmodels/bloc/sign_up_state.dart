@@ -16,8 +16,7 @@ class SignUpState extends Equatable {
 final class SignUpInitial extends SignUpState {}
 
 class AuthSignUpSuccess extends SignUpState {
-  final User user;
-  const AuthSignUpSuccess({required this.user});
+  const AuthSignUpSuccess();
 }
 
 class AuthSignupError extends SignUpState {
