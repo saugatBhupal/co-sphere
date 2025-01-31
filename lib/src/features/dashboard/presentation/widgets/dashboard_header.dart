@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
@@ -45,7 +46,8 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
               ),
-              const CircleImageAvatar(radius: 26),
+              CircleImageAvatar(
+                  radius: 26, imageUrl: user.profileImage ?? AppImages.profile),
             ],
           ),
         ),

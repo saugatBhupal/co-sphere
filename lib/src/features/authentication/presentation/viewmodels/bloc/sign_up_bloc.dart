@@ -46,37 +46,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final result = await signupUsecase(event.params);
     result.fold(
       (failure) => emit(AuthSignupError(failure.message)),
-      (success) => emit(AuthSignUpSuccess(email: success)),
+      (success) => emit(AuthSignUpSuccess(message: success)),
     );
   }
 
   _navLocationScreen(NavLocationScreen event, Emitter<SignUpState> emit) {
     Navigator.of(event.context).pushNamed(AppRoutes.location);
-  }
-
-  Future<void> _updateParams(
-      UpdateSignUpRequestDto event, Emitter<SignUpState> emit) async {
-    final updatedParams = SignUpRequestDto(
-      email: event.params.email.isNotEmpty
-          ? event.params.email
-          : state.params.email,
-      fullname: event.params.fullname.isNotEmpty
-          ? event.params.fullname
-          : state.params.fullname,
-      phone: event.params.phone.isNotEmpty
-          ? event.params.phone
-          : state.params.phone,
-      dob: event.params.dob.isNotEmpty ? event.params.dob : state.params.dob,
-      country: event.params.country.isNotEmpty
-          ? event.params.country
-          : state.params.country,
-      province: event.params.province.isNotEmpty
-          ? event.params.province
-          : state.params.province,
-      city:
-          event.params.city.isNotEmpty ? event.params.city : state.params.city,
-    );
-    emit(state.copyWith(params: updatedParams));
   }
 
   Future<void> _verifyOtp(VerifyOtp event, Emitter<SignUpState> emit) async {
@@ -96,5 +71,35 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       (failure) => emit(CreatePasswordError(failure.message)),
       (success) => emit(CreatePasswordSuccess(message: success)),
     );
+  }
+
+  Future<void> _updateParams(
+      UpdateSignUpRequestDto event, Emitter<SignUpState> emit) async {
+    final currentParams = state is SignUpUpdating
+        ? (state as SignUpUpdating).params
+        : SignUpRequestDto.initial();
+    final updatedParams = SignUpRequestDto(
+      email: event.params.email.isNotEmpty
+          ? event.params.email
+          : currentParams.email,
+      fullname: event.params.fullname.isNotEmpty
+          ? event.params.fullname
+          : currentParams.fullname,
+      phone: event.params.phone.isNotEmpty
+          ? event.params.phone
+          : currentParams.phone,
+      dob: event.params.dob != DateTime.utc(2000, 1, 1)
+          ? event.params.dob
+          : currentParams.dob,
+      country: event.params.country.isNotEmpty
+          ? event.params.country
+          : currentParams.country,
+      province: event.params.province.isNotEmpty
+          ? event.params.province
+          : currentParams.province,
+      city:
+          event.params.city.isNotEmpty ? event.params.city : currentParams.city,
+    );
+    emit(SignUpUpdating(params: updatedParams));
   }
 }

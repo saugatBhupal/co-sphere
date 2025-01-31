@@ -35,6 +35,11 @@ class UpdateSignUpRequestDto extends SignUpEvent {
   final SignUpRequestDto params;
 
   const UpdateSignUpRequestDto(this.params);
+  UpdateSignUpRequestDto copyWith({SignUpRequestDto? params}) {
+    return UpdateSignUpRequestDto(
+      params ?? this.params,
+    );
+  }
 
   @override
   List<Object> get props => [params];

@@ -56,7 +56,7 @@ class _LocationFormState extends State<LocationForm> {
         if (state is AuthSignUpSuccess) {
           buildToast(
             toastType: ToastType.success,
-            msg: "User Registered Successfully",
+            msg: state.message,
           );
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoutes.otp,
@@ -114,15 +114,18 @@ class _LocationFormState extends State<LocationForm> {
                   title: AppStrings.continueBtn,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<SignUpBloc>().add(
-                            AuthSignUp(
-                              params: state.params.copyWith(
-                                country: selectedCountry ?? "",
-                                province: selectedProvince ?? "",
-                                city: _cityController.text,
+                      final currentState = context.read<SignUpBloc>().state;
+                      if (currentState is SignUpUpdating) {
+                        context.read<SignUpBloc>().add(
+                              AuthSignUp(
+                                params: currentState.params.copyWith(
+                                  country: selectedCountry ?? "",
+                                  province: selectedProvince ?? "",
+                                  city: _cityController.text,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                      }
                     }
                   },
                 ),

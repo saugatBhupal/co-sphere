@@ -125,7 +125,6 @@ class _EditImagesState extends State<EditImages> {
                               _media = await openGallery();
                               if (_media != null) {
                                 setState(() {
-                                  // Properly update the media with the selected image
                                   _media = _media!;
                                 });
                               }
@@ -142,7 +141,6 @@ class _EditImagesState extends State<EditImages> {
                                 vertical: 8, horizontal: 6),
                             onPressed: () {
                               if (_media != null) {
-                                // Dispatch event to update profile image
                                 context.read<ProfileBloc>().add(
                                       UpdateProfileImage(
                                         dto: UpdateProfileImgageReqDto(

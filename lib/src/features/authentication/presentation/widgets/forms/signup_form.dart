@@ -6,9 +6,11 @@ import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/email_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/phone_field.dart';
+import 'package:cosphere/src/features/authentication/data/dto/sign_up/sign_up_request_dto.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -28,10 +30,10 @@ class _SignupFormState extends State<SignupForm> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _nameController = TextEditingController();
-    _phoneController = TextEditingController();
-    _dobController = TextEditingController();
+    _emailController = TextEditingController(text: "sarinam823@gmail.com");
+    _nameController = TextEditingController(text: "Sarian");
+    _phoneController = TextEditingController(text: "3422342433");
+    _dobController = TextEditingController(text: "09-09-2002");
   }
 
   @override
@@ -82,14 +84,21 @@ class _SignupFormState extends State<SignupForm> {
                 title: AppStrings.continueBtn,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    context.read<SignUpBloc>().add(UpdateSignUpRequestDto(
-                          state.params.copyWith(
-                            email: _emailController.text,
-                            fullname: _nameController.text,
-                            phone: _phoneController.text,
-                            dob: _dobController.text,
+                    context.read<SignUpBloc>().add(
+                          UpdateSignUpRequestDto(
+                            SignUpRequestDto(
+                              email: _emailController.text,
+                              fullname: _nameController.text,
+                              phone: _phoneController.text,
+                              dob: DateFormat('dd-MM-yyyy')
+                                  .parse(_dobController.text),
+                              country: "",
+                              province: "",
+                              city: "",
+                            ),
                           ),
-                        ));
+                        );
+
                     Navigator.of(context).pushNamed(
                       AppRoutes.location,
                       arguments: _emailController.text,

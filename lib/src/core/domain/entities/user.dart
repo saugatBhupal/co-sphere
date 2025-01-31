@@ -8,7 +8,7 @@ class User extends Equatable {
   final String phone;
   final String? password;
   final bool verified;
-  final String dob;
+  final DateTime dob;
   final String country;
   final String province;
   final String city;
@@ -28,7 +28,7 @@ class User extends Equatable {
   });
 
   factory User.initial() {
-    return const User(
+    return User(
       uid: '',
       fullname: 'Unknown',
       profileImage: null,
@@ -36,7 +36,7 @@ class User extends Equatable {
       phone: '',
       password: '',
       verified: false,
-      dob: '2000-01-01',
+      dob: DateTime.utc(2000, 1, 1),
       country: 'Unknown',
       province: 'Unknown',
       city: 'Unknown',
@@ -50,7 +50,7 @@ class User extends Equatable {
     String? phone,
     String? password,
     bool? verified,
-    String? dob,
+    DateTime? dob,
     String? country,
     String? province,
     String? city,

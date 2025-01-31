@@ -3,7 +3,8 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class ProfileData extends StatelessWidget {
-  const ProfileData({super.key});
+  final String name;
+  const ProfileData({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class ProfileData extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Kimmy Jimmel",
+            name,
             style: _textTheme.titleLarge!
                 .copyWith(height: 1.2, fontWeight: FontThickness.medium),
           ),

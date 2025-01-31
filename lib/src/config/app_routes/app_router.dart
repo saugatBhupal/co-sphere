@@ -55,9 +55,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => BlocProvider<SignUpBloc>.value(
             value: _signUpBloc,
-            child: LocationScreen(
-              email: settings.arguments as String,
-            ),
+            child: LocationScreen(email: settings.arguments as String),
           ),
         );
       case AppRoutes.otp:

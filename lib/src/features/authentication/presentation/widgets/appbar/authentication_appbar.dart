@@ -8,14 +8,17 @@ class AuthenticationAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Icon(
-          Icons.arrow_back_outlined,
-          color: AppColors.midnight,
+        GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: const Icon(
+            Icons.arrow_back_outlined,
+            color: AppColors.midnight,
+          ),
         ),
-        Text(
+        const Text(
           AppStrings.appName,
           style: TextStyle(
             color: AppColors.midnight,

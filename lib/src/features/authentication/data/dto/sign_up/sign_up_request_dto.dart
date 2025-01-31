@@ -7,7 +7,7 @@ class SignUpRequestDto {
   final String email;
   final String fullname;
   final String phone;
-  final String dob;
+  final DateTime dob;
   final String country;
   final String province;
   final String city;
@@ -22,24 +22,26 @@ class SignUpRequestDto {
     required this.city,
   });
 
-  const SignUpRequestDto.initial()
-      : email = '',
-        fullname = '',
-        phone = '',
-        dob = '',
-        country = '',
-        province = '',
-        city = '';
+  factory SignUpRequestDto.initial() {
+    return SignUpRequestDto(
+      email: '',
+      fullname: '',
+      phone: '',
+      dob: DateTime.utc(2000, 1, 1),
+      country: '',
+      province: '',
+      city: '',
+    );
+  }
 
   SignUpRequestDto copyWith({
     String? email,
     String? fullname,
     String? phone,
-    String? dob,
+    DateTime? dob,
     String? country,
     String? province,
     String? city,
-    String? password,
   }) {
     return SignUpRequestDto(
       email: email ?? this.email,

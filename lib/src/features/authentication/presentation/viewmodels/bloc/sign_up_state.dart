@@ -1,12 +1,16 @@
 part of 'sign_up_bloc.dart';
 
-class SignUpState extends Equatable {
+sealed class SignUpState {
+  const SignUpState();
+}
+
+class SignUpUpdating extends SignUpState {
   final SignUpRequestDto params;
 
-  const SignUpState({this.params = const SignUpRequestDto.initial()});
+  const SignUpUpdating({required this.params});
 
-  SignUpState copyWith({SignUpRequestDto? params}) {
-    return SignUpState(params: params ?? this.params);
+  SignUpUpdating copyWith({SignUpRequestDto? params}) {
+    return SignUpUpdating(params: params ?? this.params);
   }
 
   @override
@@ -16,9 +20,9 @@ class SignUpState extends Equatable {
 final class SignUpInitial extends SignUpState {}
 
 class AuthSignUpSuccess extends SignUpState {
-  final String email;
+  final String message;
 
-  const AuthSignUpSuccess({required this.email});
+  const AuthSignUpSuccess({required this.message});
 }
 
 class AuthSignupError extends SignUpState {

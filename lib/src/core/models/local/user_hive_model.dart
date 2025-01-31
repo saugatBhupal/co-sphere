@@ -14,7 +14,7 @@ class UserHiveModel extends Equatable {
   @HiveField(2)
   final String name;
   @HiveField(3)
-  final String dob;
+  final DateTime dob;
   @HiveField(4)
   final String country;
   @HiveField(5)
