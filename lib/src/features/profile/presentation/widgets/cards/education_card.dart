@@ -4,15 +4,15 @@ import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:flutter/material.dart';
 
 class EducationCard extends StatelessWidget {
-  final String position;
   final String organization;
+  final String degree;
   final String from;
   final String to;
   const EducationCard({
     super.key,
-    required this.position,
-    required this.organization,
+    required this.degree,
     required this.from,
+    required this.organization,
     required this.to,
   });
 
@@ -29,7 +29,7 @@ class EducationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              position,
+              organization,
               style: _textTheme.bodyLarge!.copyWith(
                 fontWeight: FontThickness.semiBold,
                 color: AppColors.midnight,
@@ -37,7 +37,7 @@ class EducationCard extends StatelessWidget {
               ),
             ),
             Text(
-              organization,
+              degree,
               style: _textTheme.bodyLarge!.copyWith(
                 fontWeight: FontThickness.light,
                 color: AppColors.grey,

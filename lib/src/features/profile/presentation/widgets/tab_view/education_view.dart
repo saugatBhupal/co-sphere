@@ -42,8 +42,8 @@ class EducationView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 5,
                 itemBuilder: (context, index) => const EducationCard(
-                  position: "UI|UX Developer",
                   organization: "Odama Studios",
+                  degree: "UI|UX Developer",
                   from: "2023",
                   to: "2024",
                 ),

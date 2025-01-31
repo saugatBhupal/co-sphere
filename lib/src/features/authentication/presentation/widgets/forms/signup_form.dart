@@ -30,10 +30,10 @@ class _SignupFormState extends State<SignupForm> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController(text: "sarinam823@gmail.com");
-    _nameController = TextEditingController(text: "Sarian");
-    _phoneController = TextEditingController(text: "3422342433");
-    _dobController = TextEditingController(text: "09-09-2002");
+    _emailController = TextEditingController();
+    _nameController = TextEditingController();
+    _phoneController = TextEditingController();
+    _dobController = TextEditingController();
   }
 
   @override
