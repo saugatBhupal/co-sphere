@@ -90,12 +90,16 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ProfileBloc>.value(
             value: _profileBloc,
-            child: const ProfileScreen(),
+            child: ProfileScreen(user: settings.arguments as User),
           ),
         );
       case AppRoutes.editProfile:
         return MaterialPageRoute(
-            builder: (context) => const EditProfileScreen());
+          builder: (context) => BlocProvider<ProfileBloc>.value(
+            value: _profileBloc,
+            child: EditProfileScreen(user: settings.arguments as User),
+          ),
+        );
       case AppRoutes.chatLogs:
         return MaterialPageRoute(builder: (context) => const ChatLogsScreen());
       case AppRoutes.chatRoom:

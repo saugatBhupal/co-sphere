@@ -16,3 +16,17 @@ class ProfileModuleChanged extends ProfileState {
   @override
   List<Object> get props => [index];
 }
+
+class UpdatingProfileImage extends ProfileState {}
+
+class UpdateProfileImageSuccess extends ProfileState {
+  final String profileImage;
+
+  const UpdateProfileImageSuccess({required this.profileImage});
+}
+
+class UpdateProfileImageFailed extends ProfileState {
+  final String message;
+
+  const UpdateProfileImageFailed(this.message);
+}

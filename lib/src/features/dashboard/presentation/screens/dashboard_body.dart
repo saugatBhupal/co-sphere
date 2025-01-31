@@ -1,15 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/application_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/assigned_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/created_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_functions.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_metrics.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_title.dart';
-import 'package:flutter/material.dart';
 
 class DashboardBody extends StatelessWidget {
-  const DashboardBody({super.key});
+  final User user;
+  const DashboardBody({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class DashboardBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-              const DashboardFunctions(),
+              DashboardFunctions(user: user),
               const DashboardMetrics(),
               const DashboardTitle(
                   title: AppStrings.created, option: AppStrings.view),

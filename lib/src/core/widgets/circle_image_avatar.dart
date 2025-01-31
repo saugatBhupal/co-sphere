@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +6,13 @@ import 'package:flutter/material.dart';
 class CircleImageAvatar extends StatelessWidget {
   final double? radius;
   final bool? enableNavigate;
-  // final PersonInfo personInfo;
+  final String? imageUrl;
+
   const CircleImageAvatar({
     super.key,
     this.radius,
     this.enableNavigate,
-    // required this.personInfo,
+    this.imageUrl,
   });
 
   @override
@@ -27,11 +29,25 @@ class CircleImageAvatar extends StatelessWidget {
       child: ClipOval(
         child: SizedBox.fromSize(
           size: Size.fromRadius(radius ?? 20),
-          child: const ImageBuilder(
-            imageUrl: AppImages.profile,
-          ),
+          child: imageUrl != null && imageUrl!.isNotEmpty
+              ? (isNetworkImage(imageUrl!)
+                  ? Image.network(
+                      imageUrl!,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.file(
+                      File(imageUrl!),
+                      fit: BoxFit.cover,
+                    ))
+              : const ImageBuilder(
+                  imageUrl: AppImages.profile,
+                ),
         ),
       ),
     );
+  }
+
+  bool isNetworkImage(String url) {
+    return url.startsWith('http') || url.startsWith('https');
   }
 }

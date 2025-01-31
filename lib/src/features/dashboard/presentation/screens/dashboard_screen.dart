@@ -15,7 +15,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DashboardAppbar(user: user),
-      body: const DashboardBody(),
+      body: DashboardBody(user: user),
       bottomNavigationBar: const DashboardBottomNavBar(),
     );
   }

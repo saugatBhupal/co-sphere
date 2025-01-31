@@ -1,3 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:flutter/material.dart';
+
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
@@ -6,10 +10,13 @@ import 'package:cosphere/src/features/profile/presentation/widgets/edit_intro.da
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_links.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_personal_details.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_skills.dart';
-import 'package:flutter/material.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+  final User user;
+  const EditProfileScreen({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class EditProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const EditImages(),
+              EditImages(user: user),
               _buildTitle(context, title: AppStrings.links),
               const EditLinks(),
               _buildTitle(context, title: AppStrings.skill),

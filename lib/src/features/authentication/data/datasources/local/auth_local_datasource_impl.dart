@@ -5,7 +5,6 @@ import 'package:cosphere/src/core/utils/hash_password.dart';
 import 'package:cosphere/src/features/authentication/data/datasources/local/auth_local_datasource.dart';
 import 'package:cosphere/src/features/authentication/data/dto/sign_in/sign_in_request_dto.dart';
 import 'package:cosphere/src/features/authentication/data/dto/sign_up/sign_up_request_dto.dart';
-import 'package:cosphere/src/features/authentication/domain/usecases/signin_usecase.dart';
 import 'package:uuid/uuid.dart';
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {

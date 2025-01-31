@@ -12,3 +12,9 @@ class ChangeProfileModule extends ProfileEvent {
 
   const ChangeProfileModule(this.index);
 }
+
+class UpdateProfileImage extends ProfileEvent {
+  final UpdateProfileImgageReqDto dto;
+
+  const UpdateProfileImage({required this.dto});
+}
