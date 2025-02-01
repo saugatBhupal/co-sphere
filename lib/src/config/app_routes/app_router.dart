@@ -12,6 +12,7 @@ import 'package:cosphere/src/features/authentication/presentation/viewmodels/blo
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/signin/sign_in_bloc.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_logs_screen.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
+import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_screen.dart';
@@ -29,6 +30,7 @@ class AppRouter {
   static final _signUpBloc = sl<SignUpBloc>();
   static final _signInBloc = sl<SignInBloc>();
   static final _profileBloc = sl<ProfileBloc>();
+  static final _dashBloc = sl<DashboardBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splash:
@@ -86,8 +88,18 @@ class AppRouter {
         );
       case AppRoutes.dashboard:
         return MaterialPageRoute(
-            builder: (context) =>
-                DashboardScreen(user: settings.arguments as User));
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => sl<DashboardBloc>(),
+              ),
+              BlocProvider(
+                create: (context) => sl<ProfileBloc>(),
+              ),
+            ],
+            child: DashboardScreen(user: settings.arguments as User),
+          ),
+        );
       case AppRoutes.profile:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ProfileBloc>.value(

@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/core/network/hive_service.dart';
 import 'package:cosphere/src/core/network/http_service.dart';
 import 'package:cosphere/src/features/authentication/auth_injector.dart';
+import 'package:cosphere/src/features/dashboard/dashboard_injector.dart';
 import 'package:cosphere/src/features/profile/profile_injector.dart';
 import 'package:cosphere/src/features/splash/splash_injector.dart';
 import 'package:dio/dio.dart';
@@ -14,6 +15,7 @@ Future<void> initDependencies() async {
   _initCore();
   initSplash();
   initAuth();
+  initDash();
   initProfile();
 }
 
