@@ -4,7 +4,6 @@ import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/authentication/data/dto/sign_in/sign_in_request_dto.dart';
 import 'package:cosphere/src/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 
 class SigninUsecase implements UsecaseWithParams<User, SigninRequestDto> {
   final AuthRepository authRepository;

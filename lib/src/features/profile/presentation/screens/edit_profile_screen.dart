@@ -14,13 +14,12 @@ import 'package:cosphere/src/features/profile/presentation/widgets/edit_skills.d
 class EditProfileScreen extends StatelessWidget {
   final User user;
   const EditProfileScreen({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
     const _gap = SizedBox(height: 30);
     return Scaffold(
       appBar:

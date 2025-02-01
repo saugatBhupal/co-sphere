@@ -1,7 +1,5 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
-import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/views/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class MoreButton extends StatelessWidget {

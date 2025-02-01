@@ -8,7 +8,6 @@ class ChatLogsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(64.0),

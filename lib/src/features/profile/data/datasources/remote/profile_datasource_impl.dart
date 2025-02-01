@@ -17,6 +17,11 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           dto.media != null ? dto.media!.path.split('/').last : '';
       imageData.fields.add(MapEntry('email', dto.email));
       if (dto.media != null) {
+        print("Media path: ${dto.media!.path}");
+      } else {
+        print("No media file provided");
+      }
+      if (dto.media != null) {
         imageData.files.add(MapEntry(
           'media',
           await MultipartFile.fromFile(
@@ -25,6 +30,7 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           ),
         ));
       }
+      print("werhkshfshfs $imageData");
       var res =
           await dio.post(ApiEndpoints.updateProfileImage, data: imageData);
       if (res.statusCode == 200) {

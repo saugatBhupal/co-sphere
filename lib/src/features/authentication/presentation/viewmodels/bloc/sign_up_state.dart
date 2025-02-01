@@ -12,9 +12,6 @@ class SignUpUpdating extends SignUpState {
   SignUpUpdating copyWith({SignUpRequestDto? params}) {
     return SignUpUpdating(params: params ?? this.params);
   }
-
-  @override
-  List<Object?> get props => [params];
 }
 
 final class SignUpInitial extends SignUpState {}

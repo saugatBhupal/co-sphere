@@ -9,7 +9,6 @@ class AboutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
       margin: const EdgeInsets.symmetric(horizontal: 14),

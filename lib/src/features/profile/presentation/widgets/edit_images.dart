@@ -125,7 +125,7 @@ class _EditImagesState extends State<EditImages> {
                               _media = await openGallery();
                               if (_media != null) {
                                 setState(() {
-                                  _media = _media!;
+                                  _media = _media;
                                 });
                               }
                             },
@@ -140,16 +140,22 @@ class _EditImagesState extends State<EditImages> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 8, horizontal: 6),
                             onPressed: () {
-                              if (_media != null) {
-                                context.read<ProfileBloc>().add(
-                                      UpdateProfileImage(
-                                        dto: UpdateProfileImgageReqDto(
-                                          email: widget.user.email,
-                                          media: _media!,
-                                        ),
-                                      ),
-                                    );
+                              if (_media == null) {
+                                buildToast(
+                                  toastType: ToastType.error,
+                                  msg: "Please select an image to upload.",
+                                );
+                                return;
                               }
+                              print(_media!.path);
+                              context.read<ProfileBloc>().add(
+                                    UpdateProfileImage(
+                                      dto: UpdateProfileImgageReqDto(
+                                        email: widget.user.email,
+                                        media: _media!,
+                                      ),
+                                    ),
+                                  );
                             },
                           ),
                         ),

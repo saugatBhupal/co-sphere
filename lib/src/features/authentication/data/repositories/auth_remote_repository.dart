@@ -1,7 +1,10 @@
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/domain/mappers/local/user_mappers.dart';
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/network/hive_service.dart';
+import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/authentication/data/datasources/remote/auth_remote_datasource.dart';
 import 'package:cosphere/src/features/authentication/data/dto/create_password/create_password_request_dto.dart';
 import 'package:cosphere/src/features/authentication/data/dto/otp/otp_request_dto.dart';
@@ -12,8 +15,10 @@ import 'package:dartz/dartz.dart';
 
 class AuthRemoteRepository implements AuthRepository {
   final AuthRemoteDatasource authRemoteDatasource;
+  final HiveService hive;
 
-  AuthRemoteRepository({required this.authRemoteDatasource});
+  AuthRemoteRepository(
+      {required this.authRemoteDatasource, required this.hive});
 
   @override
   Future<Either<Failure, String>> signup(SignUpRequestDto signUpDto) async {
@@ -51,6 +56,8 @@ class AuthRemoteRepository implements AuthRepository {
     try {
       final UserApiModel userApiModel =
           await authRemoteDatasource.signIn(signInParams);
+      await hive.addUserToBox(userApiModel.fromApi());
+      UserSharedPref.setUser(userApiModel);
       return Right(userApiModel.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));

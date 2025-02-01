@@ -10,9 +10,9 @@ import 'package:cosphere/src/features/authentication/presentation/widgets/textsp
 class LocationScreen extends StatelessWidget {
   final String email;
   const LocationScreen({
-    Key? key,
+    super.key,
     required this.email,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

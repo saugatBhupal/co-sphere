@@ -18,7 +18,7 @@ void initAuth() {
   sl.registerLazySingleton<AuthRemoteDatasource>(
       () => AuthRemoteDatasourceImpl(dio: sl()));
   sl.registerLazySingleton<AuthRepository>(
-      () => AuthRemoteRepository(authRemoteDatasource: sl()));
+      () => AuthRemoteRepository(authRemoteDatasource: sl(), hive: sl()));
   sl.registerLazySingleton<SignupUsecase>(
       () => SignupUsecase(authRepository: sl()));
   sl.registerLazySingleton<SigninUsecase>(
