@@ -18,8 +18,9 @@ import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
-import 'package:cosphere/views/onboarding/onboarding_screen.dart';
-import 'package:cosphere/views/splash/splash_screen.dart';
+import 'package:cosphere/src/features/splash/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:cosphere/src/features/splash/presentation/screens/splash/splash_screen.dart';
+import 'package:cosphere/src/features/splash/presentation/viewmodel/splash_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,10 +31,13 @@ class AppRouter {
   static final _profileBloc = sl<ProfileBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRoutes.root:
-        return MaterialPageRoute(builder: (context) => const SplashScreen());
       case AppRoutes.splash:
-        return MaterialPageRoute(builder: (context) => const SplashScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: sl<SplashBloc>(),
+            child: const SplashScreen(),
+          ),
+        );
       case AppRoutes.onboarding:
         return MaterialPageRoute(
             builder: (context) => const OnboardingScreen());

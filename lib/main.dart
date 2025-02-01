@@ -7,5 +7,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService.init();
   await initDependencies();
+  // await Hive.deleteBoxFromDisk(AppBoxesName.userBox);
   runApp(const App());
 }

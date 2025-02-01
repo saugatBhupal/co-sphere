@@ -25,7 +25,6 @@ class UserSharedPref {
       final Map<String, dynamic> decodedJson = json.decode(res);
       UserApiModel userApiModel = UserApiModel.fromJson(decodedJson);
       final user = userApiModel.toDomain();
-      print("User: $user");
       return user;
     } catch (e) {
       print('Error getting user: $e');

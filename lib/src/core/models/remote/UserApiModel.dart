@@ -41,7 +41,7 @@ class UserApiModel extends Equatable {
       verified: json['verified'] as bool? ?? false,
       dob: json['dob'] != null
           ? DateTime.parse(json['dob'])
-          : DateTime.utc(2000, 1, 1),
+          : DateTime(1970, 1, 1),
       country: json['country'] as String? ?? 'Unknown',
       province: json['province'] as String? ?? 'Unknown',
       city: json['city'] as String? ?? 'Unknown',
@@ -57,7 +57,7 @@ class UserApiModel extends Equatable {
       'phone': phone,
       'password': password,
       'verified': verified,
-      'dob': dob,
+      'dob': dob.toIso8601String(),
       'country': country,
       'province': province,
       'city': city,

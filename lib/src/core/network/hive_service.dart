@@ -10,6 +10,7 @@ class HiveService {
 
     Hive.init(path);
     Hive.registerAdapter(UserHiveModelAdapter());
+    await Hive.openBox<UserHiveModel>(AppBoxesName.userBox);
   }
 
   Future<void> addUserToBox(UserHiveModel user) async {
@@ -17,11 +18,29 @@ class HiveService {
     await box.put(user.uid, user);
   }
 
-  Future<UserHiveModel?> getUser(String email, String password) async {
+  Future<UserHiveModel?> login(String email, String password) async {
     var box = await Hive.openBox<UserHiveModel>(AppBoxesName.userBox);
     var user = box.values.firstWhere(
         (element) => element.email == email && element.password == password);
     box.close();
     return user;
+  }
+
+  Future<UserHiveModel?> getUser(String email, String uid) async {
+    var box = await Hive.openBox<UserHiveModel>(AppBoxesName.userBox);
+    var user = box.values
+        .firstWhere((element) => element.email == email && element.uid == uid);
+    box.close();
+    return user;
+  }
+
+  Future<void> deleteUserFromBox(String userID) async {
+    try {
+      var box = await Hive.openBox<UserHiveModel>(AppBoxesName.userBox);
+      await box.delete(userID);
+      await box.close();
+    } catch (e) {
+      print("Error deleting user: $e");
+    }
   }
 }

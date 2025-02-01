@@ -16,7 +16,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<UserHiveModel> signIn(SigninRequestDto params) async {
     try {
       String hashedPassword = hashPassword(params.password);
-      final user = await hive.getUser(params.email, hashedPassword);
+      final user = await hive.login(params.email, hashedPassword);
       if (user == null) {
         throw HiveException("Invalid email or password.");
       }

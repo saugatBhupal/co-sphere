@@ -7,7 +7,9 @@ import 'package:cosphere/src/core/constants/app_constants.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/features/splash/presentation/viewmodel/splash_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +22,6 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _animation;
-  late final Timer _timer;
 
   @override
   void initState() {
@@ -32,40 +33,54 @@ class _SplashScreenState extends State<SplashScreen>
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
 
     _animationController.forward();
-
-    _timer = Timer(
-      const Duration(milliseconds: AppConstants.navigateTime),
-      () => Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.onboarding,
-        (route) => false,
-      ),
-    );
+    Future.delayed(const Duration(milliseconds: AppConstants.navigateTime), () {
+      if (mounted) {
+        context.read<SplashBloc>().add(StartUpEvent());
+      }
+    });
   }
 
   @override
   void dispose() {
     _animationController.dispose();
-    _timer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SizedBox(
-        width: context.width,
-        height: context.height,
-        child: FadeTransition(
-          opacity: _animation,
-          child: Stack(
-            children: [
-              _buildSplashImage(),
-              Positioned(
-                bottom: context.height * 0.02,
-                right: context.width * 0.04,
-                child: _buildSplashBottomLogo(context),
-              ),
-            ],
+    return BlocListener<SplashBloc, SplashState>(
+      listener: (context, state) {
+        if (state is SplashGetUserSuccess && state.user != null) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutes.dashboard,
+            (route) => false,
+            arguments: state.user,
+          );
+        }
+        if ((state is SplashGetUserSuccess && state.user == null) ||
+            state is SplashGetUserFailed) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutes.onboarding,
+            (route) => false,
+          );
+        }
+      },
+      child: Scaffold(
+        body: SizedBox(
+          width: context.width,
+          height: context.height,
+          child: FadeTransition(
+            opacity: _animation,
+            child: Stack(
+              children: [
+                _buildSplashImage(),
+                Positioned(
+                  bottom: context.height * 0.02,
+                  right: context.width * 0.04,
+                  child: _buildSplashBottomLogo(context),
+                ),
+              ],
+            ),
           ),
         ),
       ),

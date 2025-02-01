@@ -88,7 +88,13 @@ class _SignupFormState extends State<SignupForm> {
                           UpdateSignUpRequestDto(
                             SignUpRequestDto(
                               email: _emailController.text,
-                              fullname: _nameController.text,
+                              fullname: _nameController.text
+                                  .split(' ')
+                                  .map((word) => word.isNotEmpty
+                                      ? word[0].toUpperCase() +
+                                          word.substring(1).toLowerCase()
+                                      : '')
+                                  .join(' '),
                               phone: _phoneController.text,
                               dob: DateFormat('dd-MM-yyyy')
                                   .parse(_dobController.text),
