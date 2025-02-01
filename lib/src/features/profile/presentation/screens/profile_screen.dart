@@ -38,7 +38,8 @@ class ProfileScreen extends StatelessWidget {
             children: [
               ProfileImage(profileImage: user.profileImage ?? ''),
               const SizedBox(height: 55),
-              ProfileData(name: user.fullname),
+              ProfileData(
+                  name: user.fullname, city: user.city, country: user.country),
               const ProfileBadge(),
               const ProfileFunctions(),
               const ProfileSkills(),
