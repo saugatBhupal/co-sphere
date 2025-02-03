@@ -30,3 +30,17 @@ class UpdateProfileImageFailed extends ProfileState {
 
   const UpdateProfileImageFailed(this.message);
 }
+
+class AddingSkill extends ProfileState {}
+
+class AddSkillSuccess extends ProfileState {
+  final List<Skill> skills;
+
+  const AddSkillSuccess({required this.skills});
+}
+
+class AddSkillFailed extends ProfileState {
+  final String message; 
+
+  const AddSkillFailed(this.message);
+}

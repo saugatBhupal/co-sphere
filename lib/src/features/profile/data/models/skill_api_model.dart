@@ -12,7 +12,7 @@ class SkillApiModel extends Equatable {
   factory SkillApiModel.fromJson(Map<String, dynamic> json) {
     return SkillApiModel(
       uid: json['_id'] as String? ?? '',
-      name: json['fullname'] as String? ?? 'Unknown',
+      name: json['name'] as String? ?? 'Unknown',
     );
   }
   Map<String, dynamic> toJson() {

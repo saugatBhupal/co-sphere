@@ -74,7 +74,7 @@ class ExperienceView extends StatelessWidget {
             child: MoreButton(
               title: "${AppStrings.add} ${AppStrings.more}",
               onPressed: () {
-                showEditDialog(context: context, child: const EditExperience());
+                // showEditDialog(context: context, child: const EditExperience());
               },
             ),
           ),

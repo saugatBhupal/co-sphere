@@ -58,7 +58,7 @@ class User extends Equatable {
     String? country,
     String? province,
     String? city,
-    String? skillName,
+    List<Skill>? skills,
   }) {
     return User(
       uid: uid ?? this.uid,
@@ -72,9 +72,7 @@ class User extends Equatable {
       country: country ?? this.country,
       province: province ?? this.province,
       city: city ?? this.city,
-      skills: skillName != null
-          ? [...?skills, Skill.initial().copyWith(name: skillName)]
-          : skills,
+      skills: skills ?? this.skills,
     );
   }
 

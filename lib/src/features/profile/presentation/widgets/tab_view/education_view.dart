@@ -57,7 +57,7 @@ class EducationView extends StatelessWidget {
             child: MoreButton(
               title: "${AppStrings.add} ${AppStrings.more}",
               onPressed: () {
-                showEditDialog(context: context, child: const EditEducation());
+                // showEditDialog(context: context, child: const EditEducation());
               },
             ),
           ),

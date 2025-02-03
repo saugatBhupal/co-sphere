@@ -1,8 +1,10 @@
+import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_logs_screen.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
+import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_body.dart';

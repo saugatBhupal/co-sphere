@@ -1,14 +1,28 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
+import 'package:cosphere/src/core/functions/build_toast.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
-import 'package:flutter/material.dart';
+import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
+import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 
 class EditSkills extends StatefulWidget {
-  const EditSkills({super.key});
+  final String uid;
+  final List<Skill>? skills;
+  const EditSkills({
+    Key? key,
+    required this.uid,
+    this.skills,
+  }) : super(key: key);
 
   @override
   State<EditSkills> createState() => _EditSkillsState();
@@ -31,84 +45,115 @@ class _EditSkillsState extends State<EditSkills> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     final _textTheme = Theme.of(context).textTheme;
-    return Container(
-      width: context.width,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-        border: Border.all(width: 0.6, color: AppColors.plaster),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Wrap(
-            spacing: 6,
-            runSpacing: 6,
-            children: [
-              ...List.generate(
-                5,
-                (index) {
-                  return Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                    decoration: const BoxDecoration(
-                      color: AppColors.genie,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Node JS",
-                          style: _textTheme.bodySmall!.copyWith(
-                            color: AppColors.midnight,
-                            fontWeight: FontThickness.semiBold,
+    return BlocListener<ProfileBloc, ProfileState>(
+      listener: (context, state) {
+        if (state is AddSkillSuccess) {
+          buildToast(
+              toastType: ToastType.success, msg: "Skill Added Successfully");
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        }
+        if (state is AddSkillFailed) {
+          buildToast(toastType: ToastType.error, msg: state.message);
+        }
+      },
+      child: Container(
+        width: context.width,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          border: Border.all(width: 0.6, color: AppColors.plaster),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                ...List.generate(
+                  widget.skills!.length ?? 0,
+                  (index) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 6),
+                      decoration: const BoxDecoration(
+                        color: AppColors.genie,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            widget.skills![index].name,
+                            style: _textTheme.bodySmall!.copyWith(
+                              color: AppColors.midnight,
+                              fontWeight: FontThickness.semiBold,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          "X",
-                          style: _textTheme.bodyLarge!.copyWith(
-                            color: AppColors.grey,
-                            fontWeight: FontThickness.bold,
+                          const SizedBox(width: 12),
+                          Text(
+                            "X",
+                            style: _textTheme.bodyLarge!.copyWith(
+                              color: AppColors.grey,
+                              fontWeight: FontThickness.bold,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Form(
+              key: _formKey,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 40,
+                      child: InputField(
+                        textController: _skillNameController,
+                        label: "",
+                        hintText: "Skill Name",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a skill name';
+                          }
+                          return null;
+                        },
+                      ),
                     ),
-                  );
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 40,
-                  child: InputField(
-                    textController: _skillNameController,
-                    label: "",
-                    hintText: "Skill Name",
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: SizedBox(
-                  width: context.width / 4.8,
-                  child: const DarkRoundedButton(
-                    title: AppStrings.add,
-                    fontSize: 13,
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: SizedBox(
+                      width: context.width / 4.8,
+                      child: DarkRoundedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<ProfileBloc>().add(AddSkill(
+                                params: AddSkillsParams(
+                                    uid: widget.uid,
+                                    name: _skillNameController.text)));
+                          }
+                        },
+                        title: AppStrings.add,
+                        fontSize: 13,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 12),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -18,3 +18,9 @@ class UpdateProfileImage extends ProfileEvent {
 
   const UpdateProfileImage({required this.dto});
 }
+
+class AddSkill extends ProfileEvent {
+  final AddSkillsParams params;
+
+  const AddSkill({required this.params});
+}
