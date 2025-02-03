@@ -1,3 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
@@ -7,11 +11,13 @@ import 'package:cosphere/src/features/profile/presentation/widgets/tab_view/educ
 import 'package:cosphere/src/features/profile/presentation/widgets/tab_view/experience_view.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/tab_view/history_view.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/tab_view/reviews_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileTabbar extends StatelessWidget {
-  const ProfileTabbar({super.key});
+  final String uid;
+  const ProfileTabbar({
+    super.key,
+    required this.uid,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +62,7 @@ class ProfileTabbar extends StatelessWidget {
                 ),
                 state is! ProfileModuleChanged
                     ? const AboutView()
-                    : _getProfileModule(state.index),
+                    : _getProfileModule(state.index, uid),
               ],
             ),
           ),
@@ -66,14 +72,14 @@ class ProfileTabbar extends StatelessWidget {
   }
 }
 
-Widget _getProfileModule(int index) {
+Widget _getProfileModule(int index, String uid) {
   switch (index) {
     case 0:
       return const AboutView();
     case 1:
       return const ExperienceView();
     case 2:
-      return const EducationView();
+      return EducationView(uid: uid);
     case 3:
       return const HistoryView();
     case 4:

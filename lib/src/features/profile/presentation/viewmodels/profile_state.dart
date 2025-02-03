@@ -40,7 +40,21 @@ class AddSkillSuccess extends ProfileState {
 }
 
 class AddSkillFailed extends ProfileState {
-  final String message; 
+  final String message;
 
   const AddSkillFailed(this.message);
+}
+
+class GetEducationLoading extends ProfileState {}
+
+class GetEducationSuccess extends ProfileState {
+  final List<Education> education;
+
+  const GetEducationSuccess({required this.education});
+}
+
+class GetEducationFailed extends ProfileState {
+  final String message;
+
+  const GetEducationFailed(this.message);
 }

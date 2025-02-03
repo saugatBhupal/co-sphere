@@ -24,3 +24,9 @@ class AddSkill extends ProfileEvent {
 
   const AddSkill({required this.params});
 }
+
+class GetEducationByUserID extends ProfileEvent {
+  final String uid;
+
+  const GetEducationByUserID({required this.uid});
+}

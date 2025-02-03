@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                   skills: (user.skills != null && user.skills!.isNotEmpty)
                       ? user.skills!
                       : []),
-              const ProfileTabbar(),
+              ProfileTabbar(uid: user.uid),
             ],
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
 import 'package:cosphere/src/features/profile/data/dto/update_profile_img_req_dto.dart/update_profile_imgage_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/education_mappers.dart';
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
@@ -37,8 +39,14 @@ class ProfileRemoteRepository implements ProfileRepository {
   }
 
   @override
-  Future<Either<Failure, List<Education>>> getEducationByUserID(String uid) {
-    // TODO: implement getEducationByUserID
-    throw UnimplementedError();
+  Future<Either<Failure, List<Education>>> getEducationByUserID(
+      String uid) async {
+    try {
+      final List<EducationApiModel> education =
+          await profileDatasource.getEducationByUserID(uid);
+      return Right(education.map((education) => education.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
   }
 }

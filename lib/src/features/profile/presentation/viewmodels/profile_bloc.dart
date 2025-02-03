@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/features/profile/data/dto/update_profile_img_req_dto.dart/update_profile_imgage_req_dto.dart';
+import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
 import 'package:equatable/equatable.dart';
 
@@ -11,9 +13,11 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final UpdateProfileImageUsecase updateProfileImageUsecase;
   final AddSkillUsecase addSkillUsecase;
+  final GetEducationByUseridUsecase getEducationByUseridUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,
     required this.addSkillUsecase,
+    required this.getEducationByUseridUsecase,
   }) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
       if (event is ChangeProfileModule) {
@@ -24,6 +28,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       if (event is AddSkill) {
         await _addSkill(event, emit);
+      }
+      if (event is GetEducationByUserID) {
+        await _getEducationByUserID(event, emit);
       }
     });
   }
@@ -55,6 +62,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       result.fold(
         (failure) => emit(AddSkillFailed(failure.message)),
         (success) => emit(AddSkillSuccess(skills: success)),
+      );
+    } catch (e) {
+      emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _getEducationByUserID(
+      GetEducationByUserID event, Emitter<ProfileState> emit) async {
+    emit(GetEducationLoading());
+    try {
+      final result = await getEducationByUseridUsecase(event.uid);
+      print("result $result");
+      result.fold(
+        (failure) => emit(GetEducationFailed(failure.message)),
+        (success) => emit(GetEducationSuccess(education: success)),
       );
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
