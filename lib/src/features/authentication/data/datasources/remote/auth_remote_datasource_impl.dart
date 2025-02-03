@@ -1,7 +1,8 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
-import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
+import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/authentication/data/datasources/remote/auth_remote_datasource.dart';
 import 'package:cosphere/src/features/authentication/data/dto/create_password/create_password_request_dto.dart';
 import 'package:cosphere/src/features/authentication/data/dto/otp/otp_request_dto.dart';
@@ -73,10 +74,9 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       if (res.statusCode == 200) {
         SignInResponseDto signInResponseDto =
             SignInResponseDto.fromJson(res.data);
-        print("Res data ${res.data}");
-        // final UserSharedPref userSharedPref = UserSharedPref();
-        // userSharedPref.setUserToken(signInResponseDto.token);
-        return signInResponseDto.data;
+        final UserSharedPref userSharedPref = UserSharedPref();
+        userSharedPref.setUserToken(signInResponseDto.token);
+        return signInResponseDto.user;
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

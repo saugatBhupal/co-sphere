@@ -2,7 +2,7 @@ import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/domain/mappers/local/user_mappers.dart';
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/core/error/failure.dart';
-import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/core/network/hive_service.dart';
 import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/authentication/data/datasources/remote/auth_remote_datasource.dart';

@@ -3,7 +3,7 @@ import 'package:cosphere/src/core/domain/mappers/local/user_mappers.dart';
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/models/local/user_hive_model.dart';
-import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/splash/data/datasources/local/splash_local_datasource.dart';

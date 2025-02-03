@@ -1,5 +1,8 @@
+import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+part 'user_api_model.g.dart';
 
 @JsonSerializable()
 class UserApiModel extends Equatable {
@@ -15,6 +18,7 @@ class UserApiModel extends Equatable {
   final String country;
   final String province;
   final String city;
+  final List<SkillApiModel>? skills;
 
   const UserApiModel({
     required this.uid,
@@ -28,6 +32,7 @@ class UserApiModel extends Equatable {
     required this.country,
     required this.province,
     required this.city,
+    this.skills,
   });
 
   factory UserApiModel.fromJson(Map<String, dynamic> json) {
@@ -45,6 +50,10 @@ class UserApiModel extends Equatable {
       country: json['country'] as String? ?? 'Unknown',
       province: json['province'] as String? ?? 'Unknown',
       city: json['city'] as String? ?? 'Unknown',
+      skills: (json['skills'] as List<dynamic>?)
+          ?.map(
+              (skill) => SkillApiModel.fromJson(skill as Map<String, dynamic>))
+          .toList(),
     );
   }
 

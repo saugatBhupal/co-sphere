@@ -1,7 +1,7 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
-import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/splash/data/datasources/remote/splash_remote_datasource.dart';
 import 'package:dio/dio.dart';
 

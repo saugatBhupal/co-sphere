@@ -1,5 +1,5 @@
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 
 extension UserApiModelExtension on UserApiModel {
   User toDomain() => User.initial().copyWith(

@@ -1,4 +1,4 @@
-import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/authentication/data/dto/create_password/create_password_request_dto.dart';
 import 'package:cosphere/src/features/authentication/data/dto/otp/otp_request_dto.dart';
 import 'package:cosphere/src/features/authentication/data/dto/sign_in/sign_in_request_dto.dart';

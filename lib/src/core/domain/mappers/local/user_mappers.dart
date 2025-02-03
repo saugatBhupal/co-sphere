@@ -1,6 +1,6 @@
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/models/local/user_hive_model.dart';
-import 'package:cosphere/src/core/models/remote/UserApiModel.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 
 extension UserHiveModelExtension on UserHiveModel {
   User toDomain() => User(

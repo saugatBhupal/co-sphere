@@ -1,3 +1,4 @@
+import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
@@ -12,6 +13,7 @@ class User extends Equatable {
   final String country;
   final String province;
   final String city;
+  final List<Skill>? skills;
 
   const User({
     required this.uid,
@@ -25,6 +27,7 @@ class User extends Equatable {
     required this.country,
     required this.province,
     required this.city,
+    this.skills,
   });
 
   factory User.initial() {
@@ -40,6 +43,7 @@ class User extends Equatable {
       country: 'Unknown',
       province: 'Unknown',
       city: 'Unknown',
+      skills: const [],
     );
   }
   User copyWith({
@@ -54,6 +58,7 @@ class User extends Equatable {
     String? country,
     String? province,
     String? city,
+    String? skillName,
   }) {
     return User(
       uid: uid ?? this.uid,
@@ -67,6 +72,9 @@ class User extends Equatable {
       country: country ?? this.country,
       province: province ?? this.province,
       city: city ?? this.city,
+      skills: skillName != null
+          ? [...?skills, Skill.initial().copyWith(name: skillName)]
+          : skills,
     );
   }
 
