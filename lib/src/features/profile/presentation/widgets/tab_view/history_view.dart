@@ -13,7 +13,7 @@ class HistoryView extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
-      margin: const EdgeInsets.symmetric(horizontal: 14),
+      margin: const EdgeInsets.only(right: 14, left: 14, bottom: 14),
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -37,12 +37,12 @@ class HistoryView extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 3,
-                itemBuilder: (context, index) => const ExperienceCard(
+                itemBuilder: (context, index) => ExperienceCard(
                   position: "UI|UX Developer",
                   organization: "Odama Studios",
                   status: "OnTime",
-                  from: "2023",
-                  to: "2024",
+                  from: DateTime.now(),
+                  to: DateTime.now(),
                 ),
                 separatorBuilder: (context, index) {
                   return const SizedBox(height: 24);

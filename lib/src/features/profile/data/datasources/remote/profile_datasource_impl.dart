@@ -2,6 +2,7 @@ import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
+import 'package:cosphere/src/features/profile/data/dto/get_experience_response_dto/get_experience_response_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/update_profile_img_req_dto.dart/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
@@ -33,11 +34,9 @@ class ProfileDatasourceImpl implements ProfileDatasource {
           ),
         ));
       }
-      print("werhkshfshfs $imageData");
       var res =
           await dio.post(ApiEndpoints.updateProfileImage, data: imageData);
       if (res.statusCode == 200) {
-        print("werhkshfshfs ${res.data["data"]["profileImage"]}");
         return res.data["data"]["profileImage"];
       } else {
         throw Failure(
@@ -83,6 +82,27 @@ class ProfileDatasourceImpl implements ProfileDatasource {
         return educationList
             .map((education) => EducationApiModel.fromJson(education))
             .toList();
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusCode.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<GetExperienceResponseDto> getExperienceByUserID(String uid) async {
+    try {
+      final res = await dio.get("${ApiEndpoints.getExperienceByUserID}$uid");
+      if (res.statusCode == 200) {
+        final GetExperienceResponseDto responseDto =
+            GetExperienceResponseDto.fromJson(res.data);
+        print(" resp1${res.data}");
+        print(" resp  ${responseDto.experience}");
+        return responseDto;
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

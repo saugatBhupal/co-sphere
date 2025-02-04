@@ -30,3 +30,9 @@ class GetEducationByUserID extends ProfileEvent {
 
   const GetEducationByUserID({required this.uid});
 }
+
+class GetExperienceByUserID extends ProfileEvent {
+  final String uid;
+
+  const GetExperienceByUserID({required this.uid});
+}

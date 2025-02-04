@@ -11,7 +11,7 @@ class AboutView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
-      margin: const EdgeInsets.symmetric(horizontal: 14),
+      margin: const EdgeInsets.only(right: 14, left: 14, bottom: 14),
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,

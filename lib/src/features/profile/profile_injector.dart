@@ -5,6 +5,7 @@ import 'package:cosphere/src/features/profile/data/repositories/profile_remote_r
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 
@@ -17,10 +18,13 @@ void initProfile() {
       () => UpdateProfileImageUsecase(profileRepository: sl()));
   sl.registerLazySingleton<AddSkillUsecase>(
       () => AddSkillUsecase(profileRepository: sl()));
-  sl.registerLazySingleton<GetEducationByUseridUsecase>(
-      () => GetEducationByUseridUsecase(profileRepository: sl()));
+  sl.registerLazySingleton<GetEducationByUserIDUsecase>(
+      () => GetEducationByUserIDUsecase(profileRepository: sl()));
+  sl.registerLazySingleton<GetExperienceByUserIDUsecase>(
+      () => GetExperienceByUserIDUsecase(profileRepository: sl()));
   sl.registerFactory<ProfileBloc>(() => ProfileBloc(
       updateProfileImageUsecase: sl(),
       addSkillUsecase: sl(),
-      getEducationByUseridUsecase: sl()));
+      getEducationByUseridUsecase: sl(),
+      getExperienceByUserIDUsecase: sl()));
 }

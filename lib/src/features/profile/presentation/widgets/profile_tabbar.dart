@@ -77,7 +77,7 @@ Widget _getProfileModule(int index, String uid) {
     case 0:
       return const AboutView();
     case 1:
-      return const ExperienceView();
+      return ExperienceView(uid: uid);
     case 2:
       return EducationView(uid: uid);
     case 3:

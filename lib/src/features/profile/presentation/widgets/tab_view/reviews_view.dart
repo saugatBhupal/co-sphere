@@ -13,7 +13,7 @@ class ReviewsView extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
-      margin: const EdgeInsets.symmetric(horizontal: 14),
+      margin: const EdgeInsets.only(right: 14, left: 14, bottom: 14),
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColors.white,

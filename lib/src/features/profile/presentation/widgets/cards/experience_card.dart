@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/utils/from_to_date.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
@@ -9,8 +10,8 @@ class ExperienceCard extends StatelessWidget {
   final String position;
   final String organization;
   final String status;
-  final String from;
-  final String to;
+  final DateTime from;
+  final DateTime to;
   const ExperienceCard({
     super.key,
     required this.position,
@@ -50,9 +51,11 @@ class ExperienceCard extends StatelessWidget {
             RichText(
               text: TextSpan(
                 children: [
-                  TextSpan(text: "$from - $to ", style: _textTheme.labelLarge),
                   TextSpan(
-                    text: "(${int.parse(to) - int.parse(from)} Year)",
+                      text: "${formatDate(from)} - ${formatDate(to)}",
+                      style: _textTheme.labelLarge),
+                  TextSpan(
+                    text: " (${calculateDuration(from, to)})",
                     style: _textTheme.labelLarge!.copyWith(
                       color: AppColors.midnight,
                     ),

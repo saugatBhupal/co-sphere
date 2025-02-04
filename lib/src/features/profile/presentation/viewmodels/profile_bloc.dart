@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:cosphere/src/features/profile/data/dto/get_experience_response_dto/get_experience_response_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/update_profile_img_req_dto.dart/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
 import 'package:equatable/equatable.dart';
 
@@ -13,11 +15,13 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final UpdateProfileImageUsecase updateProfileImageUsecase;
   final AddSkillUsecase addSkillUsecase;
-  final GetEducationByUseridUsecase getEducationByUseridUsecase;
+  final GetEducationByUserIDUsecase getEducationByUseridUsecase;
+  final GetExperienceByUserIDUsecase getExperienceByUserIDUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,
     required this.addSkillUsecase,
     required this.getEducationByUseridUsecase,
+    required this.getExperienceByUserIDUsecase,
   }) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
       if (event is ChangeProfileModule) {
@@ -31,6 +35,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       if (event is GetEducationByUserID) {
         await _getEducationByUserID(event, emit);
+      }
+      if (event is GetExperienceByUserID) {
+        await _getExperienceByUserID(event, emit);
       }
     });
   }
@@ -70,13 +77,27 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   Future<void> _getEducationByUserID(
       GetEducationByUserID event, Emitter<ProfileState> emit) async {
-    emit(GetEducationLoading());
+    emit(GetProfileInfoLoading());
     try {
       final result = await getEducationByUseridUsecase(event.uid);
       print("result $result");
       result.fold(
-        (failure) => emit(GetEducationFailed(failure.message)),
+        (failure) => emit(GetProfileInfoFailed(failure.message)),
         (success) => emit(GetEducationSuccess(education: success)),
+      );
+    } catch (e) {
+      emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _getExperienceByUserID(
+      GetExperienceByUserID event, Emitter<ProfileState> emit) async {
+    emit(GetProfileInfoLoading());
+    try {
+      final result = await getExperienceByUserIDUsecase(event.uid);
+      result.fold(
+        (failure) => emit(GetProfileInfoFailed(failure.message)),
+        (success) => emit(GetExperienceSuccess(dto: success)),
       );
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
