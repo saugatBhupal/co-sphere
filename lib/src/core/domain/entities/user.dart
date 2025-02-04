@@ -14,6 +14,9 @@ class User extends Equatable {
   final String province;
   final String city;
   final List<Skill>? skills;
+  final String? about;
+  final String? overview;
+  final DateTime? createdAt;
 
   const User({
     required this.uid,
@@ -28,6 +31,9 @@ class User extends Equatable {
     required this.province,
     required this.city,
     this.skills,
+    this.about,
+    this.overview,
+    this.createdAt,
   });
 
   factory User.initial() {
@@ -44,6 +50,9 @@ class User extends Equatable {
       province: 'Unknown',
       city: 'Unknown',
       skills: const [],
+      about: 'Unknown',
+      overview: 'Unknown',
+      createdAt: DateTime.utc(2000, 1, 1),
     );
   }
   User copyWith({
@@ -59,6 +68,9 @@ class User extends Equatable {
     String? province,
     String? city,
     List<Skill>? skills,
+    String? about,
+    String? overview,
+    DateTime? createdAt,
   }) {
     return User(
       uid: uid ?? this.uid,
@@ -73,6 +85,9 @@ class User extends Equatable {
       province: province ?? this.province,
       city: city ?? this.city,
       skills: skills ?? this.skills,
+      about: about ?? this.about,
+      overview: overview ?? this.about,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 

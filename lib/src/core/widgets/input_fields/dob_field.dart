@@ -9,12 +9,14 @@ class DobField extends StatelessWidget {
   final TextEditingController dobController;
   final String? hintText;
   final Color? color;
+  final String? labelText;
 
   const DobField({
     super.key,
     required this.dobController,
     this.hintText,
     this.color,
+    this.labelText,
   });
 
   @override
@@ -34,7 +36,7 @@ class DobField extends StatelessWidget {
           .copyWith(fontSize: 15, color: color ?? AppColors.midnight),
       decoration: InputDecoration(
         hintText: hintText ?? 'DD - MM - YYYY',
-        labelText: AppStrings.dob,
+        labelText: labelText ?? AppStrings.dob,
       ),
       validator: (val) {
         return FormValidator.validateDOB(val);

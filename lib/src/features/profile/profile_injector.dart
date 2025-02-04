@@ -3,6 +3,7 @@ import 'package:cosphere/src/features/profile/data/datasources/remote/profile_da
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource_impl.dart';
 import 'package:cosphere/src/features/profile/data/repositories/profile_remote_repository.dart';
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/add_education_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
@@ -22,9 +23,12 @@ void initProfile() {
       () => GetEducationByUserIDUsecase(profileRepository: sl()));
   sl.registerLazySingleton<GetExperienceByUserIDUsecase>(
       () => GetExperienceByUserIDUsecase(profileRepository: sl()));
+  sl.registerLazySingleton<AddEducationUsecase>(
+      () => AddEducationUsecase(profileRepository: sl()));
   sl.registerFactory<ProfileBloc>(() => ProfileBloc(
       updateProfileImageUsecase: sl(),
       addSkillUsecase: sl(),
       getEducationByUseridUsecase: sl(),
-      getExperienceByUserIDUsecase: sl()));
+      getExperienceByUserIDUsecase: sl(),
+      addEducationUsecase: sl()));
 }

@@ -1,11 +1,18 @@
+import 'package:cosphere/src/core/utils/from_to_date.dart';
+import 'package:flutter/material.dart';
+
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:flutter/material.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 
 class AboutView extends StatelessWidget {
-  const AboutView({super.key});
+  final User user;
+  const AboutView({
+    super.key,
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +30,22 @@ class AboutView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildInfo(
-            "Jimmy Sulluvan",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris viverra pharetra ligula, nec mattis quam porta vitae. Nullam a congue neque, nec volutpat justo. Nullam et est condimentum, bibendum neque id, congue quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum magna lacus, aliquam ut sapien quis, dignissim mattis lectus. Fusce facilisis diam magna, sit amet feugiat metus hendrerit.",
+            user.fullname,
+            user.about ?? "About not added",
             context,
           ),
           const SizedBox(height: 22),
           Row(
             children: [
-              _buildInfo(AppStrings.address, "Kathmandu, Nepal", context),
-              const SizedBox(width: 60),
-              _buildInfo(AppStrings.joined, "May 23, 2024", context),
+              _buildInfo(AppStrings.address,
+                  "${user.city} ${user.province} ${user.country}", context),
+              const SizedBox(width: 40),
+              _buildInfo(
+                  AppStrings.joined, formatDate(user.createdAt!), context),
             ],
           ),
           const SizedBox(height: 22),
-          _buildInfo(AppStrings.contact,
-              "User has decided not to disclose this data.", context),
+          _buildInfo(AppStrings.contact, user.phone, context),
           const SizedBox(height: 22),
         ],
       ),

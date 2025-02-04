@@ -1,4 +1,7 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
+import 'package:cosphere/src/features/profile/domain/entities/education.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/cards/edit_pop_up.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_education.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,21 +15,19 @@ import 'package:cosphere/src/features/profile/presentation/widgets/cards/educati
 
 class EducationView extends StatelessWidget {
   final String uid;
-  // final ProfileBloc profileBloc;
-
+  final String email;
   const EducationView({
     super.key,
     required this.uid,
-    // required this.profileBloc,
+    required this.email,
   });
+  static final _profileBloc = sl<ProfileBloc>();
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-
-    return BlocProvider(
-      create: (context) =>
-          sl<ProfileBloc>()..add(GetEducationByUserID(uid: uid)),
+    return BlocProvider<ProfileBloc>.value(
+      value: _profileBloc..add(GetEducationByUserID(uid: uid)),
       child: Container(
         width: context.width,
         margin: const EdgeInsets.only(right: 14, left: 14, bottom: 14),
@@ -49,16 +50,26 @@ class EducationView extends StatelessWidget {
             ),
             BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, state) {
-                if (state is GetEducationSuccess &&
-                    state.education.isNotEmpty) {
+                // List<Education> educationLst = [];
+                // if (context.read<ProfileBloc>().education.isNotEmpty) {
+                //   // educationLst = List.from(state.education);
+                // }
+                // if (state is AddEducationSuccess) {
+                //   context
+                //       .read<ProfileBloc>()
+                //       .add(GetEducationByUserID(uid: uid));
+                // }
+                if (context.read<ProfileBloc>().education.isNotEmpty) {
+                  List<Education> educationLst =
+                      context.read<ProfileBloc>().education;
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 18.0),
                     child: ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.education.length,
+                      itemCount: educationLst.length,
                       itemBuilder: (context, index) {
-                        final education = state.education[index];
+                        final education = educationLst[index];
                         return EducationCard(
                           education: education,
                         );
@@ -69,6 +80,7 @@ class EducationView extends StatelessWidget {
                     ),
                   );
                 }
+
                 return const SizedBox.shrink();
               },
             ),
@@ -76,7 +88,10 @@ class EducationView extends StatelessWidget {
               child: MoreButton(
                 title: "${AppStrings.add} ${AppStrings.more}",
                 onPressed: () {
-                  // showEditDialog(context: context, child: const EditEducation());
+                  showEditDialog(
+                      context: context,
+                      child: EditEducation(email: email),
+                      profileBloc: _profileBloc);
                 },
               ),
             ),

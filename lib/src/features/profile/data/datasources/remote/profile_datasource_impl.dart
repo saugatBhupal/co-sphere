@@ -2,10 +2,12 @@ import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
-import 'package:cosphere/src/features/profile/data/dto/get_experience_response_dto/get_experience_response_dto.dart';
-import 'package:cosphere/src/features/profile/data/dto/update_profile_img_req_dto.dart/update_profile_imgage_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
+import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:dio/dio.dart';
 
@@ -76,7 +78,7 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   @override
   Future<List<EducationApiModel>> getEducationByUserID(String uid) async {
     try {
-      final res = await dio.get("${ApiEndpoints.getEducationByUserID}$uid");
+      final res = await dio.get("${ApiEndpoints.userEducation}/$uid");
       if (res.statusCode == 200) {
         var educationList = res.data['data']['education'] as List;
         return educationList
@@ -94,15 +96,34 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   }
 
   @override
-  Future<GetExperienceResponseDto> getExperienceByUserID(String uid) async {
+  Future<GetExperienceResDto> getExperienceByUserID(String uid) async {
     try {
       final res = await dio.get("${ApiEndpoints.getExperienceByUserID}$uid");
       if (res.statusCode == 200) {
-        final GetExperienceResponseDto responseDto =
-            GetExperienceResponseDto.fromJson(res.data);
+        final GetExperienceResDto responseDto =
+            GetExperienceResDto.fromJson(res.data);
         print(" resp1${res.data}");
         print(" resp  ${responseDto.experience}");
         return responseDto;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusCode.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<EducationApiModel> addEducation(AddEducationReqDto dto) async {
+    try {
+      var res = await dio.post(ApiEndpoints.userEducation, data: dto.toJson());
+      if (res.statusCode == 200) {
+        EducationApiModel education =
+            EducationApiModel.fromJson(res.data['data']['education']);
+        return education;
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

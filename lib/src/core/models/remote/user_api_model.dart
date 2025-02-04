@@ -19,6 +19,9 @@ class UserApiModel extends Equatable {
   final String province;
   final String city;
   final List<SkillApiModel>? skills;
+  final String? about;
+  final String? overview;
+  final DateTime? createdAt;
 
   const UserApiModel({
     required this.uid,
@@ -33,6 +36,9 @@ class UserApiModel extends Equatable {
     required this.province,
     required this.city,
     this.skills,
+    this.about,
+    this.overview,
+    this.createdAt,
   });
 
   factory UserApiModel.fromJson(Map<String, dynamic> json) {
@@ -54,6 +60,11 @@ class UserApiModel extends Equatable {
           ?.map(
               (skill) => SkillApiModel.fromJson(skill as Map<String, dynamic>))
           .toList(),
+      about: json['about'] as String? ?? 'Unknown',
+      overview: json['overview'] as String? ?? 'Unknown',
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'])
+          : DateTime(1970, 1, 1),
     );
   }
 
@@ -70,6 +81,9 @@ class UserApiModel extends Equatable {
       'country': country,
       'province': province,
       'city': city,
+      'about': about,
+      'overview': overview,
+      'createdAt': createdAt!.toIso8601String(),
     };
   }
 

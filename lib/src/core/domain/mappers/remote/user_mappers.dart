@@ -19,6 +19,9 @@ extension UserApiModelExtension on UserApiModel {
             ?.map((skill) =>
                 Skill.initial().copyWith(uid: skill.uid, name: skill.name))
             .toList(),
+        about: about,
+        overview: overview,
+        createdAt: createdAt,
       );
 }
 
@@ -35,5 +38,8 @@ extension UserExtension on User {
         password: password,
         verified: verified,
         profileImage: profileImage,
+        about: about,
+        overview: overview,
+        createdAt: createdAt,
       );
 }

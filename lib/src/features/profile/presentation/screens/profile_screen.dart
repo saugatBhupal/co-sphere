@@ -1,9 +1,6 @@
-import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
@@ -48,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                   skills: (user.skills != null && user.skills!.isNotEmpty)
                       ? user.skills!
                       : []),
-              ProfileTabbar(uid: user.uid),
+              ProfileTabbar(user: user),
             ],
           ),
         ),

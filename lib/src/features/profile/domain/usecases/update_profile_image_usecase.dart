@@ -1,6 +1,6 @@
 import 'package:cosphere/src/core/domain/usecases/base_usecase.dart';
 import 'package:cosphere/src/core/error/failure.dart';
-import 'package:cosphere/src/features/profile/data/dto/update_profile_img_req_dto.dart/update_profile_imgage_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:dartz/dartz.dart';
 

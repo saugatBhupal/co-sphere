@@ -45,7 +45,7 @@ class EducationCard extends StatelessWidget {
                   children: [
                     TextSpan(
                         text:
-                            "${formatDate(education.from)} - ${formatDate(education.to)}",
+                            "${formatMonth(education.from)} - ${formatMonth(education.to)}",
                         style: _textTheme.labelLarge),
                     TextSpan(
                       text:

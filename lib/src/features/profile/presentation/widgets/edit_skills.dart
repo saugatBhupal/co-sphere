@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +50,7 @@ class _EditSkillsState extends State<EditSkills> {
         if (state is AddSkillSuccess) {
           buildToast(
               toastType: ToastType.success, msg: "Skill Added Successfully");
-          Navigator.of(context).popUntil((route) => route.isFirst);
+          Navigator.of(context).pop();
         }
         if (state is AddSkillFailed) {
           buildToast(toastType: ToastType.error, msg: state.message);

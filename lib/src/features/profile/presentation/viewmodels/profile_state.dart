@@ -59,6 +59,11 @@ class GetProfileInfoFailed extends ProfileState {
 }
 
 class GetExperienceSuccess extends ProfileState {
-  final GetExperienceResponseDto dto;
+  final GetExperienceResDto dto;
   const GetExperienceSuccess({required this.dto});
+}
+
+class AddEducationSuccess extends ProfileState {
+  final Education education;
+  const AddEducationSuccess({required this.education});
 }

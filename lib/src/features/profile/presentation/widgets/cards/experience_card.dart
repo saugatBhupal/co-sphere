@@ -52,7 +52,7 @@ class ExperienceCard extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                      text: "${formatDate(from)} - ${formatDate(to)}",
+                      text: "${formatMonth(from)} - ${formatMonth(to)}",
                       style: _textTheme.labelLarge),
                   TextSpan(
                     text: " (${calculateDuration(from, to)})",

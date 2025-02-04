@@ -36,3 +36,9 @@ class GetExperienceByUserID extends ProfileEvent {
 
   const GetExperienceByUserID({required this.uid});
 }
+
+class AddEducation extends ProfileEvent {
+  final AddEducationReqDto dto;
+
+  const AddEducation({required this.dto});
+}

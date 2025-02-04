@@ -1,7 +1,9 @@
 import 'package:cosphere/src/core/error/failure.dart';
-import 'package:cosphere/src/features/profile/data/dto/get_experience_response_dto/get_experience_response_dto.dart';
-import 'package:cosphere/src/features/profile/data/dto/update_profile_img_req_dto.dart/update_profile_imgage_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
+import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:dartz/dartz.dart';
@@ -11,6 +13,8 @@ abstract interface class ProfileRepository {
       UpdateProfileImgageReqDto dto);
   Future<Either<Failure, List<Skill>>> addSkill(AddSkillsParams params);
   Future<Either<Failure, List<Education>>> getEducationByUserID(String uid);
-  Future<Either<Failure, GetExperienceResponseDto>> getExperienceByUserID(
+  Future<Either<Failure, GetExperienceResDto>> getExperienceByUserID(
       String uid);
+  Future<Either<Failure, Education>> addEducation(AddEducationReqDto dto);
+  Future<Either<Failure, Experience>> addExperience(AddEducationReqDto dto);
 }

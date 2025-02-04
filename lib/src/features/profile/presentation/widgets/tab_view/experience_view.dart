@@ -51,14 +51,14 @@ class ExperienceView extends StatelessWidget {
                 if (state is GetProfileInfoLoading) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                if (state is GetProfileInfoFailed) {
-                  return Center(
-                    child: Text(
-                      "Failed to load experience",
-                      style: _textTheme.bodyLarge!.copyWith(color: Colors.red),
-                    ),
-                  );
-                }
+                // if (state is GetProfileInfoFailed) {
+                //   return Center(
+                //     child: Text(
+                //       "Failed to load experience",
+                //       style: _textTheme.bodyLarge!.copyWith(color: Colors.red),
+                //     ),
+                //   );
+                // }
                 if (state is GetExperienceSuccess &&
                     state.dto.experience.isEmpty) {
                   return Center(

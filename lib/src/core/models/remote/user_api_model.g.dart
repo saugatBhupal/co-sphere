@@ -21,6 +21,11 @@ UserApiModel _$UserApiModelFromJson(Map<String, dynamic> json) => UserApiModel(
       skills: (json['skills'] as List<dynamic>?)
           ?.map((e) => SkillApiModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      about: json['about'] as String?,
+      overview: json['overview'] as String?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$UserApiModelToJson(UserApiModel instance) =>
@@ -37,4 +42,7 @@ Map<String, dynamic> _$UserApiModelToJson(UserApiModel instance) =>
       'province': instance.province,
       'city': instance.city,
       'skills': instance.skills,
+      'about': instance.about,
+      'overview': instance.overview,
+      'createdAt': instance.createdAt?.toIso8601String(),
     };

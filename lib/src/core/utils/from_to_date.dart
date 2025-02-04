@@ -15,6 +15,10 @@ String calculateDuration(DateTime from, DateTime to) {
 }
 
 String formatDate(DateTime date) {
+  return "${date.day} ${_getMonth(date.month)} ${date.year}";
+}
+
+String formatMonth(DateTime date) {
   return "${_getMonth(date.month)} ${date.year}";
 }
 
