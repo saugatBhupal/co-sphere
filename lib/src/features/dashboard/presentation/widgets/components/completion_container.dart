@@ -15,7 +15,6 @@ class CompletionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double completionRatio = completed / total;
-    print("Completion Ratio: $completionRatio");
 
     return Container(
       width: 28,
