@@ -16,3 +16,15 @@ class ScreenModuleChanged extends DashboardState {
   @override
   List<Object> get props => [index];
 }
+
+class StartupLoading extends DashboardState {}
+
+class DashboardGetUserSuccess extends DashboardState {
+  final User? user;
+
+  const DashboardGetUserSuccess({
+    this.user,
+  });
+}
+
+class DashboardGetUserFailed extends DashboardState {}

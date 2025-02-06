@@ -12,3 +12,5 @@ class ChangeScreenModule extends DashboardEvent {
 
   const ChangeScreenModule(this.index);
 }
+
+class StartUpAppEvent extends DashboardEvent {}

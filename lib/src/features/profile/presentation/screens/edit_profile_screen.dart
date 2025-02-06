@@ -33,12 +33,6 @@ class EditProfileScreen extends StatelessWidget {
               EditImages(user: user),
               _buildTitle(context, title: AppStrings.links),
               const EditLinks(),
-              _buildTitle(context, title: AppStrings.skill),
-              EditSkills(
-                  uid: user.uid,
-                  skills: (user.skills != null && user.skills!.isNotEmpty)
-                      ? user.skills!
-                      : []),
               _buildTitle(context, title: AppStrings.personal),
               const EditPersonalDetails(),
               _buildTitle(context, title: AppStrings.intro),

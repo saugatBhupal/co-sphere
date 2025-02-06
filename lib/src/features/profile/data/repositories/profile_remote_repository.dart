@@ -1,13 +1,17 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/education_mappers.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
+import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
@@ -71,8 +75,19 @@ class ProfileRemoteRepository implements ProfileRepository {
     try {
       final EducationApiModel educationApiModel =
           await profileDatasource.addEducation(dto);
-      print(" educationApiModel  $educationApiModel");
       return Right(educationApiModel.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Experience>> addExperience(
+      AddExperienceReqDto dto) async {
+    try {
+      final ExperienceApiModel experienceApiModel =
+          await profileDatasource.addExperience(dto);
+      return Right(experienceApiModel.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

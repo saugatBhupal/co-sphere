@@ -21,7 +21,6 @@ import 'package:cosphere/src/features/authentication/presentation/screens/intere
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/splash/splash_screen.dart';
-import 'package:cosphere/src/features/splash/presentation/viewmodel/splash_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +35,7 @@ class AppRouter {
       case AppRoutes.splash:
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
-            value: sl<SplashBloc>(),
+            value: _dashBloc,
             child: const SplashScreen(),
           ),
         );

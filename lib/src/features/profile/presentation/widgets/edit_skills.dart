@@ -72,7 +72,7 @@ class _EditSkillsState extends State<EditSkills> {
               runSpacing: 6,
               children: [
                 ...List.generate(
-                  widget.skills!.length ?? 0,
+                  widget.skills!.length,
                   (index) {
                     return Container(
                       padding: const EdgeInsets.symmetric(

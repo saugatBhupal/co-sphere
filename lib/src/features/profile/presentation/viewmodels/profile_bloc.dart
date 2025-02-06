@@ -1,10 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
+import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_education_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/add_experience_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
@@ -20,12 +24,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetEducationByUserIDUsecase getEducationByUseridUsecase;
   final GetExperienceByUserIDUsecase getExperienceByUserIDUsecase;
   final AddEducationUsecase addEducationUsecase;
+  final AddExperienceUsecase addExperienceUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,
     required this.addSkillUsecase,
     required this.getEducationByUseridUsecase,
     required this.getExperienceByUserIDUsecase,
     required this.addEducationUsecase,
+    required this.addExperienceUsecase,
   }) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
       if (event is ChangeProfileModule) {
@@ -45,6 +51,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       if (event is AddEducation) {
         await _addEducation(event, emit);
+      }
+      if (event is AddExperience) {
+        await _addExperience(event, emit);
       }
     });
   }
@@ -91,9 +100,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final result = await getEducationByUseridUsecase(event.uid);
       print("result $result");
       result.fold((failure) => emit(GetProfileInfoFailed(failure.message)),
-          // (success) => emit(GetEducationSuccess(education: success)),
-          (data) {
-        _education = data;
+          (success) {
+        _education = success;
         emit(GetEducationSuccess(education: _education));
       });
     } catch (e) {
@@ -101,6 +109,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
+  List<Experience> _experience = [];
+  List<Experience> get experience => _experience;
+  String overview = "";
   Future<void> _getExperienceByUserID(
       GetExperienceByUserID event, Emitter<ProfileState> emit) async {
     emit(GetProfileInfoLoading());
@@ -108,7 +119,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final result = await getExperienceByUserIDUsecase(event.uid);
       result.fold(
         (failure) => emit(GetProfileInfoFailed(failure.message)),
-        (success) => emit(GetExperienceSuccess(dto: success)),
+        (success) {
+          overview = success.overview!;
+          _experience = success.experience
+              .map((experience) => experience.toDomain())
+              .toList();
+          emit(GetExperienceSuccess(
+              experience: _experience, overview: overview));
+        },
       );
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
@@ -124,6 +142,22 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           (data) {
         _education.add(data);
         emit(AddEducationSuccess(education: data));
+      });
+    } catch (e) {
+      emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _addExperience(
+      AddExperience event, Emitter<ProfileState> emit) async {
+    emit(GetProfileInfoLoading());
+    try {
+      final result = await addExperienceUsecase(event.dto);
+      result.fold((failure) => emit(GetProfileInfoFailed(failure.message)),
+          (data) {
+        _experience.add(data);
+        print(_experience);
+        emit(AddExperienceSuccess(experience: data));
       });
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));

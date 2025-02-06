@@ -42,3 +42,9 @@ class AddEducation extends ProfileEvent {
 
   const AddEducation({required this.dto});
 }
+
+class AddExperience extends ProfileEvent {
+  final AddExperienceReqDto dto;
+
+  const AddExperience({required this.dto});
+}

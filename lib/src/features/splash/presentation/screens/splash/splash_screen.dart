@@ -7,7 +7,7 @@ import 'package:cosphere/src/core/constants/app_constants.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/features/splash/presentation/viewmodel/splash_bloc.dart';
+import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
     _animationController.forward();
     Future.delayed(const Duration(milliseconds: AppConstants.navigateTime), () {
       if (mounted) {
-        context.read<SplashBloc>().add(StartUpEvent());
+        context.read<DashboardBloc>().add(StartUpAppEvent());
       }
     });
   }
@@ -48,17 +48,17 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SplashBloc, SplashState>(
+    return BlocListener<DashboardBloc, DashboardState>(
       listener: (context, state) {
-        if (state is SplashGetUserSuccess && state.user != null) {
+        if (state is DashboardGetUserSuccess && state.user != null) {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoutes.dashboard,
             (route) => false,
             arguments: state.user,
           );
         }
-        if ((state is SplashGetUserSuccess && state.user == null) ||
-            state is SplashGetUserFailed) {
+        if ((state is DashboardGetUserSuccess && state.user == null) ||
+            state is DashboardGetUserFailed) {
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoutes.onboarding,
             (route) => false,

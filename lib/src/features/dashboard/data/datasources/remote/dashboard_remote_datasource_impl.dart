@@ -2,13 +2,13 @@ import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
-import 'package:cosphere/src/features/splash/data/datasources/remote/splash_remote_datasource.dart';
+import 'package:cosphere/src/features/dashboard/data/datasources/remote/dashboard_remote_datasource.dart';
 import 'package:dio/dio.dart';
 
-class SplashRemoteDatasourceImpl implements SplashRemoteDatasource {
+class DashboardRemoteDatasourceImpl implements DashboardRemoteDatasource {
   final Dio dio;
 
-  SplashRemoteDatasourceImpl({required this.dio});
+  DashboardRemoteDatasourceImpl({required this.dio});
 
   @override
   Future<UserApiModel?> getCurrentUser(String? uid) async {

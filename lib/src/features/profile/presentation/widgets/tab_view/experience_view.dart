@@ -1,7 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
-import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
+import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/cards/edit_pop_up.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_experience.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,17 +15,18 @@ import 'package:cosphere/src/features/profile/presentation/widgets/cards/experie
 
 class ExperienceView extends StatelessWidget {
   final String uid;
+  final String email;
   const ExperienceView({
     super.key,
     required this.uid,
+    required this.email,
   });
-
+  static final _profileBloc = sl<ProfileBloc>();
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-    return BlocProvider(
-      create: (context) =>
-          sl<ProfileBloc>()..add(GetExperienceByUserID(uid: uid)),
+    return BlocProvider<ProfileBloc>.value(
+      value: _profileBloc..add(GetExperienceByUserID(uid: uid)),
       child: Container(
         width: context.width,
         margin: const EdgeInsets.only(right: 14, left: 14, bottom: 14),
@@ -51,16 +53,15 @@ class ExperienceView extends StatelessWidget {
                 if (state is GetProfileInfoLoading) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                // if (state is GetProfileInfoFailed) {
-                //   return Center(
-                //     child: Text(
-                //       "Failed to load experience",
-                //       style: _textTheme.bodyLarge!.copyWith(color: Colors.red),
-                //     ),
-                //   );
-                // }
-                if (state is GetExperienceSuccess &&
-                    state.dto.experience.isEmpty) {
+                if (state is GetProfileInfoFailed) {
+                  return Center(
+                    child: Text(
+                      "Failed to load experience",
+                      style: _textTheme.bodyLarge!.copyWith(color: Colors.red),
+                    ),
+                  );
+                }
+                if (context.read<ProfileBloc>().experience.isEmpty) {
                   return Center(
                     child: Text(
                       "No experience history",
@@ -71,13 +72,14 @@ class ExperienceView extends StatelessWidget {
                     ),
                   );
                 }
-                if (state is GetExperienceSuccess &&
-                    state.dto.experience.isNotEmpty) {
+                if (context.read<ProfileBloc>().experience.isNotEmpty) {
+                  List<Experience> experienceLst =
+                      context.read<ProfileBloc>().experience;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        state.dto.overview,
+                        context.read<ProfileBloc>().overview,
                         style: _textTheme.bodyLarge!.copyWith(
                           color: AppColors.silver,
                           height: 1.2,
@@ -96,11 +98,9 @@ class ExperienceView extends StatelessWidget {
                         child: ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.dto.experience.length,
+                          itemCount: experienceLst.length,
                           itemBuilder: (context, index) {
-                            final experience =
-                                state.dto.experience[index].toDomain();
-                            print("Experoine convert $experience");
+                            final experience = experienceLst[index];
                             return ExperienceCard(
                               position: experience.position,
                               organization: experience.organization,
@@ -127,7 +127,10 @@ class ExperienceView extends StatelessWidget {
               child: MoreButton(
                 title: "${AppStrings.add} ${AppStrings.more}",
                 onPressed: () {
-                  // showEditDialog(context: context, child: const EditExperience());
+                  showEditDialog(
+                      context: context,
+                      child: EditExperience(email: email),
+                      profileBloc: _profileBloc);
                 },
               ),
             ),

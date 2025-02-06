@@ -6,19 +6,19 @@ import 'package:cosphere/src/core/models/local/user_hive_model.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
-import 'package:cosphere/src/features/splash/data/datasources/local/splash_local_datasource.dart';
-import 'package:cosphere/src/features/splash/data/datasources/remote/splash_remote_datasource.dart';
-import 'package:cosphere/src/features/splash/domain/repositories/splash_repository.dart';
+import 'package:cosphere/src/features/dashboard/data/datasources/local/dashboard_local_datasource.dart';
+import 'package:cosphere/src/features/dashboard/data/datasources/remote/dashboard_remote_datasource.dart';
+import 'package:cosphere/src/features/dashboard/domain/repositories/dasbboard_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class SplashRemoteRepository implements SplashRepository {
-  final SplashRemoteDatasource splashRemoteDatasource;
-  final SplashLocalDatasource splashLocalDatasource;
+class DashboardRemoteRepository implements DasboardRepository {
+  final DashboardLocalDatasource dashboardLocalDatasource;
+  final DashboardRemoteDatasource dashboardRemoteDatasource;
   final BaseCheckInternetConnectivity checkInternetConnectivity;
 
-  SplashRemoteRepository({
-    required this.splashRemoteDatasource,
-    required this.splashLocalDatasource,
+  DashboardRemoteRepository({
+    required this.dashboardRemoteDatasource,
+    required this.dashboardLocalDatasource,
     required this.checkInternetConnectivity,
   });
   @override
@@ -28,7 +28,7 @@ class SplashRemoteRepository implements SplashRepository {
       try {
         if (userPref != null) {
           UserApiModel? userApiModel =
-              await splashRemoteDatasource.getCurrentUser(userPref.uid);
+              await dashboardRemoteDatasource.getCurrentUser(userPref.uid);
 
           if (userApiModel != null) {
             User user = userApiModel.toDomain();
@@ -41,7 +41,7 @@ class SplashRemoteRepository implements SplashRepository {
       }
     } else {
       if (userPref != null) {
-        UserHiveModel? userHiveModel = await splashLocalDatasource
+        UserHiveModel? userHiveModel = await dashboardLocalDatasource
             .getCurrentUser(userPref.uid, userPref.email);
 
         if (userHiveModel != null) {

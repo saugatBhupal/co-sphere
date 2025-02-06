@@ -3,11 +3,12 @@ import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
-import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:dio/dio.dart';
 
@@ -60,7 +61,6 @@ class ProfileDatasourceImpl implements ProfileDatasource {
       );
       if (res.statusCode == 200) {
         var skillsList = res.data['data']['skills'] as List;
-        print(skillsList);
         return skillsList
             .map((skill) => SkillApiModel.fromJson(skill))
             .toList();
@@ -98,12 +98,10 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   @override
   Future<GetExperienceResDto> getExperienceByUserID(String uid) async {
     try {
-      final res = await dio.get("${ApiEndpoints.getExperienceByUserID}$uid");
+      final res = await dio.get("${ApiEndpoints.userExperience}/$uid");
       if (res.statusCode == 200) {
         final GetExperienceResDto responseDto =
             GetExperienceResDto.fromJson(res.data);
-        print(" resp1${res.data}");
-        print(" resp  ${responseDto.experience}");
         return responseDto;
       } else {
         throw Failure(
@@ -124,6 +122,25 @@ class ProfileDatasourceImpl implements ProfileDatasource {
         EducationApiModel education =
             EducationApiModel.fromJson(res.data['data']['education']);
         return education;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusCode.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<ExperienceApiModel> addExperience(AddExperienceReqDto dto) async {
+    try {
+      var res = await dio.post(ApiEndpoints.userExperience, data: dto.toJson());
+      if (res.statusCode == 200) {
+        ExperienceApiModel experience =
+            ExperienceApiModel.fromJson(res.data['data']['experience']);
+        return experience;
       } else {
         throw Failure(
           message: res.statusMessage.toString(),
