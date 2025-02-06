@@ -47,7 +47,7 @@ void main() {
     });
 
     testWidgets('renders without icon when icon is null',
-        (WidgetTester tester) async {
+        (WidgetTester tester) async { 
       const String buttonText = 'No Icon Button';
 
       await tester.pumpWidget(
