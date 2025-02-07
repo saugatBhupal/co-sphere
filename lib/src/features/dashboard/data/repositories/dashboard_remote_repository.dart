@@ -11,7 +11,7 @@ import 'package:cosphere/src/features/dashboard/data/datasources/remote/dashboar
 import 'package:cosphere/src/features/dashboard/domain/repositories/dasbboard_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class DashboardRemoteRepository implements DasboardRepository {
+class DashboardRemoteRepository implements DashboardRepository {
   final DashboardLocalDatasource dashboardLocalDatasource;
   final DashboardRemoteDatasource dashboardRemoteDatasource;
   final BaseCheckInternetConnectivity checkInternetConnectivity;

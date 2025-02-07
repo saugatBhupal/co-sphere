@@ -5,7 +5,7 @@ import 'package:cosphere/src/features/dashboard/domain/repositories/dasbboard_re
 import 'package:dartz/dartz.dart';
 
 class GetUserUsecase implements UsecaseWithoutParams<User?> {
-  final DasboardRepository dasboardRepository;
+  final DashboardRepository dasboardRepository;
 
   GetUserUsecase({required this.dasboardRepository});
   @override
