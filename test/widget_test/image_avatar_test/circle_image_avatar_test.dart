@@ -59,8 +59,6 @@ void main() {
         ),
       ),
     );
-
-    // Check if an Image widget is used (which would internally be Image.network or Image.file)
     final fileImageFinder = find.byType(Image);
     expect(fileImageFinder, findsOneWidget);
   });
