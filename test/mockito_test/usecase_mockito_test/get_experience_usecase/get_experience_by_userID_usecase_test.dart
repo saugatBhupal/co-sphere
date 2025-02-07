@@ -55,6 +55,7 @@ void main() {
     // Assert
     expect(result, Right(resDto));
     verify(mockProfileRepository.getExperienceByUserID(userId)).called(1);
+    verifyNoMoreInteractions(mockProfileRepository);
   });
   test('should return Failure when an error occurs', () async {
     // Arrange
