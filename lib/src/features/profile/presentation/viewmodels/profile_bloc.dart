@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
-import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
