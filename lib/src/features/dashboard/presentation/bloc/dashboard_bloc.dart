@@ -26,7 +26,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   Future<void> _dashboardGetUser(
       StartUpAppEvent event, Emitter<DashboardState> emit) async {
-    emit(StartupLoading());
+    emit(DashboardStartupLoading());
     final result = await getUserUsecase();
     result.fold(
       (left) => emit(DashboardGetUserFailed()),

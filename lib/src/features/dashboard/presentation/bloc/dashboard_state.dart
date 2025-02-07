@@ -17,7 +17,7 @@ class ScreenModuleChanged extends DashboardState {
   List<Object> get props => [index];
 }
 
-class StartupLoading extends DashboardState {}
+class DashboardStartupLoading extends DashboardState {}
 
 class DashboardGetUserSuccess extends DashboardState {
   final User? user;
