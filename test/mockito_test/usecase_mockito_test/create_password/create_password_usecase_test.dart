@@ -19,7 +19,7 @@ void main() {
     createPasswordUsecase =
         CreatePasswordUsecase(authRepository: mockAuthRepository);
   });
-  test('should return success message when signup is successful', () async {
+  test('should return success message when password is successful', () async {
     final requestDto =
         CreatePasswordRequestDto(email: 'test@gmail.com', password: 'test@123');
     const successMessage = 'Password Created Successfully';

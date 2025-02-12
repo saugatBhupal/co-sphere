@@ -28,7 +28,7 @@ void main() {
     from: DateTime.now(),
     to: DateTime.now(),
   );
-  test('should return user entity when Login is successful', () async {
+  test('should return Education entity when education is added successfully', () async {
     // Arrange
 
     when(mockProfileRepository.addEducation(reqDto))
@@ -41,7 +41,7 @@ void main() {
     verifyNoMoreInteractions(mockProfileRepository);
   });
 
-  test('should return Failure when an User is not found', () async {
+  test('should return Failure when an Education is not added', () async {
     // Arrange
     const failure = Failure(message: "User not found");
 

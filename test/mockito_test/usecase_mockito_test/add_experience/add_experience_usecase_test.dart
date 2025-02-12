@@ -29,7 +29,8 @@ void main() {
     to: DateTime.now(),
   );
 
-  test('should return user entity when Login is successful', () async {
+  test('should return Experience entity when experience is added successfully',
+      () async {
     // Arrange
 
     when(mockProfileRepository.addExperience(reqDto))
