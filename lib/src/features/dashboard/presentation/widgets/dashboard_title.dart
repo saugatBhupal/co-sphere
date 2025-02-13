@@ -1,10 +1,18 @@
-import 'package:cosphere/src/core/constants/app_colors.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:cosphere/src/core/constants/app_colors.dart';
 
 class DashboardTitle extends StatelessWidget {
   final String title;
   final String? option;
-  const DashboardTitle({super.key, required this.title, this.option});
+  final VoidCallback? onPressed;
+  const DashboardTitle({
+    super.key,
+    required this.title,
+    this.option,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +27,13 @@ class DashboardTitle extends StatelessWidget {
             style: _textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
           ),
           if (option != null)
-            Text(
-              option!,
-              style: _textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w500, color: AppColors.silver),
+            GestureDetector(
+              onTap: onPressed,
+              child: Text(
+                option!,
+                style: _textTheme.bodySmall!.copyWith(
+                    fontWeight: FontWeight.w500, color: AppColors.silver),
+              ),
             ),
         ],
       ),

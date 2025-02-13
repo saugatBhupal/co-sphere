@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/features/dashboard/presentation/widgets/components/application_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/job_application_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/assigned_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/created_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_functions.dart';
@@ -67,14 +68,18 @@ class DashboardBody extends StatelessWidget {
                   },
                 ),
               ),
-              const DashboardTitle(
-                  title: AppStrings.application, option: AppStrings.view),
+              DashboardTitle(
+                title: AppStrings.application,
+                option: AppStrings.view,
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(AppRoutes.applications),
+              ),
               SizedBox(
                 child: ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 3,
-                  itemBuilder: (context, index) => const ApplicationCard(),
+                  itemBuilder: (context, index) => const JobApplicationCard(),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

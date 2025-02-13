@@ -1,6 +1,5 @@
-import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/widgets/appbar/search_field_appbar.dart';
 import 'package:cosphere/src/features/chat/presentation/widgets/message_tile.dart';
-import 'package:cosphere/src/features/dashboard/presentation/widgets/components/search_bar.dart';
 import 'package:flutter/material.dart';
 
 class ChatLogsScreen extends StatelessWidget {
@@ -8,18 +7,9 @@ class ChatLogsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(64.0),
-        child: AppBar(
-          iconTheme: const IconThemeData(color: AppColors.black),
-          centerTitle: true,
-          title: const Center(child: SearchTextField()),
-          shape: const Border(
-              bottom: BorderSide(color: AppColors.plaster, width: 0.6)),
-        ),
-      ),
-      body: const Column(
+    return const Scaffold(
+      appBar: SearchFieldAppbar(),
+      body: Column(
         children: [
           MessageTile(unread: false),
           MessageTile(unread: true),

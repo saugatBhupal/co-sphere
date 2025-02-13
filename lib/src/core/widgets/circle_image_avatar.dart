@@ -7,12 +7,14 @@ class CircleImageAvatar extends StatelessWidget {
   final double? radius;
   final bool? enableNavigate;
   final String? imageUrl;
+  final Color? color;
 
   const CircleImageAvatar({
     super.key,
     this.radius,
     this.enableNavigate,
     this.imageUrl,
+    this.color,
   });
 
   @override
@@ -29,19 +31,23 @@ class CircleImageAvatar extends StatelessWidget {
       child: ClipOval(
         child: SizedBox.fromSize(
           size: Size.fromRadius(radius ?? 20),
-          child: imageUrl != null && imageUrl!.isNotEmpty
-              ? (isNetworkImage(imageUrl!)
-                  ? Image.network(
-                      imageUrl!,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.file(
-                      File(imageUrl!),
-                      fit: BoxFit.cover,
-                    ))
-              : const ImageBuilder(
-                  imageUrl: AppImages.profile,
-                ),
+          child: color != null
+              ? Container(
+                  color: color,
+                )
+              : (imageUrl != null && imageUrl!.isNotEmpty
+                  ? (isNetworkImage(imageUrl!)
+                      ? Image.network(
+                          imageUrl!,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.file(
+                          File(imageUrl!),
+                          fit: BoxFit.cover,
+                        ))
+                  : const ImageBuilder(
+                      imageUrl: AppImages.profile,
+                    )),
         ),
       ),
     );

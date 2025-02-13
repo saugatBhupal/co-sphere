@@ -18,6 +18,7 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color green = Color(0xFFDFF7EE);
   static const Color satin = Color(0xFFF7F9FC);
+  static const Color lemon = Color(0xFFDFEA3D);
   static const Color silver = Color(0xFF868383);
   static const Color orange = Color(0xFFF8E3D1);
   static const Color winter = Color(0xFF001B6C);

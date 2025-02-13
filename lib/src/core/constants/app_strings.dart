@@ -116,4 +116,6 @@ class AppStrings {
   static const notifications = "Notifications";
   static const read = "Mark all as read";
   static const clear = "Clear all";
+  static const duration = "Duration";
+  static const days = "Days";
 }

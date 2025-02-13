@@ -14,6 +14,7 @@ import 'package:cosphere/src/features/chat/presentation/screens/chat_logs_screen
 import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
 import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
@@ -120,6 +121,9 @@ class AppRouter {
       case AppRoutes.notifications:
         return MaterialPageRoute(
             builder: (context) => const NotificationsScreen());
+      case AppRoutes.applications:
+        return MaterialPageRoute(
+            builder: (context) => const ApplicationsScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),
