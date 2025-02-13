@@ -3,8 +3,6 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/buttons/accept_button.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
 import 'package:flutter/material.dart';
 

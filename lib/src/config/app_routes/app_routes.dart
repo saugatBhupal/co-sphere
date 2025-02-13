@@ -21,4 +21,7 @@ class AppRoutes {
   static const String jobDetails = "/jobDetails";
   static const String hiring = "/hiring";
   static const String active = "/active";
+  static const String completed = "/completed";
+  static const String applicants = "/applicants";
+  static const String members = "/members";
 }

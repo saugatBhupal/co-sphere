@@ -5,20 +5,20 @@ import 'package:cosphere/src/features/project/presentation/widgets/active_comple
 import 'package:cosphere/src/features/project/presentation/widgets/active_completed/project_tabbar.dart';
 import 'package:flutter/material.dart';
 
-class ActiveDashboardScreen extends StatelessWidget {
-  const ActiveDashboardScreen({super.key});
+class CompletedDashboardScreen extends StatelessWidget {
+  const CompletedDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: const CommonAppbar(
-          title: "${AppStrings.project} ${AppStrings.details}"),
+      appBar:
+          CommonAppbar(title: "${AppStrings.project} ${AppStrings.details}"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProjectHeader(status: AppStrings.active),
-          ProjectDetailsBasics(status: AppStrings.active),
-          Expanded(child: ProjectTabbar(status: AppStrings.active)),
+          ProjectHeader(status: AppStrings.completed),
+          ProjectDetailsBasics(status: AppStrings.completed),
+          Expanded(child: ProjectTabbar(status: AppStrings.completed)),
         ],
       ),
     );

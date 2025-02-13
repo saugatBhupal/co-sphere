@@ -131,8 +131,9 @@ class AppStrings {
   static const String apply = "Apply Now";
   static const String project = "Project";
   static const String finish = "Finish";
-  static const String all = "All";
   static const String accepted = "Accepted";
+  static const String all = "All";
+  static const String newTask = "New Task";
   static const String tap = "Tap to view profile";
   static const String visible =
       "*This project is only visible to project members";

@@ -1,8 +1,6 @@
-import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
@@ -10,8 +8,9 @@ import 'package:cosphere/src/features/jobs/presentation/widgets/components/proje
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:flutter/material.dart';
 
-class ActiveDetailsBasics extends StatelessWidget {
-  const ActiveDetailsBasics({super.key});
+class ProjectDetailsBasics extends StatelessWidget {
+  final String status;
+  const ProjectDetailsBasics({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class ActiveDetailsBasics extends StatelessWidget {
                   style: _textTheme.labelLarge!.copyWith(letterSpacing: 0),
                 ),
                 const Spacer(),
-                const TrashButton(),
+                if (status == AppStrings.active) const TrashButton(),
               ],
             ),
           )

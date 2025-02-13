@@ -1,6 +1,5 @@
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_title.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/card/applicants_card.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/card/members_card.dart';
 import 'package:flutter/material.dart';
 

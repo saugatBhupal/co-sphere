@@ -5,8 +5,9 @@ import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/posted_span.dart';
 import 'package:flutter/material.dart';
 
-class ActiveHeader extends StatelessWidget {
-  const ActiveHeader({super.key});
+class ProjectHeader extends StatelessWidget {
+  final String status;
+  const ProjectHeader({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +26,21 @@ class ActiveHeader extends StatelessWidget {
             children: [
               const PostedSpan(),
               const SizedBox(width: 12),
-              const StatusButton(
-                  label: AppStrings.active,
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10)),
+              StatusButton(
+                  label: status,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 10)),
               const Spacer(),
-              SizedBox(
-                width: context.width / 4,
-                child: DarkRoundedButton(
-                  onPressed: () {},
-                  fontSize: 10,
-                  title: "${AppStrings.finish} ${AppStrings.project}",
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+              if (status == AppStrings.active)
+                SizedBox(
+                  width: context.width / 4,
+                  child: DarkRoundedButton(
+                    onPressed: () {},
+                    fontSize: 10,
+                    title: "${AppStrings.finish} ${AppStrings.project}",
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                  ),
                 ),
-              ),
             ],
           ),
         ],
