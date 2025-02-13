@@ -24,8 +24,10 @@ import 'package:cosphere/src/features/profile/presentation/screens/profile_scree
 import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/screens/active_dashboard_screen.dart';
+import 'package:cosphere/src/features/project/presentation/screens/applicants_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/completed_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/hiring_dashboard_screen.dart';
+import 'package:cosphere/src/features/project/presentation/screens/members_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -149,10 +151,9 @@ class AppRouter {
             builder: (context) => const CompletedDashboardScreen());
       case AppRoutes.applicants:
         return MaterialPageRoute(
-            builder: (context) => const CompletedDashboardScreen());
+            builder: (context) => const ApplicantsScreen());
       case AppRoutes.members:
-        return MaterialPageRoute(
-            builder: (context) => const CompletedDashboardScreen());
+        return MaterialPageRoute(builder: (context) => const MembersScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

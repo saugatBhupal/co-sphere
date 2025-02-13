@@ -17,7 +17,8 @@ class ApplicantsList extends StatelessWidget {
           title: "${AppStrings.all} ${AppStrings.applicants} (23)",
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           option: AppStrings.view,
-          onPressed: () => Navigator.of(context).pushNamed(AppRoutes.completed),
+          onPressed: () =>
+              Navigator.of(context).pushNamed(AppRoutes.applicants),
         ),
         SizedBox(
           child: ListView.separated(

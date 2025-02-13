@@ -1,3 +1,4 @@
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_title.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/card/members_card.dart';
@@ -12,10 +13,11 @@ class MembersList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const DashboardTitle(
+        DashboardTitle(
           title: "${AppStrings.accepted} (3)",
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           option: AppStrings.view,
+          onPressed: () => Navigator.of(context).pushNamed(AppRoutes.members),
         ),
         SizedBox(
           child: ListView.separated(
