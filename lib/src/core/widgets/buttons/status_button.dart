@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 class StatusButton extends StatelessWidget {
   final String label;
+  final EdgeInsetsGeometry? padding;
   const StatusButton({
     super.key,
     required this.label,
+    this.padding,
   });
 
   @override
@@ -20,6 +22,7 @@ class StatusButton extends StatelessWidget {
     switch (formattedLabel) {
       case "Pending":
       case "Intern":
+      case "Hiring":
         background = AppColors.orange;
         foreground = AppColors.pumpkin;
         break;
@@ -54,7 +57,8 @@ class StatusButton extends StatelessWidget {
         color: background,
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6.5),
+      padding:
+          padding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 6.5),
       child: Text(
         formattedLabel,
         style: _theme.textTheme.labelLarge!.copyWith(

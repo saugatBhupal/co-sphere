@@ -40,7 +40,7 @@ class ProfileBadge extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: AppStrings.job,
+                    text: AppStrings.jobSuccess,
                     style: _textTheme.bodySmall!.copyWith(
                       color: AppColors.black,
                       fontWeight: FontThickness.regular,

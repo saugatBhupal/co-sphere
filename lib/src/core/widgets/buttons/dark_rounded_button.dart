@@ -10,7 +10,6 @@ class DarkRoundedButton extends StatelessWidget {
   final double fontSize;
   final double? height;
   final bool isLoading;
-
   final EdgeInsetsGeometry? padding;
   final Function()? onPressed;
   const DarkRoundedButton(

@@ -73,8 +73,9 @@ class AppStrings {
   static const String timeSpent = "Time Spent";
   static const String completion = "Completion";
   static const String view = "View All";
-  static const String job = "Job Success";
+  static const String jobSuccess = "Job Success";
   static const String links = "Links";
+  static const String job = "Job";
   static const String chat = "Chat";
   static const String skill = "Skills";
   static const String more = "More";
@@ -124,6 +125,13 @@ class AppStrings {
   static const String completed = "Completed";
   static const String members = "Members";
   static const String remaining = "Remaining";
-  static const String jobDetails = "Job Details";
+  static const String details = "Details";
   static const String apply = "Apply Now";
+  static const String project = "Project";
+  static const String finish = "Finish";
+  static const String all = "All";
+  static const String accepted = "Accepted";
+  static const String tap = "Tap to view profile";
+  static const String visible =
+      "*This project is only visible to project members";
 }

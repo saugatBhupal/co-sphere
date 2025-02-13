@@ -15,7 +15,7 @@ class ActiveCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails),
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.active),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         margin: const EdgeInsets.symmetric(vertical: 4),

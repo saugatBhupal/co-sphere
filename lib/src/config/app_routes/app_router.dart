@@ -23,6 +23,8 @@ import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
+import 'package:cosphere/src/features/project/presentation/screens/active_dashboard_screen.dart';
+import 'package:cosphere/src/features/project/presentation/screens/hiring_dashboard_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -135,6 +137,12 @@ class AppRouter {
       case AppRoutes.jobDetails:
         return MaterialPageRoute(
             builder: (context) => const JobDetailsScreen());
+      case AppRoutes.hiring:
+        return MaterialPageRoute(
+            builder: (context) => const HiringDashboardScreen());
+      case AppRoutes.active:
+        return MaterialPageRoute(
+            builder: (context) => const ActiveDashboardScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

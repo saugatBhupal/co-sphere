@@ -15,7 +15,8 @@ class JobDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const CommonAppbar(title: AppStrings.jobDetails),
+      appBar:
+          const CommonAppbar(title: "${AppStrings.job} ${AppStrings.details}"),
       body: Stack(
         children: [
           const Padding(
