@@ -1,5 +1,4 @@
-import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/card/created_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/active_card.dart';
 import 'package:flutter/material.dart';
 
 class ActiveView extends StatelessWidget {
@@ -12,8 +11,7 @@ class ActiveView extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 3,
-        itemBuilder: (context, index) =>
-            const CreatedCard(status: AppStrings.active),
+        itemBuilder: (context, index) => const ActiveCard(),
         separatorBuilder: (context, index) {
           return const SizedBox(height: 4);
         },

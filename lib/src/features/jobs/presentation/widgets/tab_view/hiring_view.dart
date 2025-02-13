@@ -1,6 +1,4 @@
-import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/card/created_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/hiring_card.dart';
 import 'package:flutter/material.dart';
 
 class HiringView extends StatelessWidget {
@@ -13,8 +11,7 @@ class HiringView extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 3,
-        itemBuilder: (context, index) =>
-            const CreatedCard(status: AppStrings.hiring),
+        itemBuilder: (context, index) => const HiringCard(),
         separatorBuilder: (context, index) {
           return const SizedBox(height: 4);
         },

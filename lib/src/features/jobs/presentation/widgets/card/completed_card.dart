@@ -7,11 +7,9 @@ import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/card/cards_grid_info.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/card/cards_header_info.dart';
 
-class CreatedCard extends StatelessWidget {
-  final String status;
-  const CreatedCard({
+class CompletedCard extends StatelessWidget {
+  const CompletedCard({
     super.key,
-    required this.status,
   });
 
   @override
@@ -27,10 +25,10 @@ class CreatedCard extends StatelessWidget {
           border: Border.all(width: 1, color: AppColors.plaster),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Column(
+        child: const Column(
           children: [
-            const CardsHeaderInfo(),
-            const SizedBox(height: 8),
+            CardsHeaderInfo(),
+            SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -38,9 +36,7 @@ class CreatedCard extends StatelessWidget {
                   fit: FlexFit.tight,
                   child: CardsGridInfo(
                     title: "20",
-                    subtitle: status == AppStrings.hiring
-                        ? AppStrings.applicants
-                        : AppStrings.members,
+                    subtitle: AppStrings.applicants,
                     border: true,
                     padding: 4,
                   ),
@@ -49,9 +45,7 @@ class CreatedCard extends StatelessWidget {
                   fit: FlexFit.tight,
                   child: CardsGridInfo(
                     title: "20",
-                    subtitle: status == AppStrings.hiring
-                        ? AppStrings.likes
-                        : AppStrings.tasks,
+                    subtitle: AppStrings.tasks,
                     border: true,
                   ),
                 ),
@@ -59,9 +53,7 @@ class CreatedCard extends StatelessWidget {
                   fit: FlexFit.tight,
                   child: CardsGridInfo(
                     title: "20",
-                    subtitle: status == AppStrings.hiring
-                        ? AppStrings.rejected
-                        : AppStrings.completed,
+                    subtitle: AppStrings.completed,
                     border: true,
                   ),
                 ),
@@ -69,11 +61,7 @@ class CreatedCard extends StatelessWidget {
                   fit: FlexFit.tight,
                   child: CardsGridInfo(
                     title: "20",
-                    subtitle: status == AppStrings.hiring
-                        ? AppStrings.hired
-                        : status == AppStrings.active
-                            ? AppStrings.remaining
-                            : AppStrings.duration,
+                    subtitle: AppStrings.duration,
                     border: false,
                   ),
                 ),
