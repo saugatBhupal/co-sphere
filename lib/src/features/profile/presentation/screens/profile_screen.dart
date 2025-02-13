@@ -16,9 +16,9 @@ import 'package:cosphere/src/features/profile/presentation/widgets/profile_tabba
 class ProfileScreen extends StatelessWidget {
   final User user;
   const ProfileScreen({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(

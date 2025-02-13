@@ -12,6 +12,10 @@ import 'package:cosphere/src/features/profile/data/dto/experience/add_experience
     as _i18;
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart'
     as _i13;
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart'
+    as _i21;
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dto.dart'
+    as _i20;
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart'
     as _i7;
 import 'package:cosphere/src/features/profile/domain/entities/education.dart'
@@ -32,6 +36,8 @@ import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_u
     as _i10;
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart'
     as _i12;
+import 'package:cosphere/src/features/profile/domain/usecases/update_intro_usecase.dart'
+    as _i19;
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart'
     as _i4;
 import 'package:dartz/dartz.dart' as _i3;
@@ -346,4 +352,51 @@ class MockAddExperienceUsecase extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i17.Experience>>);
+}
+
+/// A class which mocks [UpdateIntroUsecase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUpdateIntroUsecase extends _i1.Mock
+    implements _i19.UpdateIntroUsecase {
+  @override
+  _i2.ProfileRepository get profileRepository => (super.noSuchMethod(
+        Invocation.getter(#profileRepository),
+        returnValue: _FakeProfileRepository_0(
+          this,
+          Invocation.getter(#profileRepository),
+        ),
+        returnValueForMissingStub: _FakeProfileRepository_0(
+          this,
+          Invocation.getter(#profileRepository),
+        ),
+      ) as _i2.ProfileRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i20.UpdateIntroResDto>> call(
+          _i21.UpdateIntroReqDto? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, _i20.UpdateIntroResDto>>.value(
+                _FakeEither_1<_i6.Failure, _i20.UpdateIntroResDto>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, _i20.UpdateIntroResDto>>.value(
+                _FakeEither_1<_i6.Failure, _i20.UpdateIntroResDto>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i20.UpdateIntroResDto>>);
 }

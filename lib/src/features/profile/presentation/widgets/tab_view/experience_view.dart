@@ -50,9 +50,6 @@ class ExperienceView extends StatelessWidget {
             const SizedBox(height: 4),
             BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, state) {
-                if (state is GetProfileInfoLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
                 if (state is GetProfileInfoFailed) {
                   return Center(
                     child: Text(

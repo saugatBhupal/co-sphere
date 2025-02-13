@@ -17,11 +17,11 @@ class ApiEndpoints {
 
   // ====================== User Routes ======================
   static const String fetchUserByID = "$baseUrl/user/";
-  static const String updateStatus = "$baseUrl/user/status/";
   static const String updateProfileImage = "$baseUrl/user/profile-image";
   static const String addSkill = "$baseUrl/user/skill/";
   static const String userEducation = "$baseUrl/user/education";
   static const String userExperience = "$baseUrl/user/experience";
+  static const String updateIntro = "$baseUrl/user/intro";
 
   // ====================== OTP Routes ======================
   static const String verifyAccount = "$baseUrl/verify/";

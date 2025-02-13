@@ -5,6 +5,8 @@ import 'package:cosphere/src/features/profile/data/datasources/remote/profile_da
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
@@ -141,6 +143,25 @@ class ProfileDatasourceImpl implements ProfileDatasource {
         ExperienceApiModel experience =
             ExperienceApiModel.fromJson(res.data['data']['experience']);
         return experience;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusCode.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<UpdateIntroResDto> updateIntro(UpdateIntroReqDto dto) async {
+    try {
+      var res = await dio.put(ApiEndpoints.updateIntro, data: dto.toJson());
+      if (res.statusCode == 200) {
+        UpdateIntroResDto updateIntroResDto =
+            UpdateIntroResDto.fromJson(res.data['data']['intro']);
+        return updateIntroResDto;
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

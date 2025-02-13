@@ -50,15 +50,6 @@ class EducationView extends StatelessWidget {
             ),
             BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, state) {
-                // List<Education> educationLst = [];
-                // if (context.read<ProfileBloc>().education.isNotEmpty) {
-                //   // educationLst = List.from(state.education);
-                // }
-                // if (state is AddEducationSuccess) {
-                //   context
-                //       .read<ProfileBloc>()
-                //       .add(GetEducationByUserID(uid: uid));
-                // }
                 if (context.read<ProfileBloc>().education.isNotEmpty) {
                   List<Education> educationLst =
                       context.read<ProfileBloc>().education;

@@ -74,3 +74,8 @@ class AddExperienceSuccess extends ProfileState {
   final Experience experience;
   const AddExperienceSuccess({required this.experience});
 }
+
+class UpdateIntroSuccess extends ProfileState {
+  final UpdateIntroResDto resDto;
+  const UpdateIntroSuccess({required this.resDto});
+}

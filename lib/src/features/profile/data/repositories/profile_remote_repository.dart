@@ -3,6 +3,8 @@ import 'package:cosphere/src/features/profile/data/datasources/remote/profile_da
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
@@ -88,6 +90,17 @@ class ProfileRemoteRepository implements ProfileRepository {
       final ExperienceApiModel experienceApiModel =
           await profileDatasource.addExperience(dto);
       return Right(experienceApiModel.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UpdateIntroResDto>> updateIntro(
+      UpdateIntroReqDto dto) async {
+    try {
+      final UpdateIntroResDto res = await profileDatasource.updateIntro(dto);
+      return Right(res);
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,6 @@ import 'package:cosphere/src/features/profile/presentation/widgets/edit_images.d
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_intro.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_links.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_personal_details.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/edit_skills.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final User user;
@@ -36,7 +34,7 @@ class EditProfileScreen extends StatelessWidget {
               _buildTitle(context, title: AppStrings.personal),
               const EditPersonalDetails(),
               _buildTitle(context, title: AppStrings.intro),
-              const EditIntro(),
+              EditIntro(about: user.about!, overview: user.overview!),
               _gap
             ],
           ),

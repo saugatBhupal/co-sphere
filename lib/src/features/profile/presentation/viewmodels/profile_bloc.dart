@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart';
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
@@ -11,6 +13,7 @@ import 'package:cosphere/src/features/profile/domain/usecases/add_experience_use
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/update_intro_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
 import 'package:equatable/equatable.dart';
 
@@ -24,6 +27,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetExperienceByUserIDUsecase getExperienceByUserIDUsecase;
   final AddEducationUsecase addEducationUsecase;
   final AddExperienceUsecase addExperienceUsecase;
+  final UpdateIntroUsecase updateIntroUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,
     required this.addSkillUsecase,
@@ -31,6 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required this.getExperienceByUserIDUsecase,
     required this.addEducationUsecase,
     required this.addExperienceUsecase,
+    required this.updateIntroUsecase,
   }) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
       if (event is ChangeProfileModule) {
@@ -53,6 +58,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       if (event is AddExperience) {
         await _addExperience(event, emit);
+      }
+      if (event is UpdateIntro) {
+        await _updateIntro(event, emit);
       }
     });
   }
@@ -158,6 +166,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         print(_experience);
         emit(AddExperienceSuccess(experience: data));
       });
+    } catch (e) {
+      emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _updateIntro(
+      UpdateIntro event, Emitter<ProfileState> emit) async {
+    emit(GetProfileInfoLoading());
+    try {
+      final result = await updateIntroUsecase(event.dto);
+      result.fold(
+        (failure) => emit(GetProfileInfoFailed(failure.message)),
+        (success) => emit(UpdateIntroSuccess(resDto: success)),
+      );
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
     }

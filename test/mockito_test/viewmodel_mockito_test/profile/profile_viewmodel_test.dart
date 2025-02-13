@@ -14,6 +14,7 @@ import 'package:cosphere/src/features/profile/domain/usecases/add_experience_use
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/update_intro_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -30,6 +31,7 @@ import 'profile_viewmodel_test.mocks.dart';
   MockSpec<GetExperienceByUserIDUsecase>(),
   MockSpec<AddEducationUsecase>(),
   MockSpec<AddExperienceUsecase>(),
+  MockSpec<UpdateIntroUsecase>(),
 ])
 void main() {
   group('ProfileViewModel', () {
@@ -39,7 +41,7 @@ void main() {
     late GetExperienceByUserIDUsecase mockGetExperienceByUserIDUsecase;
     late AddEducationUsecase mockAddEducationUsecase;
     late AddExperienceUsecase mockAddExperienceUsecase;
-
+    late UpdateIntroUsecase mockUpdateIntroUsecase;
     setUp(() {
       mockUpdateProfileImageUsecase = MockUpdateProfileImageUsecase();
       mockAddSkillUsecase = MockAddSkillUsecase();
@@ -47,6 +49,7 @@ void main() {
       mockGetEducationByUserIDUsecase = MockGetEducationByUserIDUsecase();
       mockAddEducationUsecase = MockAddEducationUsecase();
       mockAddExperienceUsecase = MockAddExperienceUsecase();
+      mockUpdateIntroUsecase = MockUpdateIntroUsecase();
     });
 
     blocTest<ProfileBloc, ProfileState>(
@@ -58,6 +61,7 @@ void main() {
         getExperienceByUserIDUsecase: mockGetExperienceByUserIDUsecase,
         addEducationUsecase: mockAddEducationUsecase,
         addExperienceUsecase: mockAddExperienceUsecase,
+        updateIntroUsecase: mockUpdateIntroUsecase,
       ),
       act: (bloc) async {
         final uid = "123";

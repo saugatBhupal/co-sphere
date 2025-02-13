@@ -12,6 +12,10 @@ import 'package:cosphere/src/features/profile/data/dto/experience/add_experience
     as _i13;
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart'
     as _i10;
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart'
+    as _i15;
+import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dto.dart'
+    as _i14;
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart'
     as _i6;
 import 'package:cosphere/src/features/profile/domain/entities/education.dart'
@@ -168,4 +172,23 @@ class MockProfileRepository extends _i1.Mock implements _i3.ProfileRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i12.Experience>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i14.UpdateIntroResDto>> updateIntro(
+          _i15.UpdateIntroReqDto? dto) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateIntro,
+          [dto],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i14.UpdateIntroResDto>>.value(
+                _FakeEither_0<_i5.Failure, _i14.UpdateIntroResDto>(
+          this,
+          Invocation.method(
+            #updateIntro,
+            [dto],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i14.UpdateIntroResDto>>);
 }
