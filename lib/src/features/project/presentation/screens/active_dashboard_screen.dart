@@ -18,9 +18,7 @@ class ActiveDashboardScreen extends StatelessWidget {
         children: [
           ActiveHeader(),
           ActiveDetailsBasics(),
-          Expanded(
-            child: ActiveTabbar(),
-          ),
+          Expanded(child: ActiveTabbar()),
         ],
       ),
     );

@@ -119,6 +119,7 @@ class AppStrings {
   static const String read = "Mark all as read";
   static const String clear = "Clear all";
   static const String duration = "Duration";
+  static const String due  = "Due Date";
   static const String days = "Days";
   static const String hiring = "Hiring";
   static const String active = "Active";

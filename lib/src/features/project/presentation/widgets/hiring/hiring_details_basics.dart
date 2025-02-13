@@ -7,6 +7,7 @@ import 'package:cosphere/src/features/jobs/presentation/widgets/components/budge
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_skills_list.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:flutter/material.dart';
 
 class HiringDetailsBasics extends StatelessWidget {
@@ -48,11 +49,7 @@ class HiringDetailsBasics extends StatelessWidget {
                 Spacer(),
                 FunctionButton(icon: AppIcons.share),
                 SizedBox(width: 12),
-                FunctionButton(
-                  icon: AppIcons.trash,
-                  background: AppColors.casa,
-                  borderColor: AppColors.red,
-                ),
+                const TrashButton(),
               ],
             ),
           )

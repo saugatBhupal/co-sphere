@@ -7,15 +7,11 @@ class FunctionButton extends StatelessWidget {
   final String icon;
   final String? title;
   final EdgeInsets? padding;
-  final Color? background;
-  final Color? borderColor;
   const FunctionButton({
     super.key,
     required this.icon,
     this.title,
     this.padding,
-    this.background,
-    this.borderColor,
   });
 
   @override
@@ -25,8 +21,8 @@ class FunctionButton extends StatelessWidget {
       padding:
           padding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
-        color: background ?? AppColors.beluga,
-        border: Border.all(width: 1, color: borderColor ?? AppColors.plaster),
+        color: AppColors.beluga,
+        border: Border.all(width: 1, color: AppColors.plaster),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
