@@ -1,7 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/tab_view/completed_view.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/tab_view/completed_task_view.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/tab_view/members_view.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/tab_view/tasks_view.dart';
 import 'package:flutter/material.dart';

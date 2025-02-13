@@ -1,3 +1,4 @@
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
@@ -15,45 +16,48 @@ class HiringDetailsBasics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      height: context.height / 5,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(width: 0.5, color: AppColors.plaster),
-      ),
-      child: const Column(
-        children: [
-          Row(
-            children: [
-              ProjectOwnerDetails(),
-              SizedBox(width: 6),
-              BudgetContainer(),
-              Spacer(),
-              DurationSpan(),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: ProjectSkillsList(),
-          ),
-          Expanded(
-            child: Row(
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        height: context.height / 5,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          border: Border.all(width: 0.5, color: AppColors.plaster),
+        ),
+        child: const Column(
+          children: [
+            Row(
               children: [
-                FunctionButton(
-                  icon: AppIcons.edit,
-                  title: "${AppStrings.edit} ${AppStrings.details}",
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                ),
+                ProjectOwnerDetails(),
+                SizedBox(width: 6),
+                BudgetContainer(),
                 Spacer(),
-                FunctionButton(icon: AppIcons.share),
-                SizedBox(width: 12),
-                const TrashButton(),
+                DurationSpan(),
               ],
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: ProjectSkillsList(),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  FunctionButton(
+                    icon: AppIcons.edit,
+                    title: "${AppStrings.edit} ${AppStrings.details}",
+                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  ),
+                  Spacer(),
+                  FunctionButton(icon: AppIcons.share),
+                  SizedBox(width: 12),
+                  const TrashButton(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

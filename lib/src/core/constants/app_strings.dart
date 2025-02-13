@@ -80,6 +80,7 @@ class AppStrings {
   static const String skill = "Skills";
   static const String more = "More";
   static const String about = "About";
+  static const String date = "Date";
   static const String experience = "Experience";
   static const String education = "Education";
   static const String history = "History";
@@ -119,7 +120,7 @@ class AppStrings {
   static const String read = "Mark all as read";
   static const String clear = "Clear all";
   static const String duration = "Duration";
-  static const String due  = "Due Date";
+  static const String due = "Due Date";
   static const String days = "Days";
   static const String hiring = "Hiring";
   static const String active = "Active";

@@ -1,16 +1,15 @@
-import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
+import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/accept_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
 import 'package:flutter/material.dart';
 
-class TaskCard extends StatelessWidget {
-  const TaskCard({super.key});
+class CompletedTaskCard extends StatelessWidget {
+  const CompletedTaskCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,8 @@ class TaskCard extends StatelessWidget {
                           .copyWith(letterSpacing: 0.2, height: 1),
                     ),
                   ),
-                  const DueDateSpan(subtitle: AppStrings.due)
+                  const DueDateSpan(
+                      subtitle: "${AppStrings.completed} ${AppStrings.date}")
                 ],
               ),
               Padding(
@@ -71,8 +71,7 @@ class TaskCard extends StatelessWidget {
                         .copyWith(color: AppColors.grey, height: 1),
                   ),
                   const Spacer(),
-                  const AcceptButton(),
-                  const TrashButton(),
+                  const StatusButton(label: 'OnTime'),
                 ],
               ),
             ],

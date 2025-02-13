@@ -32,7 +32,7 @@ class StatusButton extends StatelessWidget {
         background = AppColors.casa;
         foreground = AppColors.red;
         break;
-      case "Active":
+      case "Completed":
       case "Junior":
       case "OnTime":
         background = AppColors.green;
@@ -44,6 +44,7 @@ class StatusButton extends StatelessWidget {
         break;
       case "Senior":
       case "Early":
+      case "Active":
         background = AppColors.genie;
         foreground = AppColors.winter;
         break;

@@ -1,3 +1,4 @@
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/completed_card.dart';
 import 'package:flutter/material.dart';
 
 class CompletedView extends StatelessWidget {
@@ -10,7 +11,7 @@ class CompletedView extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 3,
-        itemBuilder: (context, index) => const CompletedView(),
+        itemBuilder: (context, index) => const CompletedCard(),
         separatorBuilder: (context, index) {
           return const SizedBox(height: 4);
         },

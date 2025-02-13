@@ -6,7 +6,8 @@ import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
 import 'package:flutter/material.dart';
 
 class DueDateSpan extends StatelessWidget {
-  const DueDateSpan({super.key});
+  final String subtitle;
+  const DueDateSpan({super.key, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class DueDateSpan extends StatelessWidget {
                   fontWeight: FontThickness.regular),
             ),
             Text(
-              AppStrings.due,
+              subtitle,
               style: _textTheme.labelLarge!.copyWith(height: 1),
             ),
           ],

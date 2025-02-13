@@ -6,18 +6,10 @@ class MembersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        child: ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 13,
-          itemBuilder: (context, index) => const MembersCard(),
-          separatorBuilder: (context, index) {
-            return const SizedBox();
-          },
-        ),
-      ),
+    return ListView.separated(
+      itemCount: 8,
+      itemBuilder: (context, index) => const MembersCard(),
+      separatorBuilder: (context, index) => const SizedBox(),
     );
   }
 }

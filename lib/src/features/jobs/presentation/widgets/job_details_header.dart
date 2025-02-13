@@ -1,11 +1,8 @@
 import 'package:cosphere/src/core/constants/app_assets.dart';
-import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/posted_span.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class JobDetailsHeader extends StatelessWidget {
   const JobDetailsHeader({super.key});
