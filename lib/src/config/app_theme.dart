@@ -23,7 +23,7 @@ class AppTheme {
       useMaterial3: true,
       scaffoldBackgroundColor: AppColors.satin,
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.satin,
+        backgroundColor: AppColors.white,
         elevation: 0.0,
         iconTheme: IconThemeData(color: AppColors.black),
       ),

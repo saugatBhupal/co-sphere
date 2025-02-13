@@ -22,6 +22,7 @@ class AppColors {
   static const Color silver = Color(0xFF868383);
   static const Color orange = Color(0xFFF8E3D1);
   static const Color winter = Color(0xFF001B6C);
+  static const Color beluga = Color(0xFFF9FBFC);
   static const Color plaster = Color(0xFFE9E9E9);
   static const Color pumpkin = Color(0xFFE3984E);
   static const Color garden = Color(0xFFF1E9DF);

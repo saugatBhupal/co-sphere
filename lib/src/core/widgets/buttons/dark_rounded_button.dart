@@ -47,7 +47,7 @@ class DarkRoundedButton extends StatelessWidget {
                   ),
                 Container(
                   padding: padding ??
-                      const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),

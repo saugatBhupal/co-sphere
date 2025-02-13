@@ -125,4 +125,5 @@ class AppStrings {
   static const String members = "Members";
   static const String remaining = "Remaining";
   static const String jobDetails = "Job Details";
+  static const String apply = "Apply Now";
 }

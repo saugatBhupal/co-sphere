@@ -33,4 +33,7 @@ class AppIcons {
   static const String trash = "$_iconsPath/trash.svg";
   static const String editUser = "$_iconsPath/edit-user.svg";
   static const String clock = "$_iconsPath/clock.svg";
+  static const String calender = "$_iconsPath/calender.svg";
+  static const String share = "$_iconsPath/share.svg";
+  static const String heart = "$_iconsPath/heart.svg";
 }

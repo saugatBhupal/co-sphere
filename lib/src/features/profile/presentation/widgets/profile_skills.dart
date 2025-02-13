@@ -1,5 +1,6 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
@@ -76,22 +77,7 @@ class ProfileSkills extends StatelessWidget {
                       ...List.generate(
                         skillsLst.length,
                         (index) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: const BoxDecoration(
-                              color: AppColors.genie,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
-                            ),
-                            child: Text(
-                              skillsLst[index].name,
-                              style: _textTheme.bodySmall!.copyWith(
-                                color: AppColors.midnight,
-                                fontWeight: FontThickness.medium,
-                              ),
-                            ),
-                          );
+                          return SkillsButton(name: skillsLst[index].name);
                         },
                       ),
                       MoreButton(
