@@ -18,7 +18,7 @@ class CardsHeaderInfo extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CircleImageAvatar(),
+          const CircleImageAvatar(color: AppColors.lemon),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

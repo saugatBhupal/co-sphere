@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class CardsGridInfo extends StatelessWidget {
@@ -36,10 +37,13 @@ class CardsGridInfo extends StatelessWidget {
         children: [
           Text(
             title,
-            style: _textTheme.titleMedium!
-                .copyWith(color: color ?? AppColors.black, height: 1.2),
+            style: _textTheme.bodyLarge!.copyWith(
+              color: color ?? AppColors.black,
+              height: 1.2,
+              fontWeight: FontThickness.semiBold,
+            ),
           ),
-          Text(subtitle, style: _textTheme.bodySmall),
+          Text(subtitle, style: _textTheme.bodySmall!.copyWith(fontSize: 11)),
         ],
       ),
     );

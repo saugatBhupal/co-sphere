@@ -1,7 +1,7 @@
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/appbar/search_field_appbar.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/job_application_card.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/project_application_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/job_application_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/project_application_card.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationsScreen extends StatelessWidget {

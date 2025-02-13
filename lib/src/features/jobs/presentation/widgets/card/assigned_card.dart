@@ -1,8 +1,8 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/features/dashboard/presentation/widgets/components/cards_grid_info.dart';
-import 'package:cosphere/src/features/dashboard/presentation/widgets/components/cards_header_info.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/cards_grid_info.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/cards_header_info.dart';
 import 'package:flutter/material.dart';
 
 class AssignedCard extends StatelessWidget {

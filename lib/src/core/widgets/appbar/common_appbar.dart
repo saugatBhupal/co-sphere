@@ -10,11 +10,12 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return AppBar(
+      centerTitle: true,
       shape:
           const Border(bottom: BorderSide(color: AppColors.plaster, width: 1)),
       title: Text(
         title,
-        style: _textTheme.titleLarge!
+        style: _textTheme.titleSmall!
             .copyWith(fontWeight: FontThickness.medium, color: AppColors.black),
       ),
     );

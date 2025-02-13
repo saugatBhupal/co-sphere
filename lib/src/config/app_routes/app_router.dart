@@ -15,6 +15,9 @@ import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
+import 'package:cosphere/src/features/jobs/presentation/screens/created_projects_screen.dart';
+import 'package:cosphere/src/features/jobs/presentation/screens/job_details_screem.dart';
+import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
 import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
@@ -31,6 +34,7 @@ class AppRouter {
   static final _signInBloc = sl<SignInBloc>();
   static final _profileBloc = sl<ProfileBloc>();
   static final _dashBloc = sl<DashboardBloc>();
+  static final _jobBloc = sl<JobBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splash:
@@ -124,6 +128,13 @@ class AppRouter {
       case AppRoutes.applications:
         return MaterialPageRoute(
             builder: (context) => const ApplicationsScreen());
+      case AppRoutes.createdProjects:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                value: _jobBloc, child: const CreatedProjectsScreen()));
+      case AppRoutes.jobDetails:
+        return MaterialPageRoute(
+            builder: (context) => const JobDetailsScreem());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

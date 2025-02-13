@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/job_application_card.dart';
-import 'package:cosphere/src/features/dashboard/presentation/widgets/components/assigned_card.dart';
-import 'package:cosphere/src/features/dashboard/presentation/widgets/components/created_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/job_application_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/assigned_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/created_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_functions.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_metrics.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_title.dart';
@@ -32,8 +32,12 @@ class DashboardBody extends StatelessWidget {
               const SizedBox(height: 16),
               DashboardFunctions(user: user),
               const DashboardMetrics(),
-              const DashboardTitle(
-                  title: AppStrings.created, option: AppStrings.view),
+              DashboardTitle(
+                title: AppStrings.created,
+                option: AppStrings.view,
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(AppRoutes.createdProjects),
+              ),
               SizedBox(
                 height: context.height * 0.17,
                 child: GridView.builder(
@@ -46,7 +50,7 @@ class DashboardBody extends StatelessWidget {
                   ),
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {
-                    return const CreatedCard();
+                    return const CreatedCard(status: AppStrings.hiring);
                   },
                 ),
               ),
