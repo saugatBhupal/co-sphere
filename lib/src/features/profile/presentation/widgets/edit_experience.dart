@@ -6,7 +6,7 @@ import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
-import 'package:cosphere/src/core/widgets/input_fields/location_dropdown.dart';
+import 'package:cosphere/src/core/widgets/input_fields/custom_dropdown.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:flutter/material.dart';

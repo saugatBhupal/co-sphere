@@ -22,6 +22,7 @@ class AppTheme {
       brightness: Brightness.light,
       useMaterial3: true,
       scaffoldBackgroundColor: AppColors.satin,
+      dialogBackgroundColor: AppColors.satin,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.white,
         elevation: 0.0,
@@ -29,6 +30,37 @@ class AppTheme {
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.midnight,
+      ),
+      buttonTheme: const ButtonThemeData(
+        textTheme: ButtonTextTheme.primary,
+        colorScheme: ColorScheme.light(
+          primary: AppColors.midnight,
+          onPrimary: Colors.white,
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.midnight,
+        ),
+      ),
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: AppColors.white,
+        headerBackgroundColor: AppColors.satin,
+        todayBackgroundColor: const WidgetStatePropertyAll(
+          AppColors.midnight,
+        ),
+        todayForegroundColor: const WidgetStatePropertyAll(AppColors.white),
+        headerHeadlineStyle: AppTextStyles.titleLarge(color: AppColors.white),
+        headerHelpStyle: AppTextStyles.titleSmall(color: AppColors.white),
+        dayStyle: AppTextStyles.bodyLarge(color: AppColors.black),
+        weekdayStyle: AppTextStyles.bodyLarge(color: AppColors.black),
+        confirmButtonStyle: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(AppColors.white),
+          backgroundColor: WidgetStateProperty.all(AppColors.midnight),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          )),
+        ),
       ),
       textTheme: TextTheme(
         labelSmall: AppTextStyles.labelSmall(color: AppColors.silver),

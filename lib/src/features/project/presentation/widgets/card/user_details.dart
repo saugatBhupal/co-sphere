@@ -30,6 +30,5 @@ class UserDetails extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

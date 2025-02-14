@@ -1,6 +1,7 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/form/add_task_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
@@ -8,7 +9,7 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/more_button.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/cards/edit_pop_up.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_pop_up.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_skills.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -84,13 +85,13 @@ class ProfileSkills extends StatelessWidget {
                         title: "+ ${AppStrings.more}",
                         onPressed: () {
                           showEditDialog(
-                            profileBloc: _profileBloc,
-                            context: context,
-                            child: EditSkills(
-                              uid: uid,
-                              skills: skillsLst,
-                            ),
-                          );
+                              profileBloc: _profileBloc,
+                              context: context,
+                              // child: EditSkills(
+                              //   uid: uid,
+                              //   skills: skillsLst,
+                              // ),
+                              child: AddTaskForm());
                         },
                       ),
                     ],

@@ -1,7 +1,7 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
-import 'package:cosphere/src/features/profile/presentation/widgets/cards/edit_pop_up.dart';
+import 'package:cosphere/src/features/profile/presentation/widgets/edit_pop_up.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_experience.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

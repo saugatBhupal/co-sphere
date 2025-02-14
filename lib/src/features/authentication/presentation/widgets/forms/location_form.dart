@@ -10,7 +10,7 @@ import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
-import 'package:cosphere/src/core/widgets/input_fields/location_dropdown.dart';
+import 'package:cosphere/src/core/widgets/input_fields/custom_dropdown.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 
 class LocationForm extends StatefulWidget {

@@ -10,7 +10,8 @@ class TextspanField extends StatefulWidget {
   final String label;
   final String? icon;
   final String? hintText;
-
+  final int minLines;
+  final int charCount;
   TextspanField({
     super.key,
     required this.textController,
@@ -18,6 +19,8 @@ class TextspanField extends StatefulWidget {
     this.icon,
     this.hintText,
     this.validator,
+    this.minLines = 5,
+    this.charCount = 200,
   });
 
   @override
@@ -60,13 +63,13 @@ class _TextspanFieldState extends State<TextspanField> {
           style: _textTheme.bodyLarge!
               .copyWith(color: AppColors.grey, letterSpacing: 0),
           maxLines: null,
-          minLines: 5,
+          minLines: widget.minLines,
           inputFormatters: [
-            LengthLimitingTextInputFormatter(200),
+            LengthLimitingTextInputFormatter(widget.charCount),
           ],
           decoration: InputDecoration(
             contentPadding:
-                const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
             hintText: widget.hintText ??
                 "${AppStrings.enter} ${widget.label.toLowerCase()}",
             prefixIcon: widget.icon != null
@@ -111,10 +114,10 @@ class _TextspanFieldState extends State<TextspanField> {
         ),
         Positioned(
           right: 10,
-          bottom: 10,
+          bottom: 5,
           child: Text(
-            '$charCount/200',
-            style: _textTheme.bodyLarge!.copyWith(
+            '$charCount/${widget.charCount}',
+            style: _textTheme.bodySmall!.copyWith(
                 color: AppColors.grey, fontWeight: FontThickness.medium),
           ),
         ),

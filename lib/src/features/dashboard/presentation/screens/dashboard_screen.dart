@@ -5,6 +5,7 @@ import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc
 import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/form/add_task_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_body.dart';
@@ -48,7 +49,7 @@ class DashboardScreen extends StatelessWidget {
       case 2:
         return const ChatLogsScreen();
       case 3:
-        return const NotificationsScreen();
+        return const AddTaskForm();
       case 4:
         return ProfileScreen(user: user);
       default:

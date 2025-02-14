@@ -131,10 +131,16 @@ class AppStrings {
   static const String apply = "Apply Now";
   static const String project = "Project";
   static const String finish = "Finish";
+  static const String title = "Title";
   static const String accepted = "Accepted";
+  static const String select = "Select";
   static const String all = "All";
+  static const String description = "Description";
+  static const String assign = "Assign To";
   static const String newTask = "New Task";
   static const String tap = "Tap to view profile";
+  static const String createNewTask = "Create a $newTask";
+  static const String createTask = "+ Create Task";
   static const String visible =
       "*This project is only visible to project members";
 }
