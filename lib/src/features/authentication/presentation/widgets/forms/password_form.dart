@@ -48,11 +48,15 @@ class _PasswordFormState extends State<PasswordForm> {
         }
         if (state is CreatePasswordSuccess) {
           buildToast(toastType: ToastType.success, msg: state.message);
-          Navigator.of(context).pushNamedAndRemoveUntil(
-            AppRoutes.signin,
-            (route) => false,
+          Navigator.of(context).pushNamed(
+            AppRoutes.interest,
             // arguments: state.user.userInfo.email,
           );
+          // Navigator.of(context).pushNamedAndRemoveUntil(
+          //   AppRoutes.signin,
+          //   (route) => false,
+          //   // arguments: state.user.userInfo.email,
+          // );
         }
       },
       builder: (context, state) {

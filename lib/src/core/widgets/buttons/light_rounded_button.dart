@@ -31,7 +31,7 @@ class LightRoundedButton extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(32)),
           child: Container(
             padding: padding ??
-                const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),

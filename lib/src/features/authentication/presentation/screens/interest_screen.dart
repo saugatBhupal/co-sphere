@@ -1,19 +1,14 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/authentication/data/dto/sign_up/sign_up_request_dto.dart';
-
-import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/appbar/authentication_appbar.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/auth_message.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/buttons/multi_select_chip_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InterestScreen extends StatelessWidget {
-  final SignUpRequestDto params;
-  const InterestScreen({super.key, required this.params});
+  const InterestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +58,15 @@ class InterestScreen extends StatelessWidget {
                     children: [
                       DarkRoundedButton(
                         title: AppStrings.continueBtn,
-                        onPressed: () => Navigator.of(context)
-                            .pushNamed(AppRoutes.dashboard),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(AppRoutes.signin),
                       ),
                       const SizedBox(height: 10),
                       AccountTextspan(
                         infoText: AppStrings.haveAccount,
                         functionText: AppStrings.signin,
                         onPressed: () =>
-                            context
-                                .read<SignUpBloc>()
-                                .add(AuthSignUp(params: params)),
+                            Navigator.of(context).pushNamed(AppRoutes.signin),
                       ),
                       const SizedBox(height: 20),
                     ],

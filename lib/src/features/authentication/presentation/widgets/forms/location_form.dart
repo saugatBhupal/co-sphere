@@ -52,6 +52,7 @@ class _LocationFormState extends State<LocationForm> {
       listener: (context, state) {
         if (state is AuthSignupError) {
           buildToast(toastType: ToastType.error, msg: state.message);
+          Navigator.of(context).pop();
         }
         if (state is AuthSignUpSuccess) {
           buildToast(
@@ -108,7 +109,7 @@ class _LocationFormState extends State<LocationForm> {
                   title: AppStrings.continueBtn,
                   onPressed: null,
                 ),
-              if (!(state is AuthSignUpLoading))
+              if (state is! AuthSignUpLoading)
                 DarkRoundedButton(
                   isLoading: false,
                   title: AppStrings.continueBtn,
@@ -121,7 +122,13 @@ class _LocationFormState extends State<LocationForm> {
                                 params: currentState.params.copyWith(
                                   country: selectedCountry ?? "",
                                   province: selectedProvince ?? "",
-                                  city: _cityController.text,
+                                  city: _cityController.text
+                                      .split(' ')
+                                      .map((word) => word.isNotEmpty
+                                          ? word[0].toUpperCase() +
+                                              word.substring(1).toLowerCase()
+                                          : '')
+                                      .join(' '),
                                 ),
                               ),
                             );

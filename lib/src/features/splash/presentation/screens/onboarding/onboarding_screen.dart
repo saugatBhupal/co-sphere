@@ -66,13 +66,17 @@ class OnboardingScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 const IntroSlider(),
                 const SizedBox(height: 20),
-                const DarkRoundedButton(
+                DarkRoundedButton(
                   title: AppStrings.findService,
                   icon: AppIcons.briefcase,
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.signup),
                 ),
                 const SizedBox(height: 10),
-                const LightRoundedButton(
+                LightRoundedButton(
                   title: AppStrings.becomeFreelancer,
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.signup),
                 ),
                 const SizedBox(height: 30),
                 AccountTextspan(

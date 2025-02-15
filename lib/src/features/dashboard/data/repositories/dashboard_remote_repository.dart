@@ -29,13 +29,11 @@ class DashboardRemoteRepository implements DashboardRepository {
         if (userPref != null) {
           UserApiModel? userApiModel =
               await dashboardRemoteDatasource.getCurrentUser(userPref.uid);
-
-          if (userApiModel != null) {
-            User user = userApiModel.toDomain();
-            return Right(user);
-          }
+          User? user = userApiModel!.toDomain();
+          return (Right(user));
+        } else {
+          return const Right(null);
         }
-        return const Left(Failure(message: "User not found"));
       } catch (e) {
         return Left(Failure(message: e.toString()));
       }
@@ -43,10 +41,7 @@ class DashboardRemoteRepository implements DashboardRepository {
       if (userPref != null) {
         UserHiveModel? userHiveModel = await dashboardLocalDatasource
             .getCurrentUser(userPref.uid, userPref.email);
-
-        if (userHiveModel != null) {
-          return Right(userHiveModel.toDomain());
-        }
+        return Right(userHiveModel!.toDomain());
       }
       return const Left(Failure(message: "User not found"));
     }

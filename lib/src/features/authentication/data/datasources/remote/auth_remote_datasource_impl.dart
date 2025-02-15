@@ -63,7 +63,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
         );
       }
     } on DioException catch (e) {
-      return await handleErrorResponse(e); 
+      return await handleErrorResponse(e);
     }
   }
 

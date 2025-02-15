@@ -1,5 +1,6 @@
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_api_model.g.dart';
@@ -77,13 +78,14 @@ class UserApiModel extends Equatable {
       'phone': phone,
       'password': password,
       'verified': verified,
-      'dob': dob.toIso8601String(),
+      // 'dob': dob.toIso8601String(),
+      'dob': DateFormat('dd-MM-yyyy').format(dob),
       'country': country,
       'province': province,
       'city': city,
       'about': about,
       'overview': overview,
-      'createdAt': createdAt!.toIso8601String(),
+      'createdAt': createdAt?.toIso8601String(),
     };
   }
 

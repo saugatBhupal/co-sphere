@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/constants/app_boxes.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/domain/mappers/local/user_mappers.dart';
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
@@ -56,7 +57,8 @@ class AuthRemoteRepository implements AuthRepository {
     try {
       final UserApiModel userApiModel =
           await authRemoteDatasource.signIn(signInParams);
-      await hive.addUserToBox(userApiModel.fromApi());
+      AppBoxes.userBox.put(AppBoxesKeys.user, userApiModel.fromApi());
+      print("${AppBoxes.userBox.get(AppBoxesKeys.user)} User Box");
       UserSharedPref.setUser(userApiModel);
       return Right(userApiModel.toDomain());
     } catch (e) {
