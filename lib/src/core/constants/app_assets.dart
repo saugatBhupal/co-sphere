@@ -40,4 +40,5 @@ class AppIcons {
   static const String check = "$_iconsPath/check.svg";
   static const String dropdown = "$_iconsPath/dropdown.svg";
   static const String upward = "$_iconsPath/upward.svg";
+  static const String add = "$_iconsPath/add.svg";
 }

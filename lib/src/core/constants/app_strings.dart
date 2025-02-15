@@ -139,8 +139,13 @@ class AppStrings {
   static const String assign = "Assign To";
   static const String newTask = "New Task";
   static const String tap = "Tap to view profile";
-  static const String createNewTask = "Create a $newTask";
-  static const String createTask = "+ Create Task";
+  static const String create = "Create";
+  static const String createNewTask = "$create a $newTask";
+  static const String createTask = "+ $create Task";
+  static const String createProject = "$create $project";
+  static const String budget = "Budget";
+  static const String newSec = "New Section";
+  static const String addSec = "Add Section";
   static const String visible =
       "*This project is only visible to project members";
 }

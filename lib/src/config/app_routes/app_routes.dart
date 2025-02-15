@@ -24,4 +24,5 @@ class AppRoutes {
   static const String completed = "/completed";
   static const String applicants = "/applicants";
   static const String members = "/members";
+  static const String createProject = "/createProject";
 }

@@ -1,13 +1,10 @@
 import 'package:cosphere/src/core/utils/from_to_date.dart';
-import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:flutter/material.dart';
-
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AboutView extends StatelessWidget {
   final User user;

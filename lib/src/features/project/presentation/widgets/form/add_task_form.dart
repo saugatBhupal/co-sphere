@@ -4,7 +4,6 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/textspan_field.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/card/members_card.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/form/assign_dropdown.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/form/date_field.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/form/selected_members_card.dart';

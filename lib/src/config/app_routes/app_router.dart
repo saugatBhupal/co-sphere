@@ -15,6 +15,7 @@ import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
+import 'package:cosphere/src/features/jobs/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/created_projects_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/job_details_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
@@ -154,6 +155,9 @@ class AppRouter {
             builder: (context) => const ApplicantsScreen());
       case AppRoutes.members:
         return MaterialPageRoute(builder: (context) => const MembersScreen());
+      case AppRoutes.createProject:
+        return MaterialPageRoute(
+            builder: (context) => const CreateProjectScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

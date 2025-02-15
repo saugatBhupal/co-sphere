@@ -2,6 +2,7 @@ import 'package:cosphere/src/config/dependency_injection/dependency_injector.dar
 import 'package:cosphere/src/features/chat/presentation/screens/chat_logs_screen.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:cosphere/src/features/jobs/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
@@ -47,7 +48,7 @@ class DashboardScreen extends StatelessWidget {
       case 1:
         return const ChatRoomScreen();
       case 2:
-        return const ChatLogsScreen();
+        return const CreateProjectScreen();
       case 3:
         return const AddTaskForm();
       case 4:
