@@ -2,6 +2,7 @@ import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/app_routes/no_route_found.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signin/signin_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signup/location_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signup/otp_screen.dart';

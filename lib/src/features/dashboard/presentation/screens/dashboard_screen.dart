@@ -1,11 +1,7 @@
-import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
-import 'package:cosphere/src/features/chat/presentation/screens/chat_logs_screen.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/create_project_screen.dart';
-import 'package:cosphere/src/features/notification/presentation/screens/notifications_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
-import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/form/add_task_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
@@ -23,15 +19,17 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<DashboardBloc>().add(LoadUserEvent());
     return BlocBuilder<DashboardBloc, DashboardState>(
       buildWhen: (previous, current) {
-        return current is ScreenModuleChanged;
+        return current is DashboardGetCacheUserSuccess ||
+            current is ScreenModuleChanged;
       },
       builder: (context, state) {
         return Scaffold(
           appBar: state is ScreenModuleChanged && state.index != 0
               ? null
-              : DashboardAppbar(user: user),
+              : DashboardAppbar(),
           body: state is! ScreenModuleChanged
               ? DashboardBody(user: user)
               : _getHomeBodyModule(state.index),

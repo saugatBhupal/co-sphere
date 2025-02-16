@@ -27,4 +27,14 @@ class DashboardGetUserSuccess extends DashboardState {
   });
 }
 
-class DashboardGetUserFailed extends DashboardState {}
+class DashboardGetUserFailed extends DashboardState {
+  final String message;
+
+  const DashboardGetUserFailed({required this.message});
+}
+
+class DashboardGetCacheUserSuccess extends DashboardState {
+  final User user;
+
+  const DashboardGetCacheUserSuccess({required this.user});
+}

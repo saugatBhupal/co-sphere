@@ -58,8 +58,7 @@ class AuthRemoteRepository implements AuthRepository {
       final UserApiModel userApiModel =
           await authRemoteDatasource.signIn(signInParams);
       AppBoxes.userBox.put(AppBoxesKeys.user, userApiModel.fromApi());
-      print("${AppBoxes.userBox.get(AppBoxesKeys.user)} User Box");
-      UserSharedPref.setUser(userApiModel);
+      UserSharedPref.setUser(userApiModel.toDomain());
       return Right(userApiModel.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));

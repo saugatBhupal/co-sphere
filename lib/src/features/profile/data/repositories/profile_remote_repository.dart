@@ -1,4 +1,6 @@
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/error/failure.dart';
+import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
@@ -29,6 +31,8 @@ class ProfileRemoteRepository implements ProfileRepository {
     try {
       final String profileImage =
           await profileDatasource.updateProfileImage(dto);
+      await UserSharedPref.updateUserField(
+          key: 'profileImage', value: profileImage);
       return Right(profileImage);
     } catch (e) {
       return Left(Failure(message: e.toString()));
@@ -100,6 +104,7 @@ class ProfileRemoteRepository implements ProfileRepository {
       UpdateIntroReqDto dto) async {
     try {
       final UpdateIntroResDto res = await profileDatasource.updateIntro(dto);
+      await UserSharedPref.updateUserField(key: 'about', value: res.about);
       return Right(res);
     } catch (e) {
       return Left(Failure(message: e.toString()));

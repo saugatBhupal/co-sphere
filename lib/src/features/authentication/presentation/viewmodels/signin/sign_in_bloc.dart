@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/authentication/data/dto/sign_in/sign_in_request_dto.dart';
 import 'package:cosphere/src/features/authentication/domain/usecases/signin_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -20,9 +21,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Future<void> _signin(AuthSignIn event, Emitter<SignInState> emit) async {
     emit(const AuthSignInLoading());
     final result = await signinUsecase(event.params);
+    final user = await UserSharedPref.getUser();
     result.fold(
       (failure) => emit(AuthSignInError(failure.message)),
-      (success) => emit(AuthSignInSuccess(user: success)),
+      (success) => emit(AuthSignInSuccess(user: user!)),
     );
   }
 }

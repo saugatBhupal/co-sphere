@@ -17,8 +17,8 @@ void main() {
         (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            appBar: DashboardAppbar(user: user),
+          home: const Scaffold(
+            appBar: DashboardAppbar(),
           ),
         ),
       );

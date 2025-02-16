@@ -14,3 +14,5 @@ class ChangeScreenModule extends DashboardEvent {
 }
 
 class StartUpAppEvent extends DashboardEvent {}
+
+class LoadUserEvent extends DashboardEvent {}

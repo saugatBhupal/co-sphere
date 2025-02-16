@@ -1,5 +1,6 @@
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 
 class User extends Equatable {
   final String uid;
@@ -89,6 +90,50 @@ class User extends Equatable {
       overview: overview ?? this.about,
       createdAt: createdAt ?? this.createdAt,
     );
+  }
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      uid: json['_id'] as String? ?? '',
+      fullname: json['fullname'] as String? ?? 'Unknown',
+      profileImage: json['profileImage'] as String?,
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      password: json['password'] as String?,
+      verified: json['verified'] as bool? ?? false,
+      dob: json['dob'] != null
+          ? DateFormat('dd-MM-yyyy').parse(json['dob'])
+          : DateTime(01 - 01 - 1970),
+      country: json['country'] as String? ?? 'Unknown',
+      province: json['province'] as String? ?? 'Unknown',
+      city: json['city'] as String? ?? 'Unknown',
+      skills: (json['skills'] as List<dynamic>?)
+          ?.map((skill) => Skill.fromJson(skill as Map<String, dynamic>))
+          .toList(),
+      about: json['about'] as String? ?? 'Unknown',
+      overview: json['overview'] as String? ?? 'Unknown',
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'])
+          : DateTime(1970, 1, 1),
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': uid,
+      'fullname': fullname,
+      'profileImage': profileImage,
+      'email': email,
+      'phone': phone,
+      'password': password,
+      'verified': verified,
+      'dob': DateFormat('dd-MM-yyyy').format(dob),
+      'country': country,
+      'province': province,
+      'city': city,
+      'about': about,
+      'overview': overview,
+      'createdAt': createdAt?.toIso8601String(),
+    };
   }
 
   @override

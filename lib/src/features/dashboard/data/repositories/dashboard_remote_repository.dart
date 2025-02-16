@@ -30,7 +30,7 @@ class DashboardRemoteRepository implements DashboardRepository {
           UserApiModel? userApiModel =
               await dashboardRemoteDatasource.getCurrentUser(userPref.uid);
           User? user = userApiModel!.toDomain();
-          return (Right(user));
+          return (Right(userPref));
         } else {
           return const Right(null);
         }
