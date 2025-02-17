@@ -11,4 +11,5 @@ abstract interface class ChatRepository {
       String conversationID);
   Future<Either<Failure, List<Message>>> getMessagesFromConversation(
       String conversationID);
+  Future<Either<Failure, Message>> sendMessage(Message message);
 }
