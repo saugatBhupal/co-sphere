@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:equatable/equatable.dart';
 
 class Message extends Equatable {
   final String id;
@@ -26,13 +26,13 @@ class Message extends Equatable {
   Message copyWith({
     String? id,
     String? content,
-    User? user,
+    User? sender,
     DateTime? sent,
   }) {
     return Message(
       id: id ?? this.id,
       content: content ?? this.content,
-      sender: sender,
+      sender: sender ?? this.sender,
       sent: sent ?? this.sent,
     );
   }

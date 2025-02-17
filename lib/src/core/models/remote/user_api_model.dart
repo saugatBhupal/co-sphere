@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
@@ -86,6 +87,68 @@ class UserApiModel extends Equatable {
       'overview': overview,
       'createdAt': createdAt?.toIso8601String(),
     };
+  }
+
+  factory UserApiModel.fromString(String jsonString) {
+    final Map<String, dynamic> json = jsonDecode(jsonString);
+    return UserApiModel.initial().copyWith(
+      uid: json['sender'] as String? ?? json['member'] as String? ?? '',
+    );
+  }
+
+  factory UserApiModel.initial() {
+    return UserApiModel(
+      uid: '',
+      fullname: 'Unknown',
+      profileImage: null,
+      email: '',
+      phone: '',
+      password: '',
+      verified: false,
+      dob: DateTime.utc(2000, 1, 1),
+      country: 'Unknown',
+      province: 'Unknown',
+      city: 'Unknown',
+      skills: const [],
+      about: 'Unknown',
+      overview: 'Unknown',
+      createdAt: DateTime.utc(2000, 1, 1),
+    );
+  }
+  UserApiModel copyWith({
+    String? uid,
+    String? fullname,
+    String? profileImage,
+    String? email,
+    String? phone,
+    String? password,
+    bool? verified,
+    DateTime? dob,
+    String? country,
+    String? province,
+    String? city,
+    List<SkillApiModel>? skills,
+    String? about,
+    String? overview,
+    DateTime? createdAt,
+  }) {
+    return UserApiModel(
+      uid: uid ?? this.uid,
+      fullname: fullname ?? this.fullname,
+      profileImage: profileImage ?? this.profileImage,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      password: password ?? this.password,
+      verified: verified ?? this.verified,
+      dob: dob ?? this.dob,
+      country: country ?? this.country,
+      province: province ?? this.province,
+      city: city ?? this.city,
+      skills: skills ?? this.skills,
+      about: about ?? this.about,
+      overview: overview ?? this.about,
+      createdAt: createdAt ?? this.createdAt,
+    );
   }
 
   @override
