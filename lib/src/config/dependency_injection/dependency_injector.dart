@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:cosphere/src/config/socket_config/socket_service.dart';
 import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/core/network/hive_service.dart';
 import 'package:cosphere/src/core/network/http_service.dart';
@@ -28,4 +29,5 @@ void _initCore() {
 
   sl.registerLazySingleton<HiveService>(() => HiveService());
   sl.registerLazySingleton<HttpService>(() => HttpService(Dio()));
+  sl.registerLazySingleton<SocketService>(() => SocketService());
 }

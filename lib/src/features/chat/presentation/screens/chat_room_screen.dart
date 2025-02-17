@@ -1,9 +1,10 @@
+import 'package:cosphere/src/config/socket_config/socket_service.dart';
+import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/features/chat/presentation/widgets/message_text_field.dart';
 import 'package:cosphere/src/features/chat/presentation/widgets/received_tile.dart';
 import 'package:cosphere/src/features/chat/presentation/widgets/sent_tile.dart';
-import 'package:flutter/material.dart';
 
 class ChatRoomScreen extends StatefulWidget {
   const ChatRoomScreen({super.key});
@@ -14,23 +15,46 @@ class ChatRoomScreen extends StatefulWidget {
 
 class _ChatRoomScreenState extends State<ChatRoomScreen> {
   final ScrollController _scrollController = ScrollController();
+  final SocketService _socketService = SocketService();
+  List<Map<String, dynamic>> messages = [];
 
   @override
   void initState() {
     super.initState();
+    _setupSocketListeners();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToBottom();
     });
   }
 
+  void _setupSocketListeners() {
+    final socket = _socketService.socket;
+    if (socket == null) return;
+
+    socket.on("receiveMessage", (message) {
+      setState(() {
+        messages.add({"text": message["content"], "isSent": false});
+      });
+      _scrollToBottom();
+    });
+  }
+
+  void _sendMessage(String message) {
+    if (message.isNotEmpty) {
+      _socketService.socket?.emit("sendMessage", message);
+      setState(() {
+        messages.add({"text": message, "isSent": true});
+      });
+      _scrollToBottom();
+    }
+  }
+
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
-        double middlePosition = _scrollController.position.maxScrollExtent / 2;
-        double targetPosition = _scrollController.position.maxScrollExtent;
-        _scrollController.jumpTo(middlePosition);
         _scrollController.animateTo(
-          targetPosition,
+          _scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 350),
           curve: Curves.decelerate,
         );
@@ -40,6 +64,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
 
   @override
   void dispose() {
+    _socketService.socket?.off("receiveMessage");
     _scrollController.dispose();
     super.dispose();
   }
@@ -47,6 +72,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
         shape: const Border(
@@ -56,165 +82,26 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
           style: _textTheme.titleLarge!.copyWith(
               fontWeight: FontThickness.medium, color: AppColors.black),
         ),
-        actions: const [
-          Icon(Icons.more_vert),
-        ],
+        actions: const [Icon(Icons.more_vert)],
       ),
       body: Column(
         children: [
           Expanded(
-            child: ListView(
+            child: ListView.builder(
               controller: _scrollController,
               padding: const EdgeInsets.symmetric(horizontal: 14.0),
-              children: const [
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                ReceivedTile(
-                  message:
-                      "Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow Hello nice to meet you my friend? Whats up my bro! Thank you! I will see you tomorrow",
-                ),
-                ReceivedTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-                SentTile(message: "Hello nice to meet you my friend?"),
-                SentTile(
-                    message:
-                        "Whats up my bro! Whats up my bro! Whats up my bro! "),
-              ],
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                final message = messages[index];
+                return message["isSent"]
+                    ? SentTile(message: message["text"])
+                    : ReceivedTile(message: message["text"]);
+              },
             ),
           ),
-          MessageTextField(),
+          MessageTextField(
+              // onSend: (text) => _sendMessage(text),
+              ),
         ],
       ),
     );

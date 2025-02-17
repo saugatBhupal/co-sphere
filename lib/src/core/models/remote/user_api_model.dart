@@ -44,7 +44,7 @@ class UserApiModel extends Equatable {
 
   factory UserApiModel.fromJson(Map<String, dynamic> json) {
     return UserApiModel(
-      uid: json['_id'] as String? ?? '',
+      uid: json['_id'] as String? ?? json['sender'] as String? ?? '',
       fullname: json['fullname'] as String? ?? 'Unknown',
       profileImage: json['profileImage'] as String?,
       email: json['email'] as String? ?? '',
