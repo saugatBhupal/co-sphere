@@ -32,6 +32,16 @@ String extractCreatedDate(String createdAt) {
   return formattedDate;
 }
 
+String extractTime(DateTime dateTime) {
+  String formattedTime =
+      "${_twoDigitsTime(dateTime.hour)}:${_twoDigitsTime(dateTime.minute)}";
+  return formattedTime;
+}
+
+String _twoDigitsTime(int number) {
+  return number.toString().padLeft(2, '0');
+}
+
 String _twoDigits(int n) {
   if (n >= 10) {
     return "$n";

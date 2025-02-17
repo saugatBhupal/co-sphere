@@ -18,7 +18,8 @@ class DashboardFunctions extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 14, left: 22),
           child: GestureDetector(
-            onTap: () => Navigator.of(context).pushNamed(AppRoutes.chatLogs),
+            onTap: () => Navigator.of(context)
+                .pushNamed(AppRoutes.chatLogs, arguments: user),
             child: SvgPicture.asset(
               AppIcons.chat,
             ),

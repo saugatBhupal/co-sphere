@@ -4,14 +4,14 @@ import 'package:cosphere/src/features/chat/domain/entities/conversation.dart';
 import 'package:cosphere/src/features/chat/domain/repositories/chat_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class CreateConversationUsecase
+class GetConversationUsecase
     implements UsecaseWithParams<Conversation, List<String>> {
   final ChatRepository chatRepository;
 
-  CreateConversationUsecase({required this.chatRepository});
+  GetConversationUsecase({required this.chatRepository});
 
   @override
   Future<Either<Failure, Conversation>> call(List<String> params) {
-    return chatRepository.createConversation(params);
+    return chatRepository.getConversation(params);
   }
 }

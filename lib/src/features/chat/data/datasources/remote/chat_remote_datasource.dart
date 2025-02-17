@@ -1,10 +1,11 @@
-import 'package:cosphere/src/features/chat/domain/entities/conversation.dart';
-import 'package:cosphere/src/features/chat/domain/entities/message.dart';
+import 'package:cosphere/src/features/chat/data/models/conversation_api_model.dart';
+import 'package:cosphere/src/features/chat/data/models/message_api_model.dart';
 
 abstract class ChatRemoteDatasource {
-  Future<Conversation> createConversation(List<String> members);
-  Future<List<Conversation>> getAllConversations(String uid);
-  Future<Conversation> getConversationById(String conversationID);
-  Future<List<Message>> getMessagesFromConversation(String conversationID);
-  Future<Message> sendMessage(Message message);
+  Future<ConversationApiModel> getConversation(List<String> members);
+  Future<List<ConversationApiModel>> getAllConversations(String uid);
+  Future<ConversationApiModel> getConversationById(String conversationID);
+  Future<List<MessageApiModel>> getMessagesFromConversation(
+      String conversationID);
+  Future<MessageApiModel> sendMessage(MessageApiModel message);
 }

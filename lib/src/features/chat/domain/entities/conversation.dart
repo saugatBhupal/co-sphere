@@ -5,12 +5,12 @@ import 'package:cosphere/src/features/chat/domain/entities/message.dart';
 class Conversation extends Equatable {
   final String id;
   final List<User> members;
-  final List<Message> messages;
+  final List<Message>? messages;
 
   const Conversation({
     required this.id,
     required this.members,
-    required this.messages,
+    this.messages,
   });
 
   factory Conversation.initial() {
@@ -34,5 +34,5 @@ class Conversation extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, members, messages];
+  List<Object> get props => [id, members];
 }

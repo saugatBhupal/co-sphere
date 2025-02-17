@@ -1,4 +1,3 @@
-import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';

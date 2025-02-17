@@ -3,19 +3,20 @@ import 'package:cosphere/src/features/chat/data/datasources/remote/chat_remote_d
 import 'package:cosphere/src/features/chat/data/datasources/remote/chat_remote_datasource_impl.dart';
 import 'package:cosphere/src/features/chat/data/repositories/chat_remote_repository.dart';
 import 'package:cosphere/src/features/chat/domain/repositories/chat_repository.dart';
-import 'package:cosphere/src/features/chat/domain/usecases/create_conversation_usecase.dart';
+import 'package:cosphere/src/features/chat/domain/usecases/get_conversation_usecase.dart';
 import 'package:cosphere/src/features/chat/domain/usecases/get_all_conversation_usecase.dart';
 import 'package:cosphere/src/features/chat/domain/usecases/get_conversation_by_id_usecase.dart';
 import 'package:cosphere/src/features/chat/domain/usecases/get_messages_from_conversation_usecase.dart';
 import 'package:cosphere/src/features/chat/domain/usecases/send_message_usecase.dart';
+import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart';
 
 void initChat() {
   sl.registerLazySingleton<ChatRemoteDatasource>(
       () => ChatRemoteDatasourceImpl(dio: sl()));
   sl.registerLazySingleton<ChatRepository>(
       () => ChatRemoteRepository(chatRemoteDatasource: sl()));
-  sl.registerLazySingleton<CreateConversationUsecase>(
-      () => CreateConversationUsecase(chatRepository: sl()));
+  sl.registerLazySingleton<GetConversationUsecase>(
+      () => GetConversationUsecase(chatRepository: sl()));
   sl.registerLazySingleton<GetAllConversationUsecase>(
       () => GetAllConversationUsecase(chatRepository: sl()));
   sl.registerLazySingleton<GetConversationByIdUsecase>(
@@ -24,4 +25,6 @@ void initChat() {
       () => GetMessagesFromConversationUsecase(chatRepository: sl()));
   sl.registerLazySingleton<SendMessageUsecase>(
       () => SendMessageUsecase(chatRepository: sl()));
+  sl.registerFactory<ChatBloc>(() =>
+      ChatBloc(getConversationUsecase: sl(), getAllConversationUsecase: sl()));
 }

@@ -2,7 +2,6 @@ import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/app_routes/no_route_found.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signin/signin_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signup/location_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/signup/otp_screen.dart';
@@ -12,6 +11,7 @@ import 'package:cosphere/src/features/authentication/presentation/viewmodels/blo
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/signin/sign_in_bloc.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_logs_screen.dart';
 import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
+import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
@@ -41,6 +41,7 @@ class AppRouter {
   static final _profileBloc = sl<ProfileBloc>();
   static final _dashBloc = sl<DashboardBloc>();
   static final _jobBloc = sl<JobBloc>();
+  static final _chatBloc = sl<ChatBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splash:
@@ -124,9 +125,19 @@ class AppRouter {
           ),
         );
       case AppRoutes.chatLogs:
-        return MaterialPageRoute(builder: (context) => const ChatLogsScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<ChatBloc>.value(
+            value: _chatBloc,
+            child: ChatLogsScreen(user: settings.arguments as User),
+          ),
+        );
       case AppRoutes.chatRoom:
-        return MaterialPageRoute(builder: (context) => const ChatRoomScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<ChatBloc>.value(
+            value: _chatBloc,
+            child: const ChatRoomScreen(),
+          ),
+        );
       case AppRoutes.notifications:
         return MaterialPageRoute(
             builder: (context) => const NotificationsScreen());

@@ -26,4 +26,8 @@ class ApiEndpoints {
   // ====================== OTP Routes ======================
   static const String verifyAccount = "$baseUrl/verify/";
   static const String sendResetOtp = "$baseUrl/verify/generateToken/";
+
+  // ====================== Chat Routes ======================
+  static const String createConversation = "$baseUrl/conversation/";
+  static const String getAllConversations = "$baseUrl/conversation/user/";
 }

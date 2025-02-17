@@ -8,12 +8,12 @@ class ConversationApiModel extends Equatable {
   @JsonKey(name: '_id')
   final String id;
   final List<UserApiModel> members;
-  final List<MessageApiModel> messages;
+  final List<MessageApiModel>? messages;
 
   const ConversationApiModel({
     required this.id,
     required this.members,
-    required this.messages,
+    this.messages,
   });
 
   factory ConversationApiModel.fromJson(Map<String, dynamic> json) {
@@ -22,12 +22,16 @@ class ConversationApiModel extends Equatable {
       members: (json['members'] as List<dynamic>).map((member) {
         return member is Map<String, dynamic>
             ? UserApiModel.fromJson(member)
-            : UserApiModel.fromString(member as String);
+            : UserApiModel.initial().copyWith(uid: member);
       }).toList(),
-      messages: (json['messages'] as List<dynamic>)
-          .map((message) =>
-              MessageApiModel.fromJson(message as Map<String, dynamic>))
-          .toList(),
+      messages: json['messages'] is List?
+          ? (json['messages'] as List<dynamic>)
+              .map((message) =>
+                  MessageApiModel.fromJson(message as Map<String, dynamic>))
+              .toList()
+          : [
+              MessageApiModel.fromJson(json['messages'] as Map<String, dynamic>)
+            ],
     );
   }
 
@@ -35,10 +39,10 @@ class ConversationApiModel extends Equatable {
     return {
       '_id': id,
       'members': members.map((member) => member.toJson()).toList(),
-      'messages': messages.map((message) => message.toJson()).toList(),
+      'messages': messages!.map((message) => message.toJson()).toList(),
     };
   }
 
   @override
-  List<Object> get props => [id, members, messages];
+  List<Object> get props => [id, members];
 }

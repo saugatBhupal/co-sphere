@@ -20,7 +20,7 @@ class MessageApiModel extends Equatable {
       content: json['content'] as String? ?? '',
       sender: json['sender'] is Map<String, dynamic>
           ? UserApiModel.fromJson(json['sender'] as Map<String, dynamic>)
-          : UserApiModel.fromString(json['sender'] as String),
+          : UserApiModel.initial().copyWith(uid: json['sender']),
       sent: DateTime.parse(json['sent'] as String),
     );
   }

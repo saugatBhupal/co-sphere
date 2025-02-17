@@ -2,16 +2,31 @@ import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/features/chat/domain/entities/conversation.dart';
 import 'package:flutter/material.dart';
 
 class MessageTile extends StatelessWidget {
   final bool unread;
-  const MessageTile({super.key, required this.unread});
+  final User user;
+  final Conversation conversation;
+  const MessageTile({
+    super.key,
+    required this.unread,
+    required this.user,
+    required this.conversation,
+  });
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
+    final recipient =
+        conversation.members.firstWhere((member) => member != user.uid);
+    final lastMessage = conversation.messages?.isNotEmpty == true
+        ? conversation.messages!.last
+        : null;
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(
@@ -38,12 +53,16 @@ class MessageTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleImageAvatar(
+                  CircleImageAvatar(
+                    imageUrl: recipient.profileImage != null &&
+                            recipient.profileImage!.isNotEmpty
+                        ? recipient.profileImage
+                        : '',
                     radius: 18,
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    "Leslie Alexander",
+                    recipient.fullname,
                     style: _textTheme.titleSmall!.copyWith(
                       fontWeight: FontThickness.medium,
                       color: AppColors.black,
@@ -51,14 +70,14 @@ class MessageTile extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "1h",
+                    extractTime(lastMessage!.sent),
                     style: _textTheme.bodySmall,
                   )
                 ],
               ),
               const SizedBox(height: 2),
               Text(
-                "Thank you! I will see you tomorrow....",
+                lastMessage.content,
                 style: _textTheme.bodyLarge!.copyWith(
                   fontWeight: FontThickness.light,
                   color: AppColors.grey,
