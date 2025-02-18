@@ -28,3 +28,31 @@ class GetAllConversationSuccess extends ChatState {
 
   const GetAllConversationSuccess({required this.conversation});
 }
+
+class GetMessagesLoading extends ChatState {}
+
+class GetMessageSuccess extends ChatState {
+  final List<Message> messages;
+
+  const GetMessageSuccess({required this.messages});
+}
+
+class GetMessageFailed extends ChatState {
+  final String message;
+
+  const GetMessageFailed(this.message);
+}
+
+class SendMessageLoading extends ChatState {}
+
+class SendMessageSuccess extends ChatState {
+  final Message message;
+
+  const SendMessageSuccess({required this.message});
+}
+
+class SendMessageFailed extends ChatState {
+  final String message;
+
+  const SendMessageFailed(this.message);
+}

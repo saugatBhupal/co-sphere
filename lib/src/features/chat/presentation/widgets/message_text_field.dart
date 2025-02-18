@@ -6,29 +6,14 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MessageTextField extends StatefulWidget {
-  MessageTextField({
+class MessageTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final Function(String)? onSend;
+  const MessageTextField({
     super.key,
+    required this.onSend,
+    required this.controller,
   });
-
-  @override
-  State<MessageTextField> createState() => _MessageTextFieldState();
-}
-
-class _MessageTextFieldState extends State<MessageTextField> {
-  late final TextEditingController _textController;
-
-  @override
-  void initState() {
-    super.initState();
-    _textController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +21,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 14),
       child: TextFormField(
-        controller: _textController,
+        controller: controller,
         keyboardType: TextInputType.text,
         cursorColor: AppColors.black,
         style: _textTheme.titleSmall!
@@ -49,10 +34,17 @@ class _MessageTextFieldState extends State<MessageTextField> {
           hintText: AppStrings.messageHint,
           hintStyle: _textTheme.titleSmall!
               .copyWith(color: AppColors.grey, fontWeight: FontThickness.light),
-          suffixIcon: Padding(
-            padding: const EdgeInsets.only(right: 16, left: 18),
-            child: SvgPicture.asset(
-              AppIcons.send,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              if (onSend != null) {
+                onSend!(controller.text);
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16, left: 18),
+              child: SvgPicture.asset(
+                AppIcons.send,
+              ),
             ),
           ),
           isDense: true,

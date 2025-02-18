@@ -1,10 +1,8 @@
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
-import 'package:cosphere/src/core/constants/app_assets.dart';
-import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
@@ -31,8 +29,12 @@ class ChatLogsScreen extends StatelessWidget {
           if (state is GetConversationSuccess) {
             buildToast(
                 toastType: ToastType.success, msg: "Conversation Initialized");
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(AppRoutes.chatRoom, (route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                AppRoutes.chatRoom, (route) => false,
+                arguments: ChatScreensArgs(
+                    conversationID: "67b199361951254f65c360f5",
+                    user: user,
+                    receipient: User.initial()));
           }
         },
         child: BlocProvider(
@@ -64,21 +66,21 @@ class ChatLogsScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<ChatBloc>().add(const GetConversation(members: [
-                "67b05057151bd4f0a904a0ba",
-                "67b1a95051c826113195e095"
-              ]));
-        },
-        splashColor: AppColors.genie,
-        shape: const CircleBorder(),
-        elevation: 2,
-        backgroundColor: AppColors.plaster,
-        child: SvgPicture.asset(
-          AppIcons.chat,
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     context.read<ChatBloc>().add(const GetConversation(members: [
+      //           "67b05057151bd4f0a904a0ba",
+      //           "67b1a95051c826113195e095"
+      //         ]));
+      //   },
+      //   splashColor: AppColors.genie,
+      //   shape: const CircleBorder(),
+      //   elevation: 2,
+      //   backgroundColor: AppColors.plaster,
+      //   child: SvgPicture.asset(
+      //     AppIcons.chat,
+      //   ),
+      // ),
     );
   }
 }

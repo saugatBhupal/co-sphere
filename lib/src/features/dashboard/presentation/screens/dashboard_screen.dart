@@ -44,7 +44,7 @@ class DashboardScreen extends StatelessWidget {
       case 0:
         return DashboardBody(user: user);
       case 1:
-        return const ChatRoomScreen();
+        return const CreateProjectScreen();
       case 2:
         return const CreateProjectScreen();
       case 3:

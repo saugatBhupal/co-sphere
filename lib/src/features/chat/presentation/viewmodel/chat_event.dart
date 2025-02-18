@@ -18,3 +18,15 @@ class GetAllConversation extends ChatEvent {
 
   const GetAllConversation({required this.uid});
 }
+
+class GetMessages extends ChatEvent {
+  final String conversationID;
+
+  const GetMessages({required this.conversationID});
+}
+
+class SendMessage extends ChatEvent {
+  final SendMessageRequestDto dto;
+
+  const SendMessage({required this.dto});
+}

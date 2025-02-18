@@ -30,4 +30,6 @@ class ApiEndpoints {
   // ====================== Chat Routes ======================
   static const String createConversation = "$baseUrl/conversation/";
   static const String getAllConversations = "$baseUrl/conversation/user/";
+  static const String getMessages = "$baseUrl/message/";
+  static const String sendMessage = "$baseUrl/message/";
 }

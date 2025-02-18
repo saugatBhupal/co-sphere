@@ -146,6 +146,7 @@ class AppStrings {
   static const String budget = "Budget";
   static const String newSec = "New Section";
   static const String addSec = "Add Section";
+  static const String you = "You :";
   static const String visible =
       "*This project is only visible to project members";
 }

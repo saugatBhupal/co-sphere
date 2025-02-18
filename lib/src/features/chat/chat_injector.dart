@@ -25,6 +25,9 @@ void initChat() {
       () => GetMessagesFromConversationUsecase(chatRepository: sl()));
   sl.registerLazySingleton<SendMessageUsecase>(
       () => SendMessageUsecase(chatRepository: sl()));
-  sl.registerFactory<ChatBloc>(() =>
-      ChatBloc(getConversationUsecase: sl(), getAllConversationUsecase: sl()));
+  sl.registerFactory<ChatBloc>(() => ChatBloc(
+      getConversationUsecase: sl(),
+      getAllConversationUsecase: sl(),
+      getMessagesFromConversationUsecase: sl(),
+      sendMessageUsecase: sl()));
 }

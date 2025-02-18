@@ -4,6 +4,7 @@ import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/chat/data/datasources/remote/chat_remote_datasource.dart';
+import 'package:cosphere/src/features/chat/data/dto/send_message_request_dto.dart';
 import 'package:cosphere/src/features/chat/data/models/conversation_api_model.dart';
 import 'package:cosphere/src/features/chat/data/models/message_api_model.dart';
 import 'package:dio/dio.dart';
@@ -61,12 +62,40 @@ class ChatRemoteDatasourceImpl implements ChatRemoteDatasource {
 
   @override
   Future<List<MessageApiModel>> getMessagesFromConversation(
-      String conversationID) {
-    throw UnimplementedError();
+      String conversationID) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.getMessages}$conversationID");
+      if (res.statusCode == 200) {
+        return (res.data as List)
+            .map((json) => MessageApiModel.fromJson(json))
+            .toList();
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
   }
 
   @override
-  Future<MessageApiModel> sendMessage(MessageApiModel message) {
-    throw UnimplementedError();
+  Future<MessageApiModel> sendMessage(SendMessageRequestDto message) async {
+    try {
+      var res = await dio.post(
+          "${ApiEndpoints.sendMessage}${message.conversationID}",
+          data: message.toJson());
+      if (res.statusCode == 200) {
+        return MessageApiModel.fromJson(res.data);
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
   }
 }

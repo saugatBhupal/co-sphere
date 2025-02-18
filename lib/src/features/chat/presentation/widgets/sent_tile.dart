@@ -8,9 +8,13 @@ class SentTile extends StatelessWidget {
   const SentTile({
     super.key,
     required this.message,
+    required this.sent,
+    this.profileImage,
   });
 
   final String message;
+  final String sent;
+  final String? profileImage;
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +53,19 @@ class SentTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "2:36 pm",
+                    sent,
                     style: _textTheme.labelLarge,
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 12),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 12.0),
-              child: CircleImageAvatar(radius: 18),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: CircleImageAvatar(
+                radius: 18,
+                imageUrl: profileImage ?? '',
+              ),
             ),
           ],
         ),

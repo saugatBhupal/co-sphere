@@ -8,9 +8,13 @@ class ReceivedTile extends StatelessWidget {
   const ReceivedTile({
     super.key,
     required this.message,
+    required this.sent,
+    this.profileImage,
   });
 
   final String message;
+  final String sent;
+  final String? profileImage;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +27,12 @@ class ReceivedTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 12.0),
-              child: CircleImageAvatar(radius: 18),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: CircleImageAvatar(
+                radius: 18,
+                imageUrl: profileImage ?? '',
+              ),
             ),
             const SizedBox(width: 12),
             Column(
@@ -52,7 +59,7 @@ class ReceivedTile extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "2:36 pm",
+                  sent,
                   style: _textTheme.labelLarge,
                 ),
               ],

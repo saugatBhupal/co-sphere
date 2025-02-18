@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/error/failure.dart';
+import 'package:cosphere/src/features/chat/data/dto/send_message_request_dto.dart';
 import 'package:cosphere/src/features/chat/domain/entities/conversation.dart';
 import 'package:cosphere/src/features/chat/domain/entities/message.dart';
 import 'package:dartz/dartz.dart';
@@ -10,5 +11,5 @@ abstract interface class ChatRepository {
       String conversationID);
   Future<Either<Failure, List<Message>>> getMessagesFromConversation(
       String conversationID);
-  Future<Either<Failure, Message>> sendMessage(Message message);
+  Future<Either<Failure, Message>> sendMessage(SendMessageRequestDto message);
 }

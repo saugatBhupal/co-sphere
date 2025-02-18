@@ -1,7 +1,10 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/chat/data/datasources/remote/chat_remote_datasource.dart';
+import 'package:cosphere/src/features/chat/data/dto/send_message_request_dto.dart';
 import 'package:cosphere/src/features/chat/data/models/conversation_api_model.dart';
 import 'package:cosphere/src/features/chat/data/models/mapppers/conversation_mapper.dart';
+import 'package:cosphere/src/features/chat/data/models/mapppers/message_mappers.dart';
+import 'package:cosphere/src/features/chat/data/models/message_api_model.dart';
 import 'package:cosphere/src/features/chat/domain/entities/conversation.dart';
 import 'package:cosphere/src/features/chat/domain/entities/message.dart';
 import 'package:cosphere/src/features/chat/domain/repositories/chat_repository.dart';
@@ -45,12 +48,25 @@ class ChatRemoteRepository implements ChatRepository {
 
   @override
   Future<Either<Failure, List<Message>>> getMessagesFromConversation(
-      String conversationID) {
-    throw UnimplementedError();
+      String conversationID) async {
+    try {
+      final List<MessageApiModel> messages = await chatRemoteDatasource
+          .getMessagesFromConversation(conversationID);
+      return Right(messages.map((message) => message.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, Message>> sendMessage(Message message) {
-    throw UnimplementedError();
+  Future<Either<Failure, Message>> sendMessage(
+      SendMessageRequestDto message) async {
+    try {
+      final MessageApiModel messageApiModel =
+          await chatRemoteDatasource.sendMessage(message);
+      return Right(messageApiModel.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
   }
 }
