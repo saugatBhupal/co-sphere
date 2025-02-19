@@ -30,3 +30,9 @@ class SendMessage extends ChatEvent {
 
   const SendMessage({required this.dto});
 }
+
+class SearchConversation extends ChatEvent {
+  final String searchQuery;
+
+  const SearchConversation({required this.searchQuery});
+}

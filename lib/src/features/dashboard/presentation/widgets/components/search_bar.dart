@@ -8,10 +8,14 @@ import 'package:flutter_svg/svg.dart';
 class SearchTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final String? icon;
+  final String? hintText;
+  final ValueChanged<String>? onChanged;
   const SearchTextField({
     super.key,
     this.validator,
     this.icon,
+    this.hintText,
+    this.onChanged,
   });
 
   @override
@@ -40,6 +44,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
       height: 36,
       child: TextFormField(
         controller: _searchController,
+        onChanged: widget.onChanged,
         validator: widget.validator,
         keyboardType: TextInputType.text,
         cursorColor: AppColors.grey,
@@ -48,7 +53,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.white,
-          hintText: AppStrings.searchPh,
+          hintText: widget.hintText ?? AppStrings.searchPh,
           hintStyle: _textTheme.bodySmall,
           prefixIcon: Padding(
             padding: const EdgeInsets.only(right: 10, left: 18),

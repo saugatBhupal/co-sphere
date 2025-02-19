@@ -80,3 +80,18 @@ String _getMonth(int month) {
       return "";
   }
 }
+
+String getMessageDate(DateTime timestamp, DateTime? previousMessageDate) {
+  if (previousMessageDate != null &&
+      isSameDay(previousMessageDate, timestamp)) {
+    return '';
+  } else {
+    return extractCreatedDate(timestamp.toIso8601String());
+  }
+}
+
+bool isSameDay(DateTime date1, DateTime date2) {
+  return date1.year == date2.year &&
+      date1.month == date2.month &&
+      date1.day == date2.day;
+}

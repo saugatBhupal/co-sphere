@@ -56,3 +56,17 @@ class SendMessageFailed extends ChatState {
 
   const SendMessageFailed(this.message);
 }
+
+class SearchLoading extends ChatState {}
+
+class SearchSuccess extends ChatState {
+  final List<Conversation> conversation;
+
+  const SearchSuccess({required this.conversation});
+}
+
+class SearchFailed extends ChatState {
+  final String message;
+
+  const SearchFailed(this.message);
+}

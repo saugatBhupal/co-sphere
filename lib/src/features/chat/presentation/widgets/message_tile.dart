@@ -25,13 +25,13 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     final recipient =
-        conversation.members.firstWhere((member) => member != user.uid);
+        conversation.members.firstWhere((member) => member.uid != user.uid);
     final lastMessage = conversation.messages?.isNotEmpty == true
         ? conversation.messages!.last
         : null;
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(AppRoutes.chatRoom,
+        Navigator.of(context).popAndPushNamed(AppRoutes.chatRoom,
             arguments: ChatScreensArgs(
               conversationID: conversation.id,
               user: user,

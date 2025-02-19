@@ -4,6 +4,9 @@ import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/chat/data/dto/send_message_request_dto.dart';
+import 'package:cosphere/src/features/chat/data/models/mapppers/conversation_mapper.dart';
+import 'package:cosphere/src/features/chat/data/models/mapppers/message_mappers.dart';
+import 'package:cosphere/src/features/chat/data/models/message_api_model.dart';
 import 'package:cosphere/src/features/chat/domain/entities/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,11 +52,14 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     final socket = _socketService.socket;
     if (socket == null) return;
 
-    socket.on("receiveMessage", (message) {
-      setState(() {
-        messages.add(message);
-      });
-      _scrollToBottom();
+    socket.on("receiveMessage", (data) {
+      if (data["conversationId"] == widget.chatScreensArgs.conversationID) {
+        final message = MessageApiModel.fromJson(data).toDomain();
+        setState(() {
+          messages.add(message);
+        });
+        _scrollToBottom();
+      }
     });
   }
 

@@ -35,6 +35,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       if (event is SendMessage) {
         await _sendMessage(event, emit);
       }
+      if (event is SearchConversation) {
+        await _searchConversation(event, emit);
+      }
     });
   }
 
@@ -52,15 +55,18 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
   }
 
+  List<Conversation> _conversation = [];
+  List<Conversation> get conversation => _conversation;
   Future<void> _getAllConversation(
       GetAllConversation event, Emitter<ChatState> emit) async {
     emit(GetConversationLoading());
     try {
       final result = await getAllConversationUsecase(event.uid);
-      result.fold(
-        (failure) => emit(GetConversationFailed(failure.message)),
-        (success) => emit(GetAllConversationSuccess(conversation: success)),
-      );
+      result.fold((failure) => emit(GetConversationFailed(failure.message)),
+          (success) {
+        _conversation = success;
+        emit(GetAllConversationSuccess(conversation: success));
+      });
     } catch (e) {
       emit(GetConversationFailed("Error: ${e.toString()}"));
     }
@@ -90,6 +96,21 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       );
     } catch (e) {
       emit(GetConversationFailed("Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _searchConversation(
+      SearchConversation event, Emitter<ChatState> emit) async {
+    emit(SearchLoading());
+    try {
+      final filteredConversations = _conversation.where((conversation) {
+        return conversation.members
+            .map((member) => member.fullname.toLowerCase())
+            .contains(event.searchQuery.toLowerCase());
+      }).toList();
+      emit(SearchSuccess(conversation: filteredConversations));
+    } catch (error) {
+      emit(const SearchFailed("Result not fount"));
     }
   }
 }

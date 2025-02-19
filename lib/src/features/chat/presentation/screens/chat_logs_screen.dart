@@ -52,7 +52,6 @@ class ChatLogsScreen extends StatelessWidget {
                   itemCount: state.conversation.length,
                   itemBuilder: (context, index) {
                     final conversation = state.conversation[index];
-
                     return MessageTile(
                       unread: true,
                       user: user,
