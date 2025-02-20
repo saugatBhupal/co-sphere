@@ -32,4 +32,10 @@ class ApiEndpoints {
   static const String getAllConversations = "$baseUrl/conversation/user/";
   static const String getMessages = "$baseUrl/message/";
   static const String sendMessage = "$baseUrl/message/";
+
+  // ====================== Search Routes ======================
+  static const String searchHistory = "$baseUrl/user/search-history/";
+  static const String searchUser = "$baseUrl/user/name/";
+  static const String searchJob = "$baseUrl/job/name/";
+  static const String searchProject = "$baseUrl/project/name/";
 }
