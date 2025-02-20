@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 class Salary extends Equatable {
-  final double min;
-  final double max;
+  final int min;
+  final int max;
 
   const Salary({required this.min, required this.max});
 
@@ -11,14 +11,14 @@ class Salary extends Equatable {
 
   factory Salary.initial() {
     return const Salary(
-      min: 0.0,
-      max: 0.0,
+      min: 0,
+      max: 0,
     );
   }
 
   Salary copyWith({
-    double? min,
-    double? max,
+    int? min,
+    int? max,
   }) {
     return Salary(
       min: min ?? this.min,
@@ -28,8 +28,8 @@ class Salary extends Equatable {
 
   factory Salary.fromJson(Map<String, dynamic> json) {
     return Salary(
-      min: json['min'] as double,
-      max: json['max'] as double,
+      min: json['min'] as int,
+      max: json['max'] as int,
     );
   }
   Map<String, dynamic> toJson() {

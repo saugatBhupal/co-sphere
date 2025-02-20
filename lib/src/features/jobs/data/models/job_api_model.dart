@@ -46,40 +46,50 @@ class JobApiModel {
       jobName: json['jobName'] as String? ?? '',
       position: json['position'] as String? ?? '',
       address: json['address'] as String? ?? '',
-      postedBy: json['postedBy'] is Map<String, dynamic>
-          ? UserApiModel.fromJson(json['postedBy'] as Map<String, dynamic>)
-          : UserApiModel.initial().copyWith(uid: json['postedBy']),
-      skills: (json['skills'] as List<dynamic>)
-          .map((message) =>
-              SkillApiModel.fromJson(message as Map<String, dynamic>))
-          .toList(),
+      postedBy:
+          json['postedBy'] != null && json['postedBy'] is Map<String, dynamic>
+              ? UserApiModel.fromJson(json['postedBy'] as Map<String, dynamic>)
+              : UserApiModel.initial()
+                  .copyWith(uid: json['postedBy'] as String? ?? ''),
+      skills: (json['skills'] as List?)
+              ?.map((skill) =>
+                  SkillApiModel.fromJson(skill as Map<String, dynamic>))
+              .toList() ??
+          [],
       companyName: json['companyName'] as String? ?? '',
       site: json['site'] as String? ?? '',
-      status: StatusExtension.fromDatabaseValue(json["status"]),
-      salary: Salary.fromJson(json['salary']),
-      likesCount: json['likesCount'] as int? ?? 0,
-      likes: json['likes'] is List?
-          ? (json['likes'] as List<Map<String, dynamic>>)
-              .map((like) => UserApiModel.fromJson(like))
+      status:
+          StatusExtension.fromDatabaseValue(json['status'] as String? ?? ''),
+      salary: json['salary'] != null && json['salary'] is Map<String, dynamic>
+          ? Salary.fromJson(json['salary'] as Map<String, dynamic>)
+          : Salary.initial(),
+      likesCount: json['likes_count'] as int? ?? 0,
+      likes: json['likes'] != null && json['likes'] is List
+          ? (json['likes'] as List)
+              .map((like) => like is Map<String, dynamic>
+                  ? UserApiModel.fromJson(like)
+                  : UserApiModel.initial().copyWith(uid: like.toString()))
               .toList()
-          : (json['likes'] as List<String>)
-              .map((like) => UserApiModel.initial().copyWith(uid: like))
-              .toList(),
-      applicants: (json['applicants'] as List<Map<String, dynamic>>)
-          .map((like) => ApplicantsApiModel.fromJson(like))
-          .toList(),
-      hired: json['hired'] is List?
-          ? (json['hired'] as List<Map<String, dynamic>>)
-              .map((hired) => UserApiModel.fromJson(hired))
+          : [],
+      applicants: (json['applicants'] as List?)
+              ?.whereType<Map<String, dynamic>>()
+              .map((app) => ApplicantsApiModel.fromJson(app))
+              .toList() ??
+          [],
+      hired: json['hired'] != null && json['hired'] is List
+          ? (json['hired'] as List)
+              .map((hired) => hired is Map<String, dynamic>
+                  ? UserApiModel.fromJson(hired)
+                  : UserApiModel.initial().copyWith(uid: hired.toString()))
               .toList()
-          : (json['hired'] as List<String>)
-              .map((hired) => UserApiModel.initial().copyWith(uid: hired))
-              .toList(),
+          : [],
       createdAt: json['createdAt'] != null
-          ? DateTime.parse(json['createdAt'])
+          ? DateTime.tryParse(json['createdAt'].toString()) ??
+              DateTime(1970, 1, 1)
           : DateTime(1970, 1, 1),
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
       '_id': id,

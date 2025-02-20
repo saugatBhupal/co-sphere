@@ -31,6 +31,7 @@ import 'package:cosphere/src/features/project/presentation/screens/completed_das
 import 'package:cosphere/src/features/project/presentation/screens/hiring_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/members_screen.dart';
 import 'package:cosphere/src/features/search/presentation/screens/search_screen.dart';
+import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class AppRouter {
   static final _dashBloc = sl<DashboardBloc>();
   static final _jobBloc = sl<JobBloc>();
   static final _chatBloc = sl<ChatBloc>();
+  static final _searchBloc = sl<SearchBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splash:
@@ -172,7 +174,10 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => const CreateProjectScreen());
       case AppRoutes.search:
-        return MaterialPageRoute(builder: (context) => const SearchScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                value: _searchBloc,
+                child: SearchScreen(user: settings.arguments as User)));
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 abstract interface class SearchRepository {
   Future<Either<Failure, List<Search>>> getSearchHistory(String uid);
   Future<Either<Failure, void>> addSearchHistory(AddSearchHistoryReqDto dto);
-  Future<Either<Failure, List<User>>> getUsersByName(String name);
-  Future<Either<Failure, List<Job>>> getJobsByName(String name);
-  Future<Either<Failure, List<Project>>> getProjectsByName(String name);
+  Future<Either<Failure, List<User>>> getUsersByName(String query);
+  Future<Either<Failure, List<Job>>> getJobsByName(String query);
+  Future<Either<Failure, List<Project>>> getProjectsByName(String query);
 }

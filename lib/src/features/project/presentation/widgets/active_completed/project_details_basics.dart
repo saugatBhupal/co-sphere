@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
@@ -25,11 +26,13 @@ class ProjectDetailsBasics extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Row(
+          Row(
             children: [
               ProjectOwnerDetails(),
               SizedBox(width: 6),
-              BudgetContainer(),
+              BudgetContainer(
+                salary: Salary.initial(),
+              ),
               Spacer(),
               DurationSpan(),
             ],

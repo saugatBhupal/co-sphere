@@ -5,8 +5,10 @@ import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
 import 'package:flutter/material.dart';
 
 class DueDateSpan extends StatelessWidget {
+  final String title;
   final String subtitle;
-  const DueDateSpan({super.key, required this.subtitle});
+  const DueDateSpan(
+      {super.key, this.title = "12 Oct 2025", required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class DueDateSpan extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "12 Oct 2025",
+              title,
               style: _textTheme.bodySmall!.copyWith(
                   height: 1,
                   color: AppColors.black,

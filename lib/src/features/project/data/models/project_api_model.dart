@@ -52,33 +52,41 @@ class ProjectApiModel {
       postedBy: json['postedBy'] is Map<String, dynamic>
           ? UserApiModel.fromJson(json['postedBy'] as Map<String, dynamic>)
           : UserApiModel.initial().copyWith(uid: json['postedBy']),
-      skills: (json['skills'] as List<dynamic>)
-          .map((message) =>
-              SkillApiModel.fromJson(message as Map<String, dynamic>))
-          .toList(),
+      skills: (json['skills'] as List?)
+              ?.map((skill) =>
+                  SkillApiModel.fromJson(skill as Map<String, dynamic>))
+              .toList() ??
+          [],
       companyName: json['companyName'] as String? ?? '',
       site: json['site'] as String? ?? '',
       status: StatusExtension.fromDatabaseValue(json["status"]),
-      salary: Salary.fromJson(json['salary']),
-      duration: Durations.fromJson(json['duration']),
+      salary: json['salary'] != null && json['salary'] is Map<String, dynamic>
+          ? Salary.fromJson(json['salary'] as Map<String, dynamic>)
+          : Salary.initial(),
+      duration:
+          json['duration'] != null && json['duration'] is Map<String, dynamic>
+              ? Durations.fromJson(json['duration'] as Map<String, dynamic>)
+              : Durations.initial(),
       likesCount: json['likesCount'] as int? ?? 0,
-      likes: json['likes'] is List?
-          ? (json['likes'] as List<Map<String, dynamic>>)
-              .map((like) => UserApiModel.fromJson(like))
+      likes: json['likes'] != null && json['likes'] is List
+          ? (json['likes'] as List)
+              .map((like) => like is Map<String, dynamic>
+                  ? UserApiModel.fromJson(like)
+                  : UserApiModel.initial().copyWith(uid: like.toString()))
               .toList()
-          : (json['likes'] as List<String>)
-              .map((like) => UserApiModel.initial().copyWith(uid: like))
-              .toList(),
-      applicants: (json['applicants'] as List<Map<String, dynamic>>)
-          .map((like) => ApplicantsApiModel.fromJson(like))
-          .toList(),
-      members: json['members'] is List?
-          ? (json['members'] as List<Map<String, dynamic>>)
-              .map((member) => UserApiModel.fromJson(member))
+          : [],
+      applicants: (json['applicants'] as List?)
+              ?.whereType<Map<String, dynamic>>()
+              .map((app) => ApplicantsApiModel.fromJson(app))
+              .toList() ??
+          [],
+      members: json['members'] != null && json['members'] is List
+          ? (json['members'] as List)
+              .map((member) => member is Map<String, dynamic>
+                  ? UserApiModel.fromJson(member)
+                  : UserApiModel.initial().copyWith(uid: member.toString()))
               .toList()
-          : (json['members'] as List<String>)
-              .map((member) => UserApiModel.initial().copyWith(uid: member))
-              .toList(),
+          : [],
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'])
           : DateTime(1970, 1, 1),

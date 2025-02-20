@@ -1,13 +1,15 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
+import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
+import 'package:cosphere/src/features/search/presentation/widgets/cards/project_search_card.dart';
 import 'package:flutter/material.dart';
-import 'package:cosphere/src/features/search/presentation/widgets/cards/user_search_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UserSearch extends StatelessWidget {
+class ProjectsSearch extends StatelessWidget {
   final String query;
-  const UserSearch({
+  const ProjectsSearch({
     super.key,
     required this.query,
   });
@@ -16,14 +18,18 @@ class UserSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => sl<SearchBloc>()..add(GetUserByName(query: query)),
+      create: (context) =>
+          sl<SearchBloc>()..add(GetProjectByName(query: query)),
       child: BlocBuilder<SearchBloc, SearchState>(
         builder: (context, state) {
-          if (state is GetUserByNameSuccess) {
-            if (state.users.isEmpty) {
+          if (state is SearchHistoryFailed) {
+            buildToast(toastType: ToastType.error, msg: state.message);
+          }
+          if (state is GetProjectByNameSuccess) {
+            if (state.projects.isEmpty) {
               return Center(
                 child: Text(
-                  "No User Name $query",
+                  "No Project Name $query",
                   style: _textTheme.bodyMedium!.copyWith(color: AppColors.grey),
                 ),
               );
@@ -32,9 +38,9 @@ class UserSearch extends StatelessWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.users.length,
+                  itemCount: state.projects.length,
                   itemBuilder: (context, index) =>
-                      UserSearchCard(user: state.users[index]),
+                      ProjectSearchCard(project: state.projects[index]),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

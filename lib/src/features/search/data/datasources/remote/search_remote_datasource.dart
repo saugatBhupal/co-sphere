@@ -7,7 +7,7 @@ import 'package:cosphere/src/features/search/data/models/search_api_model.dart';
 abstract class SearchRemoteDatasource {
   Future<List<SearchApiModel>> getSearchHistory(String uid);
   Future<void> addSearchHistory(AddSearchHistoryReqDto dto);
-  Future<List<UserApiModel>> getUsersByName(String name);
-  Future<List<JobApiModel>> getJobsByName(String name);
-  Future<List<ProjectApiModel>> getProjectsByName(String name);
+  Future<List<UserApiModel>> getUsersByName(String query);
+  Future<List<JobApiModel>> getJobsByName(String query);
+  Future<List<ProjectApiModel>> getProjectsByName(String query);
 }

@@ -4,6 +4,7 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
@@ -26,22 +27,24 @@ class HiringDetailsBasics extends StatelessWidget {
           color: AppColors.white,
           border: Border.all(width: 0.5, color: AppColors.plaster),
         ),
-        child: const Column(
+        child: Column(
           children: [
             Row(
               children: [
-                ProjectOwnerDetails(),
-                SizedBox(width: 6),
-                BudgetContainer(),
-                Spacer(),
-                DurationSpan(),
+                const ProjectOwnerDetails(),
+                const SizedBox(width: 6),
+  BudgetContainer(
+              salary: Salary.initial(),
+            ),
+                const Spacer(),
+                const DurationSpan(),
               ],
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
               child: ProjectSkillsList(),
             ),
-            Expanded(
+            const Expanded(
               child: Row(
                 children: [
                   FunctionButton(

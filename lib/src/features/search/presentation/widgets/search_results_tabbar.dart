@@ -1,14 +1,16 @@
-import 'package:cosphere/src/features/search/presentation/widgets/tabbar/jobs_search.dart';
-import 'package:cosphere/src/features/search/presentation/widgets/tabbar/projects_search.dart';
-import 'package:cosphere/src/features/search/presentation/widgets/tabbar/user_search.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/features/search/presentation/widgets/tabbar/jobs_search.dart';
+import 'package:cosphere/src/features/search/presentation/widgets/tabbar/projects_search_card.dart';
+import 'package:cosphere/src/features/search/presentation/widgets/tabbar/user_search.dart';
 
 class SearchResultsTabbar extends StatelessWidget {
+  final String query;
   const SearchResultsTabbar({
     super.key,
+    required this.query,
   });
 
   @override
@@ -47,12 +49,12 @@ class SearchResultsTabbar extends StatelessWidget {
                   Tab(text: AppStrings.project),
                 ],
               ),
-              const Expanded(
+              Expanded(
                 child: TabBarView(
                   children: [
-                    UserSearch(),
-                    JobsSearch(),
-                    ProjectsSearch(),
+                    UserSearch(query: query),
+                    JobsSearch(query: query),
+                    ProjectsSearch(query: query),
                   ],
                 ),
               ),

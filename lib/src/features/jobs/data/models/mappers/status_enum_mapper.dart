@@ -7,6 +7,8 @@ extension StatusExtension on Status {
         return "Pending";
       case Status.accepted:
         return "Accepted";
+      case Status.active:
+        return "Active";
       case Status.rejected:
         return "Rejected";
     }
@@ -16,10 +18,12 @@ extension StatusExtension on Status {
     switch (value) {
       case "Pending":
         return Status.pending;
-      case "Accepted":
-        return Status.accepted;
+      case "Active":
+        return Status.active;
       case "Rejected":
         return Status.rejected;
+      case "Accepted":
+        return Status.accepted;
       default:
         throw ArgumentError("Invalid status value: $value");
     }

@@ -16,7 +16,8 @@ class DashboardFunctions extends StatelessWidget {
       children: [
         Expanded(
           child: SearchTextField(
-            onTap: () => Navigator.of(context).pushNamed(AppRoutes.search),
+            onTap: () => Navigator.of(context)
+                .pushNamed(AppRoutes.search, arguments: user),
           ),
         ),
         Padding(

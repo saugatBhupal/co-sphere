@@ -3,22 +3,22 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
-import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:flutter_svg/svg.dart';
 
-class JobsSearchCard extends StatelessWidget {
-  final Job job;
-  const JobsSearchCard({super.key, required this.job});
+class ProjectSearchCard extends StatelessWidget {
+  final Project project;
+  const ProjectSearchCard({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-    final List<String> tag = [job.site, "Full Time", "Company"];
+    final List<String> tag = [project.site, "Full Time", "Company"];
 
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(AppRoutes.hiring),
@@ -31,7 +31,7 @@ class JobsSearchCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Makes height dynamic
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -50,12 +50,12 @@ class JobsSearchCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        job.companyName.isNotEmpty
-                            ? job.companyName
-                            : job.postedBy.fullname,
+                        project.companyName.isNotEmpty == true
+                            ? project.companyName
+                            : project.postedBy.fullname,
                         style: _textTheme.labelLarge!.copyWith(height: 1),
                       ),
-                      Text(job.jobName,
+                      Text(project.projectName,
                           style: _textTheme.bodySmall!.copyWith(
                             letterSpacing: 0,
                             color: AppColors.black,
@@ -65,18 +65,18 @@ class JobsSearchCard extends StatelessWidget {
                   ),
                 ),
                 BudgetContainer(
-                  salary: job.salary,
+                  salary: project.salary,
                 ),
               ],
             ),
-            if (job.skills.isNotEmpty) ...[
+            if (project.skills.isNotEmpty) ...[
               const SizedBox(height: 12),
               Row(
                 children: [
                   Wrap(
                     spacing: 6,
                     runSpacing: 6,
-                    children: job.skills
+                    children: project.skills
                         .take(2)
                         .map((skill) => SkillsButton(
                               name: skill.name,
@@ -88,10 +88,10 @@ class JobsSearchCard extends StatelessWidget {
                         .toList(),
                   ),
                   const SizedBox(width: 6),
-                  if (job.skills.length > 2) ...[
+                  if (project.skills.length > 2) ...[
                     const SizedBox(width: 6),
                     SkillsButton(
-                      name: "+${job.skills.length - 2} more",
+                      name: "+${project.skills.length - 2} more",
                       borderRadius: 4,
                       fontSize: 10,
                       padding: const EdgeInsets.symmetric(
@@ -127,7 +127,7 @@ class JobsSearchCard extends StatelessWidget {
                         children: [
                           SvgPicture.asset(AppIcons.location),
                           const SizedBox(width: 6),
-                          Text(job.address,
+                          Text(project.address,
                               style: _textTheme.labelLarge!
                                   .copyWith(color: AppColors.black)),
                         ],
@@ -144,7 +144,7 @@ class JobsSearchCard extends StatelessWidget {
                   const Spacer(),
                   DueDateSpan(
                     subtitle: AppStrings.posted,
-                    title: extractDate(job.createdAt),
+                    title: extractDate(project.createdAt),
                   )
                 ],
               ),
