@@ -9,3 +9,5 @@ enum MediaType { image, video }
 enum Gender { male, female, preferNotSay }
 
 enum OtpType { verifyUser, verifyPassword }
+
+enum Status { pending, accepted, rejected }
