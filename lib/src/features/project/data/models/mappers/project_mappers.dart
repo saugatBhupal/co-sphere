@@ -1,0 +1,53 @@
+import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
+import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
+import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
+import 'package:cosphere/src/features/project/domain/entities/durations.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
+
+extension ProjectApiModelMappers on ProjectApiModel {
+  Project toDomain() => Project.initial().copyWith(
+        id: id,
+        projectName: projectName,
+        position: position,
+        address: address,
+        postedBy: postedBy.toDomain(),
+        skills: skills.map((skill) => skill.toDomain()).toList(),
+        companyName: companyName,
+        site: site,
+        status: status,
+        salary: Salary.initial().copyWith(max: salary.max, min: salary.min),
+        likesCount: likesCount,
+        likes: likes.map((like) => like.toDomain()).toList(),
+        duration:
+            Durations.initial().copyWith(from: duration.from, to: duration.to),
+        applicants:
+            applicants.map((applicant) => applicant.toDomain()).toList(),
+        members: members.map((member) => member.toDomain()).toList(),
+        createdAt: createdAt,
+      );
+}
+
+extension ProjectMappers on Project {
+  ProjectApiModel toDomain() => ProjectApiModel(
+        id: id,
+        projectName: projectName,
+        position: position,
+        address: address,
+        postedBy: postedBy.toApiModel(),
+        skills: skills.map((skill) => skill.fromDomain()).toList(),
+        companyName: companyName,
+        site: site,
+        status: status,
+        salary: Salary.initial().copyWith(max: salary.max, min: salary.min),
+        likesCount: likesCount,
+        likes: likes.map((like) => like.toApiModel()).toList(),
+        duration:
+            Durations.initial().copyWith(from: duration.from, to: duration.to),
+        applicants:
+            applicants.map((applicant) => applicant.fromDomain()).toList(),
+        members: members.map((member) => member.toApiModel()).toList(),
+        createdAt: createdAt,
+      );
+}
