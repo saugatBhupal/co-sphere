@@ -4,7 +4,6 @@ import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/chat/data/dto/send_message_request_dto.dart';
-import 'package:cosphere/src/features/chat/data/models/mapppers/conversation_mapper.dart';
 import 'package:cosphere/src/features/chat/data/models/mapppers/message_mappers.dart';
 import 'package:cosphere/src/features/chat/data/models/message_api_model.dart';
 import 'package:cosphere/src/features/chat/domain/entities/message.dart';
