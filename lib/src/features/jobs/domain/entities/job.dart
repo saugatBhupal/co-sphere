@@ -53,9 +53,9 @@ class Job extends Equatable {
       status: Status.pending,
       salary: Salary.initial(),
       likesCount: 0,
-      likes: [],
-      applicants: [],
-      hired: [],
+      likes: const [],
+      applicants: const [],
+      hired: const [],
       createdAt: DateTime.timestamp(),
     );
   }

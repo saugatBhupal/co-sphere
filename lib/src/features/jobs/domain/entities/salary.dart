@@ -25,4 +25,17 @@ class Salary extends Equatable {
       max: max ?? this.max,
     );
   }
+
+  factory Salary.fromJson(Map<String, dynamic> json) {
+    return Salary(
+      min: json['min'] as double,
+      max: json['max'] as double,
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'min': min,
+      'max': max,
+    };
+  }
 }

@@ -4,7 +4,7 @@ class Durations extends Equatable {
   final int from;
   final int to;
 
-  Durations({required this.from, required this.to});
+  const Durations({required this.from, required this.to});
 
   factory Durations.initial() {
     return Durations(from: 0, to: 0);
@@ -18,6 +18,20 @@ class Durations extends Equatable {
       from: from ?? this.from,
       to: to ?? this.to,
     );
+  }
+
+  factory Durations.fromJson(Map<String, dynamic> json) {
+    return Durations(
+      from: json['from'] as int? ?? 0,
+      to: json['to'] as int? ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'from': from,
+      'to': to,
+    };
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:cosphere/src/features/project/domain/entities/duration.dart';
+import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:equatable/equatable.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
@@ -57,9 +57,9 @@ class Project extends Equatable {
       salary: Salary.initial(),
       duration: Durations.initial(),
       likesCount: 0,
-      likes: [],
-      applicants: [],
-      members: [],
+      likes: const [],
+      applicants: const [],
+      members: const [],
       createdAt: DateTime.timestamp(),
     );
   }
