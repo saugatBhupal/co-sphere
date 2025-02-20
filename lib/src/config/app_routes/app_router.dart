@@ -30,6 +30,7 @@ import 'package:cosphere/src/features/project/presentation/screens/applicants_sc
 import 'package:cosphere/src/features/project/presentation/screens/completed_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/hiring_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/members_screen.dart';
+import 'package:cosphere/src/features/search/presentation/screens/search_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -170,6 +171,8 @@ class AppRouter {
       case AppRoutes.createProject:
         return MaterialPageRoute(
             builder: (context) => const CreateProjectScreen());
+      case AppRoutes.search:
+        return MaterialPageRoute(builder: (context) => const SearchScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

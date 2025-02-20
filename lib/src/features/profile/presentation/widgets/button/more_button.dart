@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class MoreButton extends StatelessWidget {
   final String title;
   final Function()? onPressed;
+  final EdgeInsets? padding;
   const MoreButton({
     super.key,
     required this.title,
     this.onPressed,
+    this.padding,
   });
 
   @override
@@ -23,7 +25,8 @@ class MoreButton extends StatelessWidget {
           splashColor: AppColors.winter,
           borderRadius: BorderRadius.circular(8.0),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: padding ??
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: AppColors.plaster,
               borderRadius: BorderRadius.circular(8.0),

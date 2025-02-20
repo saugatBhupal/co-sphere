@@ -57,6 +57,7 @@ class AppStrings {
   static const String invalidPassword =
       "Must include a number and special character";
   static const String searchPh = "Search user, company or job";
+  static const String search = "Search";
   static const String level = "My level";
   static const String success = "Success";
   static const String rating = "Rating";
@@ -147,6 +148,11 @@ class AppStrings {
   static const String newSec = "New Section";
   static const String addSec = "Add Section";
   static const String you = "You :";
+  static const String recent = "Recent Searches";
+  static const String results = "Results";
   static const String visible =
       "*This project is only visible to project members";
+  static const String users = "Users";
+  static const String posted = "Posted Date";
+  static const String start = "Start $chat";
 }

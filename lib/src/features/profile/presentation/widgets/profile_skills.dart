@@ -2,7 +2,6 @@ import 'package:cosphere/src/config/dependency_injection/dependency_injector.dar
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/edit_skills.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/form/add_task_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';

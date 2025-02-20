@@ -10,12 +10,16 @@ class SearchTextField extends StatefulWidget {
   final String? icon;
   final String? hintText;
   final ValueChanged<String>? onChanged;
+  final VoidCallback? onTap;
+  final TextEditingController? controller;
   const SearchTextField({
     super.key,
     this.validator,
     this.icon,
     this.hintText,
     this.onChanged,
+    this.onTap,
+    this.controller,
   });
 
   @override
@@ -27,13 +31,15 @@ class _SearchTextFieldState extends State<SearchTextField> {
 
   @override
   void initState() {
-    _searchController = TextEditingController();
     super.initState();
+    _searchController = widget.controller ?? TextEditingController();
   }
 
   @override
   void dispose() {
-    _searchController.dispose();
+    if (widget.controller == null) {
+      _searchController.dispose();
+    }
     super.dispose();
   }
 
@@ -43,6 +49,8 @@ class _SearchTextFieldState extends State<SearchTextField> {
     return SizedBox(
       height: 36,
       child: TextFormField(
+        readOnly: true,
+        onTap: widget.onTap,
         controller: _searchController,
         onChanged: widget.onChanged,
         validator: widget.validator,

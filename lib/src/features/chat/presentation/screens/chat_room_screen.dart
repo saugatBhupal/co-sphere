@@ -47,6 +47,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     _textController = TextEditingController();
   }
 
+
   void _setupSocketListeners() {
     final socket = _socketService.socket;
     if (socket == null) return;
