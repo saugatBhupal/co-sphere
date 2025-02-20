@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/features/search/presentation/widgets/recent_searches.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/search_app_bar_field.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/search_results_tabbar.dart';
 import 'package:flutter/material.dart';
@@ -45,12 +46,13 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              AppStrings.results,
-              style:
-                  _textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
-            ),
-            const Expanded(child: SearchResultsTabbar()),
+            // Text(
+            //   AppStrings.results,
+            //   style:
+            //       _textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
+            // ),
+            // const Expanded(child: SearchResultsTabbar()),
+            RecentSearches(),
           ],
         ),
       ),
