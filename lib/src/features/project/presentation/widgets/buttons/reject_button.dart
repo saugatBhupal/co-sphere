@@ -17,7 +17,7 @@ class RejectButton extends StatelessWidget {
         border: Border.all(width: 1, color: AppColors.red),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 3),
+        padding: const EdgeInsets.only(top: 2),
         child: SvgPicture.asset(
           AppIcons.cross,
         ),

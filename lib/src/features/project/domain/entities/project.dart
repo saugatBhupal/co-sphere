@@ -19,7 +19,7 @@ class Project extends Equatable {
   final Status status;
   final Salary salary;
   final int likesCount;
-  final Durations duration;
+  final DurationTime duration;
   final List<User> likes;
   final List<Applicants> acceptedApplicants;
   final List<Applicants> rejectedApplicants;
@@ -59,7 +59,7 @@ class Project extends Equatable {
       site: '',
       status: Status.pending,
       salary: Salary.initial(),
-      duration: Durations.initial(),
+      duration: DurationTime.initial(),
       likesCount: 0,
       likes: const [],
       acceptedApplicants: const [],
@@ -80,7 +80,7 @@ class Project extends Equatable {
     String? site,
     Status? status,
     Salary? salary,
-    Durations? duration,
+    DurationTime? duration,
     int? likesCount,
     List<User>? likes,
     List<Applicants>? acceptedApplicants,

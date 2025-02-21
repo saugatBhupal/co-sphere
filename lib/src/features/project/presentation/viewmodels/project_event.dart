@@ -24,3 +24,9 @@ class GetCompletedProject extends ProjectEvent {
 
   const GetCompletedProject({required this.uid});
 }
+
+class GetProjectByID extends ProjectEvent {
+  final String projectId;
+
+  const GetProjectByID({required this.projectId});
+}

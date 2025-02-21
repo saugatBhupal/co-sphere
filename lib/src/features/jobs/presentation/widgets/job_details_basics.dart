@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_skills_list.dart';
@@ -10,20 +11,22 @@ class JobDetailsBasics extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
 
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ProjectOwnerDetails(),
+              ProjectOwnerDetails(postedBy: User.initial()),
               Spacer(),
               DurationSpan(),
             ],
           ),
           SizedBox(height: 10),
-          ProjectSkillsList(),
+          ProjectSkillsList(
+            skills: [],
+          ),
         ],
       ),
     );

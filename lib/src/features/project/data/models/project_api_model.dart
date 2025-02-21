@@ -17,7 +17,7 @@ class ProjectApiModel {
   final String site;
   final Status status;
   final Salary salary;
-  final Durations duration;
+  final DurationTime duration;
   final int likesCount;
   final List<UserApiModel> likes;
   final List<ApplicantsApiModel> acceptedApplicants;
@@ -69,8 +69,8 @@ class ProjectApiModel {
           : Salary.initial(),
       duration:
           json['duration'] != null && json['duration'] is Map<String, dynamic>
-              ? Durations.fromJson(json['duration'] as Map<String, dynamic>)
-              : Durations.initial(),
+              ? DurationTime.fromJson(json['duration'] as Map<String, dynamic>)
+              : DurationTime.initial(),
       likesCount: json['likesCount'] as int? ?? 0,
       likes: json['likes'] != null && json['likes'] is List
           ? (json['likes'] as List)

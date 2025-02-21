@@ -9,7 +9,6 @@ class AcceptButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12),
       width: 30,
       height: 30,
       decoration: BoxDecoration(

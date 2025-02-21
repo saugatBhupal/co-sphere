@@ -1,3 +1,5 @@
+import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/buttons/accept_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/card/members_card.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +10,9 @@ class MembersView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: 8,
-      itemBuilder: (context, index) => const MembersCard(),
+      itemBuilder: (context, index) => MembersCard(
+          applicants: Applicants.initial(),
+          functionWidget: const AcceptButton()),
       separatorBuilder: (context, index) => const SizedBox(),
     );
   }

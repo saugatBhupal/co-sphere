@@ -14,7 +14,6 @@ class HiringView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
     return BlocProvider(
       create: (context) => sl<ProjectBloc>()..add(GetHiringProject(uid: uid)),
       child: BlocBuilder<ProjectBloc, ProjectState>(

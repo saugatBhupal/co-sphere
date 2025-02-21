@@ -3,7 +3,9 @@ import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:flutter/material.dart';
 
 class UserDetails extends StatelessWidget {
-  const UserDetails({super.key});
+  final String name;
+  final String applied;
+  const UserDetails({super.key, this.applied = "1h ago", this.name = "Saugat"});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +19,12 @@ class UserDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Leslie Alexander",
+                name,
                 style: _textTheme.bodyLarge!
                     .copyWith(letterSpacing: 0.4, height: 1),
               ),
               Text(
-                "1h ago",
+                applied,
                 style: _textTheme.labelLarge,
               ),
             ],

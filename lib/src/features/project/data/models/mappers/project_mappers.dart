@@ -20,8 +20,8 @@ extension ProjectApiModelMappers on ProjectApiModel {
         salary: Salary.initial().copyWith(max: salary.max, min: salary.min),
         likesCount: likesCount,
         likes: likes.map((like) => like.toDomain()).toList(),
-        duration:
-            Durations.initial().copyWith(from: duration.from, to: duration.to),
+        duration: DurationTime.initial()
+            .copyWith(from: duration.from, to: duration.to),
         acceptedApplicants: acceptedApplicants
             .map((applicant) => applicant.toDomain())
             .toList(),
@@ -49,8 +49,8 @@ extension ProjectMappers on Project {
         salary: Salary.initial().copyWith(max: salary.max, min: salary.min),
         likesCount: likesCount,
         likes: likes.map((like) => like.toApiModel()).toList(),
-        duration:
-            Durations.initial().copyWith(from: duration.from, to: duration.to),
+        duration: DurationTime.initial()
+            .copyWith(from: duration.from, to: duration.to),
         acceptedApplicants: acceptedApplicants
             .map((applicant) => applicant.fromDomain())
             .toList(),

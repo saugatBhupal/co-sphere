@@ -32,3 +32,8 @@ class GetCompletedProjectSuccess extends ProjectState {
   final List<Project> projects;
   const GetCompletedProjectSuccess({required this.projects});
 }
+
+class GetProjectByIdSuccess extends ProjectState {
+  final Project project;
+  const GetProjectByIdSuccess({required this.project});
+}

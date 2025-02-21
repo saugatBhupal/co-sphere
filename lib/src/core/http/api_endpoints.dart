@@ -46,6 +46,7 @@ class ApiEndpoints {
   static const String getHiring = "$baseUrl/project/hiring/";
   static const String getActive = "$baseUrl/project/active/";
   static const String getCompleted = "$baseUrl/project/completed/";
+  static const String projectById = "$baseUrl/project/";
   static const String hire = "$baseUrl/project/hire";
   static const String reject = "$baseUrl/project/reject";
   static const String finishHire = "$baseUrl/project/finish-hiring/";

@@ -1,11 +1,13 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_skills_list.dart';
+import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:flutter/material.dart';
 
@@ -28,18 +30,24 @@ class ProjectDetailsBasics extends StatelessWidget {
         children: [
           Row(
             children: [
-              ProjectOwnerDetails(),
+              ProjectOwnerDetails(
+                postedBy: User.initial(),
+              ),
               SizedBox(width: 6),
               BudgetContainer(
                 salary: Salary.initial(),
               ),
               Spacer(),
-              DurationSpan(),
+              DurationSpan(
+                duration: DurationTime.initial().copyWith(from: 2, to: 5),
+              ),
             ],
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
-            child: ProjectSkillsList(),
+            child: ProjectSkillsList(
+              skills: [],
+            ),
           ),
           Expanded(
             child: Row(

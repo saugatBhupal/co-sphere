@@ -84,4 +84,21 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
     // TODO: implement rejectUser
     throw UnimplementedError();
   }
+
+  @override
+  Future<ProjectApiModel> getProjectById(String projectId) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.projectById}$projectId");
+      if (res.statusCode == 200) {
+        return ProjectApiModel.fromJson(res.data);
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
 }

@@ -153,13 +153,16 @@ class AppRouter {
       case AppRoutes.createdProjects:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-                value: _projectBloc, child: CreatedProjectsScreen(user: settings.arguments as User)));
+                value: _projectBloc,
+                child:
+                    CreatedProjectsScreen(user: settings.arguments as User)));
       case AppRoutes.jobDetails:
         return MaterialPageRoute(
             builder: (context) => const JobDetailsScreen());
       case AppRoutes.hiring:
         return MaterialPageRoute(
-            builder: (context) => const HiringDashboardScreen());
+            builder: (context) => BlocProvider.value(
+                value: _projectBloc, child: HiringDashboardScreen(projectId: settings.arguments as String)));
       case AppRoutes.active:
         return MaterialPageRoute(
             builder: (context) => const ActiveDashboardScreen());

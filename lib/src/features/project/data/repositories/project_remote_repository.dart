@@ -64,4 +64,15 @@ class ProjectRemoteRepository implements ProjectRepository {
     // TODO: implement rejectUser
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, Project>> getProjectById(String projectId) async {
+    try {
+      final ProjectApiModel project =
+          await datasource.getProjectById(projectId);
+      return Right(project.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
 }

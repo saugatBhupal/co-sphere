@@ -24,6 +24,22 @@ String dateTimeUtil(DateTime timestamp) {
   }
 }
 
+String timeAgo(DateTime inputTime) {
+  final Duration difference = DateTime.now().difference(inputTime);
+
+  if (difference.inDays >= 30) {
+    return "${difference.inDays ~/ 30} month${difference.inDays ~/ 30 > 1 ? 's' : ''} ago";
+  } else if (difference.inDays >= 1) {
+    return "${difference.inDays} day${difference.inDays > 1 ? 's' : ''} ago";
+  } else if (difference.inHours >= 1) {
+    return "${difference.inHours} hour${difference.inHours > 1 ? 's' : ''} ago";
+  } else if (difference.inMinutes >= 1) {
+    return "${difference.inMinutes} minute${difference.inMinutes > 1 ? 's' : ''} ago";
+  } else {
+    return "${difference.inSeconds} second${difference.inSeconds > 1 ? 's' : ''} ago";
+  }
+}
+
 String extractCreatedDate(String createdAt) {
   DateTime dateTime = DateTime.parse(createdAt);
   String formattedDate =

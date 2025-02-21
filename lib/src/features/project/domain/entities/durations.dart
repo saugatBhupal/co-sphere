@@ -1,27 +1,27 @@
 import 'package:equatable/equatable.dart';
 
-class Durations extends Equatable {
+class DurationTime extends Equatable {
   final int from;
   final int to;
 
-  const Durations({required this.from, required this.to});
+  const DurationTime({required this.from, required this.to});
 
-  factory Durations.initial() {
-    return Durations(from: 0, to: 0);
+  factory DurationTime.initial() {
+    return DurationTime(from: 0, to: 0);
   }
 
-  Durations copyWith({
+  DurationTime copyWith({
     int? from,
     int? to,
   }) {
-    return Durations(
+    return DurationTime(
       from: from ?? this.from,
       to: to ?? this.to,
     );
   }
 
-  factory Durations.fromJson(Map<String, dynamic> json) {
-    return Durations(
+  factory DurationTime.fromJson(Map<String, dynamic> json) {
+    return DurationTime(
       from: json['from'] as int? ?? 0,
       to: json['to'] as int? ?? 0,
     );
