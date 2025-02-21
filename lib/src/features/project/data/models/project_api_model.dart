@@ -20,7 +20,9 @@ class ProjectApiModel {
   final Durations duration;
   final int likesCount;
   final List<UserApiModel> likes;
-  final List<ApplicantsApiModel> applicants;
+  final List<ApplicantsApiModel> acceptedApplicants;
+  final List<ApplicantsApiModel> rejectedApplicants;
+  final List<ApplicantsApiModel> pendingApplicants;
   final List<UserApiModel> members;
   final DateTime createdAt;
 
@@ -38,7 +40,9 @@ class ProjectApiModel {
     required this.duration,
     required this.likesCount,
     required this.likes,
-    required this.applicants,
+    required this.acceptedApplicants,
+    required this.rejectedApplicants,
+    required this.pendingApplicants,
     required this.members,
     required this.createdAt,
   });
@@ -75,7 +79,17 @@ class ProjectApiModel {
                   : UserApiModel.initial().copyWith(uid: like.toString()))
               .toList()
           : [],
-      applicants: (json['applicants'] as List?)
+      acceptedApplicants: (json['acceptedApplicants'] as List?)
+              ?.whereType<Map<String, dynamic>>()
+              .map((app) => ApplicantsApiModel.fromJson(app))
+              .toList() ??
+          [],
+      rejectedApplicants: (json['rejectedApplicants'] as List?)
+              ?.whereType<Map<String, dynamic>>()
+              .map((app) => ApplicantsApiModel.fromJson(app))
+              .toList() ??
+          [],
+      pendingApplicants: (json['pendingApplicants'] as List?)
               ?.whereType<Map<String, dynamic>>()
               .map((app) => ApplicantsApiModel.fromJson(app))
               .toList() ??
@@ -107,7 +121,12 @@ class ProjectApiModel {
       'duration': duration.toJson(),
       'likesCount': likesCount,
       'likes': likes.map((like) => like.toJson()).toList(),
-      'applicants': applicants.map((applicant) => applicant.toJson()).toList(),
+      'acceptedApplicants':
+          acceptedApplicants.map((applicant) => applicant.toJson()).toList(),
+      'rejectedApplicants':
+          rejectedApplicants.map((applicant) => applicant.toJson()).toList(),
+      'pendingApplicants':
+          pendingApplicants.map((applicant) => applicant.toJson()).toList(),
       'members': members.map((member) => member.toJson()).toList(),
       'createdAt': createdAt.toIso8601String(),
     };

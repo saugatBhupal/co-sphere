@@ -1,10 +1,12 @@
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/widgets/appbar/search_field_appbar.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/created_project_tabbar.dart';
 import 'package:flutter/material.dart';
 
 class CreatedProjectsScreen extends StatelessWidget {
-  const CreatedProjectsScreen({super.key});
+  final User user;
+  const CreatedProjectsScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class CreatedProjectsScreen extends StatelessWidget {
               style:
                   _textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
             ),
-            const Expanded(child: CreatedProjectTabbar())
+            Expanded(child: CreatedProjectTabbar(user: user))
           ],
         ),
       ),

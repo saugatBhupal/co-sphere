@@ -21,7 +21,9 @@ class Project extends Equatable {
   final int likesCount;
   final Durations duration;
   final List<User> likes;
-  final List<Applicants> applicants;
+  final List<Applicants> acceptedApplicants;
+  final List<Applicants> rejectedApplicants;
+  final List<Applicants> pendingApplicants;
   final List<User> members;
   final DateTime createdAt;
 
@@ -39,7 +41,9 @@ class Project extends Equatable {
     required this.duration,
     required this.likesCount,
     required this.likes,
-    required this.applicants,
+    required this.acceptedApplicants,
+    required this.rejectedApplicants,
+    required this.pendingApplicants,
     required this.members,
     required this.createdAt,
   });
@@ -58,7 +62,9 @@ class Project extends Equatable {
       duration: Durations.initial(),
       likesCount: 0,
       likes: const [],
-      applicants: const [],
+      acceptedApplicants: const [],
+      rejectedApplicants: const [],
+      pendingApplicants: const [],
       members: const [],
       createdAt: DateTime.timestamp(),
     );
@@ -77,6 +83,9 @@ class Project extends Equatable {
     Durations? duration,
     int? likesCount,
     List<User>? likes,
+    List<Applicants>? acceptedApplicants,
+    List<Applicants>? rejectedApplicants,
+    List<Applicants>? pendingApplicants,
     List<Applicants>? applicants,
     List<User>? members,
     DateTime? createdAt,
@@ -95,7 +104,9 @@ class Project extends Equatable {
       duration: duration ?? this.duration,
       likesCount: likesCount ?? this.likesCount,
       likes: likes ?? this.likes,
-      applicants: applicants ?? this.applicants,
+      acceptedApplicants: acceptedApplicants ?? this.acceptedApplicants,
+      rejectedApplicants: rejectedApplicants ?? this.rejectedApplicants,
+      pendingApplicants: pendingApplicants ?? this.pendingApplicants,
       members: members ?? this.members,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -116,7 +127,7 @@ class Project extends Equatable {
       salary,
       likesCount,
       likes,
-      applicants,
+      acceptedApplicants,
       members,
       createdAt,
     ];

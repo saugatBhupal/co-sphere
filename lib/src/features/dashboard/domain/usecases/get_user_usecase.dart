@@ -5,11 +5,11 @@ import 'package:cosphere/src/features/dashboard/domain/repositories/dasbboard_re
 import 'package:dartz/dartz.dart';
 
 class GetUserUsecase implements UsecaseWithoutParams<User?> {
-  final DashboardRepository dasboardRepository;
+  final DashboardRepository dashboardRepository;
 
-  GetUserUsecase({required this.dasboardRepository});
+  GetUserUsecase({required this.dashboardRepository});
   @override
   Future<Either<Failure, User?>> call() {
-    return dasboardRepository.getCurrentUser();
+    return dashboardRepository.getCurrentUser();
   }
 }

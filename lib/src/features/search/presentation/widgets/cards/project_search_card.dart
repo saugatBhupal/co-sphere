@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
@@ -37,8 +38,8 @@ class ProjectSearchCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: 40,
-                  width: 40,
+                  height: 52,
+                  width: 52,
                   decoration: BoxDecoration(
                     color: AppColors.frog,
                     borderRadius: BorderRadius.circular(10),
@@ -53,7 +54,7 @@ class ProjectSearchCard extends StatelessWidget {
                         project.companyName.isNotEmpty == true
                             ? project.companyName
                             : project.postedBy.fullname,
-                        style: _textTheme.labelLarge!.copyWith(height: 1),
+                        style: _textTheme.labelLarge,
                       ),
                       Text(project.projectName,
                           style: _textTheme.bodySmall!.copyWith(
@@ -61,11 +62,14 @@ class ProjectSearchCard extends StatelessWidget {
                             color: AppColors.black,
                             fontWeight: FontThickness.regular,
                           )),
+                      if (project.salary != Salary.initial()) ...[
+                        const SizedBox(height: 2),
+                        BudgetContainer(
+                          salary: project.salary,
+                        ),
+                      ]
                     ],
                   ),
-                ),
-                BudgetContainer(
-                  salary: project.salary,
                 ),
               ],
             ),

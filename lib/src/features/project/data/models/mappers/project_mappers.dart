@@ -22,8 +22,14 @@ extension ProjectApiModelMappers on ProjectApiModel {
         likes: likes.map((like) => like.toDomain()).toList(),
         duration:
             Durations.initial().copyWith(from: duration.from, to: duration.to),
-        applicants:
-            applicants.map((applicant) => applicant.toDomain()).toList(),
+        acceptedApplicants: acceptedApplicants
+            .map((applicant) => applicant.toDomain())
+            .toList(),
+        rejectedApplicants: rejectedApplicants
+            .map((applicant) => applicant.toDomain())
+            .toList(),
+        pendingApplicants:
+            pendingApplicants.map((applicant) => applicant.toDomain()).toList(),
         members: members.map((member) => member.toDomain()).toList(),
         createdAt: createdAt,
       );
@@ -45,8 +51,15 @@ extension ProjectMappers on Project {
         likes: likes.map((like) => like.toApiModel()).toList(),
         duration:
             Durations.initial().copyWith(from: duration.from, to: duration.to),
-        applicants:
-            applicants.map((applicant) => applicant.fromDomain()).toList(),
+        acceptedApplicants: acceptedApplicants
+            .map((applicant) => applicant.fromDomain())
+            .toList(),
+        rejectedApplicants: rejectedApplicants
+            .map((applicant) => applicant.fromDomain())
+            .toList(),
+        pendingApplicants: pendingApplicants
+            .map((applicant) => applicant.fromDomain())
+            .toList(),
         members: members.map((member) => member.toApiModel()).toList(),
         createdAt: createdAt,
       );

@@ -1,0 +1,26 @@
+part of 'project_bloc.dart';
+
+sealed class ProjectEvent extends Equatable {
+  const ProjectEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetHiringProject extends ProjectEvent {
+  final String uid;
+
+  const GetHiringProject({required this.uid});
+}
+
+class GetActiveProject extends ProjectEvent {
+  final String uid;
+
+  const GetActiveProject({required this.uid});
+}
+
+class GetCompletedProject extends ProjectEvent {
+  final String uid;
+
+  const GetCompletedProject({required this.uid});
+}

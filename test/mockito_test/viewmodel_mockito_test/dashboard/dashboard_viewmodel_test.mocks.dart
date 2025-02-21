@@ -53,7 +53,7 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
 /// See the documentation for Mockito's code generation for more information.
 class MockGetUserUsecase extends _i1.Mock implements _i4.GetUserUsecase {
   @override
-  _i2.DashboardRepository get dasboardRepository => (super.noSuchMethod(
+  _i2.DashboardRepository get dashboardRepository => (super.noSuchMethod(
         Invocation.getter(#dasboardRepository),
         returnValue: _FakeDashboardRepository_0(
           this,

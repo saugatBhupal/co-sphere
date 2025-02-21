@@ -44,6 +44,7 @@ class AppRouter {
   static final _profileBloc = sl<ProfileBloc>();
   static final _dashBloc = sl<DashboardBloc>();
   static final _jobBloc = sl<JobBloc>();
+  static final _projectBloc = sl<ProfileBloc>();
   static final _chatBloc = sl<ChatBloc>();
   static final _searchBloc = sl<SearchBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -152,7 +153,7 @@ class AppRouter {
       case AppRoutes.createdProjects:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-                value: _jobBloc, child: const CreatedProjectsScreen()));
+                value: _projectBloc, child: CreatedProjectsScreen(user: settings.arguments as User)));
       case AppRoutes.jobDetails:
         return MaterialPageRoute(
             builder: (context) => const JobDetailsScreen());

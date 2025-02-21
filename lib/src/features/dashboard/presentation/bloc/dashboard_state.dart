@@ -38,3 +38,17 @@ class DashboardGetCacheUserSuccess extends DashboardState {
 
   const DashboardGetCacheUserSuccess({required this.user});
 }
+
+class GetProjectByUserLoading extends DashboardState {
+  const GetProjectByUserLoading();
+}
+
+class GetProjectByUserSuccess extends DashboardState {
+  final List<Project> projects;
+  const GetProjectByUserSuccess({required this.projects});
+}
+
+class GetProjectByUserFailed extends DashboardState {
+  final String message;
+  const GetProjectByUserFailed({required this.message});
+}

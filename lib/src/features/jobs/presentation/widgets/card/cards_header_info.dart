@@ -3,7 +3,13 @@ import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:flutter/material.dart';
 
 class CardsHeaderInfo extends StatelessWidget {
-  const CardsHeaderInfo({super.key});
+  final String title;
+  final String postedOn;
+  const CardsHeaderInfo({
+    super.key,
+    this.postedOn = "10-11-2025",
+    this.title = "Assignment Helper Needed",
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +31,12 @@ class CardsHeaderInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Assignment Helper Needed",
+                  title,
                   style: _textTheme.bodyLarge!
                       .copyWith(letterSpacing: 0.4, height: 1),
                 ),
                 Text(
-                  "Posted on 10-11-2025",
+                  "Posted on $postedOn",
                   style: _textTheme.labelSmall,
                 ),
               ],

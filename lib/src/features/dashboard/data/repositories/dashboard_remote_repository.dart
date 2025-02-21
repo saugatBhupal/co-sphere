@@ -9,6 +9,9 @@ import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/dashboard/data/datasources/local/dashboard_local_datasource.dart';
 import 'package:cosphere/src/features/dashboard/data/datasources/remote/dashboard_remote_datasource.dart';
 import 'package:cosphere/src/features/dashboard/domain/repositories/dasbboard_repository.dart';
+import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
+import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:dartz/dartz.dart';
 
 class DashboardRemoteRepository implements DashboardRepository {
@@ -44,6 +47,17 @@ class DashboardRemoteRepository implements DashboardRepository {
         return Right(userHiveModel!.toDomain());
       }
       return const Left(Failure(message: "User not found"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Project>>> getProjectsByUser(String uid) async {
+    try {
+      final List<ProjectApiModel> projects =
+          await dashboardRemoteDatasource.getProjectsByUser(uid);
+      return Right(projects.map((project) => project.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
     }
   }
 }

@@ -15,7 +15,7 @@ void main() {
 
   setUp(() {
     mockDashRepository = MockDashboardRepository();
-    getUserUsecase = GetUserUsecase(dasboardRepository: mockDashRepository);
+    getUserUsecase = GetUserUsecase(dashboardRepository: mockDashRepository);
   });
   test('should return User when repository call is successful', () async {
     // Arrange

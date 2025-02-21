@@ -8,6 +8,7 @@ import 'package:cosphere/src/features/chat/chat_injector.dart';
 import 'package:cosphere/src/features/dashboard/dashboard_injector.dart';
 import 'package:cosphere/src/features/jobs/job_injector.dart';
 import 'package:cosphere/src/features/profile/profile_injector.dart';
+import 'package:cosphere/src/features/project/project_injector.dart';
 import 'package:cosphere/src/features/search/search_injector.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -22,6 +23,7 @@ Future<void> initDependencies() async {
   initJob();
   initChat();
   initSearch();
+  initProject();
 }
 
 void _initCore() {

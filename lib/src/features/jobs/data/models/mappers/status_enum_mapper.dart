@@ -11,6 +11,10 @@ extension StatusExtension on Status {
         return "Active";
       case Status.rejected:
         return "Rejected";
+      case Status.hiring:
+        return "Hiring";
+      case Status.completed:
+        return "Completed";
     }
   }
 
@@ -24,6 +28,10 @@ extension StatusExtension on Status {
         return Status.rejected;
       case "Accepted":
         return Status.accepted;
+      case "Hiring":
+        return Status.hiring;
+      case "Completed":
+        return Status.completed;
       default:
         throw ArgumentError("Invalid status value: $value");
     }

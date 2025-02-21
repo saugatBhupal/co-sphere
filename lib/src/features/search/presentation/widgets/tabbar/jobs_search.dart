@@ -36,7 +36,7 @@ class JobsSearch extends StatelessWidget {
               return SizedBox(
                 child: ListView.separated(
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.jobs.length,
                   itemBuilder: (context, index) =>
                       JobsSearchCard(job: state.jobs[index]),

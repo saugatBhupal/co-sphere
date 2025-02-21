@@ -31,7 +31,7 @@ class UserSearch extends StatelessWidget {
               return SizedBox(
                 child: ListView.separated(
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.users.length,
                   itemBuilder: (context, index) =>
                       UserSearchCard(user: state.users[index]),

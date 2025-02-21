@@ -4,6 +4,7 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
@@ -19,7 +20,6 @@ class JobsSearchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     final List<String> tag = [job.site, "Full Time", "Company"];
-
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(AppRoutes.hiring),
       child: Container(
@@ -31,14 +31,15 @@ class JobsSearchCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Makes height dynamic
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 40,
-                  width: 40,
+                  height: 52,
+                  width: 52,
                   decoration: BoxDecoration(
                     color: AppColors.frog,
                     borderRadius: BorderRadius.circular(10),
@@ -50,10 +51,10 @@ class JobsSearchCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        job.companyName.isNotEmpty
+                        job.companyName.isNotEmpty == true
                             ? job.companyName
                             : job.postedBy.fullname,
-                        style: _textTheme.labelLarge!.copyWith(height: 1),
+                        style: _textTheme.labelLarge,
                       ),
                       Text(job.jobName,
                           style: _textTheme.bodySmall!.copyWith(
@@ -61,11 +62,14 @@ class JobsSearchCard extends StatelessWidget {
                             color: AppColors.black,
                             fontWeight: FontThickness.regular,
                           )),
+                      if (job.salary != Salary.initial()) ...[
+                        const SizedBox(height: 2),
+                        BudgetContainer(
+                          salary: job.salary,
+                        ),
+                      ]
                     ],
                   ),
-                ),
-                BudgetContainer(
-                  salary: job.salary,
                 ),
               ],
             ),

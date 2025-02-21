@@ -24,11 +24,7 @@ class SearchResultsTabbar extends StatelessWidget {
           child: Column(
             children: [
               TabBar(
-                onTap: (index) {
-                  // context
-                  //     .read<JobBloc>()
-                  //     .add(ChangeCreatedModule(index: index));
-                },
+                onTap: (index) {},
                 isScrollable: false,
                 indicator: const BoxDecoration(),
                 dividerHeight: 0,

@@ -37,7 +37,7 @@ class ProjectsSearch extends StatelessWidget {
               return SizedBox(
                 child: ListView.separated(
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.projects.length,
                   itemBuilder: (context, index) =>
                       ProjectSearchCard(project: state.projects[index]),

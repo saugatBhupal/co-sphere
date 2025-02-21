@@ -70,6 +70,7 @@ class AppStrings {
   static const String created = "Created By Me";
   static const String assigned = "Assigned To Me";
   static const String application = "My Applications";
+  static const String projectApp = "My $project Applications";
   static const String deadline = "Deadline";
   static const String timeSpent = "Time Spent";
   static const String completion = "Completion";

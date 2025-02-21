@@ -2,10 +2,12 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/recent_searches.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/search_app_bar_field.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/search_results_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -58,9 +60,10 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: _searchQuery.isEmpty
-            ? RecentSearches(user: widget.user)
-            : Column(
+        child: BlocBuilder<SearchBloc, SearchState>(
+          builder: (context, state) {
+            if (state is AddSearchHistorySuccess && _searchQuery != "") {
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -72,7 +75,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: SearchResultsTabbar(query: _searchQuery),
                   ),
                 ],
-              ),
+              );
+            }
+            return RecentSearches(user: widget.user);
+          },
+        ),
       ),
     );
   }

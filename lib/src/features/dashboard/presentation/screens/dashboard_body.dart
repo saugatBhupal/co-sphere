@@ -1,13 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/created_by_me_dashboard.dart';
 import 'package:flutter/material.dart';
-
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/card/job_application_card.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/card/assigned_card.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/card/hiring_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_functions.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_metrics.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_title.dart';
@@ -35,25 +33,10 @@ class DashboardBody extends StatelessWidget {
               DashboardTitle(
                 title: AppStrings.created,
                 option: AppStrings.view,
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(AppRoutes.createdProjects),
+                onPressed: () => Navigator.of(context)
+                    .pushNamed(AppRoutes.createdProjects, arguments: user),
               ),
-              SizedBox(
-                height: context.height * 0.17,
-                child: GridView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 14.0,
-                    childAspectRatio: 0.40,
-                  ),
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const HiringCard();
-                  },
-                ),
-              ),
+              CreatedByMeDashboard(uid: user.uid),
               const DashboardTitle(
                   title: AppStrings.assigned, option: AppStrings.view),
               SizedBox(

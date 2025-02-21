@@ -5,6 +5,7 @@ import 'package:cosphere/src/features/dashboard/data/datasources/remote/dashboar
 import 'package:cosphere/src/features/dashboard/data/datasources/remote/dashboard_remote_datasource_impl.dart';
 import 'package:cosphere/src/features/dashboard/data/repositories/dashboard_remote_repository.dart';
 import 'package:cosphere/src/features/dashboard/domain/repositories/dasbboard_repository.dart';
+import 'package:cosphere/src/features/dashboard/domain/usecases/get_projects_user_usecase.dart';
 import 'package:cosphere/src/features/dashboard/domain/usecases/get_user_usecase.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
@@ -17,6 +18,9 @@ void initDash() {
       dashboardLocalDatasource: sl(),
       dashboardRemoteDatasource: sl(),
       checkInternetConnectivity: sl()));
-  sl.registerLazySingleton(() => GetUserUsecase(dasboardRepository: sl()));
-  sl.registerFactory<DashboardBloc>(() => DashboardBloc(getUserUsecase: sl()));
+  sl.registerLazySingleton(() => GetUserUsecase(dashboardRepository: sl()));
+  sl.registerLazySingleton(
+      () => GetProjectsUserUsecase(dashboardRepository: sl()));
+  sl.registerFactory<DashboardBloc>(
+      () => DashboardBloc(getUserUsecase: sl(), getProjectsUserUsecase: sl()));
 }
