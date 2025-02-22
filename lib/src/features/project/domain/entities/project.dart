@@ -1,4 +1,5 @@
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
+import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:equatable/equatable.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
@@ -24,6 +25,7 @@ class Project extends Equatable {
   final List<Applicants> acceptedApplicants;
   final List<Applicants> rejectedApplicants;
   final List<Applicants> pendingApplicants;
+  final List<Tasks> tasks;
   final List<User> members;
   final DateTime createdAt;
 
@@ -44,6 +46,7 @@ class Project extends Equatable {
     required this.acceptedApplicants,
     required this.rejectedApplicants,
     required this.pendingApplicants,
+    required this.tasks,
     required this.members,
     required this.createdAt,
   });
@@ -65,6 +68,7 @@ class Project extends Equatable {
       acceptedApplicants: const [],
       rejectedApplicants: const [],
       pendingApplicants: const [],
+      tasks: const [],
       members: const [],
       createdAt: DateTime.timestamp(),
     );
@@ -88,6 +92,7 @@ class Project extends Equatable {
     List<Applicants>? pendingApplicants,
     List<Applicants>? applicants,
     List<User>? members,
+    List<Tasks>? tasks,
     DateTime? createdAt,
   }) {
     return Project(
@@ -107,6 +112,7 @@ class Project extends Equatable {
       acceptedApplicants: acceptedApplicants ?? this.acceptedApplicants,
       rejectedApplicants: rejectedApplicants ?? this.rejectedApplicants,
       pendingApplicants: pendingApplicants ?? this.pendingApplicants,
+      tasks: tasks ?? this.tasks,
       members: members ?? this.members,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -129,6 +135,7 @@ class Project extends Equatable {
       likes,
       acceptedApplicants,
       members,
+      tasks,
       createdAt,
     ];
   }

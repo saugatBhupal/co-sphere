@@ -2,6 +2,7 @@ import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
+import 'package:cosphere/src/features/project/data/models/mappers/task_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
@@ -30,6 +31,7 @@ extension ProjectApiModelMappers on ProjectApiModel {
             .toList(),
         pendingApplicants:
             pendingApplicants.map((applicant) => applicant.toDomain()).toList(),
+        tasks: tasks.map((task) => task.toDomain()).toList(),
         members: members.map((member) => member.toDomain()).toList(),
         createdAt: createdAt,
       );
@@ -60,6 +62,7 @@ extension ProjectMappers on Project {
         pendingApplicants: pendingApplicants
             .map((applicant) => applicant.fromDomain())
             .toList(),
+        tasks: tasks.map((task) => task.fromDomain()).toList(),
         members: members.map((member) => member.toApiModel()).toList(),
         createdAt: createdAt,
       );

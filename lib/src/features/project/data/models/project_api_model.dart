@@ -1,9 +1,10 @@
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
-import 'package:cosphere/src/features/jobs/data/models/mappers/status_enum_mapper.dart';
+import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 
 class ProjectApiModel {
@@ -23,6 +24,7 @@ class ProjectApiModel {
   final List<ApplicantsApiModel> acceptedApplicants;
   final List<ApplicantsApiModel> rejectedApplicants;
   final List<ApplicantsApiModel> pendingApplicants;
+  final List<TasksApiModel> tasks;
   final List<UserApiModel> members;
   final DateTime createdAt;
 
@@ -44,6 +46,7 @@ class ProjectApiModel {
     required this.rejectedApplicants,
     required this.pendingApplicants,
     required this.members,
+    required this.tasks,
     required this.createdAt,
   });
 
@@ -92,6 +95,11 @@ class ProjectApiModel {
       pendingApplicants: (json['pendingApplicants'] as List?)
               ?.whereType<Map<String, dynamic>>()
               .map((app) => ApplicantsApiModel.fromJson(app))
+              .toList() ??
+          [],
+      tasks: (json['tasks'] as List?)
+              ?.map((task) =>
+                  TasksApiModel.fromJson(task as Map<String, dynamic>))
               .toList() ??
           [],
       members: json['members'] != null && json['members'] is List

@@ -37,3 +37,29 @@ extension StatusExtension on Status {
     }
   }
 }
+
+extension CompletionExtension on CompletionType {
+  String toDatabaseValue() {
+    switch (this) {
+      case CompletionType.delayed:
+        return "Delayed";
+      case CompletionType.ontime:
+        return "On-Time";
+      case CompletionType.early:
+        return "Early";
+    }
+  }
+
+  static CompletionType fromDatabaseValue(String value) {
+    switch (value) {
+      case "Delayed":
+        return CompletionType.delayed;
+      case "On-Time":
+        return CompletionType.ontime;
+      case "Early":
+        return CompletionType.early;
+      default:
+        throw ArgumentError("Invalid status value: $value");
+    }
+  }
+}

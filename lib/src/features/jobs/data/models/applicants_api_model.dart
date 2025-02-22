@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
-import 'package:cosphere/src/features/jobs/data/models/mappers/status_enum_mapper.dart';
+import 'package:cosphere/src/core/utils/enum_mapper.dart';
 
 class ApplicantsApiModel extends Equatable {
   final String id;
