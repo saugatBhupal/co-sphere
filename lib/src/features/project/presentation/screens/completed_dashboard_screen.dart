@@ -18,8 +18,7 @@ class CompletedDashboardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ProjectHeader(status: AppStrings.completed),
-          ProjectDetailsBasics(
-              status: AppStrings.completed, project: Project.initial()),
+          ProjectDetailsBasics(project: Project.initial()),
           Expanded(
               child: ProjectTabbar(
                   status: AppStrings.completed, project: Project.initial())),

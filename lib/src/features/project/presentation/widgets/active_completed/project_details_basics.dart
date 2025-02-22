@@ -12,59 +12,57 @@ import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash
 import 'package:flutter/material.dart';
 
 class ProjectDetailsBasics extends StatelessWidget {
-  final String status;
-  final Project project;
-  const ProjectDetailsBasics(
-      {super.key, required this.status, required this.project});
+final Project project;
+const ProjectDetailsBasics({super.key, required this.project});
 
-  @override
-  Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      height: context.height / 5,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(width: 0.5, color: AppColors.plaster),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              UserLocationDetails(
-                user: project.postedBy,
+@override
+Widget build(BuildContext context) {
+  final _textTheme = Theme.of(context).textTheme;
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    margin: const EdgeInsets.symmetric(vertical: 4),
+    height: context.height / 5,
+    decoration: BoxDecoration(
+      color: AppColors.white,
+      border: Border.all(width: 0.5, color: AppColors.plaster),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            UserLocationDetails(
+              user: project.postedBy,
+            ),
+            if (project.salary != Salary.initial()) ...[
+              const SizedBox(width: 6),
+              BudgetContainer(
+                salary: project.salary,
               ),
-              if (project.salary != Salary.initial()) ...[
-                const SizedBox(width: 6),
-                BudgetContainer(
-                  salary: project.salary,
-                ),
-              ],
+            ],
+            const Spacer(),
+            DurationSpan(
+                postedOn: project.createdAt, duration: project.duration),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: ProjectSkillsList(skills: project.skills),
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Text(
+                AppStrings.visible,
+                style: _textTheme.labelLarge!.copyWith(letterSpacing: 0),
+              ),
               const Spacer(),
-              DurationSpan(
-                  postedOn: project.createdAt, duration: project.duration),
+              if (project.status == Status.active) const TrashButton(),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: ProjectSkillsList(skills: project.skills),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Text(
-                  AppStrings.visible,
-                  style: _textTheme.labelLarge!.copyWith(letterSpacing: 0),
-                ),
-                const Spacer(),
-                if (project.status == Status.active) const TrashButton(),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+        )
+      ],
+    ),
+  );
+}
 }

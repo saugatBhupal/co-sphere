@@ -16,7 +16,6 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
   Future<String> finishHiring(String projectId) async {
     try {
       var res = await dio.post("${ApiEndpoints.finishHire}$projectId");
-      print("Response Data: ${res}");
       if (res.statusCode == 200) {
         return res.data['message'];
       } else {

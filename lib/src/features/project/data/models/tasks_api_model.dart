@@ -40,8 +40,8 @@ class TasksApiModel {
       completionDate: json['completionDate'] != null
           ? DateTime.parse(json['completionDate'])
           : DateTime(1970, 1, 1),
-      completionType:
-          CompletionExtension.fromDatabaseValue(json["completionType"]),
+      completionType: CompletionExtension.fromDatabaseValue(
+          json["completionType"] ?? "On-Time"),
       members: json['members'] != null && json['members'] is List
           ? (json['members'] as List)
               .map((member) => member is Map<String, dynamic>

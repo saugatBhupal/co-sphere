@@ -1,79 +1,88 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/accept_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
 import 'package:flutter/material.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({super.key});
+  final Tasks task;
+  const TaskCard({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 18),
-      height: context.height / 5.32,
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        border: Border(
-          top: BorderSide(color: AppColors.plaster, width: 0.5),
-          bottom: BorderSide(color: AppColors.plaster, width: 0.5),
+    return IntrinsicHeight(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 18),
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          border: Border(
+            top: BorderSide(color: AppColors.plaster, width: 0.5),
+            bottom: BorderSide(color: AppColors.plaster, width: 0.5),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: SizedBox(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Initialize flutter application and connect to database",
-                      style: _textTheme.bodyLarge!
-                          .copyWith(letterSpacing: 0.2, height: 1),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        task.taskName,
+                        style: _textTheme.bodyLarge!
+                            .copyWith(letterSpacing: 0.2, height: 1),
+                      ),
                     ),
-                  ),
-                  const DueDateSpan(subtitle: AppStrings.due)
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text(
-                  "First initialize flutter app and then goto add dependency and then when you finish adding dependency, you need to connect to the database. If you do not have the database please message me.",
-                  style: _textTheme.labelLarge!
-                      .copyWith(color: AppColors.grey, height: 1.2),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                    DueDateSpan(
+                      subtitle: AppStrings.due,
+                      title: extractDate(task.deadline),
+                    )
+                  ],
                 ),
-              ),
-              Row(
-                children: [
-                  Row(
-                    children: List.generate(
-                        3,
-                        (index) => const Padding(
-                              padding: EdgeInsets.only(right: 2),
-                              child: CircleImageAvatar(
-                                  radius: 8, color: AppColors.red),
-                            )),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "19 ${AppStrings.members}",
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                    task.taskDescription,
                     style: _textTheme.labelLarge!
-                        .copyWith(color: AppColors.grey, height: 1),
+                        .copyWith(color: AppColors.grey, height: 1.2),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  const Spacer(),
-                  const AcceptButton(),
-                  const TrashButton(),
-                ],
-              ),
-            ],
+                ),
+                Row(
+                  children: [
+                    Row(
+                      children: List.generate(
+                          task.members.length,
+                          (index) => Padding(
+                                padding: const EdgeInsets.only(right: 2),
+                                child: CircleImageAvatar(
+                                  radius: 10,
+                                  imageUrl: task.members[index].profileImage,
+                                ),
+                              )),
+                    ),
+                    const SizedBox(width: 2),
+                    Text(
+                      "${task.members.length} ${task.members.length > 1 ? AppStrings.members : "Member"}",
+                      style: _textTheme.labelLarge!
+                          .copyWith(color: AppColors.grey, height: 1),
+                    ),
+                    const Spacer(),
+                    const AcceptButton(),
+                    const SizedBox(width: 8),
+                    const TrashButton(),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

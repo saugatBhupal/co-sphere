@@ -1,7 +1,5 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';

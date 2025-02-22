@@ -1,8 +1,11 @@
+import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
+import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/card/task_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TasksView extends StatelessWidget {
   final String status;
@@ -13,6 +16,7 @@ class TasksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Tasks> tasks = context.read<ProjectBloc>().activeTasks;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -32,8 +36,8 @@ class TasksView extends StatelessWidget {
           ),
         Expanded(
           child: ListView.separated(
-            itemCount: 8,
-            itemBuilder: (context, index) => const TaskCard(),
+            itemCount: tasks.length,
+            itemBuilder: (context, index) => TaskCard(task: tasks[index]),
             separatorBuilder: (context, index) => const SizedBox(),
           ),
         ),

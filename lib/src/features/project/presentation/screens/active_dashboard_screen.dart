@@ -36,10 +36,7 @@ class ActiveDashboardScreen extends StatelessWidget {
                     projectName: project.projectName,
                     projectId: project.id,
                   ),
-                  ProjectDetailsBasics(
-                    status: AppStrings.active,
-                    project: project,
-                  ),
+                  ProjectDetailsBasics(project: project),
                   Expanded(
                       child: ProjectTabbar(
                           status: AppStrings.active, project: project)),

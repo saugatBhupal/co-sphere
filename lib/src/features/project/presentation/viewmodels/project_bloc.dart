@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
+import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
@@ -104,6 +106,10 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   List<Applicants> get accepted => _accepted;
   List<Applicants> _rejected = [];
   List<Applicants> get rejected => _rejected;
+  List<Tasks> _activeTasks = [];
+  List<Tasks> get activeTasks => _activeTasks;
+  List<Tasks> _completedTasks = [];
+  List<Tasks> get completedTasks => _completedTasks;
   Project _project = Project.initial();
   Project get project => _project;
   Future<void> _getProjectById(
@@ -117,6 +123,12 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         _accepted = success.acceptedApplicants;
         _rejected = success.rejectedApplicants;
         _project = success;
+        _activeTasks = success.tasks
+            .where((task) => task.status == Status.active)
+            .toList();
+        _completedTasks = success.tasks
+            .where((task) => task.status == Status.completed)
+            .toList();
         emit(GetProjectByIdSuccess(project: _project));
       });
     } catch (e) {
