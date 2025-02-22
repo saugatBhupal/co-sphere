@@ -19,7 +19,8 @@ class ActiveCard extends StatelessWidget {
         project.rejectedApplicants.length +
         project.pendingApplicants.length;
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.active),
+      onTap: () => Navigator.of(context)
+          .pushNamed(AppRoutes.active, arguments: project.id),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         margin: const EdgeInsets.symmetric(vertical: 4),

@@ -11,5 +11,5 @@ abstract interface class ProjectRepository {
   Future<Either<Failure, Project>> getProjectById(String projectId);
   Future<Either<Failure, Applicants>> hireUser(HireUserReqDto params);
   Future<Either<Failure, Applicants>> rejectUser(HireUserReqDto params);
-  Future<Either<Failure, String>> finishHiring(String params);
+  Future<Either<Failure, String>> finishHiring(String projectId);
 }

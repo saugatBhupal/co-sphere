@@ -2,7 +2,6 @@ import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
-import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
@@ -14,9 +13,22 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
   ProjectRemoteDatasourceImpl({required this.dio});
 
   @override
-  Future<String> finishHiring(String uid) {
-    // TODO: implement finishHiring
-    throw UnimplementedError();
+  Future<String> finishHiring(String projectId) async {
+    try {
+      var res = await dio.post("${ApiEndpoints.finishHire}$projectId");
+      print("Response Data: ${res}");
+      if (res.statusCode == 200) {
+        return res.data['message'];
+      } else {
+        throw Failure(
+          message: res.data['message'],
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      print("Dio Exception: ${e.response?.statusCode} ${e.response?.data}");
+      return await handleErrorResponse(e);
+    }
   }
 
   @override

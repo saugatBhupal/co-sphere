@@ -1,6 +1,6 @@
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/components/user_location_details.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_skills_list.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class JobDetailsBasics extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ProjectOwnerDetails(postedBy: User.initial()),
+              UserLocationDetails(user: User.initial()),
               Spacer(),
               DurationSpan(),
             ],

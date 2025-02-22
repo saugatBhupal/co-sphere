@@ -1,3 +1,4 @@
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
@@ -7,8 +8,6 @@ import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/accepted_members_list.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/applicants_list.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/buttons/accept_button.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/buttons/reject_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/hiring/hiring_details_basics.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/hiring/hiring_header.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/rejected_members_list.dart';
@@ -40,11 +39,19 @@ class HiringDashboardScreen extends StatelessWidget {
                     toastType: ToastType.success,
                     msg: "User Rejected Successfully");
               }
+              if (state is HireUserFailed) {
+                buildToast(toastType: ToastType.error, msg: state.message);
+              }
               if (state is GetProjectFailed) {
                 buildToast(toastType: ToastType.error, msg: state.message);
               }
-              if (state is HireUserFailed) {
+              if (state is FinishHireFailed) {
                 buildToast(toastType: ToastType.error, msg: state.message);
+              }
+              if (state is FinishHireSuccess) {
+                buildToast(toastType: ToastType.success, msg: state.message);
+                Navigator.of(context)
+                    .popAndPushNamed(AppRoutes.active, arguments: projectId);
               }
             },
             child: BlocBuilder<ProjectBloc, ProjectState>(
@@ -56,14 +63,12 @@ class HiringDashboardScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       HiringHeader(
-                          postedOn: project.createdAt,
-                          projectName: project.projectName),
-                      HiringDetailsBasics(
-                        postedBy: project.postedBy,
-                        salary: project.salary,
-                        duration: project.duration,
                         postedOn: project.createdAt,
-                        skills: project.skills,
+                        projectName: project.projectName,
+                        projectId: project.id,
+                      ),
+                      HiringDetailsBasics(
+                        project: project,
                       ),
                       if (projectBloc.applicants.isNotEmpty) ...[
                         ApplicantsList(projectId: project.id),

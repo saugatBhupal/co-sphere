@@ -61,3 +61,17 @@ class RejectUserFailed extends ProjectState {
   final String message;
   const RejectUserFailed({required this.message});
 }
+
+class FinishHireLoading extends ProjectState {
+  const FinishHireLoading();
+}
+
+class FinishHireSuccess extends ProjectState {
+  final String message;
+  const FinishHireSuccess({required this.message});
+}
+
+class FinishHireFailed extends ProjectState {
+  final String message;
+  const FinishHireFailed({required this.message});
+}

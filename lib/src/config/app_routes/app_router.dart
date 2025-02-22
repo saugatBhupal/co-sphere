@@ -165,7 +165,8 @@ class AppRouter {
                 value: _projectBloc, child: HiringDashboardScreen(projectId: settings.arguments as String)));
       case AppRoutes.active:
         return MaterialPageRoute(
-            builder: (context) => const ActiveDashboardScreen());
+            builder: (context) => BlocProvider.value(
+                value: _projectBloc, child: ActiveDashboardScreen(projectId: settings.arguments as String)));
       case AppRoutes.completed:
         return MaterialPageRoute(
             builder: (context) => const CompletedDashboardScreen());

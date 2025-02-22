@@ -35,7 +35,6 @@ class DashboardRemoteDatasourceImpl implements DashboardRemoteDatasource {
     try {
       var res = await dio.get("${ApiEndpoints.getProjectUser}$uid");
       if (res.statusCode == 200) {
-        print(res.data);
         final List<ProjectApiModel> projects = (res.data as List<dynamic>)
             .map((json) =>
                 ProjectApiModel.fromJson(json as Map<String, dynamic>))

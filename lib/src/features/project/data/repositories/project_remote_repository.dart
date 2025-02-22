@@ -16,9 +16,12 @@ class ProjectRemoteRepository implements ProjectRepository {
   ProjectRemoteRepository({required this.datasource});
 
   @override
-  Future<Either<Failure, String>> finishHiring(String params) {
-    // TODO: implement finishHiring
-    throw UnimplementedError();
+  Future<Either<Failure, String>> finishHiring(String projectId) async {
+    try {
+      return Right(await datasource.finishHiring(projectId));
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
   }
 
   @override

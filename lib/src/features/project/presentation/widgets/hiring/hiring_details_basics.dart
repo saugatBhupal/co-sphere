@@ -3,32 +3,19 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_owner_details.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/components/user_location_details.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_skills_list.dart';
-import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
-import 'package:cosphere/src/features/project/domain/entities/durations.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:flutter/material.dart';
 
 class HiringDetailsBasics extends StatelessWidget {
-  final User postedBy;
-  final Salary? salary;
-  final DurationTime? duration;
-  final DateTime? postedOn;
-  final List<Skill> skills;
-  const HiringDetailsBasics({
-    super.key,
-    required this.postedBy,
-    this.salary,
-    this.duration,
-    this.postedOn,
-    required this.skills,
-  });
+  final Project project;
+  const HiringDetailsBasics({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +34,21 @@ class HiringDetailsBasics extends StatelessWidget {
           children: [
             Row(
               children: [
-                ProjectOwnerDetails(postedBy: postedBy),
-                if (salary != Salary.initial()) ...[
+                UserLocationDetails(user: project.postedBy),
+                if (project.salary != Salary.initial()) ...[
                   const SizedBox(width: 6),
                   BudgetContainer(
-                    salary: salary!,
+                    salary: project.salary,
                   ),
                 ],
                 const Spacer(),
-                DurationSpan(postedOn: postedOn!, duration: duration!),
+                DurationSpan(
+                    postedOn: project.createdAt, duration: project.duration),
               ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: ProjectSkillsList(skills: skills),
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: ProjectSkillsList(skills: project.skills),
             ),
             const Expanded(
               child: Row(
@@ -73,7 +61,7 @@ class HiringDetailsBasics extends StatelessWidget {
                   Spacer(),
                   FunctionButton(icon: AppIcons.share),
                   SizedBox(width: 12),
-                  const TrashButton(),
+                  TrashButton(),
                 ],
               ),
             )

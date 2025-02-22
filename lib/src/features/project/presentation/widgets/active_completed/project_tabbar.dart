@@ -1,3 +1,4 @@
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
@@ -8,10 +9,8 @@ import 'package:cosphere/src/features/project/presentation/widgets/tab_view/task
 
 class ProjectTabbar extends StatelessWidget {
   final String status;
-  const ProjectTabbar({
-    super.key,
-    required this.status,
-  });
+  final Project project;
+  const ProjectTabbar({super.key, required this.status, required this.project});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,7 @@ class ProjectTabbar extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    const MembersView(),
+                    MembersView(members: project.members),
                     TasksView(status: status),
                     const CompletedTaskView(),
                   ],

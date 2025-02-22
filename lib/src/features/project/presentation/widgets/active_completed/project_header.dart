@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/posted_span.dart';
@@ -7,7 +8,16 @@ import 'package:flutter/material.dart';
 
 class ProjectHeader extends StatelessWidget {
   final String status;
-  const ProjectHeader({super.key, required this.status});
+  final String projectId;
+  final String projectName;
+  final DateTime postedOn;
+  const ProjectHeader({
+    super.key,
+    required this.status,
+    required this.projectId,
+    required this.projectName,
+    required this.postedOn,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +25,17 @@ class ProjectHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Develop a Mobile App for Food Delivery",
+            projectName,
             style:
                 _textTheme.headlineSmall!.copyWith(height: 1.2, fontSize: 20),
           ),
           const SizedBox(height: 6),
           Row(
             children: [
-              const PostedSpan(),
+              PostedSpan(posted: timeAgo(postedOn)),
               const SizedBox(width: 12),
               StatusButton(
                   label: status,

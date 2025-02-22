@@ -9,5 +9,5 @@ abstract interface class ProjectRemoteDatasource {
   Future<ProjectApiModel> getProjectById(String projectId);
   Future<ApplicantsApiModel> hireUser(HireUserReqDto params);
   Future<ApplicantsApiModel> rejectUser(HireUserReqDto params);
-  Future<String> finishHiring(String uid);
+  Future<String> finishHiring(String projectId);
 }

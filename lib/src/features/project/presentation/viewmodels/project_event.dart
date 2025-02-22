@@ -42,3 +42,9 @@ class RejectUser extends ProjectEvent {
 
   const RejectUser({required this.dto});
 }
+
+class FinishHiring extends ProjectEvent {
+  final String projectId;
+
+  const FinishHiring({required this.projectId});
+}

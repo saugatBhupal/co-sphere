@@ -4,13 +4,19 @@ import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/posted_span.dart';
+import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HiringHeader extends StatelessWidget {
+  final String projectId;
   final String projectName;
   final DateTime postedOn;
   const HiringHeader(
-      {super.key, required this.projectName, required this.postedOn});
+      {super.key,
+      required this.projectId,
+      required this.projectName,
+      required this.postedOn});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,9 @@ class HiringHeader extends StatelessWidget {
               SizedBox(
                 width: context.width / 4,
                 child: DarkRoundedButton(
-                  onPressed: () {},
+                  onPressed: () => context
+                      .read<ProjectBloc>()
+                      .add(FinishHiring(projectId: projectId)),
                   fontSize: 10,
                   title: "${AppStrings.finish} ${AppStrings.hiring}",
                   padding: const EdgeInsets.symmetric(vertical: 10),

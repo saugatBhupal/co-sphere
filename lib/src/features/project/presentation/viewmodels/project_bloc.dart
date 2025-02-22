@@ -50,6 +50,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       if (event is RejectUser) {
         await _rejectUser(event, emit);
       }
+      if (event is FinishHiring) {
+        await _finishHiring(event, emit);
+      }
     });
   }
 
@@ -162,6 +165,20 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       });
     } catch (e) {
       emit(RejectUserFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _finishHiring(
+      FinishHiring event, Emitter<ProjectState> emit) async {
+    emit(const FinishHireLoading());
+    try {
+      final result = await finishHiringUsecase(event.projectId);
+      result.fold(
+        (failure) => emit(FinishHireFailed(message: failure.message)),
+        (success) => emit(FinishHireSuccess(message: success)),
+      );
+    } catch (e) {
+      emit(GetProjectFailed(message: "Error: ${e.toString()}"));
     }
   }
 }
