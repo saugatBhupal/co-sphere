@@ -1,5 +1,9 @@
 import 'package:cosphere/src/core/error/failure.dart';
+import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
+import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
+import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
@@ -54,15 +58,23 @@ class ProjectRemoteRepository implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, String>> hireUser(List<String> params) {
-    // TODO: implement hireUser
-    throw UnimplementedError();
+  Future<Either<Failure, Applicants>> hireUser(HireUserReqDto params) async {
+    try {
+      final ApplicantsApiModel applicants = await datasource.hireUser(params);
+      return Right(applicants.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, String>> rejectUser(List<String> params) {
-    // TODO: implement rejectUser
-    throw UnimplementedError();
+  Future<Either<Failure, Applicants>> rejectUser(HireUserReqDto params) async {
+    try {
+      final ApplicantsApiModel applicants = await datasource.rejectUser(params);
+      return Right(applicants.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
   }
 
   @override

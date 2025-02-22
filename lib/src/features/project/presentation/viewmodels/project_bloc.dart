@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
@@ -42,6 +43,12 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is GetProjectByID) {
         await _getProjectById(event, emit);
+      }
+      if (event is HireUser) {
+        await _hireUser(event, emit);
+      }
+      if (event is RejectUser) {
+        await _rejectUser(event, emit);
       }
     });
   }
@@ -94,7 +101,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   List<Applicants> get accepted => _accepted;
   List<Applicants> _rejected = [];
   List<Applicants> get rejected => _rejected;
-
+  Project _project = Project.initial();
+  Project get project => _project;
   Future<void> _getProjectById(
       GetProjectByID event, Emitter<ProjectState> emit) async {
     emit(const GetProjectLoading());
@@ -105,10 +113,55 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         _applicants = success.pendingApplicants;
         _accepted = success.acceptedApplicants;
         _rejected = success.rejectedApplicants;
-        emit(GetProjectByIdSuccess(project: success));
+        _project = success;
+        emit(GetProjectByIdSuccess(project: _project));
       });
     } catch (e) {
       emit(GetProjectFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _hireUser(HireUser event, Emitter<ProjectState> emit) async {
+    emit(const AcceptingUserLoading());
+    try {
+      final result = await hireUserUsecase(event.dto);
+      result.fold((failure) => emit(HireUserFailed(message: failure.message)),
+          (success) {
+        Applicants? applicant = _applicants.firstWhere(
+          (e) => e.id == success.id,
+          orElse: () => _rejected.firstWhere((e) => e.id == success.id),
+        );
+        if (applicant != null) {
+          _applicants.removeWhere((e) => e.id == success.id);
+          _rejected.removeWhere((e) => e.id == success.id);
+          _accepted.add(applicant);
+        }
+        emit(HireUserSuccess(project: _project));
+      });
+    } catch (e) {
+      emit(HireUserFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _rejectUser(RejectUser event, Emitter<ProjectState> emit) async {
+    emit(const AcceptingUserLoading());
+    try {
+      final result = await rejectUserUsecase(event.dto);
+      result.fold((failure) => emit(RejectUserFailed(message: failure.message)),
+          (success) {
+        Applicants? applicant = _applicants.firstWhere(
+          (e) => e.id == success.id,
+          orElse: () => _accepted.firstWhere((e) => e.id == success.id),
+        );
+        if (applicant != null) {
+          _applicants.removeWhere((e) => e.id == success.id);
+          _accepted.removeWhere((e) => e.id == success.id);
+          _rejected.add(applicant);
+        }
+        emit(RejectUserSuccess(applicant: success));
+      });
+    } catch (e) {
+      emit(RejectUserFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

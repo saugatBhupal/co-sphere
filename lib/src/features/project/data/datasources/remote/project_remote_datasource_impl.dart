@@ -1,7 +1,10 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
+import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
+import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
 import 'package:dio/dio.dart';
 
@@ -74,15 +77,37 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
   }
 
   @override
-  Future<String> hireUser(List<String> uid) {
-    // TODO: implement hireUser
-    throw UnimplementedError();
+  Future<ApplicantsApiModel> hireUser(HireUserReqDto params) async {
+    try {
+      var res = await dio.post(ApiEndpoints.hire, data: params.toJson());
+      if (res.statusCode == 200) {
+        return ApplicantsApiModel.fromJson(res.data['applicant']);
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
   }
 
   @override
-  Future<String> rejectUser(List<String> uid) {
-    // TODO: implement rejectUser
-    throw UnimplementedError();
+  Future<ApplicantsApiModel> rejectUser(HireUserReqDto params) async {
+    try {
+      var res = await dio.post(ApiEndpoints.reject, data: params.toJson());
+      if (res.statusCode == 200) {
+        return ApplicantsApiModel.fromJson(res.data['applicant']);
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
   }
 
   @override

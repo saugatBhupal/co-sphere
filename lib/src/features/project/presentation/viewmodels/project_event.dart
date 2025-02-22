@@ -30,3 +30,15 @@ class GetProjectByID extends ProjectEvent {
 
   const GetProjectByID({required this.projectId});
 }
+
+class HireUser extends ProjectEvent {
+  final HireUserReqDto dto;
+
+  const HireUser({required this.dto});
+}
+
+class RejectUser extends ProjectEvent {
+  final HireUserReqDto dto;
+
+  const RejectUser({required this.dto});
+}

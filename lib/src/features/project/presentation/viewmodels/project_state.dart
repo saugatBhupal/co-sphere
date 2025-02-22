@@ -37,3 +37,27 @@ class GetProjectByIdSuccess extends ProjectState {
   final Project project;
   const GetProjectByIdSuccess({required this.project});
 }
+
+class AcceptingUserLoading extends ProjectState {
+  const AcceptingUserLoading();
+}
+
+class HireUserSuccess extends ProjectState {
+  final Project project;
+  const HireUserSuccess({required this.project});
+}
+
+class HireUserFailed extends ProjectState {
+  final String message;
+  const HireUserFailed({required this.message});
+}
+
+class RejectUserSuccess extends ProjectState {
+  final Applicants applicant;
+  const RejectUserSuccess({required this.applicant});
+}
+
+class RejectUserFailed extends ProjectState {
+  final String message;
+  const RejectUserFailed({required this.message});
+}

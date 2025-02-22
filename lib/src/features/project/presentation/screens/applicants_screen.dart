@@ -16,6 +16,7 @@ class ApplicantsScreen extends StatelessWidget {
         itemCount: 8,
         itemBuilder: (context, index) => ApplicantsCard(
           applicant: Applicants.initial(),
+          projectId: "67b83064af55b52f8d7b4580",
         ),
         separatorBuilder: (context, index) => const SizedBox(),
       ),

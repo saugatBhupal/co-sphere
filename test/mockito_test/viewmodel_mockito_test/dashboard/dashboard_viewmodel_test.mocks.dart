@@ -54,14 +54,14 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
 class MockGetUserUsecase extends _i1.Mock implements _i4.GetUserUsecase {
   @override
   _i2.DashboardRepository get dashboardRepository => (super.noSuchMethod(
-        Invocation.getter(#dasboardRepository),
+        Invocation.getter(#dashboardRepository),
         returnValue: _FakeDashboardRepository_0(
           this,
-          Invocation.getter(#dasboardRepository),
+          Invocation.getter(#dashboardRepository),
         ),
         returnValueForMissingStub: _FakeDashboardRepository_0(
           this,
-          Invocation.getter(#dasboardRepository),
+          Invocation.getter(#dashboardRepository),
         ),
       ) as _i2.DashboardRepository);
 
