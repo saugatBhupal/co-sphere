@@ -9,10 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TasksView extends StatelessWidget {
   final String status;
-  const TasksView({
-    super.key,
-    required this.status,
-  });
+  final String projectId;
+  const TasksView({super.key, required this.status, required this.projectId});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,8 @@ class TasksView extends StatelessWidget {
         Expanded(
           child: ListView.separated(
             itemCount: tasks.length,
-            itemBuilder: (context, index) => TaskCard(task: tasks[index]),
+            itemBuilder: (context, index) =>
+                TaskCard(task: tasks[index], projectId: projectId),
             separatorBuilder: (context, index) => const SizedBox(),
           ),
         ),

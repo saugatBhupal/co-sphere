@@ -1,8 +1,10 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
+import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/features/jobs/data/models/job_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +77,7 @@ class CompletedTaskCard extends StatelessWidget {
                           .copyWith(color: AppColors.grey, height: 1),
                     ),
                     const Spacer(),
-                    const StatusButton(label: 'OnTime'),
+                    StatusButton(label: task.completionType.toDatabaseValue()),
                   ],
                 ),
               ],

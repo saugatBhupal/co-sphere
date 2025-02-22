@@ -3,14 +3,18 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
+import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
+import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/accept_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/trash_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TaskCard extends StatelessWidget {
   final Tasks task;
-  const TaskCard({super.key, required this.task});
+  final String projectId;
+  const TaskCard({super.key, required this.task, required this.projectId});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +80,11 @@ class TaskCard extends StatelessWidget {
                           .copyWith(color: AppColors.grey, height: 1),
                     ),
                     const Spacer(),
-                    const AcceptButton(),
+                    AcceptButton(
+                      onTap: () => context.read<ProjectBloc>().add(CompleteTask(
+                          params: CompleteTaskParams(
+                              projectId: projectId, taskId: task.id))),
+                    ),
                     const SizedBox(width: 8),
                     const TrashButton(),
                   ],

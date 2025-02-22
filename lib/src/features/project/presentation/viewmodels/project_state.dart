@@ -75,3 +75,17 @@ class FinishHireFailed extends ProjectState {
   final String message;
   const FinishHireFailed({required this.message});
 }
+
+class CompleteTaskLoading extends ProjectState {
+  const CompleteTaskLoading();
+}
+
+class CompleteTaskSuccess extends ProjectState {
+  final Tasks task;
+  const CompleteTaskSuccess({required this.task});
+}
+
+class CompleteTaskFailed extends ProjectState {
+  final String message;
+  const CompleteTaskFailed({required this.message});
+}

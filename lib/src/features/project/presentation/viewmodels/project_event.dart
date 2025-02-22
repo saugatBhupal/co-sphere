@@ -48,3 +48,9 @@ class FinishHiring extends ProjectEvent {
 
   const FinishHiring({required this.projectId});
 }
+
+class CompleteTask extends ProjectEvent {
+  final CompleteTaskParams params;
+
+  const CompleteTask({required this.params});
+}

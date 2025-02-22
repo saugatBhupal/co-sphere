@@ -43,6 +43,7 @@ class ApiEndpoints {
   static const String getProjectUser = "$baseUrl/project/user/";
 
   // ====================== Project Routes ======================
+  static const String project = "$baseUrl/project/";
   static const String getHiring = "$baseUrl/project/hiring/";
   static const String getActive = "$baseUrl/project/active/";
   static const String getCompleted = "$baseUrl/project/completed/";
