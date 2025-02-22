@@ -8,3 +8,5 @@ extension MediaQueryValues on BuildContext {
   double get mainHeight => height - statusBarSize;
   double get heightOfScreenOnly => height - appBarSize;
 }
+
+const double tabletBreakpoint = 600;

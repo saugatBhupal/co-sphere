@@ -28,6 +28,10 @@ class ActiveDashboardScreen extends StatelessWidget {
             if (state is CompleteTaskFailed) {
               buildToast(toastType: ToastType.error, msg: state.message);
             }
+            if (state is CompleteTaskSuccess) {
+              buildToast(
+                  toastType: ToastType.success, msg: "Task Added Successfully");
+            }
           },
           child: BlocBuilder<ProjectBloc, ProjectState>(
             builder: (context, state) {

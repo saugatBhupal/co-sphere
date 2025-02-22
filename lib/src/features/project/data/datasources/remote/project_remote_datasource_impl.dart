@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
 import 'package:cosphere/src/features/project/data/models/tasks_api_model.dart';
@@ -140,6 +141,7 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
     }
   }
 
+  @override
   Future<TasksApiModel> completeTask(CompleteTaskParams params) async {
     try {
       var res = await dio.post(
@@ -164,6 +166,27 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
       }
     } on DioException catch (e) {
       print("Dio Exception: ${e.response?.statusCode} ${e.response?.data}");
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<TasksApiModel> createTask(CreateTaskReqDto dto) async {
+    try {
+      var res = await dio.post("${ApiEndpoints.project}${dto.projectId}/task",
+          data: dto.toJson());
+      if (res.statusCode == 200) {
+        List<TasksApiModel> tasks = (res.data['task'] as List)
+            .map((json) => TasksApiModel.fromJson(json))
+            .toList();
+        return tasks[0];
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
       return await handleErrorResponse(e);
     }
   }

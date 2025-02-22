@@ -1,4 +1,5 @@
 import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
 import 'package:cosphere/src/features/project/data/models/tasks_api_model.dart';
@@ -13,4 +14,5 @@ abstract interface class ProjectRemoteDatasource {
   Future<ApplicantsApiModel> rejectUser(HireUserReqDto params);
   Future<String> finishHiring(String projectId);
   Future<TasksApiModel> completeTask(CompleteTaskParams params);
+  Future<TasksApiModel> createTask(CreateTaskReqDto dto);
 }

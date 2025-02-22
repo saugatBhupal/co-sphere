@@ -3,6 +3,7 @@ import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/task_mappers.dart';
@@ -99,6 +100,16 @@ class ProjectRemoteRepository implements ProjectRepository {
   Future<Either<Failure, Tasks>> completeTask(CompleteTaskParams params) async {
     try {
       final TasksApiModel task = await datasource.completeTask(params);
+      return Right(task.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Tasks>> createTask(CreateTaskReqDto dto) async {
+    try {
+      final TasksApiModel task = await datasource.createTask(dto);
       return Right(task.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));

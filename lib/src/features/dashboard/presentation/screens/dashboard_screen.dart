@@ -1,4 +1,3 @@
-import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
@@ -48,7 +47,10 @@ class DashboardScreen extends StatelessWidget {
       case 2:
         return const CreateProjectScreen();
       case 3:
-        return const AddTaskForm();
+        return const AddTaskForm(
+          members: [],
+          projectId: "",
+        );
       case 4:
         return ProfileScreen(user: user);
       default:

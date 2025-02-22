@@ -1,29 +1,31 @@
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AssignDropdown extends StatefulWidget {
   final String? label;
-  final List<String> items;
-  final ValueChanged<String>? onChanged;
-  final String? selectedItem;
+  // final List<String> items;
+  final ValueChanged<User>? onChanged;
+  final User? selectedItem;
+  final List<User> members;
 
-  const AssignDropdown({
-    super.key,
-    this.label,
-    required this.items,
-    this.onChanged,
-    this.selectedItem,
-  });
+  const AssignDropdown(
+      {super.key,
+      this.label,
+      // required this.items,
+      this.onChanged,
+      this.selectedItem,
+      required this.members});
 
   @override
   _AssignDropdownState createState() => _AssignDropdownState();
 }
 
 class _AssignDropdownState extends State<AssignDropdown> {
-  String? selectedValue;
+  User? selectedValue;
   OverlayEntry? _overlayEntry;
   final LayerLink _layerLink = LayerLink();
   final GlobalKey _textFieldKey = GlobalKey();
@@ -68,7 +70,7 @@ class _AssignDropdownState extends State<AssignDropdown> {
             child: ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
-              children: widget.items.map((String item) {
+              children: widget.members.map((User member) {
                 return Container(
                   decoration: const BoxDecoration(
                     border: Border(
@@ -76,12 +78,12 @@ class _AssignDropdownState extends State<AssignDropdown> {
                     ),
                   ),
                   child: ListTile(
-                    title: Text(item),
+                    title: Text(member.fullname),
                     onTap: () {
                       setState(() {
-                        selectedValue = item;
+                        selectedValue = member;
                       });
-                      widget.onChanged?.call(item);
+                      widget.onChanged?.call(member);
                       _closeDropdown();
                     },
                   ),

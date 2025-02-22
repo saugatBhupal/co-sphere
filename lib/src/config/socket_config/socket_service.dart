@@ -15,7 +15,8 @@ class SocketService {
     String userId = user?.uid ?? 'undefined';
 
     _socket = IO.io(
-      'http://10.0.2.2:3000',
+      // 'http://10.0.2.2:3000',
+      'http://localhost:3000',
       IO.OptionBuilder()
           .setQuery({'userId': userId})
           .setTransports(['websocket'])

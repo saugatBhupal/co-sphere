@@ -10,48 +10,49 @@ class AssignedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      height: context.height / 6.4,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(width: 1, color: AppColors.plaster),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: const Column(
-        children: [
-          CardsHeaderInfo(),
-          SizedBox(height: 8),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: CardsGridInfo(
-                    title: "20",
-                    subtitle: AppStrings.deadline,
-                    color: AppColors.red,
-                    padding: 32,
+    return IntrinsicHeight(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          border: Border.all(width: 1, color: AppColors.plaster),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Column(
+          children: [
+            CardsHeaderInfo(),
+            SizedBox(height: 8),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: CardsGridInfo(
+                      title: "20",
+                      subtitle: AppStrings.deadline,
+                      color: AppColors.red,
+                      padding: 32,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: CardsGridInfo(
-                    title: "20",
-                    subtitle: AppStrings.timeSpent,
+                  Expanded(
+                    child: CardsGridInfo(
+                      title: "20",
+                      subtitle: AppStrings.timeSpent,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: CardsGridInfo(
-                    title: "20",
-                    subtitle: AppStrings.completion,
-                    border: false,
+                  Expanded(
+                    child: CardsGridInfo(
+                      title: "20",
+                      subtitle: AppStrings.completion,
+                      border: false,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

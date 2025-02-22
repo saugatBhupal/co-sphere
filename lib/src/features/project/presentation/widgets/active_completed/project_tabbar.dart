@@ -55,7 +55,10 @@ class ProjectTabbar extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     MembersView(members: project.members),
-                    TasksView(status: status, projectId: project.id),
+                    TasksView(
+                        status: status,
+                        projectId: project.id,
+                        members: project.members),
                     const CompletedTaskView(),
                   ],
                 ),

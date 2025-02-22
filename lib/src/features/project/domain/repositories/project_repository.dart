@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
@@ -15,4 +16,5 @@ abstract interface class ProjectRepository {
   Future<Either<Failure, Applicants>> rejectUser(HireUserReqDto params);
   Future<Either<Failure, String>> finishHiring(String projectId);
   Future<Either<Failure, Tasks>> completeTask(CompleteTaskParams params);
+  Future<Either<Failure, Tasks>> createTask(CreateTaskReqDto dto);
 }

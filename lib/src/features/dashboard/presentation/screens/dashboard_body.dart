@@ -40,14 +40,15 @@ class DashboardBody extends StatelessWidget {
               const DashboardTitle(
                   title: AppStrings.assigned, option: AppStrings.view),
               SizedBox(
-                height: context.height * 0.17,
+                width: context.width,
+                height: context.height / 6.5,
                 child: GridView.builder(
                   physics: const AlwaysScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
-                    mainAxisSpacing: 14.0,
-                    childAspectRatio: 0.40,
+                    mainAxisSpacing: context.width * 0.02,
+                    childAspectRatio: 0.42,
                   ),
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {

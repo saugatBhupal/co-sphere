@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/authentication/presentation/widgets/textspan/account_textspan.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/buttons/light_rounded_button.dart';
@@ -15,6 +16,8 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = MediaQuery.of(context).size.width >= tabletBreakpoint;
+    final _textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -27,24 +30,25 @@ class OnboardingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RichText(
-                      text: const TextSpan(
+                      text: TextSpan(
                         children: [
                           TextSpan(
                             text: AppStrings.welcome,
-                            style: TextStyle(
-                              color: AppColors.grey,
-                              fontFamily: AppFonts.albertSans,
-                              fontSize: 18,
-                            ),
+                            style: isTablet
+                                ? _textTheme.headlineLarge!.copyWith(
+                                    color: AppColors.grey,
+                                    fontWeight: FontThickness.medium)
+                                : _textTheme.bodyLarge!
+                                    .copyWith(color: AppColors.grey),
                           ),
                           TextSpan(
                             text: AppStrings.appName,
-                            style: TextStyle(
-                              color: AppColors.midnight,
-                              fontFamily: AppFonts.albertSans,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                            ),
+                            style: isTablet
+                                ? _textTheme.headlineLarge!.copyWith(
+                                    color: AppColors.midnight,
+                                    fontWeight: FontThickness.medium)
+                                : _textTheme.bodyLarge!
+                                    .copyWith(color: AppColors.midnight),
                           ),
                         ],
                       ),

@@ -89,3 +89,17 @@ class CompleteTaskFailed extends ProjectState {
   final String message;
   const CompleteTaskFailed({required this.message});
 }
+
+class CreateTaskLoading extends ProjectState {
+  const CreateTaskLoading();
+}
+
+class CreateTaskSuccess extends ProjectState {
+  final Tasks task;
+  const CreateTaskSuccess({required this.task});
+}
+
+class CreateTaskFailed extends ProjectState {
+  final String message;
+  const CreateTaskFailed({required this.message});
+}

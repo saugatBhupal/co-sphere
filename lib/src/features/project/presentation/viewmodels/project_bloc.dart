@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
@@ -26,6 +28,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final RejectUserUsecase rejectUserUsecase;
   final FinishHiringUsecase finishHiringUsecase;
   final CompleteTaskUsecase completeTaskUsecase;
+  final CreateTaskUsecase createTaskUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -35,6 +38,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.finishHiringUsecase,
     required this.getProjectByIdUsecase,
     required this.completeTaskUsecase,
+    required this.createTaskUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -60,6 +64,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is CompleteTask) {
         await _completeTask(event, emit);
+      }
+      if (event is CreateTask) {
+        await _createTask(event, emit);
       }
     });
   }
@@ -220,6 +227,23 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       );
     } catch (e) {
       emit(CompleteTaskFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _createTask(CreateTask event, Emitter<ProjectState> emit) async {
+    emit(const CreateTaskLoading());
+    try {
+      final result = await createTaskUsecase(event.dto);
+      result.fold(
+        (failure) => emit(CreateTaskFailed(message: failure.message)),
+        (success) {
+          print(success);
+          _activeTasks.add(success);
+          emit(CreateTaskSuccess(task: success));
+        },
+      );
+    } catch (e) {
+      emit(CreateTaskFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

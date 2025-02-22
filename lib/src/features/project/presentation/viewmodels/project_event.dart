@@ -54,3 +54,9 @@ class CompleteTask extends ProjectEvent {
 
   const CompleteTask({required this.params});
 }
+
+class CreateTask extends ProjectEvent {
+  final CreateTaskReqDto dto;
+
+  const CreateTask({required this.dto});
+}
