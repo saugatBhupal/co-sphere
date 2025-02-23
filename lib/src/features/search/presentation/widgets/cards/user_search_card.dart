@@ -1,7 +1,9 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/card/task_card.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/start_chat_button.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
@@ -31,8 +33,8 @@ class UserSearchCard extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    height: 40,
-                    width: 40,
+                    height: context.isTablet ? 50 : 40,
+                    width: context.isTablet ? 50 : 40,
                     decoration: BoxDecoration(
                       color: AppColors.frog,
                       borderRadius: BorderRadius.circular(10),
@@ -46,12 +48,16 @@ class UserSearchCard extends StatelessWidget {
                         Text(user.fullname,
                             style: _textTheme.bodySmall!.copyWith(
                               letterSpacing: 0,
+                              fontSize: context.isTablet ? 16 : 12,
                               color: AppColors.black,
                               fontWeight: FontThickness.regular,
                             )),
                         Text(
                           "${user.city} ${user.country}",
-                          style: _textTheme.labelLarge!.copyWith(height: 1),
+                          style: _textTheme.labelLarge!.copyWith(
+                            height: 1,
+                            fontSize: context.isTablet ? 14 : 10,
+                          ),
                         ),
                       ],
                     ),
@@ -72,7 +78,7 @@ class UserSearchCard extends StatelessWidget {
                           .map((skill) => SkillsButton(
                                 name: skill.name,
                                 borderRadius: 4,
-                                fontSize: 10,
+                                fontSize: context.isTablet ? 14 : 10,
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 6, horizontal: 12),
                               ))
@@ -84,7 +90,7 @@ class UserSearchCard extends StatelessWidget {
                       SkillsButton(
                         name: "+${user.skills!.length - 2} more",
                         borderRadius: 4,
-                        fontSize: 10,
+                        fontSize: context.isTablet ? 14 : 10,
                         padding: const EdgeInsets.symmetric(
                             vertical: 6, horizontal: 12),
                       ),
@@ -100,6 +106,7 @@ class UserSearchCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: _textTheme.bodySmall!.copyWith(
                     letterSpacing: 0,
+                    fontSize: context.isTablet ? 16 : 12,
                     fontWeight: FontThickness.light,
                     color: AppColors.grey,
                   ),

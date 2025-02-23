@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 
 class CompletionContainer extends StatelessWidget {
@@ -17,7 +18,7 @@ class CompletionContainer extends StatelessWidget {
     double completionRatio = completed / total;
 
     return Container(
-      width: 28,
+      width: context.isTablet ? 34 : 28,
       height: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),

@@ -63,20 +63,25 @@ class MessageTile extends StatelessWidget {
                             recipient.profileImage!.isNotEmpty
                         ? recipient.profileImage
                         : '',
-                    radius: 18,
+                    radius: context.isTablet ? 26 : 18,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     recipient.fullname,
                     style: _textTheme.titleSmall!.copyWith(
-                      fontWeight: FontThickness.medium,
+                      fontWeight: context.isTablet
+                          ? FontThickness.regular
+                          : FontThickness.medium,
                       color: AppColors.black,
+                      fontSize: context.isTablet ? 20 : 16,
                     ),
                   ),
                   const Spacer(),
                   Text(
                     extractTime(lastMessage!.sent),
-                    style: _textTheme.bodySmall,
+                    style: _textTheme.bodySmall!.copyWith(
+                      fontSize: context.isTablet ? 16 : 12,
+                    ),
                   )
                 ],
               ),
@@ -85,7 +90,7 @@ class MessageTile extends StatelessWidget {
                 children: [
                   if (lastMessage.sender.uid == user.uid)
                     SizedBox(
-                      width: 36,
+                      width: context.isTablet ? 48 : 36,
                       child: Text(
                         AppStrings.you,
                         maxLines: 1,
@@ -93,6 +98,7 @@ class MessageTile extends StatelessWidget {
                         style: _textTheme.bodyLarge!.copyWith(
                           fontWeight: FontThickness.medium,
                           color: AppColors.midnight,
+                          fontSize: context.isTablet ? 18 : 14,
                         ),
                       ),
                     ),
@@ -105,6 +111,7 @@ class MessageTile extends StatelessWidget {
                       style: _textTheme.bodyLarge!.copyWith(
                         fontWeight: FontThickness.light,
                         color: AppColors.grey,
+                        fontSize: context.isTablet ? 18 : 14,
                       ),
                     ),
                   ),

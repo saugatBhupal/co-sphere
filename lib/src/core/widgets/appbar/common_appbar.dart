@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 
 class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,8 +19,10 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
           const Border(bottom: BorderSide(color: AppColors.plaster, width: 1)),
       title: Text(
         title,
-        style: _textTheme.titleSmall!
-            .copyWith(fontWeight: FontThickness.medium, color: AppColors.black),
+        style: _textTheme.titleSmall!.copyWith(
+            fontWeight: FontThickness.medium,
+            color: AppColors.black,
+            fontSize: context.isTablet ? 20 : 16),
       ),
     );
   }

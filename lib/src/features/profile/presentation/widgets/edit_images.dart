@@ -83,7 +83,7 @@ class _EditImagesState extends State<EditImages> {
                     bottom: -32,
                     left: 20,
                     child: CircleImageAvatar(
-                        radius: 34,
+                        radius: context.isTablet ? 40 : 34,
                         imageUrl: _media?.path ??
                             widget.user.profileImage ??
                             AppImages.profile),
@@ -101,6 +101,7 @@ class _EditImagesState extends State<EditImages> {
                         fontWeight: FontThickness.medium,
                         color: AppColors.grey,
                         height: 1.2,
+                        fontSize: context.isTablet ? 20 : 16,
                       ),
                     ),
                     Text(
@@ -108,6 +109,7 @@ class _EditImagesState extends State<EditImages> {
                       style: _textTheme.bodySmall!.copyWith(
                         color: AppColors.grey,
                         fontWeight: FontThickness.regular,
+                        fontSize: context.isTablet ? 16 : 12,
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -118,7 +120,7 @@ class _EditImagesState extends State<EditImages> {
                           width: context.width / 3.8,
                           child: LightRoundedButton(
                             title: AppStrings.upload,
-                            fontSize: 13,
+                            fontSize: context.isTablet ? 17 : 13,
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             onPressed: () async {
                               await AppPermissions.checkCameraPermission();
@@ -136,7 +138,7 @@ class _EditImagesState extends State<EditImages> {
                           width: context.width / 5.8,
                           child: DarkRoundedButton(
                             title: AppStrings.save,
-                            fontSize: 13,
+                            fontSize: context.isTablet ? 17 : 13,
                             padding: const EdgeInsets.symmetric(
                                 vertical: 8, horizontal: 6),
                             onPressed: () {

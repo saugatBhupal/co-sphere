@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -30,10 +31,15 @@ class PhoneField extends StatelessWidget {
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       inputFormatters: [LengthLimitingTextInputFormatter(10)],
-      style: _textTheme.titleSmall!
-          .copyWith(fontSize: 15, color: color ?? AppColors.midnight),
+      style: _textTheme.titleSmall!.copyWith(
+          fontSize: context.isTablet ? 18 : 15, color: AppColors.midnight),
       decoration: InputDecoration(
         hintText: "${AppStrings.enter} ${AppStrings.phone.toLowerCase()}",
+        hintStyle: _textTheme.titleSmall!.copyWith(
+          fontSize: context.isTablet ? 17 : 15,
+          color: AppColors.dim,
+          fontWeight: FontThickness.light,
+        ),
         prefix: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -55,6 +61,10 @@ class PhoneField extends StatelessWidget {
           fontSize: 16,
         ),
         labelText: label,
+        contentPadding: EdgeInsets.symmetric(
+          vertical: context.isTablet ? 14 : 6,
+          horizontal: 16,
+        ),
       ),
     );
   }

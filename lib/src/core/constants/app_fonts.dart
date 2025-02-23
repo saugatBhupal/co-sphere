@@ -7,7 +7,7 @@ class AppFonts {
 
 class FontSize {
   static const double subLight = 8.0; //labelSmall
-  static const double light = 10.0; // labelLarge
+  static const double light = 10.0; //   labelLarge
   static const double subLabel = 12.0; // bodySmall
   static const double label = 14.0; // bodyLarge
   static const double details = 16.0; //titleSmall/Medium

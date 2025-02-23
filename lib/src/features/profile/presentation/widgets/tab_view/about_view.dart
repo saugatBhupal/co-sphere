@@ -60,16 +60,19 @@ Widget _buildInfo(String title, String subtitle, BuildContext context) {
       Text(
         title,
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontThickness.semiBold,
-            ),
+            fontWeight: FontThickness.semiBold,
+            fontSize: context.isTablet ? 18 : 14),
       ),
       const SizedBox(height: 4),
       Text(
         subtitle,
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: AppColors.silver,
-              height: 0,
-            ),
+            color: AppColors.silver,
+            height: 0,
+            fontWeight: context.isTablet
+                ? FontThickness.regular
+                : FontThickness.semiBold,
+            fontSize: context.isTablet ? 18 : 14),
       ),
     ],
   );

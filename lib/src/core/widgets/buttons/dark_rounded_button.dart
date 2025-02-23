@@ -7,20 +7,22 @@ import 'package:flutter/material.dart';
 class DarkRoundedButton extends StatelessWidget {
   final String title;
   final String? icon;
-  final double fontSize;
+  final double? fontSize;
   final double? height;
   final bool isLoading;
   final EdgeInsetsGeometry? padding;
   final Function()? onPressed;
-  const DarkRoundedButton(
-      {super.key,
-      required this.title,
-      this.onPressed,
-      this.fontSize = 18,
-      this.padding,
-      this.height,
-      this.icon,
-      this.isLoading = false});
+
+  const DarkRoundedButton({
+    super.key,
+    required this.title,
+    this.onPressed,
+    this.fontSize,
+    this.padding,
+    this.height,
+    this.icon,
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,11 @@ class DarkRoundedButton extends StatelessWidget {
                   ),
                 Container(
                   padding: padding ??
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                      (context.isTablet
+                          ? const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 16)
+                          : const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 8)),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
@@ -59,12 +65,16 @@ class DarkRoundedButton extends StatelessWidget {
                         )
                       : Text(
                           title,
-                          style:
-                              Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    color: AppColors.white,
-                                    fontWeight: FontThickness.medium,
-                                    fontSize: fontSize,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                color: AppColors.white,
+                                fontWeight: FontThickness.medium,
+                                letterSpacing: 0,
+                                fontSize:
+                                    fontSize ?? (context.isTablet ? 22 : 18),
+                              ),
                         ),
                 ),
               ],

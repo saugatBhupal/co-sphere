@@ -1,5 +1,6 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
-import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/created_by_me_dashboard.dart';
+import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/assigned_to_me_grid.dart';
+import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/created_by_me_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
@@ -27,7 +28,7 @@ class DashboardBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
+              SizedBox(height: context.isTablet ? 4 : 16),
               DashboardFunctions(user: user),
               const DashboardMetrics(),
               DashboardTitle(
@@ -36,26 +37,10 @@ class DashboardBody extends StatelessWidget {
                 onPressed: () => Navigator.of(context)
                     .pushNamed(AppRoutes.createdProjects, arguments: user),
               ),
-              CreatedByMeDashboard(uid: user.uid),
+              CreatedByMeGrid(uid: user.uid),
               const DashboardTitle(
                   title: AppStrings.assigned, option: AppStrings.view),
-              SizedBox(
-                width: context.width,
-                height: context.height / 6.5,
-                child: GridView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: context.width * 0.02,
-                    childAspectRatio: 0.42,
-                  ),
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const AssignedCard();
-                  },
-                ),
-              ),
+              const AssignedToMeGrid(),
               DashboardTitle(
                 title: AppStrings.application,
                 option: AppStrings.view,

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class LightRoundedButton extends StatelessWidget {
   final String title;
-  final double fontSize;
+  final double? fontSize;
 
   final EdgeInsetsGeometry? padding;
   final Function()? onPressed;
@@ -13,7 +13,7 @@ class LightRoundedButton extends StatelessWidget {
   const LightRoundedButton({
     super.key,
     required this.title,
-    this.fontSize = 18,
+    this.fontSize,
     this.padding,
     this.onPressed,
   });
@@ -31,17 +31,20 @@ class LightRoundedButton extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(32)),
           child: Container(
             padding: padding ??
-                const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                (context.isTablet
+                    ? const EdgeInsets.symmetric(vertical: 10, horizontal: 16)
+                    : const EdgeInsets.symmetric(vertical: 10, horizontal: 8)),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: Center(
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       color: AppColors.midnight,
                       fontWeight: FontThickness.medium,
-                      fontSize: fontSize,
+                      letterSpacing: 0,
+                      fontSize: fontSize ?? (context.isTablet ? 22 : 18),
                     ),
               ),
             ),

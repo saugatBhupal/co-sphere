@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
 
@@ -20,7 +21,8 @@ class JobDetailsSection extends StatelessWidget {
         children: [
           Text(
             section.title,
-            style: textTheme.bodyLarge!.copyWith(letterSpacing: 0),
+            style: textTheme.bodyLarge!.copyWith(
+                letterSpacing: 0, fontSize: context.isTablet ? 18 : 14),
           ),
           const SizedBox(height: 4),
           if (section.description != null && section.description!.isNotEmpty)
@@ -31,6 +33,7 @@ class JobDetailsSection extends StatelessWidget {
                 style: textTheme.bodyLarge!.copyWith(
                     letterSpacing: 0,
                     fontWeight: FontThickness.light,
+                    fontSize: context.isTablet ? 18 : 14,
                     color: AppColors.grey),
               ),
             ),
@@ -51,6 +54,7 @@ class JobDetailsSection extends StatelessWidget {
                               desc,
                               style: textTheme.bodyLarge!.copyWith(
                                   letterSpacing: 0,
+                                  fontSize: context.isTablet ? 18 : 14,
                                   fontWeight: FontThickness.light,
                                   color: AppColors.grey),
                             ),

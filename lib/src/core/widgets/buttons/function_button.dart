@@ -1,4 +1,6 @@
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
@@ -22,8 +24,10 @@ class FunctionButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        padding:
-            padding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        padding: padding ??
+            EdgeInsets.symmetric(
+                horizontal: context.isTablet ? 12 : 8,
+                vertical: context.isTablet ? 8 : 6),
         decoration: BoxDecoration(
           color: AppColors.beluga,
           border: Border.all(width: 1, color: AppColors.plaster),
@@ -31,7 +35,10 @@ class FunctionButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SvgPicture.asset(icon),
+            SvgPicture.asset(
+              icon,
+              height: context.isTablet ? 20 : null,
+            ),
             if (title != null) ...[
               const SizedBox(width: 6),
               Text(
@@ -39,6 +46,7 @@ class FunctionButton extends StatelessWidget {
                 style: _textTheme.labelLarge!.copyWith(
                   color: AppColors.black,
                   fontWeight: FontThickness.semiBold,
+                  fontSize: context.isTablet ? 14 : 10,
                 ),
               ),
             ],

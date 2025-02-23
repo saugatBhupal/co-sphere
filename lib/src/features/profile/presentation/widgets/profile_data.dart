@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 
 class ProfileData extends StatelessWidget {
@@ -20,13 +22,16 @@ class ProfileData extends StatelessWidget {
         children: [
           Text(
             name,
-            style: _textTheme.titleLarge!
-                .copyWith(height: 1.2, fontWeight: FontThickness.medium),
+            style: _textTheme.titleLarge!.copyWith(
+                height: 1.2,
+                fontWeight: FontThickness.medium,
+                fontSize: context.isTablet ? 26 : 18),
           ),
           Text(
             "$city, $country",
-            style: _textTheme.titleSmall!
-                .copyWith(color: AppColors.grey.withOpacity(0.8)),
+            style: _textTheme.titleSmall!.copyWith(
+                color: AppColors.grey.withOpacity(0.8),
+                fontSize: context.isTablet ? 22 : 14),
           ),
         ],
       ),

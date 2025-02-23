@@ -1,4 +1,6 @@
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cosphere/src/core/constants/app_fonts.dart';
@@ -50,7 +52,10 @@ Widget _buildTitle(BuildContext context, {required String title}) {
     child: Text(
       title,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          fontWeight: FontThickness.medium, letterSpacing: 0, height: 1),
+          fontWeight: FontThickness.medium,
+          letterSpacing: 0,
+          height: 1,
+          fontSize: context.isTablet ? 18 : 14),
     ),
   );
 }

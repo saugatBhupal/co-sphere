@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +34,15 @@ class ProjectTabbar extends StatelessWidget {
                 tabAlignment: TabAlignment.center,
                 unselectedLabelColor: AppColors.grey,
                 labelStyle: _textTheme.bodySmall!.copyWith(
-                    fontWeight: FontThickness.semiBold,
-                    color: AppColors.midnight),
+                  fontWeight: FontThickness.semiBold,
+                  color: AppColors.midnight,
+                  fontSize: context.isTablet ? 16 : 12,
+                ),
                 unselectedLabelStyle: _textTheme.bodySmall!.copyWith(
-                    fontWeight: FontThickness.medium,
-                    color: AppColors.dim.withOpacity(0.2)),
+                  fontWeight: FontThickness.medium,
+                  color: AppColors.dim.withOpacity(0.2),
+                  fontSize: context.isTablet ? 16 : 12,
+                ),
                 labelPadding:
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),
                 splashFactory: NoSplash.splashFactory,

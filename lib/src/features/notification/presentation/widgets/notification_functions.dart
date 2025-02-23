@@ -2,6 +2,8 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -36,12 +38,15 @@ class NotificationFunctions extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     AppIcons.tick,
+                    height: context.isTablet ? 26 : null,
                   ),
                   const SizedBox(width: 6),
                   Text(
                     AppStrings.read,
                     style: _textTheme.bodySmall!.copyWith(
-                        fontWeight: FontThickness.medium, letterSpacing: 0),
+                        fontWeight: FontThickness.medium,
+                        fontSize: context.isTablet ? 16 : 12,
+                        letterSpacing: 0),
                   ),
                 ],
               ),
@@ -58,6 +63,7 @@ class NotificationFunctions extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     AppIcons.trash,
+                    height: context.isTablet ? 26 : null,
                   ),
                   const SizedBox(width: 2),
                   Text(
@@ -66,6 +72,7 @@ class NotificationFunctions extends StatelessWidget {
                       fontWeight: FontThickness.medium,
                       letterSpacing: 0,
                       color: AppColors.pumpkin,
+                      fontSize: context.isTablet ? 16 : 12,
                     ),
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
@@ -40,8 +41,11 @@ class TaskCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         task.taskName,
-                        style: _textTheme.bodyLarge!
-                            .copyWith(letterSpacing: 0.2, height: 1),
+                        style: _textTheme.bodyLarge!.copyWith(
+                          letterSpacing: 0.2,
+                          height: 1,
+                          fontSize: context.isTablet ? 20 : 14,
+                        ),
                       ),
                     ),
                     DueDateSpan(
@@ -54,8 +58,11 @@ class TaskCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Text(
                     task.taskDescription,
-                    style: _textTheme.labelLarge!
-                        .copyWith(color: AppColors.grey, height: 1.2),
+                    style: _textTheme.labelLarge!.copyWith(
+                      color: AppColors.grey,
+                      height: 1.2,
+                      fontSize: context.isTablet ? 16 : 10,
+                    ),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -76,8 +83,11 @@ class TaskCard extends StatelessWidget {
                     const SizedBox(width: 2),
                     Text(
                       "${task.members.length} ${task.members.length > 1 ? AppStrings.members : "Member"}",
-                      style: _textTheme.labelLarge!
-                          .copyWith(color: AppColors.grey, height: 1),
+                      style: _textTheme.labelLarge!.copyWith(
+                        color: AppColors.grey,
+                        height: 1,
+                        fontSize: context.isTablet ? 16 : 10,
+                      ),
                     ),
                     const Spacer(),
                     AcceptButton(

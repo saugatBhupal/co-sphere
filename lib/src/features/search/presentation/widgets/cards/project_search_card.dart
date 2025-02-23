@@ -2,6 +2,7 @@ import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
@@ -38,8 +39,8 @@ class ProjectSearchCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: 52,
-                  width: 52,
+                  height: context.isTablet ? 64 : 52,
+                  width: context.isTablet ? 64 : 52,
                   decoration: BoxDecoration(
                     color: AppColors.frog,
                     borderRadius: BorderRadius.circular(10),
@@ -54,12 +55,15 @@ class ProjectSearchCard extends StatelessWidget {
                         project.companyName.isNotEmpty == true
                             ? project.companyName
                             : project.postedBy.fullname,
-                        style: _textTheme.labelLarge,
+                        style: _textTheme.labelLarge!.copyWith(
+                          fontSize: context.isTablet ? 14 : 10,
+                        ),
                       ),
                       Text(project.projectName,
                           style: _textTheme.bodySmall!.copyWith(
                             letterSpacing: 0,
                             color: AppColors.black,
+                            fontSize: context.isTablet ? 16 : 12,
                             fontWeight: FontThickness.regular,
                           )),
                       if (project.salary != Salary.initial()) ...[
@@ -85,7 +89,7 @@ class ProjectSearchCard extends StatelessWidget {
                         .map((skill) => SkillsButton(
                               name: skill.name,
                               borderRadius: 4,
-                              fontSize: 10,
+                              fontSize: context.isTablet ? 14 : 10,
                               padding: const EdgeInsets.symmetric(
                                   vertical: 6, horizontal: 12),
                             ))
@@ -97,7 +101,7 @@ class ProjectSearchCard extends StatelessWidget {
                     SkillsButton(
                       name: "+${project.skills.length - 2} more",
                       borderRadius: 4,
-                      fontSize: 10,
+                      fontSize: context.isTablet ? 14 : 10,
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 12),
                     ),
@@ -114,6 +118,7 @@ class ProjectSearchCard extends StatelessWidget {
                 style: _textTheme.bodySmall!.copyWith(
                   letterSpacing: 0,
                   fontWeight: FontThickness.light,
+                  fontSize: context.isTablet ? 16 : 14,
                   color: AppColors.grey,
                 ),
               ),
@@ -132,15 +137,20 @@ class ProjectSearchCard extends StatelessWidget {
                           SvgPicture.asset(AppIcons.location),
                           const SizedBox(width: 6),
                           Text(project.address,
-                              style: _textTheme.labelLarge!
-                                  .copyWith(color: AppColors.black)),
+                              style: _textTheme.labelLarge!.copyWith(
+                                color: AppColors.black,
+                                fontSize: context.isTablet ? 14 : 10,
+                              )),
                         ],
                       ),
                       const SizedBox(height: 4),
                       Wrap(
                         spacing: 6,
                         children: tag
-                            .map((t) => Text(t, style: _textTheme.labelLarge))
+                            .map((t) => Text(t,
+                                style: _textTheme.labelLarge!.copyWith(
+                                  fontSize: context.isTablet ? 14 : 10,
+                                )))
                             .toList(),
                       ),
                     ],

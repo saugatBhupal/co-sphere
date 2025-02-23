@@ -1,6 +1,8 @@
 import 'package:cosphere/src/config/app_routes/app_router.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,11 +30,16 @@ class DashboardBottomNavBar extends StatelessWidget {
             context.read<DashboardBloc>().add(ChangeScreenModule(index));
           },
           items: [
-            _bottomNavIcon(AppIcons.dashboard, AppIcons.dashboard),
-            _bottomNavIcon(AppIcons.explore, AppIcons.explore),
-            _bottomNavIcon(AppIcons.create, AppIcons.create),
-            _bottomNavIcon(AppIcons.task, AppIcons.task),
-            _bottomNavIcon(AppIcons.profile, AppIcons.profile),
+            _bottomNavIcon(AppIcons.dashboard, AppIcons.dashboard,
+                context.isTablet ? 36 : null),
+            _bottomNavIcon(AppIcons.explore, AppIcons.explore,
+                context.isTablet ? 38 : null),
+            _bottomNavIcon(
+                AppIcons.create, AppIcons.create, context.isTablet ? 46 : null),
+            _bottomNavIcon(
+                AppIcons.task, AppIcons.task, context.isTablet ? 38 : null),
+            _bottomNavIcon(AppIcons.profile, AppIcons.profile,
+                context.isTablet ? 36 : null),
           ],
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -45,10 +52,11 @@ class DashboardBottomNavBar extends StatelessWidget {
 }
 
 BottomNavigationBarItem _bottomNavIcon(
-    String unselectedIconPath, String selectedIconPath) {
+    String unselectedIconPath, String selectedIconPath, double? height) {
   return BottomNavigationBarItem(
     icon: SvgPicture.asset(
       unselectedIconPath,
+      height: height,
     ),
     activeIcon: SvgPicture.asset(
       selectedIconPath,

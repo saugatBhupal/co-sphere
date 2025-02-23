@@ -1,6 +1,7 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/features/authentication/data/dto/otp/otp_request_dto.dart';
 import 'package:cosphere/src/features/authentication/presentation/viewmodels/bloc/sign_up_bloc.dart';
@@ -57,7 +58,7 @@ class _OtpFormState extends State<OtpForm> {
                 align: Alignment.centerLeft,
                 infoText: AppStrings.codeReceive,
                 functionText: AppStrings.resend,
-                fontSize: 16,
+                fontSize: context.isTablet ? 20 : 16,
                 onPressed: () {}),
             const SizedBox(height: 20),
             DarkRoundedButton(

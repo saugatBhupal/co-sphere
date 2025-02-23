@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
@@ -32,9 +33,11 @@ class SearchResultsTabbar extends StatelessWidget {
                 unselectedLabelColor: AppColors.grey,
                 labelStyle: _textTheme.bodySmall!.copyWith(
                     fontWeight: FontThickness.semiBold,
+                    fontSize: context.isTablet ? 16 : 12,
                     color: AppColors.midnight),
                 unselectedLabelStyle: _textTheme.bodySmall!.copyWith(
                     fontWeight: FontThickness.medium,
+                    fontSize: context.isTablet ? 16 : 12,
                     color: AppColors.dim.withOpacity(0.2)),
                 labelPadding:
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),

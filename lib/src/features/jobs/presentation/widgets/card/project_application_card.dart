@@ -17,31 +17,35 @@ class ProjectApplicationCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       margin: const EdgeInsets.symmetric(vertical: 4),
-      height: context.height / 6.8 ,
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border.all(width: 1, color: AppColors.plaster),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircleImageAvatar(radius: 18, color: AppColors.lemon),
+              CircleImageAvatar(
+                  radius: context.isTablet ? 24 : 18, color: AppColors.lemon),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Product Designer",
-                        style: _textTheme.bodyLarge!
-                            .copyWith(letterSpacing: 0, height: 1.2)),
+                        style: _textTheme.bodyLarge!.copyWith(
+                            letterSpacing: 0,
+                            height: 1.2,
+                            fontSize: context.isTablet ? 18 : 14)),
                     Text(
                       "Posted on 10-11-2025 by Saugat Bhupal Singh",
-                      style: _textTheme.labelSmall!
-                          .copyWith(height: 1, letterSpacing: 0),
+                      style: _textTheme.labelSmall!.copyWith(
+                          height: 1,
+                          letterSpacing: 0,
+                          fontSize: context.isTablet ? 12 : 8),
                     ),
                   ],
                 ),
@@ -64,8 +68,10 @@ class ProjectApplicationCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 6),
                 Text("Kathmandu, Nepal",
-                    style: _textTheme.labelLarge!
-                        .copyWith(color: AppColors.black)),
+                    style: _textTheme.labelLarge!.copyWith(
+                      color: AppColors.black,
+                      fontSize: context.isTablet ? 14 : 10,
+                    )),
               ],
             ),
           ),
@@ -75,17 +81,24 @@ class ProjectApplicationCard extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 8),
                     child: Text(
                       item,
-                      style: _textTheme.labelLarge,
+                      style: _textTheme.labelLarge!.copyWith(
+                        fontSize: context.isTablet ? 14 : 10,
+                      ),
                     ),
                   )),
               const Spacer(),
               Text(
                 "${AppStrings.duration}: ",
-                style: _textTheme.labelSmall,
+                style: _textTheme.labelSmall!.copyWith(
+                  fontSize: context.isTablet ? 14 : 8,
+                ),
               ),
               Text(
                 "3-6 ${AppStrings.days}",
-                style: _textTheme.labelSmall!.copyWith(color: AppColors.winter),
+                style: _textTheme.labelSmall!.copyWith(
+                  color: AppColors.winter,
+                  fontSize: context.isTablet ? 14 : 8,
+                ),
               ),
             ],
           )

@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_assets.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
@@ -12,8 +13,8 @@ class RejectButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 30,
-        height: 30,
+        width: context.isTablet ? 42 : 30,
+        height: context.isTablet ? 42 : 30,
         decoration: BoxDecoration(
           color: AppColors.casa,
           shape: BoxShape.circle,

@@ -45,6 +45,7 @@ class ExperienceView extends StatelessWidget {
               "${AppStrings.professional} ${AppStrings.overview}",
               style: _textTheme.bodyLarge!.copyWith(
                 fontWeight: FontThickness.semiBold,
+                fontSize: context.isTablet ? 18 : 14,
               ),
             ),
             const SizedBox(height: 4),
@@ -59,12 +60,15 @@ class ExperienceView extends StatelessWidget {
                   );
                 }
                 if (context.read<ProfileBloc>().experience.isEmpty) {
-                  return Center(
-                    child: Text(
-                      "No experience history",
-                      style: _textTheme.bodyLarge!.copyWith(
-                        color: AppColors.grey,
-                        fontWeight: FontThickness.regular,
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    child: Center(
+                      child: Text(
+                        "No experience history",
+                        style: _textTheme.bodyLarge!.copyWith(
+                          color: AppColors.grey,
+                          fontWeight: FontThickness.regular,
+                        ),
                       ),
                     ),
                   );
@@ -80,6 +84,7 @@ class ExperienceView extends StatelessWidget {
                         style: _textTheme.bodyLarge!.copyWith(
                           color: AppColors.silver,
                           height: 1.2,
+                          fontSize: context.isTablet ? 18 : 14,
                         ),
                       ),
                       const SizedBox(height: 14),
@@ -88,6 +93,7 @@ class ExperienceView extends StatelessWidget {
                         style: _textTheme.bodyLarge!.copyWith(
                           fontWeight: FontThickness.semiBold,
                           color: AppColors.grey,
+                          fontSize: context.isTablet ? 18 : 14,
                         ),
                       ),
                       Padding(

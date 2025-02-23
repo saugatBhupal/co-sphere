@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/utils/auto_hypen_formattor.dart';
 import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +34,20 @@ class DobField extends StatelessWidget {
         AutoHyphenFormatter(),
         LengthLimitingTextInputFormatter(10),
       ],
-      style: _textTheme.titleSmall!
-          .copyWith(fontSize: 15, color: color ?? AppColors.midnight),
+      style: _textTheme.titleSmall!.copyWith(
+          fontSize: context.isTablet ? 18 : 15,
+          color: color ?? AppColors.midnight),
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(
+          vertical: context.isTablet ? 14 : 6,
+          horizontal: 16,
+        ),
         hintText: hintText ?? 'DD - MM - YYYY',
+        hintStyle: _textTheme.titleSmall!.copyWith(
+          fontSize: context.isTablet ? 17 : 15,
+          color: color ?? AppColors.dim,
+          fontWeight: FontThickness.light,
+        ),
         labelText: labelText ?? AppStrings.dob,
       ),
       validator: (val) {

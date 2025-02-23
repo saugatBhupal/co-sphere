@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
@@ -12,9 +12,9 @@ import 'package:cosphere/src/features/authentication/presentation/widgets/textsp
 class OtpScreen extends StatelessWidget {
   final String email;
   const OtpScreen({
-    Key? key,
+    super.key,
     required this.email,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,10 @@ class OtpScreen extends StatelessWidget {
                 child: Text(
                   email,
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: AppColors.midnight, fontWeight: FontWeight.w500),
+                        color: AppColors.midnight,
+                        fontWeight: FontWeight.w500,
+                        fontSize: context.isTablet ? 22 : 18,
+                      ),
                 ),
               ),
               const SizedBox(height: 20),

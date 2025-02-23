@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/widgets/appbar/search_field_appbar.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/created_project_tabbar.dart';
@@ -20,8 +21,10 @@ class CreatedProjectsScreen extends StatelessWidget {
           children: [
             Text(
               AppStrings.created,
-              style:
-                  _textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
+              style: _textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w500,
+                fontSize: context.isTablet ? 18 : 14,
+              ),
             ),
             Expanded(child: CreatedProjectTabbar(user: user))
           ],

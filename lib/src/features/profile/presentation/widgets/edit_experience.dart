@@ -138,7 +138,7 @@ class _EditExperienceState extends State<EditExperience> {
                 title:
                     "${AppStrings.add} ${AppStrings.experience} ${AppStrings.history}",
                 height: context.height / 20,
-                fontSize: 14,
+                fontSize: context.isTablet ? 18 : 14,
                 padding: const EdgeInsets.symmetric(vertical: 8),
               ),
             ],

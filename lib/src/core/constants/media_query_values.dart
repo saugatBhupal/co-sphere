@@ -7,6 +7,5 @@ extension MediaQueryValues on BuildContext {
   double get appBarSize => statusBarSize + kToolbarHeight;
   double get mainHeight => height - statusBarSize;
   double get heightOfScreenOnly => height - appBarSize;
+  bool get isTablet => width >= 600;
 }
-
-const double tabletBreakpoint = 600;

@@ -24,7 +24,7 @@ class NotificationCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CircleImageAvatar(),
+          CircleImageAvatar(radius: context.isTablet ? 24 : 16),
           const SizedBox(width: 8),
           Expanded(
             child: Padding(
@@ -40,21 +40,24 @@ class NotificationCard extends StatelessWidget {
                           style: _textTheme.bodyLarge!.copyWith(
                               fontWeight: FontThickness.medium,
                               height: 1.2,
-                              letterSpacing: 0),
+                              letterSpacing: 0,
+                              fontSize: context.isTablet ? 18 : 14),
                         ),
                         TextSpan(
                           text: "messaged you",
                           style: _textTheme.bodyLarge!.copyWith(
                               color: AppColors.grey,
                               height: 1.2,
-                              letterSpacing: 0),
+                              letterSpacing: 0,
+                              fontSize: context.isTablet ? 18 : 14),
                         ),
                       ],
                     ),
                   ),
                   Text(
                     'Friday 3:12 PM',
-                    style: _textTheme.labelLarge,
+                    style: _textTheme.labelLarge!
+                        .copyWith(fontSize: context.isTablet ? 12 : 10),
                   ),
                   if (content != null) ...[
                     const SizedBox(height: 12),

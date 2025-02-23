@@ -1,5 +1,6 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/components/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +28,16 @@ class DashboardFunctions extends StatelessWidget {
                 .pushNamed(AppRoutes.chatLogs, arguments: user),
             child: SvgPicture.asset(
               AppIcons.chat,
+              height: context.isTablet ? 36 : null,
             ),
           ),
         ),
         GestureDetector(
           onTap: () => Navigator.of(context)
-              .pushNamed(AppRoutes.profile, arguments: user),
+              .pushNamed(AppRoutes.notifications, arguments: user),
           child: SvgPicture.asset(
             AppIcons.notification,
+            height: context.isTablet ? 36 : null,
           ),
         ),
       ],

@@ -48,6 +48,7 @@ class ProfileSkills extends StatelessWidget {
                           text: "${AppStrings.skill} ",
                           style: _textTheme.bodyLarge!.copyWith(
                             fontWeight: FontThickness.medium,
+                            fontSize: context.isTablet ? 18 : 14,
                           ),
                         ),
                         TextSpan(
@@ -55,6 +56,7 @@ class ProfileSkills extends StatelessWidget {
                           style: _textTheme.bodyLarge!.copyWith(
                             color: AppColors.midnight,
                             fontWeight: FontThickness.semiBold,
+                            fontSize: context.isTablet ? 18 : 14,
                           ),
                         ),
                       ],

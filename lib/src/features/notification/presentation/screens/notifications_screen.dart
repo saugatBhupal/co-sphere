@@ -14,25 +14,25 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CommonAppbar(title: AppStrings.notifications),
+    return const Scaffold(
+      appBar: CommonAppbar(title: AppStrings.notifications),
       body: Column(
         children: [
-          const NotificationCard(),
+          NotificationCard(),
           NotificationCard(
-            content: MessageTile(
-              unread: true,
-              user: User.initial(),
-              conversation: Conversation.initial(),
-            ),
-          ),
-          const NotificationCard(
+              // content: MessageTile(
+              //   unread: true,
+              //   user: User.initial(),
+              //   conversation: Conversation.initial(),
+              // ),
+              ),
+          NotificationCard(
             content: NotificationContent(
                 message:
                     "He is a great guy did all the tasks i provided to him on time"),
           ),
-          const Spacer(),
-          const NotificationFunctions(),
+          Spacer(),
+          NotificationFunctions(),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 
@@ -13,7 +14,7 @@ class DashboardTitle extends StatelessWidget {
     this.option,
     this.onPressed,
     this.padding,
-    this.fontSize = 12,
+    this.fontSize,
   });
 
   @override
@@ -27,8 +28,9 @@ class DashboardTitle extends StatelessWidget {
         children: [
           Text(
             title,
-            style: _textTheme.bodyLarge!
-                .copyWith(fontWeight: FontWeight.w500, fontSize: fontSize),
+            style: _textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w500,
+                fontSize: fontSize ?? (context.isTablet ? 18 : 14)),
           ),
           if (option != null)
             GestureDetector(
@@ -37,6 +39,7 @@ class DashboardTitle extends StatelessWidget {
                 option!,
                 style: _textTheme.labelLarge!.copyWith(
                   fontWeight: FontWeight.w500,
+                  fontSize: context.isTablet ? 14 : 10,
                   color: AppColors.silver,
                 ),
               ),

@@ -30,7 +30,7 @@ class ReceivedTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
               child: CircleImageAvatar(
-                radius: 18,
+                radius: context.isTablet ? 24 : 18,
                 imageUrl: profileImage ?? '',
               ),
             ),
@@ -50,9 +50,9 @@ class ReceivedTile extends StatelessWidget {
                     child: Text(
                       message,
                       style: _textTheme.bodySmall!.copyWith(
-                        color: AppColors.black,
-                        fontWeight: FontThickness.regular,
-                      ),
+                          color: AppColors.black,
+                          fontWeight: FontThickness.regular,
+                          fontSize: context.isTablet ? 16 : 12),
                       softWrap: true,
                       overflow: TextOverflow.visible,
                     ),
@@ -60,7 +60,8 @@ class ReceivedTile extends StatelessWidget {
                 ),
                 Text(
                   sent,
-                  style: _textTheme.labelLarge,
+                  style: _textTheme.labelLarge!
+                      .copyWith(fontSize: context.isTablet ? 12 : 10),
                 ),
               ],
             ),

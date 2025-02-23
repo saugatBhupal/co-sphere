@@ -27,8 +27,11 @@ class HistoryView extends StatelessWidget {
         children: [
           Text(
             "${AppStrings.appName} ${AppStrings.history}",
-            style: _textTheme.bodyLarge!
-                .copyWith(fontWeight: FontThickness.semiBold, wordSpacing: -1),
+            style: _textTheme.bodyLarge!.copyWith(
+              fontWeight: FontThickness.semiBold,
+              wordSpacing: -1,
+              fontSize: context.isTablet ? 18 : 14,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 18.0),
@@ -40,7 +43,7 @@ class HistoryView extends StatelessWidget {
                 itemBuilder: (context, index) => ExperienceCard(
                   position: "UI|UX Developer",
                   organization: "Odama Studios",
-                  status: "OnTime",
+                  status: "On-Time",
                   from: DateTime.now(),
                   to: DateTime.now(),
                 ),

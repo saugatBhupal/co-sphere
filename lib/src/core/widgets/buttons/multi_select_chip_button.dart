@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 

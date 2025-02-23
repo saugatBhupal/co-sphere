@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropdown extends StatelessWidget {
@@ -31,8 +33,11 @@ class CustomDropdown extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "${AppStrings.enter} ${label.toLowerCase()}",
-            style: _textTheme.bodyLarge!
-                .copyWith(fontWeight: FontWeight.w300, color: AppColors.dim),
+            style: _textTheme.titleSmall!.copyWith(
+              fontSize: context.isTablet ? 17 : 15,
+              color: AppColors.dim,
+              fontWeight: FontThickness.light,
+            ),
           ),
         ),
         validator: validator,
@@ -43,7 +48,8 @@ class CustomDropdown extends StatelessWidget {
             value: item,
             child: Text(
               item,
-              style: _textTheme.bodyLarge!.copyWith(color: AppColors.grey),
+              style: _textTheme.titleSmall!.copyWith(
+                  fontSize: context.isTablet ? 18 : 15, color: AppColors.grey),
             ),
           );
         }).toList(),
@@ -56,6 +62,10 @@ class CustomDropdown extends StatelessWidget {
         dropdownColor: AppColors.satin,
         decoration: InputDecoration(
           labelText: label,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: context.isTablet ? 14 : 6,
+            horizontal: 16,
+          ),
         ),
       ),
     );

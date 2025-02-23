@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,32 +24,34 @@ class _OtpFieldState extends State<OtpField> {
 
   @override
   Widget build(BuildContext context) {
+    final _textTheme = Theme.of(context).textTheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: List.generate(
         6,
         (index) {
           return Container(
-            width: 50,
-            height: 50,
-            margin: const EdgeInsets.symmetric(horizontal: 4.6),
+            width: context.isTablet ? 80 : 50,
+            height: context.isTablet ? 80 : 50,
+            margin: EdgeInsets.only(right: context.isTablet ? 8 : 4.6),
             child: TextFormField(
               controller: widget.controllers[index],
               focusNode: focusNodes[index],
               keyboardType: TextInputType.number,
               cursorColor: AppColors.grey,
-              style: const TextStyle(
-                color: AppColors.midnight,
-                fontFamily: AppFonts.albertSans,
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
-              ),
+              style: _textTheme.titleSmall!.copyWith(
+                  fontSize: context.isTablet ? 24 : 18,
+                  color: AppColors.midnight),
               textAlign: TextAlign.center,
               maxLength: 1,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
               ],
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: context.isTablet ? 20 : 6,
+                  horizontal: 16,
+                ),
                 counterText: '',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),

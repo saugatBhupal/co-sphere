@@ -1,6 +1,8 @@
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/email_field.dart';
@@ -63,8 +65,13 @@ class _SigninFormState extends State<SigninForm> {
           Align(
             alignment: Alignment.centerRight,
             child: Text(AppStrings.forgot,
-                style: _textTheme.titleLarge!.copyWith(
-                    color: AppColors.midnight, fontWeight: FontWeight.w500)),
+                style: context.isTablet
+                    ? _textTheme.headlineSmall!.copyWith(
+                        color: AppColors.midnight,
+                        fontWeight: FontThickness.medium)
+                    : _textTheme.titleLarge!.copyWith(
+                        color: AppColors.midnight,
+                        fontWeight: FontThickness.medium)),
           ),
           const SizedBox(height: 35),
           DarkRoundedButton(

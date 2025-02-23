@@ -2,6 +2,8 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,14 +20,15 @@ class ProfileFunctions extends StatelessWidget {
           children: [
             SvgPicture.asset(
               AppIcons.web,
+              height: context.isTablet ? 26 : null,
             ),
             Text(
               AppStrings.links,
               style: _textTheme.labelLarge!.copyWith(
-                fontWeight: FontThickness.medium,
-                height: 1.8,
-                color: AppColors.grey,
-              ),
+                  fontWeight: FontThickness.medium,
+                  height: 1.8,
+                  color: AppColors.grey,
+                  fontSize: context.isTablet ? 14 : 10),
             ),
           ],
         ),
@@ -34,6 +37,7 @@ class ProfileFunctions extends StatelessWidget {
           children: [
             SvgPicture.asset(
               AppIcons.like,
+              height: context.isTablet ? 32 : null,
             ),
             Text(
               "121",
@@ -41,6 +45,7 @@ class ProfileFunctions extends StatelessWidget {
                 fontWeight: FontThickness.medium,
                 height: 1.8,
                 color: AppColors.grey,
+                fontSize: context.isTablet ? 14 : 10,
               ),
             ),
           ],
@@ -50,6 +55,7 @@ class ProfileFunctions extends StatelessWidget {
           children: [
             SvgPicture.asset(
               AppIcons.chat,
+              height: context.isTablet ? 32 : null,
               colorFilter:
                   const ColorFilter.mode(AppColors.midnight, BlendMode.srcIn),
             ),
@@ -59,6 +65,7 @@ class ProfileFunctions extends StatelessWidget {
                 fontWeight: FontThickness.medium,
                 height: 1.8,
                 color: AppColors.grey,
+                fontSize: context.isTablet ? 14 : 10,
               ),
             ),
           ],

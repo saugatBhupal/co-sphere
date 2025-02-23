@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class SearchFieldAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String? hintext;
   final ValueChanged<String>? onChanged;
+
   const SearchFieldAppbar({super.key, this.hintext, this.onChanged});
 
   @override
@@ -13,10 +14,14 @@ class SearchFieldAppbar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: const IconThemeData(color: AppColors.black),
       centerTitle: true,
       title: Center(
-          child: SearchTextField(
-              hintText: hintext, onChanged: (value) => onChanged)),
+        child: SearchTextField(
+          hintText: hintext,
+          onChanged: onChanged,
+        ),
+      ),
       shape: const Border(
-          bottom: BorderSide(color: AppColors.plaster, width: 0.6)),
+        bottom: BorderSide(color: AppColors.plaster, width: 0.6),
+      ),
     );
   }
 

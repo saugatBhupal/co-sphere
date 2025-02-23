@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
@@ -19,6 +20,7 @@ class PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _textTheme = Theme.of(context).textTheme;
     return TextFormField(
       controller: passwordController,
       obscuringCharacter: "•",
@@ -26,32 +28,29 @@ class PasswordField extends StatelessWidget {
       cursorColor: AppColors.grey,
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      style: const TextStyle(
-        color: AppColors.midnight,
-        fontFamily: AppFonts.albertSans,
-        fontSize: 18,
-        letterSpacing: -1,
-      ),
+      style: _textTheme.titleSmall!.copyWith(
+          fontSize: context.isTablet ? 18 : 15, color: AppColors.midnight),
       obscureText: true,
       decoration: InputDecoration(
         hintText: "${AppStrings.enter} ${AppStrings.password.toLowerCase()}",
-        hintStyle: const TextStyle(
+        hintStyle: _textTheme.titleSmall!.copyWith(
+          fontSize: context.isTablet ? 17 : 15,
           color: AppColors.dim,
-          fontFamily: AppFonts.albertSans,
-          fontWeight: FontWeight.w300,
-          fontSize: 14,
-          letterSpacing: 0,
+          fontWeight: FontThickness.light,
         ),
         prefixIcon: Padding(
           padding: const EdgeInsets.only(right: 10, left: 18),
           child: Image.asset(
             icon!,
-            height: 24,
-            width: 24,
+            height: context.isTablet ? 26 : 24,
+            width: context.isTablet ? 26 : 24,
             fit: BoxFit.contain,
           ),
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: context.isTablet ? 14 : 6,
+          horizontal: 16,
+        ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         labelText: label,
         labelStyle: const TextStyle(

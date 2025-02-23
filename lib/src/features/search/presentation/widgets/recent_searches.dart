@@ -2,6 +2,7 @@ import 'package:cosphere/src/config/dependency_injection/dependency_injector.dar
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +33,18 @@ class RecentSearches extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   AppIcons.clock,
-                  height: 20,
-                  width: 20,
+                  height: context.isTablet ? 30 : 20,
+                  width: context.isTablet ? 30 : 20,
                   colorFilter: const ColorFilter.mode(
                       Color(0xFF949292), BlendMode.srcIn),
                 ),
                 const SizedBox(width: 6),
                 Text(
                   AppStrings.recent,
-                  style: _textTheme.bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w500),
+                  style: _textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    fontSize: context.isTablet ? 18 : 14,
+                  ),
                 ),
               ],
             ),
@@ -71,14 +74,16 @@ class RecentSearches extends StatelessWidget {
                           children: [
                             SvgPicture.asset(
                               AppIcons.search,
-                              height: 20,
-                              width: 20,
+                              height: context.isTablet ? 30 : 20,
+                              width: context.isTablet ? 30 : 20,
                             ),
                             const SizedBox(width: 6),
                             Text(
                               searchItem.query,
-                              style: _textTheme.bodyMedium!
-                                  .copyWith(color: AppColors.grey),
+                              style: _textTheme.bodyMedium!.copyWith(
+                                color: AppColors.grey,
+                                fontSize: context.isTablet ? 18 : 12,
+                              ),
                             ),
                           ],
                         ),

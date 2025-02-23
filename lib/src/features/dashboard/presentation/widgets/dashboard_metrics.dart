@@ -16,21 +16,21 @@ class DashboardMetrics extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(top: 18),
           width: context.width,
-          height: context.height / 3.8,
+          height:
+              context.isTablet ? context.height / 4.5 : context.height / 3.8,
           decoration: BoxDecoration(
             color: AppColors.white,
             border: Border.all(width: 1, color: AppColors.plaster),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(context.isTablet ? 24 : 16),
+                topRight: Radius.circular(context.isTablet ? 24 : 16)),
           ),
           child: GridView.count(
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 2,
             crossAxisSpacing: 0,
             mainAxisSpacing: 0,
-            childAspectRatio: 1.7,
+            childAspectRatio: context.isTablet ? 3 : 1.7,
             children: [
               _buildGridItem(
                 context,
@@ -41,6 +41,7 @@ class DashboardMetrics extends StatelessWidget {
                 font: 20,
                 widget: SvgPicture.asset(
                   AppIcons.trophy,
+                  height: context.isTablet ? 42 : null,
                 ),
               ),
               _buildGridItem(
@@ -101,7 +102,9 @@ Widget _buildGridItem(
   bool bottom = false,
 }) {
   return Container(
-    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+    padding: context.isTablet
+        ? const EdgeInsets.all(26)
+        : const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
     decoration: BoxDecoration(
       border: Border(
         right: right
@@ -122,7 +125,10 @@ Widget _buildGridItem(
           children: [
             Text(
               title,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontSize: context.isTablet ? 24 : 18),
             ),
             if (subtitle.isNotEmpty) ...[
               const SizedBox(height: 4),
@@ -166,7 +172,7 @@ Container _buildListItem(
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 16),
     width: context.width,
-    height: context.height / 15.5,
+    height: context.isTablet ? context.height / 18.5 : context.height / 15.5,
     decoration: BoxDecoration(
       color: AppColors.white,
       border: const Border(
@@ -175,32 +181,35 @@ Container _buildListItem(
         bottom: BorderSide(width: 1, color: AppColors.plaster),
       ),
       borderRadius: BorderRadius.only(
-        bottomLeft: bottomLeft ? const Radius.circular(16) : Radius.zero,
-        bottomRight: bottomLeft ? const Radius.circular(16) : Radius.zero,
+        bottomLeft: bottomLeft
+            ? Radius.circular(context.isTablet ? 24 : 16)
+            : Radius.zero,
+        bottomRight: bottomLeft
+            ? Radius.circular(context.isTablet ? 24 : 16)
+            : Radius.zero,
       ),
     ),
     child: Row(
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge!
+              .copyWith(fontSize: context.isTablet ? 18 : 14),
         ),
         const Spacer(),
         Text(
           completed,
           textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall!
-              .copyWith(color: AppColors.black),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: AppColors.black, fontSize: context.isTablet ? 20 : 16),
         ),
         Text(
           " / $total",
           textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall!
-              .copyWith(color: AppColors.silver),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: AppColors.silver, fontSize: context.isTablet ? 20 : 16),
         ),
       ],
     ),

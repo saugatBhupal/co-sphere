@@ -70,7 +70,7 @@ class _EditLinksState extends State<EditLinks> {
           DarkRoundedButton(
             title: "${AppStrings.add} ${AppStrings.more}",
             height: context.height / 20,
-            fontSize: 14,
+            fontSize: context.isTablet ? 18 : 14,
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
           const SizedBox(height: 6),

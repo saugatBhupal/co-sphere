@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
@@ -63,7 +64,8 @@ class ApplicantsCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Text(
                       AppStrings.tap,
-                      style: _textTheme.labelLarge,
+                      style: _textTheme.labelLarge!
+                          .copyWith(fontSize: context.isTablet ? 14 : 10),
                     ),
                   ),
                 ],

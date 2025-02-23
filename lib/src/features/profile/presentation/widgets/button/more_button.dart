@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 
 class MoreButton extends StatelessWidget {
@@ -26,7 +27,9 @@ class MoreButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
           child: Container(
             padding: padding ??
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                EdgeInsets.symmetric(
+                    horizontal: context.isTablet ? 20 : 16,
+                    vertical: context.isTablet ? 12 : 8),
             decoration: BoxDecoration(
               color: AppColors.plaster,
               borderRadius: BorderRadius.circular(8.0),
@@ -36,6 +39,7 @@ class MoreButton extends StatelessWidget {
               style: _textTheme.bodySmall!.copyWith(
                 color: AppColors.black,
                 fontWeight: FontThickness.medium,
+                fontSize: context.isTablet ? 16 : 12,
               ),
             ),
           ),

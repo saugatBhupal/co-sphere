@@ -18,9 +18,10 @@ class ProfileBadge extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         width: context.width / 2.60,
         height: context.mainHeight / 28,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.plaster,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius:
+              BorderRadius.all(Radius.circular(context.isTablet ? 28 : 15)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -35,16 +36,16 @@ class ProfileBadge extends StatelessWidget {
                   TextSpan(
                     text: "100% ",
                     style: _textTheme.bodySmall!.copyWith(
-                      color: AppColors.midnight,
-                      fontWeight: FontThickness.bold,
-                    ),
+                        color: AppColors.midnight,
+                        fontWeight: FontThickness.bold,
+                        fontSize: context.isTablet ? 18 : 14),
                   ),
                   TextSpan(
                     text: AppStrings.jobSuccess,
                     style: _textTheme.bodySmall!.copyWith(
-                      color: AppColors.black,
-                      fontWeight: FontThickness.regular,
-                    ),
+                        color: AppColors.black,
+                        fontWeight: FontThickness.regular,
+                        fontSize: context.isTablet ? 18 : 14),
                   ),
                 ],
               ),

@@ -16,7 +16,6 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTablet = MediaQuery.of(context).size.width >= tabletBreakpoint;
     final _textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: SafeArea(
@@ -34,7 +33,7 @@ class OnboardingScreen extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: AppStrings.welcome,
-                            style: isTablet
+                            style: context.isTablet
                                 ? _textTheme.headlineLarge!.copyWith(
                                     color: AppColors.grey,
                                     fontWeight: FontThickness.medium)
@@ -43,7 +42,7 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                           TextSpan(
                             text: AppStrings.appName,
-                            style: isTablet
+                            style: context.isTablet
                                 ? _textTheme.headlineLarge!.copyWith(
                                     color: AppColors.midnight,
                                     fontWeight: FontThickness.medium)
@@ -69,7 +68,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const IntroSlider(),
-                const SizedBox(height: 20),
+                SizedBox(height: context.isTablet ? 30 : 20),
                 DarkRoundedButton(
                   title: AppStrings.findService,
                   icon: AppIcons.briefcase,
@@ -84,6 +83,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 AccountTextspan(
+                  fontSize: context.isTablet ? 22 : 17,
                   infoText: AppStrings.haveAccount,
                   functionText: AppStrings.signin,
                   onPressed: () =>

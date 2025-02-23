@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 
 import 'package:flutter/material.dart';
 
@@ -58,14 +60,16 @@ class StatusButton extends StatelessWidget {
         color: background,
         borderRadius: BorderRadius.circular(8),
       ),
-      padding:
-          padding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 6.5),
+      padding: padding ??
+          EdgeInsets.symmetric(
+              horizontal: context.isTablet ? 14 : 12,
+              vertical: context.isTablet ? 8 : 6.5),
       child: Text(
         formattedLabel,
         style: _theme.textTheme.labelLarge!.copyWith(
-          fontWeight: FontThickness.medium,
-          color: foreground,
-        ),
+            fontWeight: FontThickness.medium,
+            color: foreground,
+            fontSize: context.isTablet ? 14 : 10),
       ),
     );
   }

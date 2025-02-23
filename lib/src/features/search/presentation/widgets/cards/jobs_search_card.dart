@@ -2,6 +2,7 @@ import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
@@ -54,12 +55,15 @@ class JobsSearchCard extends StatelessWidget {
                         job.companyName.isNotEmpty == true
                             ? job.companyName
                             : job.postedBy.fullname,
-                        style: _textTheme.labelLarge,
+                        style: _textTheme.labelLarge!.copyWith(
+                          fontSize: context.isTablet ? 14 : 10,
+                        ),
                       ),
                       Text(job.jobName,
                           style: _textTheme.bodySmall!.copyWith(
                             letterSpacing: 0,
                             color: AppColors.black,
+                            fontSize: context.isTablet ? 16 : 12,
                             fontWeight: FontThickness.regular,
                           )),
                       if (job.salary != Salary.initial()) ...[
@@ -85,7 +89,7 @@ class JobsSearchCard extends StatelessWidget {
                         .map((skill) => SkillsButton(
                               name: skill.name,
                               borderRadius: 4,
-                              fontSize: 10,
+                              fontSize: context.isTablet ? 14 : 10,
                               padding: const EdgeInsets.symmetric(
                                   vertical: 6, horizontal: 12),
                             ))
@@ -97,7 +101,7 @@ class JobsSearchCard extends StatelessWidget {
                     SkillsButton(
                       name: "+${job.skills.length - 2} more",
                       borderRadius: 4,
-                      fontSize: 10,
+                      fontSize: context.isTablet ? 14 : 10,
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 12),
                     ),
@@ -113,6 +117,7 @@ class JobsSearchCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: _textTheme.bodySmall!.copyWith(
                   letterSpacing: 0,
+                  fontSize: context.isTablet ? 16 : 14,
                   fontWeight: FontThickness.light,
                   color: AppColors.grey,
                 ),
@@ -132,15 +137,20 @@ class JobsSearchCard extends StatelessWidget {
                           SvgPicture.asset(AppIcons.location),
                           const SizedBox(width: 6),
                           Text(job.address,
-                              style: _textTheme.labelLarge!
-                                  .copyWith(color: AppColors.black)),
+                              style: _textTheme.labelLarge!.copyWith(
+                                color: AppColors.black,
+                                fontSize: context.isTablet ? 14 : 10,
+                              )),
                         ],
                       ),
                       const SizedBox(height: 4),
                       Wrap(
                         spacing: 6,
                         children: tag
-                            .map((t) => Text(t, style: _textTheme.labelLarge))
+                            .map((t) => Text(t,
+                                style: _textTheme.labelLarge!.copyWith(
+                                  fontSize: context.isTablet ? 14 : 10,
+                                )))
                             .toList(),
                       ),
                     ],

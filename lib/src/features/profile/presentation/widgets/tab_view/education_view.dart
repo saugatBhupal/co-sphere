@@ -46,6 +46,7 @@ class EducationView extends StatelessWidget {
               AppStrings.education,
               style: _textTheme.bodyLarge!.copyWith(
                 fontWeight: FontThickness.semiBold,
+                fontSize: context.isTablet ? 18 : 14,
               ),
             ),
             BlocBuilder<ProfileBloc, ProfileState>(

@@ -1,9 +1,11 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/utils/from_to_date.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 
 class ExperienceCard extends StatelessWidget {
@@ -26,8 +28,8 @@ class ExperienceCard extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Row(
       children: [
-        const CircleImageAvatar(
-          radius: 26,
+        CircleImageAvatar(
+          radius: context.isTablet ? 34 : 26,
         ),
         const SizedBox(width: 10),
         Column(
@@ -39,6 +41,7 @@ class ExperienceCard extends StatelessWidget {
                 fontWeight: FontThickness.semiBold,
                 color: AppColors.midnight,
                 height: 1,
+                fontSize: context.isTablet ? 18 : 14,
               ),
             ),
             Text(
@@ -46,6 +49,7 @@ class ExperienceCard extends StatelessWidget {
               style: _textTheme.bodyLarge!.copyWith(
                 fontWeight: FontThickness.light,
                 color: AppColors.grey,
+                fontSize: context.isTablet ? 18 : 14,
               ),
             ),
             RichText(
@@ -53,12 +57,13 @@ class ExperienceCard extends StatelessWidget {
                 children: [
                   TextSpan(
                       text: "${formatMonth(from)} - ${formatMonth(to)}",
-                      style: _textTheme.labelLarge),
+                      style: _textTheme.labelLarge!
+                          .copyWith(fontSize: context.isTablet ? 14 : 10)),
                   TextSpan(
                     text: " (${calculateDuration(from, to)})",
                     style: _textTheme.labelLarge!.copyWith(
-                      color: AppColors.midnight,
-                    ),
+                        color: AppColors.midnight,
+                        fontSize: context.isTablet ? 14 : 10),
                   ),
                 ],
               ),

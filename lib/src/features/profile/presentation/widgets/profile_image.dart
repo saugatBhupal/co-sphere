@@ -28,7 +28,7 @@ class ProfileImage extends StatelessWidget {
               bottom: -50,
               left: context.width / 2 - 48,
               child: CircleImageAvatar(
-                radius: 48,
+                radius: context.isTablet ? 54 : 48,
                 imageUrl: image ?? '',
               ),
             ),

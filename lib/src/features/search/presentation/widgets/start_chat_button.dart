@@ -2,6 +2,8 @@ import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/card/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -21,8 +23,8 @@ class StartChatButton extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AppIcons.chat,
-            height: 16,
-            width: 18,
+            height: context.isTablet ? 28 : 16,
+            width: context.isTablet ? 28 : 18,
             colorFilter:
                 const ColorFilter.mode(AppColors.frog, BlendMode.srcIn),
           ),
@@ -31,6 +33,7 @@ class StartChatButton extends StatelessWidget {
             AppStrings.start,
             style: _textTheme.labelSmall!.copyWith(
               fontWeight: FontThickness.semiBold,
+              fontSize: context.isTablet ? 14 : 10,
               color: AppColors.frog,
             ),
           ),

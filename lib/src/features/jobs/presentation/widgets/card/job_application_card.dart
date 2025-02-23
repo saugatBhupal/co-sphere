@@ -15,7 +15,6 @@ class JobApplicationCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       margin: const EdgeInsets.symmetric(vertical: 4),
-      height: context.height / 6.5,
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border.all(width: 1, color: AppColors.plaster),
@@ -42,11 +41,13 @@ class JobApplicationCard extends StatelessWidget {
                   children: [
                     Text(
                       "Esewa",
-                      style: _textTheme.labelLarge!.copyWith(height: 1),
+                      style: _textTheme.labelLarge!.copyWith(
+                          height: 1, fontSize: context.isTablet ? 14 : 10),
                     ),
                     Text("Product Designer",
-                        style:
-                            _textTheme.bodyLarge!.copyWith(letterSpacing: 0)),
+                        style: _textTheme.bodyLarge!.copyWith(
+                            letterSpacing: 0,
+                            fontSize: context.isTablet ? 18 : 14)),
                   ],
                 ),
               ),
@@ -68,8 +69,10 @@ class JobApplicationCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 6),
                 Text("Kathmandu, Nepal",
-                    style: _textTheme.labelLarge!
-                        .copyWith(color: AppColors.black)),
+                    style: _textTheme.labelLarge!.copyWith(
+                      color: AppColors.black,
+                      fontSize: context.isTablet ? 14 : 10,
+                    )),
               ],
             ),
           ),
@@ -79,7 +82,9 @@ class JobApplicationCard extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8),
                 child: Text(
                   tag[index],
-                  style: _textTheme.labelLarge,
+                  style: _textTheme.labelLarge!.copyWith(
+                    fontSize: context.isTablet ? 14 : 10,
+                  ),
                 ),
               );
             }),

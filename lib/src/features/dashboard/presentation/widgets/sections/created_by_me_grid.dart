@@ -9,9 +9,9 @@ import 'package:cosphere/src/features/jobs/presentation/widgets/card/hiring_card
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreatedByMeDashboard extends StatelessWidget {
+class CreatedByMeGrid extends StatelessWidget {
   final String uid;
-  const CreatedByMeDashboard({super.key, required this.uid});
+  const CreatedByMeGrid({super.key, required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +28,16 @@ class CreatedByMeDashboard extends StatelessWidget {
             return const SizedBox.shrink();
           }
           return SizedBox(
-            height: context.height * 0.17,
+            height: context.isTablet
+                ? context.height * 0.13
+                : context.height * 0.17,
             child: GridView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 mainAxisSpacing: 14.0,
-                childAspectRatio: 0.38,
+                childAspectRatio: context.isTablet ? 0.4 : 0.38,
               ),
               itemCount: projectList.length,
               itemBuilder: (BuildContext context, int index) {

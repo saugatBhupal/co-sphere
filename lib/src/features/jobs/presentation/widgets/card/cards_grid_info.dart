@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 
 class CardsGridInfo extends StatelessWidget {
@@ -40,10 +42,14 @@ class CardsGridInfo extends StatelessWidget {
             style: _textTheme.bodyLarge!.copyWith(
               color: color ?? AppColors.black,
               height: 1.2,
+              fontSize: context.isTablet ? 18 : 14,
               fontWeight: FontThickness.semiBold,
             ),
           ),
-          Text(subtitle, style: _textTheme.bodySmall!.copyWith(fontSize: 11)),
+          Text(subtitle,
+              style: _textTheme.bodySmall!.copyWith(
+                fontSize: context.isTablet ? 13 : 11,
+              )),
         ],
       ),
     );

@@ -133,7 +133,7 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
           DarkRoundedButton(
             title: AppStrings.save,
             height: context.height / 20,
-            fontSize: 14,
+            fontSize: context.isTablet ? 18 : 14,
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
         ],

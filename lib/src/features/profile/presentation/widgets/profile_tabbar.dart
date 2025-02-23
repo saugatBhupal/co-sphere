@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,10 +47,13 @@ class ProfileTabbar extends StatelessWidget {
                   tabAlignment: TabAlignment.center,
                   unselectedLabelColor: AppColors.grey,
                   labelStyle: _textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontThickness.semiBold,
-                      color: AppColors.midnight),
+                    fontWeight: FontThickness.semiBold,
+                    color: AppColors.midnight,
+                    fontSize: context.isTablet ? 16 : 14,
+                  ),
                   unselectedLabelStyle: _textTheme.bodyLarge!.copyWith(
                       fontWeight: FontThickness.medium,
+                      fontSize: context.isTablet ? 16 : 14,
                       color: AppColors.dim.withOpacity(0.2)),
                   labelPadding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),

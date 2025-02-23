@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 
 class CardsHeaderInfo extends StatelessWidget {
@@ -22,9 +24,12 @@ class CardsHeaderInfo extends StatelessWidget {
         ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CircleImageAvatar(color: AppColors.lemon),
+          CircleImageAvatar(
+            color: AppColors.lemon,
+            radius: context.isTablet ? 22 : null,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -32,12 +37,15 @@ class CardsHeaderInfo extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: _textTheme.bodyLarge!
-                      .copyWith(letterSpacing: 0.4, height: 1),
+                  style: _textTheme.bodyLarge!.copyWith(
+                      letterSpacing: 0.4,
+                      height: 1,
+                      fontSize: context.isTablet ? 18 : 14),
                 ),
                 Text(
                   "Posted on $postedOn",
-                  style: _textTheme.labelSmall,
+                  style: _textTheme.labelSmall!
+                      .copyWith(fontSize: context.isTablet ? 12 : 8),
                 ),
               ],
             ),

@@ -28,7 +28,7 @@ class DashboardScreen extends StatelessWidget {
         return Scaffold(
           appBar: state is ScreenModuleChanged && state.index != 0
               ? null
-              : DashboardAppbar(),
+              : const DashboardAppbar(),
           body: state is! ScreenModuleChanged
               ? DashboardBody(user: user)
               : _getHomeBodyModule(state.index),

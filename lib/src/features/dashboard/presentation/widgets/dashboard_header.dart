@@ -1,5 +1,6 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
@@ -31,7 +32,9 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
                 titleSpacing: 0,
                 title: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 0.0),
+                    horizontal: 16.0,
+                    vertical: 0.0,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -41,8 +44,11 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
                           children: [
                             Text(
                               "${AppStrings.hi} ${state.user.fullname},",
-                              style: _textTheme.headlineSmall!
-                                  .copyWith(height: 1.2),
+                              style: context.isTablet
+                                  ? _textTheme.displaySmall!
+                                      .copyWith(height: 1, fontSize: 28)
+                                  : _textTheme.headlineSmall!
+                                      .copyWith(height: 1.2),
                             ),
                             Text(
                               AppStrings.welcomeBack,
@@ -53,7 +59,7 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ),
                       CircleImageAvatar(
-                          radius: 26,
+                          radius: context.isTablet ? 30 : 26,
                           imageUrl:
                               state.user.profileImage ?? AppImages.profile),
                     ],
@@ -69,5 +75,5 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(95);
+  Size get preferredSize => Size.fromHeight(95);
 }

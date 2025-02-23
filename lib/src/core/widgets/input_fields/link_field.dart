@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:flutter/material.dart';
 
 class LinkField extends StatelessWidget {
@@ -23,7 +24,7 @@ class LinkField extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return SizedBox(
-      height: 42,
+      height: context.isTablet ? 54 : 42,
       child: TextFormField(
         controller: textController,
         keyboardType: TextInputType.emailAddress,
@@ -37,6 +38,11 @@ class LinkField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           hintText: hintText ?? "${AppStrings.enter} ${label.toLowerCase()}",
+          hintStyle: _textTheme.titleSmall!.copyWith(
+            fontSize: context.isTablet ? 17 : 15,
+            color: AppColors.dim,
+            fontWeight: FontThickness.light,
+          ),
           prefixIcon: icon != null
               ? Padding(
                   padding: const EdgeInsets.only(right: 10, left: 18),
@@ -52,6 +58,7 @@ class LinkField extends StatelessWidget {
           labelStyle: _textTheme.bodyLarge!.copyWith(
             color: AppColors.grey,
             fontWeight: FontThickness.regular,
+            fontSize: context.isTablet ? 18 : 14,
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 18),
         ),

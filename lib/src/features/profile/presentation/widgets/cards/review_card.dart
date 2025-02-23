@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_fonts.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,7 @@ class ReviewCard extends StatelessWidget {
             style: _textTheme.bodySmall!.copyWith(
               color: AppColors.grey,
               height: 0,
+              fontSize: context.isTablet ? 16 : 12,
             ),
           ),
         ),
@@ -57,6 +59,7 @@ class ReviewCard extends StatelessWidget {
                   color: AppColors.grey,
                   fontWeight: FontThickness.medium,
                   height: 0,
+                  fontSize: context.isTablet ? 16 : 12,
                 ),
               ),
             ],

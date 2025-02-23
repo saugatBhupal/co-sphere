@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/tab_view/active_view.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/tab_view/completed_view.dart';
@@ -29,10 +30,13 @@ class CreatedProjectTabbar extends StatelessWidget {
                 tabAlignment: TabAlignment.center,
                 unselectedLabelColor: AppColors.grey,
                 labelStyle: _textTheme.bodySmall!.copyWith(
-                    fontWeight: FontThickness.semiBold,
-                    color: AppColors.midnight),
+                  fontWeight: FontThickness.semiBold,
+                  color: AppColors.midnight,
+                  fontSize: context.isTablet ? 16 : 12,
+                ),
                 unselectedLabelStyle: _textTheme.bodySmall!.copyWith(
                     fontWeight: FontThickness.medium,
+                    fontSize: context.isTablet ? 16 : 12,
                     color: AppColors.dim.withOpacity(0.2)),
                 labelPadding:
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),

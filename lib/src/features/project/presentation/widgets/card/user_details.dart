@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,8 @@ class UserDetails extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Row(
       children: [
-        const CircleImageAvatar(color: AppColors.midnight),
+        CircleImageAvatar(
+            color: AppColors.midnight, radius: context.isTablet ? 24 : 20),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -20,12 +22,15 @@ class UserDetails extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: _textTheme.bodyLarge!
-                    .copyWith(letterSpacing: 0.4, height: 1),
+                style: _textTheme.bodyLarge!.copyWith(
+                    letterSpacing: 0.4,
+                    height: 1,
+                    fontSize: context.isTablet ? 18 : 14),
               ),
               Text(
                 applied,
-                style: _textTheme.labelLarge,
+                style: _textTheme.labelLarge!
+                    .copyWith(fontSize: context.isTablet ? 14 : 10),
               ),
             ],
           ),

@@ -28,8 +28,8 @@ class HiringHeader extends StatelessWidget {
         children: [
           Text(
             projectName,
-            style:
-                _textTheme.headlineSmall!.copyWith(height: 1.2, fontSize: 20),
+            style: _textTheme.headlineSmall!
+                .copyWith(height: 1.2, fontSize: context.isTablet ? 24 : 20),
           ),
           const SizedBox(height: 6),
           Row(
@@ -46,7 +46,7 @@ class HiringHeader extends StatelessWidget {
                   onPressed: () => context
                       .read<ProjectBloc>()
                       .add(FinishHiring(projectId: projectId)),
-                  fontSize: 10,
+                  fontSize: context.isTablet ? 15 : 10,
                   title: "${AppStrings.finish} ${AppStrings.hiring}",
                   padding: const EdgeInsets.symmetric(vertical: 10),
                 ),

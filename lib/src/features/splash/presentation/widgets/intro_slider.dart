@@ -16,8 +16,7 @@ class _IntroSliderState extends State<IntroSlider> {
 
   @override
   Widget build(BuildContext context) {
-    final imageHeight = context.height * 0.4;
-
+    final imageHeight = context.isTablet ? context.height * 0.6 : context.height * 0.4;
     return Column(
       children: [
         SizedBox(

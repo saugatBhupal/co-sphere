@@ -29,6 +29,7 @@ class ReviewsView extends StatelessWidget {
             style: _textTheme.bodyLarge!.copyWith(
               fontWeight: FontThickness.semiBold,
               wordSpacing: 0,
+                  fontSize: context.isTablet ? 18 : 14,
             ),
           ),
           Padding(

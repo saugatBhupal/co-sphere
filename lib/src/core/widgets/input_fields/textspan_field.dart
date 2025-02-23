@@ -1,6 +1,8 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -60,8 +62,10 @@ class _TextspanFieldState extends State<TextspanField> {
           cursorColor: AppColors.grey,
           validator: widget.validator,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          style: _textTheme.bodyLarge!
-              .copyWith(color: AppColors.grey, letterSpacing: 0),
+          style: _textTheme.bodyLarge!.copyWith(
+              color: AppColors.grey,
+              letterSpacing: 0,
+              fontSize: context.isTablet ? 18 : 14),
           maxLines: null,
           minLines: widget.minLines,
           inputFormatters: [
@@ -84,8 +88,9 @@ class _TextspanFieldState extends State<TextspanField> {
                   )
                 : null,
             labelText: widget.label,
-            labelStyle: _textTheme.titleSmall!
-                .copyWith(fontWeight: FontThickness.regular),
+            labelStyle: _textTheme.titleSmall!.copyWith(
+                fontWeight: FontThickness.regular,
+                fontSize: context.isTablet ? 20 : 16),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
