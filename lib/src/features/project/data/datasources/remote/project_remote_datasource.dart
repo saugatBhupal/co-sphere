@@ -1,8 +1,8 @@
-import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
+import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
-import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
-import 'package:cosphere/src/features/project/data/models/tasks_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
 
 abstract interface class ProjectRemoteDatasource {

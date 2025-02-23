@@ -12,8 +12,8 @@ import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc
 void initDash() {
   sl.registerLazySingleton<DashboardLocalDatasource>(
       () => DashboardLocalDatasourceImpl(hiveService: sl()));
-  sl.registerLazySingleton<DashboardRemoteDatasource>(
-      () => DashboardRemoteDatasourceImpl(dio: sl()));
+  sl.registerLazySingleton<DashboardRemoteDatasource>(() =>
+      DashboardRemoteDatasourceImpl(dio: sl(), dashboardLocalDatasource: sl()));
   sl.registerLazySingleton<DashboardRepository>(() => DashboardRemoteRepository(
       dashboardLocalDatasource: sl(),
       dashboardRemoteDatasource: sl(),

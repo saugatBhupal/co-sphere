@@ -1,5 +1,5 @@
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
-import 'package:cosphere/src/features/project/data/models/tasks_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 
 extension TaskApiModelMappers on TasksApiModel {

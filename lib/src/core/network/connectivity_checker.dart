@@ -11,10 +11,12 @@ class CheckInternetConnectivity implements BaseCheckInternetConnectivity {
 
   @override
   Future<bool> isConnected() async {
-    if (await connectivity.checkConnectivity() != ConnectivityResult.none) {
-      return true;
-    } else {
+    var connectionResult = await Connectivity().checkConnectivity();
+    if (!connectionResult.contains(ConnectivityResult.mobile) &&
+        !connectionResult.contains(ConnectivityResult.wifi)) {
       return false;
+    } else {
+      return true;
     }
   }
 }

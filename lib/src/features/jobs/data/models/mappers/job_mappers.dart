@@ -1,6 +1,6 @@
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
-import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
-import 'package:cosphere/src/features/jobs/data/models/job_api_model.dart';
+import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
+import 'package:cosphere/src/features/jobs/data/models/remote/job_api_model.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';

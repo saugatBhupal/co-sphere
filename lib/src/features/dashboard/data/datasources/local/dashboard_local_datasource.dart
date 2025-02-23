@@ -1,5 +1,7 @@
-import 'package:cosphere/src/core/models/local/user_hive_model.dart';
+import 'package:cosphere/src/features/project/data/models/local/project_hive_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 
 abstract class DashboardLocalDatasource {
-  Future<UserHiveModel?> getCurrentUser(String? uid, String? email);
+  void addCreatedProjects(List<ProjectApiModel> projects);
+Future<List<ProjectHiveModel>> getCreatedProjects();
 }

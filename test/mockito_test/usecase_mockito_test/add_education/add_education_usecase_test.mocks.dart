@@ -5,6 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
+import 'package:cosphere/src/core/domain/entities/user.dart' as _i16;
 import 'package:cosphere/src/core/error/failure.dart' as _i5;
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart'
     as _i11;
@@ -191,4 +192,22 @@ class MockProfileRepository extends _i1.Mock implements _i3.ProfileRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i14.UpdateIntroResDto>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i16.User>> getUserProfileById(
+          String? uid) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserProfileById,
+          [uid],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i16.User>>.value(
+            _FakeEither_0<_i5.Failure, _i16.User>(
+          this,
+          Invocation.method(
+            #getUserProfileById,
+            [uid],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i16.User>>);
 }

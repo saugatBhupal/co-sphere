@@ -1,5 +1,7 @@
 import 'package:cosphere/src/core/constants/app_boxes.dart';
 import 'package:cosphere/src/core/models/local/user_hive_model.dart';
+import 'package:cosphere/src/core/type_adaptar/status_adaptar.dart';
+import 'package:cosphere/src/features/project/data/models/local/project_hive_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -10,7 +12,10 @@ class HiveService {
 
     Hive.init(path);
     Hive.registerAdapter(UserHiveModelAdapter());
+    Hive.registerAdapter(ProjectHiveModelAdapter());
+    Hive.registerAdapter(StatusAdapter());
     await Hive.openBox<UserHiveModel>(AppBoxesName.userBox);
+    await Hive.openBox<ProjectHiveModel>(AppBoxesName.projectBox);
   }
 
   Future<void> addUserToBox(UserHiveModel user) async {

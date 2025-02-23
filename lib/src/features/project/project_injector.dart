@@ -7,6 +7,7 @@ import 'package:cosphere/src/features/project/domain/usecases/complete_task_usec
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_applied_projects_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_hiring_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_project_by_id_usecase.dart';
@@ -37,6 +38,8 @@ void initProject() {
       () => CompleteTaskUsecase(projectRepository: sl()));
   sl.registerLazySingleton<CreateTaskUsecase>(
       () => CreateTaskUsecase(projectRepository: sl()));
+  sl.registerLazySingleton<GetAppliedProjectsUsecase>(
+      () => GetAppliedProjectsUsecase(projectRepository: sl()));
   sl.registerFactory<ProjectBloc>(() => ProjectBloc(
       getHiringProjectsUserUsecase: sl(),
       getActiveProjectUserUsecase: sl(),

@@ -2,8 +2,9 @@ import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
+import 'package:cosphere/src/features/project/data/models/local/project_hive_model.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/task_mappers.dart';
-import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 

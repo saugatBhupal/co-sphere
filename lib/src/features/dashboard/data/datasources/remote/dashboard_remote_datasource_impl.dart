@@ -2,14 +2,17 @@ import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
+import 'package:cosphere/src/features/dashboard/data/datasources/local/dashboard_local_datasource.dart';
 import 'package:cosphere/src/features/dashboard/data/datasources/remote/dashboard_remote_datasource.dart';
-import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:dio/dio.dart';
 
 class DashboardRemoteDatasourceImpl implements DashboardRemoteDatasource {
   final Dio dio;
+  final DashboardLocalDatasource dashboardLocalDatasource;
 
-  DashboardRemoteDatasourceImpl({required this.dio});
+  DashboardRemoteDatasourceImpl(
+      {required this.dio, required this.dashboardLocalDatasource});
 
   @override
   Future<UserApiModel?> getCurrentUser(String? uid) async {
@@ -39,6 +42,9 @@ class DashboardRemoteDatasourceImpl implements DashboardRemoteDatasource {
             .map((json) =>
                 ProjectApiModel.fromJson(json as Map<String, dynamic>))
             .toList();
+        if (projects.isNotEmpty) {
+          dashboardLocalDatasource.addCreatedProjects(projects);
+        }
         return projects;
       } else {
         throw Failure(

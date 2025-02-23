@@ -1,5 +1,5 @@
 import 'package:cosphere/src/core/error/failure.dart';
-import 'package:cosphere/src/features/jobs/data/models/applicants_api_model.dart';
+import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
@@ -7,8 +7,8 @@ import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart'
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/task_mappers.dart';
-import 'package:cosphere/src/features/project/data/models/project_api_model.dart';
-import 'package:cosphere/src/features/project/data/models/tasks_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
+import 'package:cosphere/src/features/project/data/models/remote/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/repositories/project_repository.dart';
@@ -114,5 +114,11 @@ class ProjectRemoteRepository implements ProjectRepository {
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, List<Project>>> getAppliedProjects(String uid) {
+    // TODO: implement getAppliedProjects
+    throw UnimplementedError();
   }
 }

@@ -6,9 +6,6 @@ import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bl
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:cosphere/src/config/app_routes/app_routes.dart';
-import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/profile_badge.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/profile_data.dart';
