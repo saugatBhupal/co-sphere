@@ -119,7 +119,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ProfileBloc>.value(
             value: _profileBloc,
-            child: ProfileScreen(user: settings.arguments as User),
+            child: ProfileScreen(uid: settings.arguments as String),
           ),
         );
       case AppRoutes.editProfile:

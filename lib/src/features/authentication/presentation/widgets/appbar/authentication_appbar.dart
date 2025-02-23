@@ -18,7 +18,7 @@ class AuthenticationAppbar extends StatelessWidget {
           child: Icon(
             Icons.arrow_back_outlined,
             color: AppColors.midnight,
-            size: context.isTablet ? 36 : 12,
+            size: context.isTablet ? 36 : 26,
           ),
         ),
         Text(

@@ -52,7 +52,7 @@ class DashboardScreen extends StatelessWidget {
           projectId: "",
         );
       case 4:
-        return ProfileScreen(user: user);
+        return ProfileScreen(uid: user.uid);
       default:
         return DashboardBody(user: user);
     }

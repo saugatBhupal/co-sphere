@@ -1,4 +1,7 @@
+import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/core/error/failure.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
@@ -105,6 +108,16 @@ class ProfileRemoteRepository implements ProfileRepository {
       final UpdateIntroResDto res = await profileDatasource.updateIntro(dto);
       await UserSharedPref.updateUserField(key: 'about', value: res.about);
       return Right(res);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> getUserProfileById(String uid) async {
+    try {
+      final UserApiModel user = await profileDatasource.getUserProfileById(uid);
+      return Right(user.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

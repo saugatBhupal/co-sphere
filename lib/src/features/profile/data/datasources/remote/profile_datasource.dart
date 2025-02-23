@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
@@ -17,4 +18,5 @@ abstract class ProfileDatasource {
   Future<EducationApiModel> addEducation(AddEducationReqDto dto);
   Future<ExperienceApiModel> addExperience(AddExperienceReqDto dto);
   Future<UpdateIntroResDto> updateIntro(UpdateIntroReqDto dto);
+  Future<UserApiModel> getUserProfileById(String uid);
 }

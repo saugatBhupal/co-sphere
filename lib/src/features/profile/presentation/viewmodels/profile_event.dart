@@ -54,3 +54,9 @@ class UpdateIntro extends ProfileEvent {
 
   const UpdateIntro({required this.dto});
 }
+
+class GetUserProfileById extends ProfileEvent {
+  final String uid;
+
+  const GetUserProfileById({required this.uid});
+}

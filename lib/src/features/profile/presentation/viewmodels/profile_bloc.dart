@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart';
@@ -13,6 +14,7 @@ import 'package:cosphere/src/features/profile/domain/usecases/add_experience_use
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_user_profile_by_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_intro_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -28,6 +30,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final AddEducationUsecase addEducationUsecase;
   final AddExperienceUsecase addExperienceUsecase;
   final UpdateIntroUsecase updateIntroUsecase;
+  final GetUserProfileByIdUsecase getUserProfileByIdUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,
     required this.addSkillUsecase,
@@ -36,6 +39,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required this.addEducationUsecase,
     required this.addExperienceUsecase,
     required this.updateIntroUsecase,
+    required this.getUserProfileByIdUsecase,
   }) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
       if (event is ChangeProfileModule) {
@@ -61,6 +65,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       if (event is UpdateIntro) {
         await _updateIntro(event, emit);
+      }
+      if (event is GetUserProfileById) {
+        await _getUserProfileById(event, emit);
       }
     });
   }
@@ -180,6 +187,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         (failure) => emit(GetProfileInfoFailed(failure.message)),
         (success) => emit(UpdateIntroSuccess(resDto: success)),
       );
+    } catch (e) {
+      emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
+    }
+  }
+
+  User _user = User.initial();
+  User get user => _user;
+  Future<void> _getUserProfileById(
+      GetUserProfileById event, Emitter<ProfileState> emit) async {
+    emit(GetProfileInfoLoading());
+    try {
+      final result = await getUserProfileByIdUsecase(event.uid);
+      result.fold((failure) => emit(GetProfileInfoFailed(failure.message)),
+          (success) {
+        _user = success;
+        emit(GetProfileInfoSuccess(user: success));
+      });
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
     }

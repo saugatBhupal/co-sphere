@@ -9,7 +9,7 @@ class AssignedToMeGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: context.width,
-      height: context.isTablet ? context.height * 0.13 : context.height / 6.5,
+      height: context.isTablet ? context.height * 0.13 : context.height / 6,
       child: GridView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,

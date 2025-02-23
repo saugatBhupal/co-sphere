@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
+import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
@@ -162,6 +163,25 @@ class ProfileDatasourceImpl implements ProfileDatasource {
         UpdateIntroResDto updateIntroResDto =
             UpdateIntroResDto.fromJson(res.data['data']['intro']);
         return updateIntroResDto;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusCode.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<UserApiModel> getUserProfileById(String uid) async {
+    try {
+      final res = await dio.get("${ApiEndpoints.fetchUserByID}$uid");
+      if (res.statusCode == 200) {
+        final data = res.data['data'];
+        final UserApiModel userApiModel = UserApiModel.fromJson(data);
+        return userApiModel;
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

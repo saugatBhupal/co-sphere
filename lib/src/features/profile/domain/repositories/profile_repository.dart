@@ -1,3 +1,4 @@
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
@@ -21,4 +22,5 @@ abstract interface class ProfileRepository {
   Future<Either<Failure, Education>> addEducation(AddEducationReqDto dto);
   Future<Either<Failure, Experience>> addExperience(AddExperienceReqDto dto);
   Future<Either<Failure, UpdateIntroResDto>> updateIntro(UpdateIntroReqDto dto);
+  Future<Either<Failure, User>> getUserProfileById(String uid);
 }

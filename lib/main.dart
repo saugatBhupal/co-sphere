@@ -9,6 +9,7 @@ Future<void> main() async {
   await HiveService.init();
   await initDependencies();
   SocketService().initialize();
+  // await UserSharedPref.deleteUser();
   // await Hive.deleteBoxFromDisk(AppBoxesName.userBox);
   runApp(const App());
 }

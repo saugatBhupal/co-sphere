@@ -47,6 +47,11 @@ class AddSkillFailed extends ProfileState {
 
 class GetProfileInfoLoading extends ProfileState {}
 
+class GetProfileInfoSuccess extends ProfileState {
+  final User user;
+  const GetProfileInfoSuccess({required this.user});
+}
+
 class GetEducationSuccess extends ProfileState {
   final List<Education> education;
   const GetEducationSuccess({required this.education});
