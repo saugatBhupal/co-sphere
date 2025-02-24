@@ -7,4 +7,5 @@ class HiveTable {
   static const int jobTableId = 3;
   static const int searchTableId = 4;
   static const int experienceTableId = 5;
+  static const int educationTableId = 6;
 }

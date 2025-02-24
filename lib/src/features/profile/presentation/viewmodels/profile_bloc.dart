@@ -112,7 +112,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(GetProfileInfoLoading());
     try {
       final result = await getEducationByUseridUsecase(event.uid);
-      print("result $result");
       result.fold((failure) => emit(GetProfileInfoFailed(failure.message)),
           (success) {
         _education = success;
@@ -134,12 +133,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       result.fold(
         (failure) => emit(GetProfileInfoFailed(failure.message)),
         (success) {
-          overview = success.overview!;
           _experience = success.experience
               .map((experience) => experience.toDomain())
               .toList();
-          emit(GetExperienceSuccess(
-              experience: _experience, overview: overview));
+          overview = success.overview!;
+          emit(
+              GetExperienceSuccess(experience: experience, overview: overview));
         },
       );
     } catch (e) {

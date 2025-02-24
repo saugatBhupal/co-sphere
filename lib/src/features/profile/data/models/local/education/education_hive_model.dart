@@ -1,10 +1,10 @@
 import 'package:cosphere/src/core/constants/hive_table.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-part 'experience_hive_model.g.dart';
+part 'education_hive_model.g.dart';
 
-@HiveType(typeId: HiveTable.experienceTableId)
-class ExperienceHiveModel extends Equatable {
+@HiveType(typeId: HiveTable.educationTableId)
+class EducationHiveModel extends Equatable {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -16,7 +16,7 @@ class ExperienceHiveModel extends Equatable {
   @HiveField(4)
   final DateTime to;
 
-  const ExperienceHiveModel({
+  const EducationHiveModel({
     required this.id,
     required this.organization,
     required this.degree,

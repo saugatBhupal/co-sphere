@@ -32,9 +32,9 @@ class ApplicationsScreen extends StatelessWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
+                  itemCount: jobs.length,
                   itemBuilder: (context, index) =>
-                      JobApplicationCard(job: Job.initial()),
+                      JobApplicationCard(job: jobs[index]),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

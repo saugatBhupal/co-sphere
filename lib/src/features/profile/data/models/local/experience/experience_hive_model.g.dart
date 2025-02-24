@@ -18,26 +18,29 @@ class ExperienceHiveModelAdapter extends TypeAdapter<ExperienceHiveModel> {
     };
     return ExperienceHiveModel(
       id: fields[0] as String,
-      organization: fields[1] as String,
-      degree: fields[2] as String,
-      from: fields[3] as DateTime,
-      to: fields[4] as DateTime,
+      position: fields[1] as String,
+      organization: fields[2] as String,
+      status: fields[3] as String,
+      from: fields[4] as DateTime,
+      to: fields[5] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, ExperienceHiveModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.organization)
+      ..write(obj.position)
       ..writeByte(2)
-      ..write(obj.degree)
+      ..write(obj.organization)
       ..writeByte(3)
-      ..write(obj.from)
+      ..write(obj.status)
       ..writeByte(4)
+      ..write(obj.from)
+      ..writeByte(5)
       ..write(obj.to);
   }
 

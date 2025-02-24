@@ -1,4 +1,5 @@
 import 'package:cosphere/src/core/constants/app_boxes.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/models/local/project_hive_model.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_local_mappers.dart';
@@ -45,6 +46,40 @@ class ProjectLocalDatasourceImpl implements ProjectLocalDatasource {
     var box =
         await Hive.openBox<ProjectHiveModel>(AppBoxesName.appliedProjects);
     List<ProjectHiveModel> storedProjects = box.values.toList();
+    return storedProjects;
+  }
+
+  @override
+  Future<List<ProjectHiveModel>> getActiveProjects() async {
+    var box =
+        await Hive.openBox<ProjectHiveModel>(AppBoxesName.appliedProjects);
+    List<ProjectHiveModel> storedProjects = box.values.toList();
+    print("Stored Projects: $storedProjects");
+
+    storedProjects = storedProjects
+        .where((project) => project.status == Status.pending)
+        .toList();
+    print("Filtered Projects (Status.hiring): $storedProjects");
+    return storedProjects;
+  }
+
+  @override
+  Future<List<ProjectHiveModel>> getCompletedProjects() {
+    // TODO: implement getCompletedProjects
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ProjectHiveModel>> getHiringProjects() async {
+    var box =
+        await Hive.openBox<ProjectHiveModel>(AppBoxesName.appliedProjects);
+    List<ProjectHiveModel> storedProjects = box.values.toList();
+    print("Stored Projects: $storedProjects");
+
+    storedProjects = storedProjects
+        .where((project) => project.status == Status.pending)
+        .toList();
+    print("Filtered Projects (Status.hiring): $storedProjects");
     return storedProjects;
   }
 }

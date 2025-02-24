@@ -229,7 +229,6 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         (success) {
           Tasks? task = _activeTasks.firstWhere((e) => e.id == success.id);
           if (task != null) {
-            // _activeTasks.removeWhere((e) => e.id == success.id);
             _activeTasks.remove(task);
             _completedTasks.add(success);
           }
