@@ -2,7 +2,7 @@ import 'package:cosphere/src/config/dependency_injection/dependency_injector.dar
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/card/hiring_card.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/card/completed_card.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,6 @@ class CompletedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
     return BlocProvider(
       create: (context) =>
           sl<ProjectBloc>()..add(GetCompletedProject(uid: uid)),
@@ -42,7 +41,7 @@ class CompletedView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: state.projects.length,
                 itemBuilder: (context, index) =>
-                    HiringCard(project: state.projects[index]),
+                    CompletedCard(project: state.projects[index]),
                 separatorBuilder: (context, index) => const SizedBox(height: 4),
               ),
             );

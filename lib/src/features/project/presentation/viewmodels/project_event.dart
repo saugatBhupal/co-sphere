@@ -72,3 +72,9 @@ class GetAppliedProject extends ProjectEvent {
 
   const GetAppliedProject({required this.uid});
 }
+
+class AddReview extends ProjectEvent {
+  final AddReviewReqDto dto;
+
+  const AddReview({required this.dto});
+}

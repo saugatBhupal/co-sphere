@@ -2,14 +2,13 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextspanField extends StatefulWidget {
   final TextEditingController textController;
   final FormFieldValidator<String>? validator;
-  final String label;
+  final String? label;
   final String? icon;
   final String? hintText;
   final int minLines;
@@ -17,7 +16,7 @@ class TextspanField extends StatefulWidget {
   TextspanField({
     super.key,
     required this.textController,
-    required this.label,
+    this.label,
     this.icon,
     this.hintText,
     this.validator,
@@ -75,7 +74,7 @@ class _TextspanFieldState extends State<TextspanField> {
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
             hintText: widget.hintText ??
-                "${AppStrings.enter} ${widget.label.toLowerCase()}",
+                "${AppStrings.enter} ${widget.label!.toLowerCase()}",
             prefixIcon: widget.icon != null
                 ? Padding(
                     padding: const EdgeInsets.only(right: 10, left: 18),
@@ -87,7 +86,7 @@ class _TextspanFieldState extends State<TextspanField> {
                     ),
                   )
                 : null,
-            labelText: widget.label,
+            labelText: widget.label ?? widget.label,
             labelStyle: _textTheme.titleSmall!.copyWith(
                 fontWeight: FontThickness.regular,
                 fontSize: context.isTablet ? 20 : 16),

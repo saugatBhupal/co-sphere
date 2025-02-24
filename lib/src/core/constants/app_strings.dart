@@ -155,5 +155,12 @@ class AppStrings {
       "*This project is only visible to project members";
   static const String users = "Users";
   static const String posted = "Posted Date";
+  static const String completionType = "Completion Type";
   static const String start = "Start $chat";
+  static const String reviewSubtitle = "Add a review for ";
+  static const String submitReview = "Submit Review";
+  static const String reviewHint = "Write a short review";
+  static const String reviewTitle =
+      "Add a final review before completing the project.";
+  static const String completionLabel = "Did the project complete on time";
 }

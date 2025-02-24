@@ -3,8 +3,12 @@ import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/review_mapper.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
+import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
+import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_local_mappers.dart';
@@ -164,6 +168,16 @@ class ProjectRemoteRepository implements ProjectRepository {
     } else {
       final projects = await projectLocalDatasource.getAppliedProjects();
       return Right(projects.map((e) => e.toDomain()).toList());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Reviews>>> addReview(AddReviewReqDto dto) async {
+    try {
+      final List<ReviewsApiModel> reviews = await datasource.addReview(dto);
+      return Right(reviews.map((review) => review.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
     }
   }
 }

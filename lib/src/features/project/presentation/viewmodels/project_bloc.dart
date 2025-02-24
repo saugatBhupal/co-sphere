@@ -1,10 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
+import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
+import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
@@ -33,6 +36,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final CreateTaskUsecase createTaskUsecase;
   final GetProjectsUserUsecase getProjectsUserUsecase;
   final GetAppliedProjectsUsecase getAppliedProjectsUsecase;
+  final AddReviewUsecase addReviewUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -45,6 +49,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.createTaskUsecase,
     required this.getProjectsUserUsecase,
     required this.getAppliedProjectsUsecase,
+    required this.addReviewUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -79,6 +84,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is GetAppliedProject) {
         await _getAppliedProjectByUser(event, emit);
+      }
+      if (event is AddReview) {
+        await _addReview(event, emit);
       }
     });
   }
@@ -294,6 +302,19 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       });
     } catch (e) {
       emit(GetAppliedProjectFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _addReview(AddReview event, Emitter<ProjectState> emit) async {
+    emit(const AddReviewLoading());
+    try {
+      final result = await addReviewUsecase(event.dto);
+      result.fold(
+        (failure) => emit(AddReviewFailed(message: failure.message)),
+        (success) => emit(AddReviewSuccess(reviews: success)),
+      );
+    } catch (e) {
+      emit(CreateTaskFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

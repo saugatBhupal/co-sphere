@@ -190,7 +190,10 @@ class AppRouter {
                     projectId: settings.arguments as String)));
       case AppRoutes.completed:
         return MaterialPageRoute(
-            builder: (context) => const CompletedDashboardScreen());
+            builder: (context) => BlocProvider.value(
+                value: _projectBloc,
+                child: CompletedDashboardScreen(
+                    projectId: settings.arguments as String)));
       case AppRoutes.applicants:
         return MaterialPageRoute(
             builder: (context) => const ApplicantsScreen());

@@ -131,3 +131,17 @@ class GetAppliedProjectFailed extends ProjectState {
   final String message;
   const GetAppliedProjectFailed({required this.message});
 }
+
+class AddReviewLoading extends ProjectState {
+  const AddReviewLoading();
+}
+
+class AddReviewSuccess extends ProjectState {
+  final List<Reviews> reviews;
+  const AddReviewSuccess({required this.reviews});
+}
+
+class AddReviewFailed extends ProjectState {
+  final String message;
+  const AddReviewFailed({required this.message});
+}

@@ -49,6 +49,7 @@ class ActiveDashboardScreen extends StatelessWidget {
                       postedOn: project.createdAt,
                       projectName: project.projectName,
                       projectId: project.id,
+                      members: project.members,
                     ),
                     ProjectDetailsBasics(project: project),
                     Expanded(
