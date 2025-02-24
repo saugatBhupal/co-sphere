@@ -1,4 +1,6 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
+import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
+import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource_impl.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource_impl.dart';
 import 'package:cosphere/src/features/project/data/repositories/project_remote_repository.dart';
@@ -11,15 +13,20 @@ import 'package:cosphere/src/features/project/domain/usecases/get_applied_projec
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_hiring_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_project_by_id_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/hire_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/reject_user_usecase.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 
 void initProject() {
-  sl.registerLazySingleton<ProjectRemoteDatasource>(
-      () => ProjectRemoteDatasourceImpl(dio: sl()));
-  sl.registerLazySingleton<ProjectRepository>(
-      () => ProjectRemoteRepository(datasource: sl()));
+  sl.registerLazySingleton<ProjectLocalDatasource>(
+      () => ProjectLocalDatasourceImpl());
+  sl.registerLazySingleton<ProjectRemoteDatasource>(() =>
+      ProjectRemoteDatasourceImpl(dio: sl(), projectLocalDatasource: sl()));
+  sl.registerLazySingleton<ProjectRepository>(() => ProjectRemoteRepository(
+      datasource: sl(),
+      projectLocalDatasource: sl(),
+      checkInternetConnectivity: sl()));
   sl.registerLazySingleton<GetHiringProjectsUserUsecase>(
       () => GetHiringProjectsUserUsecase(projectRepository: sl()));
   sl.registerLazySingleton<GetActiveProjectUserUsecase>(
@@ -38,6 +45,8 @@ void initProject() {
       () => CompleteTaskUsecase(projectRepository: sl()));
   sl.registerLazySingleton<CreateTaskUsecase>(
       () => CreateTaskUsecase(projectRepository: sl()));
+  sl.registerLazySingleton<GetProjectsUserUsecase>(
+      () => GetProjectsUserUsecase(projectRepository: sl()));
   sl.registerLazySingleton<GetAppliedProjectsUsecase>(
       () => GetAppliedProjectsUsecase(projectRepository: sl()));
   sl.registerFactory<ProjectBloc>(() => ProjectBloc(
@@ -49,5 +58,7 @@ void initProject() {
       rejectUserUsecase: sl(),
       finishHiringUsecase: sl(),
       completeTaskUsecase: sl(),
-      createTaskUsecase: sl()));
+      createTaskUsecase: sl(),
+      getProjectsUserUsecase: sl(),
+      getAppliedProjectsUsecase: sl()));
 }

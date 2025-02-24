@@ -1,10 +1,13 @@
 import 'package:cosphere/src/core/error/failure.dart';
+import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
+import 'package:cosphere/src/features/project/data/models/mappers/project_local_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/task_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
@@ -17,8 +20,14 @@ import 'package:dartz/dartz.dart';
 
 class ProjectRemoteRepository implements ProjectRepository {
   final ProjectRemoteDatasource datasource;
+  final ProjectLocalDatasource projectLocalDatasource;
+  final BaseCheckInternetConnectivity checkInternetConnectivity;
 
-  ProjectRemoteRepository({required this.datasource});
+  ProjectRemoteRepository({
+    required this.datasource,
+    required this.projectLocalDatasource,
+    required this.checkInternetConnectivity,
+  });
 
   @override
   Future<Either<Failure, String>> finishHiring(String projectId) async {
@@ -117,8 +126,34 @@ class ProjectRemoteRepository implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, List<Project>>> getAppliedProjects(String uid) {
-    // TODO: implement getAppliedProjects
-    throw UnimplementedError();
+  Future<Either<Failure, List<Project>>> getProjectsByUser(String uid) async {
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final List<ProjectApiModel> projects =
+            await datasource.getProjectsByUser(uid);
+        return Right(projects.map((project) => project.toDomain()).toList());
+      } catch (e) {
+        return Left(Failure(message: e.toString()));
+      }
+    } else {
+      final projects = await projectLocalDatasource.getCreatedProjects();
+      return Right(projects.map((e) => e.toDomain()).toList());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Project>>> getAppliedProjects(String uid) async {
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final List<ProjectApiModel> projects =
+            await datasource.getAppliedProjects(uid);
+        return Right(projects.map((project) => project.toDomain()).toList());
+      } catch (e) {
+        return Left(Failure(message: e.toString()));
+      }
+    } else {
+      final projects = await projectLocalDatasource.getAppliedProjects();
+      return Right(projects.map((e) => e.toDomain()).toList());
+    }
   }
 }

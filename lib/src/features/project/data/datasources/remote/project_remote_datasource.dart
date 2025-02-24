@@ -15,4 +15,6 @@ abstract interface class ProjectRemoteDatasource {
   Future<String> finishHiring(String projectId);
   Future<TasksApiModel> completeTask(CompleteTaskParams params);
   Future<TasksApiModel> createTask(CreateTaskReqDto dto);
+  Future<List<ProjectApiModel>> getProjectsByUser(String uid);
+  Future<List<ProjectApiModel>> getAppliedProjects(String uid);
 }

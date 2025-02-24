@@ -32,28 +32,4 @@ class DashboardRemoteDatasourceImpl implements DashboardRemoteDatasource {
       return await handleErrorResponse(e);
     }
   }
-
-  @override
-  Future<List<ProjectApiModel>> getProjectsByUser(String uid) async {
-    try {
-      var res = await dio.get("${ApiEndpoints.getProjectUser}$uid");
-      if (res.statusCode == 200) {
-        final List<ProjectApiModel> projects = (res.data as List<dynamic>)
-            .map((json) =>
-                ProjectApiModel.fromJson(json as Map<String, dynamic>))
-            .toList();
-        if (projects.isNotEmpty) {
-          dashboardLocalDatasource.addCreatedProjects(projects);
-        }
-        return projects;
-      } else {
-        throw Failure(
-          message: res.statusMessage.toString(),
-          statusCode: res.statusMessage.toString(),
-        );
-      }
-    } on DioException catch (e) {
-      return await handleErrorResponse(e);
-    }
-  }
 }

@@ -41,6 +41,8 @@ class ApiEndpoints {
 
   // ====================== Dashboard Routes ======================
   static const String getProjectUser = "$baseUrl/project/user/";
+  static const String getAppliedProjectUser =
+      "$baseUrl/project/applied-projects/";
 
   // ====================== Project Routes ======================
   static const String project = "$baseUrl/project/";

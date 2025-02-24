@@ -17,8 +17,3 @@ class StartUpAppEvent extends DashboardEvent {}
 
 class LoadUserEvent extends DashboardEvent {}
 
-class GetProjectByUser extends DashboardEvent {
-  final String uid;
-
-  const GetProjectByUser({required this.uid});
-}

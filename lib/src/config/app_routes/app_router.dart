@@ -25,11 +25,14 @@ import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/screens/active_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/applicants_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/completed_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/hiring_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/members_screen.dart';
+import 'package:cosphere/src/features/project/presentation/screens/project_applications_screen.dart';
+import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/search/presentation/screens/search_screen.dart';
 import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
 import 'package:cosphere/src/features/splash/presentation/screens/onboarding/onboarding_screen.dart';
@@ -111,6 +114,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => sl<ProfileBloc>(),
               ),
+              BlocProvider(
+                create: (context) => sl<ProjectBloc>(),
+              ),
             ],
             child: DashboardScreen(user: settings.arguments as User),
           ),
@@ -150,6 +156,12 @@ class AppRouter {
       case AppRoutes.applications:
         return MaterialPageRoute(
             builder: (context) => const ApplicationsScreen());
+      case AppRoutes.projectApplications:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                value: _projectBloc,
+                child: ProjectApplicationsScreen(
+                    projects: settings.arguments as List<Project>)));
       case AppRoutes.createdProjects:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
@@ -162,11 +174,15 @@ class AppRouter {
       case AppRoutes.hiring:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-                value: _projectBloc, child: HiringDashboardScreen(projectId: settings.arguments as String)));
+                value: _projectBloc,
+                child: HiringDashboardScreen(
+                    projectId: settings.arguments as String)));
       case AppRoutes.active:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-                value: _projectBloc, child: ActiveDashboardScreen(projectId: settings.arguments as String)));
+                value: _projectBloc,
+                child: ActiveDashboardScreen(
+                    projectId: settings.arguments as String)));
       case AppRoutes.completed:
         return MaterialPageRoute(
             builder: (context) => const CompletedDashboardScreen());

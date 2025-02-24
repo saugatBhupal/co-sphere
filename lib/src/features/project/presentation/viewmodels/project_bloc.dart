@@ -9,9 +9,11 @@ import 'package:cosphere/src/features/project/domain/usecases/complete_task_usec
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_applied_projects_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_hiring_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_project_by_id_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/hire_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/reject_user_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -29,6 +31,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final FinishHiringUsecase finishHiringUsecase;
   final CompleteTaskUsecase completeTaskUsecase;
   final CreateTaskUsecase createTaskUsecase;
+  final GetProjectsUserUsecase getProjectsUserUsecase;
+  final GetAppliedProjectsUsecase getAppliedProjectsUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -39,6 +43,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.getProjectByIdUsecase,
     required this.completeTaskUsecase,
     required this.createTaskUsecase,
+    required this.getProjectsUserUsecase,
+    required this.getAppliedProjectsUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -67,6 +73,12 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is CreateTask) {
         await _createTask(event, emit);
+      }
+      if (event is GetProjectByUser) {
+        await _getProjectByUser(event, emit);
+      }
+      if (event is GetAppliedProject) {
+        await _getAppliedProjectByUser(event, emit);
       }
     });
   }
@@ -244,6 +256,44 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       );
     } catch (e) {
       emit(CreateTaskFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  List<Project> _createdProjects = [];
+  List<Project> get createdProjects => _createdProjects;
+  Future<void> _getProjectByUser(
+      GetProjectByUser event, Emitter<ProjectState> emit) async {
+    emit(const GetProjectByUserLoading());
+    try {
+      final result = await getProjectsUserUsecase(event.uid);
+      result.fold(
+          (failure) => emit(GetProjectByUserFailed(message: failure.message)),
+          (success) {
+        _createdProjects =
+            success.length >= 3 ? success.take(3).toList() : success;
+        emit(GetProjectByUserSuccess(projects: _createdProjects));
+      });
+    } catch (e) {
+      emit(GetProjectByUserFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  List<Project> _appliedProjects = [];
+  List<Project> get appliedProjects => _appliedProjects;
+  Future<void> _getAppliedProjectByUser(
+      GetAppliedProject event, Emitter<ProjectState> emit) async {
+    emit(const GetAppliedProjectLoading());
+    try {
+      final result = await getAppliedProjectsUsecase(event.uid);
+      result.fold(
+          (failure) => emit(GetAppliedProjectFailed(message: failure.message)),
+          (success) {
+        _appliedProjects =
+            success.length >= 3 ? success.take(3).toList() : success;
+        emit(GetAppliedProjectSuccess(projects: _appliedProjects));
+      });
+    } catch (e) {
+      emit(GetAppliedProjectFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

@@ -60,3 +60,15 @@ class CreateTask extends ProjectEvent {
 
   const CreateTask({required this.dto});
 }
+
+class GetProjectByUser extends ProjectEvent {
+  final String uid;
+
+  const GetProjectByUser({required this.uid});
+}
+
+class GetAppliedProject extends ProjectEvent {
+  final String uid;
+
+  const GetAppliedProject({required this.uid});
+}

@@ -103,3 +103,31 @@ class CreateTaskFailed extends ProjectState {
   final String message;
   const CreateTaskFailed({required this.message});
 }
+
+class GetProjectByUserLoading extends ProjectState {
+  const GetProjectByUserLoading();
+}
+
+class GetProjectByUserSuccess extends ProjectState {
+  final List<Project> projects;
+  const GetProjectByUserSuccess({required this.projects});
+}
+
+class GetProjectByUserFailed extends ProjectState {
+  final String message;
+  const GetProjectByUserFailed({required this.message});
+}
+
+class GetAppliedProjectLoading extends ProjectState {
+  const GetAppliedProjectLoading();
+}
+
+class GetAppliedProjectSuccess extends ProjectState {
+  final List<Project> projects;
+  const GetAppliedProjectSuccess({required this.projects});
+}
+
+class GetAppliedProjectFailed extends ProjectState {
+  final String message;
+  const GetAppliedProjectFailed({required this.message});
+}

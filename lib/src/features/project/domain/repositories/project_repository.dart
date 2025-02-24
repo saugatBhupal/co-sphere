@@ -17,5 +17,6 @@ abstract interface class ProjectRepository {
   Future<Either<Failure, String>> finishHiring(String projectId);
   Future<Either<Failure, Tasks>> completeTask(CompleteTaskParams params);
   Future<Either<Failure, Tasks>> createTask(CreateTaskReqDto dto);
+  Future<Either<Failure, List<Project>>> getProjectsByUser(String uid);
   Future<Either<Failure, List<Project>>> getAppliedProjects(String uid);
 }

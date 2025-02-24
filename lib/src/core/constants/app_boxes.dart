@@ -7,6 +7,7 @@ class AppBoxesName {
   static const String userBox = 'userBox';
   static const String projectBox = 'projectBox';
   static const String createdProjects = 'createdProjects';
+  static const String appliedProjects = 'appliedProjects';
 }
 
 class AppBoxes {
