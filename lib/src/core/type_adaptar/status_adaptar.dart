@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class StatusAdapter extends TypeAdapter<Status> {
   @override
-  final int typeId = 3;
+  final int typeId = 2;
 
   @override
   Status read(BinaryReader reader) {

@@ -5,9 +5,9 @@ import 'package:cosphere/src/features/profile/data/dto/experience/get_experience
 import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
-import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
-import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
-import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/education_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 
 abstract class ProfileDatasource {

@@ -16,8 +16,8 @@ import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bl
 void initProfile() {
   sl.registerLazySingleton<ProfileDatasource>(
       () => ProfileDatasourceImpl(dio: sl()));
-  sl.registerLazySingleton<ProfileRepository>(
-      () => ProfileRemoteRepository(profileDatasource: sl()));
+  sl.registerLazySingleton<ProfileRepository>(() => ProfileRemoteRepository(
+      profileDatasource: sl(), checkInternetConnectivity: sl()));
   sl.registerLazySingleton<UpdateProfileImageUsecase>(
       () => UpdateProfileImageUsecase(profileRepository: sl()));
   sl.registerLazySingleton<AddSkillUsecase>(

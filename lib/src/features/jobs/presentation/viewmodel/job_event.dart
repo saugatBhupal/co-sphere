@@ -12,3 +12,9 @@ class ChangeCreatedModule extends JobEvent {
 
   const ChangeCreatedModule({required this.index});
 }
+
+class GetAppliedJob extends JobEvent {
+  final String uid;
+
+  const GetAppliedJob({required this.uid});
+}

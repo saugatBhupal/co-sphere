@@ -288,9 +288,10 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       result.fold(
           (failure) => emit(GetAppliedProjectFailed(message: failure.message)),
           (success) {
-        _appliedProjects =
-            success.length >= 3 ? success.take(3).toList() : success;
-        emit(GetAppliedProjectSuccess(projects: _appliedProjects));
+        _appliedProjects = success;
+        emit(GetAppliedProjectSuccess(
+            projects:
+                success.length >= 3 ? success.take(3).toList() : success));
       });
     } catch (e) {
       emit(GetAppliedProjectFailed(message: "Error: ${e.toString()}"));

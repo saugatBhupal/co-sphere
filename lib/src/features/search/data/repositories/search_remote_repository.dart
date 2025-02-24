@@ -2,14 +2,17 @@ import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
+import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/job_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
+import 'package:cosphere/src/features/search/data/datasources/local/search_local_datasource.dart';
 import 'package:cosphere/src/features/search/data/datasources/remote/search_remote_datasource.dart';
 import 'package:cosphere/src/features/search/data/dto/add_search_history_req_dto/add_search_history_req_dto.dart';
+import 'package:cosphere/src/features/search/data/models/mappers/search_local_mappers.dart';
 import 'package:cosphere/src/features/search/data/models/mappers/search_mappers.dart';
 import 'package:cosphere/src/features/search/data/models/search_api_model.dart';
 import 'package:cosphere/src/features/search/domain/entities/search.dart';
@@ -18,8 +21,12 @@ import 'package:dartz/dartz.dart';
 
 class SearchRemoteRepository implements SearchRepository {
   final SearchRemoteDatasource datasource;
-
-  SearchRemoteRepository({required this.datasource});
+  final SearchLocalDatasource searchLocalDatasource;
+  final BaseCheckInternetConnectivity checkInternetConnectivity;
+  SearchRemoteRepository(
+      {required this.datasource,
+      required this.checkInternetConnectivity,
+      required this.searchLocalDatasource});
   @override
   Future<Either<Failure, void>> addSearchHistory(
       AddSearchHistoryReqDto dto) async {
@@ -54,12 +61,17 @@ class SearchRemoteRepository implements SearchRepository {
 
   @override
   Future<Either<Failure, List<Search>>> getSearchHistory(String uid) async {
-    try {
-      final List<SearchApiModel> searches =
-          await datasource.getSearchHistory(uid);
-      return Right(searches.map((search) => search.toDomain()).toList());
-    } catch (e) {
-      return Left(Failure(message: e.toString()));
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final List<SearchApiModel> searches =
+            await datasource.getSearchHistory(uid);
+        return Right(searches.map((search) => search.toDomain()).toList());
+      } catch (e) {
+        return Left(Failure(message: e.toString()));
+      }
+    } else {
+      final searches = await searchLocalDatasource.getSearchHistory();
+      return Right(searches.map((e) => e.toDomain()).toList());
     }
   }
 

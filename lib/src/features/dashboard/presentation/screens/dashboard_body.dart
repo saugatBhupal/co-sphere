@@ -1,9 +1,8 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
-import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/applied_job_list.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/applied_project_list.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/assigned_to_me_grid.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/created_by_me_grid.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/card/project_application_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
@@ -12,7 +11,6 @@ import 'package:cosphere/src/features/jobs/presentation/widgets/card/job_applica
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_functions.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_metrics.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_title.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardBody extends StatelessWidget {
   final User user;
@@ -38,23 +36,7 @@ class DashboardBody extends StatelessWidget {
               const DashboardTitle(
                   title: AppStrings.assigned, option: AppStrings.view),
               const AssignedToMeGrid(),
-              DashboardTitle(
-                title: AppStrings.application,
-                option: AppStrings.view,
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(AppRoutes.applications),
-              ),
-              SizedBox(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
-                  itemBuilder: (context, index) => const JobApplicationCard(),
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 4);
-                  },
-                ),
-              ),
+              AppliedJobList(user: user),
               AppliedProjectList(user: user),
             ],
           ),

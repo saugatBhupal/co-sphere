@@ -1,5 +1,4 @@
 import 'package:cosphere/src/core/constants/app_boxes.dart';
-import 'package:cosphere/src/core/network/hive_service.dart';
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/models/local/project_hive_model.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_local_mappers.dart';

@@ -9,8 +9,6 @@ import 'package:cosphere/src/core/domain/entities/user.dart' as _i6;
 import 'package:cosphere/src/core/error/failure.dart' as _i5;
 import 'package:cosphere/src/features/dashboard/domain/repositories/dasbboard_repository.dart'
     as _i3;
-import 'package:cosphere/src/features/project/domain/entities/project.dart'
-    as _i7;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -62,23 +60,4 @@ class MockDashboardRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.User?>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i7.Project>>> getProjectsByUser(
-          String? uid) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getProjectsByUser,
-          [uid],
-        ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.Failure, List<_i7.Project>>>.value(
-                _FakeEither_0<_i5.Failure, List<_i7.Project>>(
-          this,
-          Invocation.method(
-            #getProjectsByUser,
-            [uid],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i7.Project>>>);
 }

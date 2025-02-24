@@ -39,10 +39,8 @@ class ApiEndpoints {
   static const String searchJob = "$baseUrl/job/name/";
   static const String searchProject = "$baseUrl/project/name/";
 
-  // ====================== Dashboard Routes ======================
-  static const String getProjectUser = "$baseUrl/project/user/";
-  static const String getAppliedProjectUser =
-      "$baseUrl/project/applied-projects/";
+  // ====================== Job Routes ======================
+  static const String getAppliedJobs = "$baseUrl/job/applied-jobs/";
 
   // ====================== Project Routes ======================
   static const String project = "$baseUrl/project/";
@@ -53,4 +51,6 @@ class ApiEndpoints {
   static const String hire = "$baseUrl/project/hire";
   static const String reject = "$baseUrl/project/reject";
   static const String finishHire = "$baseUrl/project/finish-hiring/";
+  static const String getProjectUser = "$baseUrl/project/user/";
+  static const String getAppliedProject = "$baseUrl/project/applied-projects/";
 }

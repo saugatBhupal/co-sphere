@@ -1,4 +1,4 @@
-import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()

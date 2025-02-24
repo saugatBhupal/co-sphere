@@ -15,6 +15,7 @@ import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen
 import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/created_projects_screen.dart';
@@ -117,6 +118,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => sl<ProjectBloc>(),
               ),
+              BlocProvider(
+                create: (context) => sl<JobBloc>(),
+              ),
             ],
             child: DashboardScreen(user: settings.arguments as User),
           ),
@@ -153,9 +157,10 @@ class AppRouter {
       case AppRoutes.notifications:
         return MaterialPageRoute(
             builder: (context) => const NotificationsScreen());
-      case AppRoutes.applications:
+      case AppRoutes.jobApplications:
         return MaterialPageRoute(
-            builder: (context) => const ApplicationsScreen());
+            builder: (context) =>
+                ApplicationsScreen(jobs: settings.arguments as List<Job>));
       case AppRoutes.projectApplications:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(

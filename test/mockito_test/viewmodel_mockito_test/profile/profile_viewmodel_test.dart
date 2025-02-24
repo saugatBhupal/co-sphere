@@ -5,7 +5,7 @@ import 'package:cosphere/src/features/profile/data/dto/education/add_education_r
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
-import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';

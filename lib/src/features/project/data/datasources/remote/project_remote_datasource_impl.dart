@@ -220,7 +220,7 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
   @override
   Future<List<ProjectApiModel>> getAppliedProjects(String uid) async {
     try {
-      var res = await dio.get("${ApiEndpoints.getAppliedProjectUser}$uid");
+      var res = await dio.get("${ApiEndpoints.getAppliedProject}$uid");
       if (res.statusCode == 200) {
         final List<ProjectApiModel> projects = (res.data as List<dynamic>)
             .map((json) =>

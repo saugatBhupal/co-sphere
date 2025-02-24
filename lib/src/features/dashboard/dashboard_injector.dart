@@ -13,10 +13,8 @@ void initDash() {
       () => DashboardLocalDatasourceImpl(hiveService: sl()));
   sl.registerLazySingleton<DashboardRemoteDatasource>(() =>
       DashboardRemoteDatasourceImpl(dio: sl(), dashboardLocalDatasource: sl()));
-  sl.registerLazySingleton<DashboardRepository>(() => DashboardRemoteRepository(
-      dashboardLocalDatasource: sl(),
-      dashboardRemoteDatasource: sl(),
-      checkInternetConnectivity: sl()));
+  sl.registerLazySingleton<DashboardRepository>(
+      () => DashboardRemoteRepository(dashboardRemoteDatasource: sl()));
   sl.registerLazySingleton(() => GetUserUsecase(dashboardRepository: sl()));
 
   sl.registerFactory<DashboardBloc>(() => DashboardBloc(getUserUsecase: sl()));

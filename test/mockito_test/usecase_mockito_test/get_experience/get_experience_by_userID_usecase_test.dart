@@ -1,6 +1,6 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/get_experience_res_dto.dart';
-import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
 import 'package:dartz/dartz.dart';

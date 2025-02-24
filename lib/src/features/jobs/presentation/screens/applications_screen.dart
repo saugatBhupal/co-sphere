@@ -1,13 +1,13 @@
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/appbar/search_field_appbar.dart';
-import 'package:cosphere/src/core/widgets/image_builder.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/card/job_application_card.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/card/project_application_card.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationsScreen extends StatelessWidget {
-  const ApplicationsScreen({super.key});
+  final List<Job> jobs;
+  const ApplicationsScreen({super.key, required this.jobs});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,8 @@ class ApplicationsScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 3,
-                  itemBuilder: (context, index) => const JobApplicationCard(),
+                  itemBuilder: (context, index) =>
+                      JobApplicationCard(job: Job.initial()),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

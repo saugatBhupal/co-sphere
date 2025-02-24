@@ -9,4 +9,5 @@ abstract class AuthRemoteDatasource {
   Future<String> verifyOTP(OtpRequestDto dto);
   Future<String> createPassword(CreatePasswordRequestDto dto);
   Future<UserApiModel> signIn(SigninRequestDto params);
+  Future<UserApiModel> getUserProfileById(String uid);
 }

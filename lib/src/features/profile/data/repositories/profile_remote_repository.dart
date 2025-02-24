@@ -2,6 +2,7 @@ import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
+import 'package:cosphere/src/core/network/connectivity_checker.dart';
 import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/profile/data/datasources/remote/profile_datasource.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
@@ -10,11 +11,11 @@ import 'package:cosphere/src/features/profile/data/dto/experience/get_experience
 import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
-import 'package:cosphere/src/features/profile/data/models/education_api_model.dart';
-import 'package:cosphere/src/features/profile/data/models/experience_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/education_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/education_mappers.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
-import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
@@ -25,8 +26,10 @@ import 'package:dartz/dartz.dart';
 
 class ProfileRemoteRepository implements ProfileRepository {
   final ProfileDatasource profileDatasource;
-
-  ProfileRemoteRepository({required this.profileDatasource});
+  final BaseCheckInternetConnectivity checkInternetConnectivity;
+  ProfileRemoteRepository(
+      {required this.profileDatasource,
+      required this.checkInternetConnectivity});
   @override
   Future<Either<Failure, String>> updateProfileImage(
       UpdateProfileImgageReqDto dto) async {
@@ -115,11 +118,22 @@ class ProfileRemoteRepository implements ProfileRepository {
 
   @override
   Future<Either<Failure, User>> getUserProfileById(String uid) async {
-    try {
-      final UserApiModel user = await profileDatasource.getUserProfileById(uid);
-      return Right(user.toDomain());
-    } catch (e) {
-      return Left(Failure(message: e.toString()));
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final UserApiModel user =
+            await profileDatasource.getUserProfileById(uid);
+        return Right(user.toDomain());
+      } catch (e) {
+        return Left(Failure(message: e.toString()));
+      }
+    } else {
+      User? userPref = await UserSharedPref.getUser();
+      if (userPref!.uid == uid) {
+        print("$userPref is this");
+        return Right(userPref);
+      } else {
+        return const Left(Failure(message: "User not found locally"));
+      }
     }
   }
 }

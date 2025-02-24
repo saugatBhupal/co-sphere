@@ -16,3 +16,17 @@ class CreatedModuleChanged extends JobState {
   @override
   List<Object> get props => [index];
 }
+
+class GetAppliedJobLoading extends JobState {
+  const GetAppliedJobLoading();
+}
+
+class GetAppliedJobSuccess extends JobState {
+  final List<Job> jobs;
+  const GetAppliedJobSuccess({required this.jobs});
+}
+
+class GetAppliedJobFailed extends JobState {
+  final String message;
+  const GetAppliedJobFailed({required this.message});
+}

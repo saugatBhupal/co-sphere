@@ -12,6 +12,6 @@ class GetAppliedProjectsUsecase
 
   @override
   Future<Either<Failure, List<Project>>> call(String params) {
-    return projectRepository.getAppliedProjects(params);
+  return projectRepository.getAppliedProjects(params);
   }
 }

@@ -4,6 +4,7 @@ import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/job_api_model.dart';
 import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
+import 'package:cosphere/src/features/search/data/datasources/local/search_local_datasource.dart';
 import 'package:cosphere/src/features/search/data/datasources/remote/search_remote_datasource.dart';
 import 'package:cosphere/src/features/search/data/dto/add_search_history_req_dto/add_search_history_req_dto.dart';
 import 'package:cosphere/src/features/search/data/models/search_api_model.dart';
@@ -11,8 +12,9 @@ import 'package:dio/dio.dart';
 
 class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
   final Dio dio;
-
-  SearchRemoteDatasourceImpl({required this.dio});
+  final SearchLocalDatasource searchLocalDatasource;
+  SearchRemoteDatasourceImpl(
+      {required this.dio, required this.searchLocalDatasource});
   @override
   Future<void> addSearchHistory(AddSearchHistoryReqDto dto) async {
     try {
@@ -74,9 +76,13 @@ class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
     try {
       var res = await dio.get("${ApiEndpoints.searchHistory}$uid");
       if (res.statusCode == 200) {
-        return (res.data['data'] as List)
+        final List<SearchApiModel> searches = (res.data['data'] as List)
             .map((json) => SearchApiModel.fromJson(json))
             .toList();
+        if (searches.isNotEmpty) {
+          searchLocalDatasource.addSearchHistory(searches);
+        }
+        return searches;
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

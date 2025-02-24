@@ -3,7 +3,7 @@ import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
-import 'package:cosphere/src/features/profile/data/models/skill_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/project/data/models/remote/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 
