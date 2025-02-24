@@ -7,6 +7,7 @@ import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dt
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/education_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 
@@ -19,4 +20,6 @@ abstract class ProfileDatasource {
   Future<ExperienceApiModel> addExperience(AddExperienceReqDto dto);
   Future<UpdateIntroResDto> updateIntro(UpdateIntroReqDto dto);
   Future<UserApiModel> getUserProfileById(String uid);
+  Future<List<ReviewsApiModel>> getReviewsByUser(String reviewId);
+  Future<ReviewsApiModel> getReviewById(String reviewId);
 }

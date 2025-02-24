@@ -9,6 +9,7 @@ import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/complete_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_local_mappers.dart';
@@ -176,6 +177,26 @@ class ProjectRemoteRepository implements ProjectRepository {
     try {
       final List<ReviewsApiModel> reviews = await datasource.addReview(dto);
       return Right(reviews.map((review) => review.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> completeProject(
+      CompleteProjectReqDto dto) async {
+    try {
+      return Right(await datasource.completeProject(dto));
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Reviews>> getReviewById(String reviewId) async {
+    try {
+      final ReviewsApiModel review = await datasource.getReviewById(reviewId);
+      return Right(review.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

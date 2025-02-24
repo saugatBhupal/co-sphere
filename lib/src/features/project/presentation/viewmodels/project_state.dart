@@ -145,3 +145,31 @@ class AddReviewFailed extends ProjectState {
   final String message;
   const AddReviewFailed({required this.message});
 }
+
+class CompleteProjectLoading extends ProjectState {
+  const CompleteProjectLoading();
+}
+
+class CompleteProjectSuccess extends ProjectState {
+  final String message;
+  const CompleteProjectSuccess({required this.message});
+}
+
+class CompleteProjectFailed extends ProjectState {
+  final String message;
+  const CompleteProjectFailed({required this.message});
+}
+
+class GetReviewByIdLoading extends ProjectState {
+  const GetReviewByIdLoading();
+}
+
+class GetReviewByIdSuccess extends ProjectState {
+  final Reviews reviews;
+  const GetReviewByIdSuccess({required this.reviews});
+}
+
+class GetReviewByIdFailed extends ProjectState {
+  final String message;
+  const GetReviewByIdFailed({required this.message});
+}

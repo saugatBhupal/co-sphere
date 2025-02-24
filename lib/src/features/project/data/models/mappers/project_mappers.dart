@@ -1,8 +1,8 @@
 import 'package:cosphere/src/core/domain/mappers/remote/user_mappers.dart';
 import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/review_mapper.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
-import 'package:cosphere/src/features/project/data/models/local/project_hive_model.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/task_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
@@ -34,6 +34,8 @@ extension ProjectApiModelMappers on ProjectApiModel {
             pendingApplicants.map((applicant) => applicant.toDomain()).toList(),
         tasks: tasks.map((task) => task.toDomain()).toList(),
         members: members.map((member) => member.toDomain()).toList(),
+        reviews: reviews.map((reviews) => reviews.toDomain()).toList(),
+        completionType: completionType,
         createdAt: createdAt,
       );
 }
@@ -65,6 +67,8 @@ extension ProjectMappers on Project {
             .toList(),
         tasks: tasks.map((task) => task.fromDomain()).toList(),
         members: members.map((member) => member.toApiModel()).toList(),
+        reviews: reviews.map((review) => review.fromDomain()).toList(),
+        completionType: completionType,
         createdAt: createdAt,
       );
 }

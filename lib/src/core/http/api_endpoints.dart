@@ -16,7 +16,7 @@ class ApiEndpoints {
   static const String resetPassword = "$baseUrl/auth/resetPassword";
 
   // ====================== User Routes ======================
-  static const String fetchUserByID = "$baseUrl/user/";
+  static const String user = "$baseUrl/user/";
   static const String updateProfileImage = "$baseUrl/user/profile-image";
   static const String addSkill = "$baseUrl/user/skill/";
   static const String userEducation = "$baseUrl/user/education";
@@ -43,6 +43,7 @@ class ApiEndpoints {
   static const String getAppliedJobs = "$baseUrl/job/applied-jobs/";
 
   // ====================== Review Routes ======================
+  static const String review = "$baseUrl/review/";
   static const String addReviews = "$baseUrl/review/";
 
   // ====================== Project Routes ======================

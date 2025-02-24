@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/models/remote/user_api_model.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/project/data/models/remote/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
@@ -26,6 +27,8 @@ class ProjectApiModel {
   final List<ApplicantsApiModel> pendingApplicants;
   final List<TasksApiModel> tasks;
   final List<UserApiModel> members;
+  final List<ReviewsApiModel> reviews;
+  final CompletionType completionType;
   final DateTime createdAt;
 
   const ProjectApiModel({
@@ -47,6 +50,8 @@ class ProjectApiModel {
     required this.pendingApplicants,
     required this.members,
     required this.tasks,
+    required this.reviews,
+    required this.completionType,
     required this.createdAt,
   });
 
@@ -109,6 +114,12 @@ class ProjectApiModel {
                   : UserApiModel.initial().copyWith(uid: member.toString()))
               .toList()
           : [],
+      reviews: (json['reviews'] as List?)
+              ?.map((review) => ReviewsApiModel.initial().copyWith(id: review))
+              .toList() ??
+          [],
+      completionType: CompletionExtension.fromDatabaseValue(
+          json["completionType"] ?? "On-Time"),
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'])
           : DateTime(1970, 1, 1),
@@ -136,6 +147,7 @@ class ProjectApiModel {
       'pendingApplicants':
           pendingApplicants.map((applicant) => applicant.toJson()).toList(),
       'members': members.map((member) => member.toJson()).toList(),
+      'completionType': completionType.toDatabaseValue(),
       'createdAt': createdAt.toIso8601String(),
     };
   }

@@ -14,14 +14,17 @@ import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dt
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/education_local_mappers.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/experience_local_mapper.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/review_mapper.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/education_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/education_mappers.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
+import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
@@ -172,6 +175,28 @@ class ProfileRemoteRepository implements ProfileRepository {
       } else {
         return const Left(Failure(message: "User not found locally"));
       }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Reviews>>> getReviewsByUser(String uid) async {
+    try {
+      final List<ReviewsApiModel> reviews =
+          await profileDatasource.getReviewsByUser(uid);
+      return Right(reviews.map((review) => review.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Reviews>> getReviewById(String reviewId) async {
+    try {
+      final ReviewsApiModel review =
+          await profileDatasource.getReviewById(reviewId);
+      return Right(review.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
     }
   }
 }

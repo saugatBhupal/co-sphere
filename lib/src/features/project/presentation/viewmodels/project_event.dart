@@ -78,3 +78,15 @@ class AddReview extends ProjectEvent {
 
   const AddReview({required this.dto});
 }
+
+class CompleteProject extends ProjectEvent {
+  final CompleteProjectReqDto dto;
+
+  const CompleteProject({required this.dto});
+}
+
+class GetReviewById extends ProjectEvent {
+  final String reviewId;
+
+  const GetReviewById({required this.reviewId});
+}

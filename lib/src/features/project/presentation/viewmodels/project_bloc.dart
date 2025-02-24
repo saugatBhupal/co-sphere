@@ -3,11 +3,13 @@ import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/complete_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/complete_project_usecse.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
@@ -17,6 +19,7 @@ import 'package:cosphere/src/features/project/domain/usecases/get_completed_proj
 import 'package:cosphere/src/features/project/domain/usecases/get_hiring_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_project_by_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_projects_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_review_by_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/hire_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/reject_user_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -37,6 +40,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final GetProjectsUserUsecase getProjectsUserUsecase;
   final GetAppliedProjectsUsecase getAppliedProjectsUsecase;
   final AddReviewUsecase addReviewUsecase;
+  final CompleteProjectUsecse completeProjectUsecse;
+  final GetReviewByIdUsecase getReviewByIdUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -50,6 +55,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.getProjectsUserUsecase,
     required this.getAppliedProjectsUsecase,
     required this.addReviewUsecase,
+    required this.completeProjectUsecse,
+    required this.getReviewByIdUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -87,6 +94,12 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is AddReview) {
         await _addReview(event, emit);
+      }
+      if (event is CompleteProject) {
+        await _completeProject(event, emit);
+      }
+      if (event is GetReviewById) {
+        await _getReviewById(event, emit);
       }
     });
   }
@@ -314,7 +327,35 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         (success) => emit(AddReviewSuccess(reviews: success)),
       );
     } catch (e) {
-      emit(CreateTaskFailed(message: "Error: ${e.toString()}"));
+      emit(AddReviewFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _completeProject(
+      CompleteProject event, Emitter<ProjectState> emit) async {
+    emit(const CompleteProjectLoading());
+    try {
+      final result = await completeProjectUsecse(event.dto);
+      result.fold(
+        (failure) => emit(CompleteProjectFailed(message: failure.message)),
+        (success) => emit(CompleteProjectSuccess(message: success)),
+      );
+    } catch (e) {
+      emit(CompleteProjectFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _getReviewById(
+      GetReviewById event, Emitter<ProjectState> emit) async {
+    emit(const GetReviewByIdLoading());
+    try {
+      final result = await getReviewByIdUsecase(event.reviewId);
+      result.fold(
+        (failure) => emit(GetReviewByIdFailed(message: failure.message)),
+        (success) => emit(GetReviewByIdSuccess(reviews: success)),
+      );
+    } catch (e) {
+      emit(GetReviewByIdFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

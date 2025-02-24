@@ -18,7 +18,8 @@ class CompletedCard extends StatelessWidget {
         project.pendingApplicants.length;
 
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.completed),
+      onTap: () => Navigator.of(context)
+          .pushNamed(AppRoutes.completed, arguments: project.id),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         margin: const EdgeInsets.symmetric(vertical: 4),

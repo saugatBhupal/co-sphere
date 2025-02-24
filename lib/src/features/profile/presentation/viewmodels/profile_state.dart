@@ -84,3 +84,31 @@ class UpdateIntroSuccess extends ProfileState {
   final UpdateIntroResDto resDto;
   const UpdateIntroSuccess({required this.resDto});
 }
+
+class GetReviewByIdLoading extends ProfileState {
+  const GetReviewByIdLoading();
+}
+
+class GetReviewByIdSuccess extends ProfileState {
+  final Reviews review;
+  const GetReviewByIdSuccess({required this.review});
+}
+
+class GetReviewByIdFailed extends ProfileState {
+  final String message;
+  const GetReviewByIdFailed({required this.message});
+}
+
+class GetReviewByUserLoading extends ProfileState {
+  const GetReviewByUserLoading();
+}
+
+class GetReviewByUserSuccess extends ProfileState {
+  final List<Reviews> reviews;
+  const GetReviewByUserSuccess({required this.reviews});
+}
+
+class GetReviewByUserFailed extends ProfileState {
+  final String message;
+  const GetReviewByUserFailed({required this.message});
+}

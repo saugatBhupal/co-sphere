@@ -91,7 +91,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   @override
   Future<UserApiModel> getUserProfileById(String uid) async {
     try {
-      final res = await dio.get("${ApiEndpoints.fetchUserByID}$uid");
+      final res = await dio.get("${ApiEndpoints.user}$uid");
       if (res.statusCode == 200) {
         final data = res.data['data'];
         final UserApiModel userApiModel = UserApiModel.fromJson(data);

@@ -11,6 +11,7 @@ import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_res_dt
 import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profile_imgage_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/education_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/experience_api_model.dart';
+import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:dio/dio.dart';
@@ -177,7 +178,7 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   @override
   Future<UserApiModel> getUserProfileById(String uid) async {
     try {
-      final res = await dio.get("${ApiEndpoints.fetchUserByID}$uid");
+      final res = await dio.get("${ApiEndpoints.user}$uid");
       if (res.statusCode == 200) {
         final data = res.data['data'];
         final UserApiModel userApiModel = UserApiModel.fromJson(data);
@@ -186,6 +187,43 @@ class ProfileDatasourceImpl implements ProfileDatasource {
         throw Failure(
           message: res.statusMessage.toString(),
           statusCode: res.statusCode.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<List<ReviewsApiModel>> getReviewsByUser(String reviewId) async {
+    try {
+      final res = await dio.get("${ApiEndpoints.user}$reviewId/reviews");
+      if (res.statusCode == 200) {
+        final List<dynamic> data = res.data['reviews'];
+        return data
+            .map((review) => ReviewsApiModel.initial().copyWith(id: review))
+            .toList();
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusCode.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<ReviewsApiModel> getReviewById(String reviewId) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.review}/$reviewId");
+      if (res.statusCode == 200) {
+        return ReviewsApiModel.fromJson(res.data);
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
         );
       }
     } on DioException catch (e) {

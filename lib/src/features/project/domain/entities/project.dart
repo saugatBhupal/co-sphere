@@ -1,3 +1,4 @@
+import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:equatable/equatable.dart';
@@ -27,6 +28,8 @@ class Project extends Equatable {
   final List<Applicants> pendingApplicants;
   final List<Tasks> tasks;
   final List<User> members;
+  final List<Reviews> reviews;
+  final CompletionType completionType;
   final DateTime createdAt;
 
   const Project({
@@ -48,6 +51,8 @@ class Project extends Equatable {
     required this.pendingApplicants,
     required this.tasks,
     required this.members,
+    required this.reviews,
+    required this.completionType,
     required this.createdAt,
   });
   factory Project.initial() {
@@ -70,6 +75,8 @@ class Project extends Equatable {
       pendingApplicants: const [],
       tasks: const [],
       members: const [],
+      reviews: const [],
+      completionType: CompletionType.ontime,
       createdAt: DateTime.timestamp(),
     );
   }
@@ -93,6 +100,8 @@ class Project extends Equatable {
     List<Applicants>? applicants,
     List<User>? members,
     List<Tasks>? tasks,
+    List<Reviews>? reviews,
+    CompletionType? completionType,
     DateTime? createdAt,
   }) {
     return Project(
@@ -114,6 +123,8 @@ class Project extends Equatable {
       pendingApplicants: pendingApplicants ?? this.pendingApplicants,
       tasks: tasks ?? this.tasks,
       members: members ?? this.members,
+      reviews: reviews ?? this.reviews,
+      completionType: completionType ?? this.completionType,
       createdAt: createdAt ?? this.createdAt,
     );
   }

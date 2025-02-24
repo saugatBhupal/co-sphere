@@ -6,6 +6,7 @@ import 'package:cosphere/src/features/project/data/datasources/remote/project_re
 import 'package:cosphere/src/features/project/data/repositories/project_remote_repository.dart';
 import 'package:cosphere/src/features/project/domain/repositories/project_repository.dart';
 import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/complete_project_usecse.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
@@ -15,6 +16,7 @@ import 'package:cosphere/src/features/project/domain/usecases/get_completed_proj
 import 'package:cosphere/src/features/project/domain/usecases/get_hiring_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_project_by_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_projects_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_review_by_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/hire_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/reject_user_usecase.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
@@ -52,6 +54,10 @@ void initProject() {
       () => GetAppliedProjectsUsecase(projectRepository: sl()));
   sl.registerLazySingleton<AddReviewUsecase>(
       () => AddReviewUsecase(projectRepository: sl()));
+  sl.registerLazySingleton<CompleteProjectUsecse>(
+      () => CompleteProjectUsecse(projectRepository: sl()));
+  sl.registerLazySingleton<GetReviewByIdUsecase>(
+      () => GetReviewByIdUsecase(projectRepository: sl()));
   sl.registerFactory<ProjectBloc>(() => ProjectBloc(
       getHiringProjectsUserUsecase: sl(),
       getActiveProjectUserUsecase: sl(),
@@ -64,5 +70,7 @@ void initProject() {
       createTaskUsecase: sl(),
       getProjectsUserUsecase: sl(),
       getAppliedProjectsUsecase: sl(),
-      addReviewUsecase: sl()));
+      addReviewUsecase: sl(),
+      completeProjectUsecse: sl(),
+      getReviewByIdUsecase: sl()));
 }

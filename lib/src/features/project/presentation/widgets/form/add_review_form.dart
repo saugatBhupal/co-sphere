@@ -7,6 +7,7 @@ import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/features/profile/data/models/mappers/review_mapper.dart';
 import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/complete_project_req_dto.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/star_rating.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/form/complete_dropdown.dart';
@@ -88,11 +89,21 @@ class _AddReviewFormState extends State<AddReviewForm> {
         if (state is AddReviewSuccess) {
           buildToast(
               toastType: ToastType.success, msg: "Review Added Successfully");
-          // Navigator.of(context).popAndPushNamed(AppRoutes.completed,
-          //     arguments: widget.projectId);
+          context.read<ProjectBloc>().add(CompleteProject(
+              dto: CompleteProjectReqDto(
+                  projectId: widget.projectId,
+                  completionType: completionType!)));
         }
         if (state is AddReviewFailed) {
           buildToast(toastType: ToastType.error, msg: state.message);
+        }
+        if (state is CompleteProjectFailed) {
+          buildToast(toastType: ToastType.error, msg: state.message);
+        }
+        if (state is CompleteProjectSuccess) {
+          buildToast(toastType: ToastType.success, msg: state.message);
+          Navigator.of(context).popAndPushNamed(AppRoutes.completed,
+              arguments: widget.projectId);
         }
       },
       child: SingleChildScrollView(
@@ -126,6 +137,7 @@ class _AddReviewFormState extends State<AddReviewForm> {
                   onChanged: (value) {
                     setState(() {
                       completionType = value;
+                      print(completionType);
                     });
                   },
                 ),

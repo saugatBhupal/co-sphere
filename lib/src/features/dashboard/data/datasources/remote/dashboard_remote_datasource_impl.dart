@@ -17,7 +17,7 @@ class DashboardRemoteDatasourceImpl implements DashboardRemoteDatasource {
   @override
   Future<UserApiModel?> getCurrentUser(String? uid) async {
     try {
-      final res = await dio.get("${ApiEndpoints.fetchUserByID}$uid");
+      final res = await dio.get("${ApiEndpoints.user}$uid");
       if (res.statusCode == 200) {
         final data = res.data['data'];
         final UserApiModel userApiModel = UserApiModel.fromJson(data);

@@ -60,3 +60,15 @@ class GetUserProfileById extends ProfileEvent {
 
   const GetUserProfileById({required this.uid});
 }
+
+class GetReviewsByUser extends ProfileEvent {
+  final String uid;
+
+  const GetReviewsByUser({required this.uid});
+}
+
+class GetReviewById extends ProfileEvent {
+  final String reviewId;
+
+  const GetReviewById({required this.reviewId});
+}

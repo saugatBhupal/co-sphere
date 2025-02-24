@@ -89,7 +89,7 @@ Widget _getProfileModule(int index, User user) {
     case 3:
       return const HistoryView();
     case 4:
-      return const ReviewsView();
+      return ReviewsView(uid: user.uid);
     default:
       return AboutView(user: user);
   }

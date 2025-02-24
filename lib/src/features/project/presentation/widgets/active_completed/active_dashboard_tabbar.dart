@@ -10,10 +10,11 @@ import 'package:cosphere/src/features/project/presentation/widgets/tab_view/memb
 import 'package:cosphere/src/features/project/presentation/widgets/tab_view/tasks_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProjectTabbar extends StatelessWidget {
+class ActiveDashboardTabbar extends StatelessWidget {
   final String status;
   final Project project;
-  const ProjectTabbar({super.key, required this.status, required this.project});
+  const ActiveDashboardTabbar(
+      {super.key, required this.status, required this.project});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/active_completed/project_details_basics.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/active_completed/project_header.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/active_completed/project_tabbar.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/active_completed/active_dashboard_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,7 +53,7 @@ class ActiveDashboardScreen extends StatelessWidget {
                     ),
                     ProjectDetailsBasics(project: project),
                     Expanded(
-                        child: ProjectTabbar(
+                        child: ActiveDashboardTabbar(
                             status: AppStrings.active, project: project)),
                   ],
                 );

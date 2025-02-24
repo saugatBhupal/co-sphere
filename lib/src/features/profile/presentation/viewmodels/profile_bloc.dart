@@ -8,15 +8,18 @@ import 'package:cosphere/src/features/profile/data/dto/profile_img/update_profil
 import 'package:cosphere/src/features/profile/data/models/mappers/experience_mapper.dart';
 import 'package:cosphere/src/features/profile/domain/entities/education.dart';
 import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
+import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_education_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_experience_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_reviews_by_user_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_user_profile_by_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_intro_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_review_by_id_usecase.dart';
 import 'package:equatable/equatable.dart';
 
 part 'profile_event.dart';
@@ -31,6 +34,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final AddExperienceUsecase addExperienceUsecase;
   final UpdateIntroUsecase updateIntroUsecase;
   final GetUserProfileByIdUsecase getUserProfileByIdUsecase;
+  final GetReviewsByUserUsecase getReviewsByUserUsecase;
+  final GetReviewByIdUsecase getReviewByIdUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,
     required this.addSkillUsecase,
@@ -40,6 +45,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required this.addExperienceUsecase,
     required this.updateIntroUsecase,
     required this.getUserProfileByIdUsecase,
+    required this.getReviewByIdUsecase,
+    required this.getReviewsByUserUsecase,
   }) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
       if (event is ChangeProfileModule) {
@@ -68,6 +75,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       if (event is GetUserProfileById) {
         await _getUserProfileById(event, emit);
+      }
+      if (event is GetReviewsByUser) {
+        await _getReviewsByUser(event, emit);
+      }
+      if (event is GetReviewById) {
+        await _getReviewById(event, emit);
       }
     });
   }
@@ -205,6 +218,34 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       });
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _getReviewById(
+      GetReviewById event, Emitter<ProfileState> emit) async {
+    emit(const GetReviewByIdLoading());
+    try {
+      final result = await getReviewByIdUsecase(event.reviewId);
+      result.fold(
+        (failure) => emit(GetReviewByIdFailed(message: failure.message)),
+        (success) => emit(GetReviewByIdSuccess(review: success)),
+      );
+    } catch (e) {
+      emit(GetReviewByIdFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _getReviewsByUser(
+      GetReviewsByUser event, Emitter<ProfileState> emit) async {
+    emit(const GetReviewByUserLoading());
+    try {
+      final result = await getReviewsByUserUsecase(event.uid);
+      result.fold(
+        (failure) => emit(GetReviewByUserFailed(message: failure.message)),
+        (success) => emit(GetReviewByUserSuccess(reviews: success)),
+      );
+    } catch (e) {
+      emit(GetReviewByUserFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

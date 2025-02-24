@@ -3,10 +3,10 @@ import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
-import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/complete_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
@@ -263,6 +263,43 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
       }
     } on DioException catch (e) {
       print("Dio Exception: ${e.response?.statusCode} ${e.response?.data}");
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<String> completeProject(CompleteProjectReqDto dto) async {
+    try {
+      var res = await dio.post(
+          "${ApiEndpoints.project}${dto.projectId}/complete",
+          data: dto.toJson());
+      if (res.statusCode == 200) {
+        return res.data['message'];
+      } else {
+        throw Failure(
+          message: res.data['message'],
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      print("Dio Exception: ${e.response?.statusCode} ${e.response?.data}");
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<ReviewsApiModel> getReviewById(String reviewId) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.review}/$reviewId");
+      if (res.statusCode == 200) {
+        return ReviewsApiModel.fromJson(res.data);
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
       return await handleErrorResponse(e);
     }
   }
