@@ -5,10 +5,11 @@ import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_mod
 import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
-import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
-import 'package:cosphere/src/features/project/data/dto/complete_project_req_dto.dart';
-import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
-import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/add_review/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/complete_project/complete_project_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task/create_task_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/hire_user/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:cosphere/src/features/project/data/models/remote/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
@@ -300,6 +301,24 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
         );
       }
     } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<ProjectApiModel> createProject(CreateProjectReqDto dto) async {
+    try {
+      var res = await dio.post(ApiEndpoints.project, data: dto.toJson());
+      if (res.statusCode == 200) {
+        return ProjectApiModel.fromJson(res.data);
+      } else {
+        throw Failure(
+          message: res.data['message'],
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      print("Dio Exception: ${e.response?.statusCode} ${e.response?.data}");
       return await handleErrorResponse(e);
     }
   }

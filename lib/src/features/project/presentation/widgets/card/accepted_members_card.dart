@@ -1,6 +1,6 @@
 import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
-import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/hire_user/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/reject_button.dart';
 import 'package:flutter/material.dart';

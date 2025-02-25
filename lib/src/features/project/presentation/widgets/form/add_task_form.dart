@@ -1,6 +1,6 @@
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
-import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';

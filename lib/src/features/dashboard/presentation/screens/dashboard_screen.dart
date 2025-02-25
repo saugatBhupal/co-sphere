@@ -1,5 +1,5 @@
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:cosphere/src/features/jobs/presentation/screens/create_project_screen.dart';
+import 'package:cosphere/src/features/project/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/form/add_task_form.dart';
 import 'package:flutter/material.dart';

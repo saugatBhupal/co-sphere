@@ -173,3 +173,17 @@ class GetReviewByIdFailed extends ProjectState {
   final String message;
   const GetReviewByIdFailed({required this.message});
 }
+
+class CreateProjectLoading extends ProjectState {
+  const CreateProjectLoading();
+}
+
+class CreateProjectSuccess extends ProjectState {
+  final Project project;
+  const CreateProjectSuccess({required this.project});
+}
+
+class CreateProjectFailed extends ProjectState {
+  final String message;
+  const CreateProjectFailed({required this.message});
+}

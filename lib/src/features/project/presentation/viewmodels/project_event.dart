@@ -90,3 +90,9 @@ class GetReviewById extends ProjectEvent {
 
   const GetReviewById({required this.reviewId});
 }
+
+class CreateProject extends ProjectEvent {
+  final CreateProjectReqDto dto;
+
+  const CreateProject({required this.dto});
+}

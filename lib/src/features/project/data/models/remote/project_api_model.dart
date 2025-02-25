@@ -1,10 +1,13 @@
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/models/remote/user_api_model.dart';
+import 'package:cosphere/src/features/jobs/data/models/mappers/job_mappers.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
+import 'package:cosphere/src/features/profile/data/models/mappers/skill_mappers.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
+import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/project/data/models/remote/tasks_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 
@@ -67,8 +70,9 @@ class ProjectApiModel {
           ? UserApiModel.fromJson(json['postedBy'] as Map<String, dynamic>)
           : UserApiModel.initial().copyWith(uid: json['postedBy']),
       skills: (json['skills'] as List?)
-              ?.map((skill) =>
-                  SkillApiModel.fromJson(skill as Map<String, dynamic>))
+              ?.map((skill) => skill is Map<String, dynamic>
+                  ? SkillApiModel.fromJson(skill)
+                  : Skill.initial().copyWith(uid: skill).fromDomain())
               .toList() ??
           [],
       companyName: json['companyName'] as String? ?? '',

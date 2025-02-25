@@ -3,7 +3,7 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
-import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/hire_user/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/accept_button.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/buttons/reject_button.dart';

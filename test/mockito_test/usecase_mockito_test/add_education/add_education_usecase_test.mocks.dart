@@ -23,12 +23,16 @@ import 'package:cosphere/src/features/profile/domain/entities/education.dart'
     as _i9;
 import 'package:cosphere/src/features/profile/domain/entities/experience.dart'
     as _i12;
+import 'package:cosphere/src/features/profile/domain/entities/reviews.dart'
+    as _i17;
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart'
     as _i7;
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart'
     as _i3;
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart'
     as _i8;
+import 'package:cosphere/src/features/project/domain/entities/project.dart'
+    as _i18;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -210,4 +214,60 @@ class MockProfileRepository extends _i1.Mock implements _i3.ProfileRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i16.User>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i17.Reviews>>> getReviewsByUser(
+          String? uid) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getReviewsByUser,
+          [uid],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, List<_i17.Reviews>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i17.Reviews>>(
+          this,
+          Invocation.method(
+            #getReviewsByUser,
+            [uid],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i17.Reviews>>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i17.Reviews>> getReviewById(
+          String? reviewId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getReviewById,
+          [reviewId],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i17.Reviews>>.value(
+            _FakeEither_0<_i5.Failure, _i17.Reviews>(
+          this,
+          Invocation.method(
+            #getReviewById,
+            [reviewId],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i17.Reviews>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i18.Project>>> getHistoryByUserId(
+          String? uid) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getHistoryByUserId,
+          [uid],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, List<_i18.Project>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i18.Project>>(
+          this,
+          Invocation.method(
+            #getHistoryByUserId,
+            [uid],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i18.Project>>>);
 }

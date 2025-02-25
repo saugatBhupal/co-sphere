@@ -2,15 +2,17 @@ import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
-import 'package:cosphere/src/features/project/data/dto/add_review_req_dto.dart';
-import 'package:cosphere/src/features/project/data/dto/complete_project_req_dto.dart';
-import 'package:cosphere/src/features/project/data/dto/create_task_req_dto.dart';
-import 'package:cosphere/src/features/project/data/dto/hire_user_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/add_review/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/complete_project/complete_project_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/create_task/create_task_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/hire_user/hire_user_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_project_usecse.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/create_project_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
@@ -42,6 +44,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final AddReviewUsecase addReviewUsecase;
   final CompleteProjectUsecse completeProjectUsecse;
   final GetReviewByIdUsecase getReviewByIdUsecase;
+  final CreateProjectUsecase createProjectUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -57,6 +60,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.addReviewUsecase,
     required this.completeProjectUsecse,
     required this.getReviewByIdUsecase,
+    required this.createProjectUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -100,6 +104,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is GetReviewById) {
         await _getReviewById(event, emit);
+      }
+      if (event is CreateProject) {
+        await _createProject(event, emit);
       }
     });
   }
@@ -356,6 +363,23 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       );
     } catch (e) {
       emit(GetReviewByIdFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _createProject(
+      CreateProject event, Emitter<ProjectState> emit) async {
+    emit(const CreateProjectLoading());
+    try {
+      final result = await createProjectUsecase(event.dto);
+      result.fold(
+        (failure) => emit(CreateProjectFailed(message: failure.message)),
+        (success) {
+          _createdProjects.add(success);
+          emit(CreateProjectSuccess(project: success));
+        },
+      );
+    } catch (e) {
+      emit(CreateTaskFailed(message: "Error: ${e.toString()}"));
     }
   }
 }
