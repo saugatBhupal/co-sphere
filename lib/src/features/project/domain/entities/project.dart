@@ -31,6 +31,7 @@ class Project extends Equatable {
   final List<Reviews> reviews;
   final CompletionType completionType;
   final DateTime createdAt;
+  final DateTime completionDate;
 
   const Project({
     required this.id,
@@ -54,6 +55,7 @@ class Project extends Equatable {
     required this.reviews,
     required this.completionType,
     required this.createdAt,
+    required this.completionDate,
   });
   factory Project.initial() {
     return Project(
@@ -78,6 +80,7 @@ class Project extends Equatable {
       reviews: const [],
       completionType: CompletionType.ontime,
       createdAt: DateTime.timestamp(),
+      completionDate: DateTime.timestamp(),
     );
   }
   Project copyWith({
@@ -103,6 +106,7 @@ class Project extends Equatable {
     List<Reviews>? reviews,
     CompletionType? completionType,
     DateTime? createdAt,
+    DateTime? completionDate,
   }) {
     return Project(
       id: id ?? this.id,
@@ -126,6 +130,7 @@ class Project extends Equatable {
       reviews: reviews ?? this.reviews,
       completionType: completionType ?? this.completionType,
       createdAt: createdAt ?? this.createdAt,
+      completionDate: completionDate ?? this.completionDate,
     );
   }
 

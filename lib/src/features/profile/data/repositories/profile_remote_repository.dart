@@ -28,6 +28,9 @@ import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
+import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:dartz/dartz.dart';
 
 class ProfileRemoteRepository implements ProfileRepository {
@@ -195,6 +198,17 @@ class ProfileRemoteRepository implements ProfileRepository {
       final ReviewsApiModel review =
           await profileDatasource.getReviewById(reviewId);
       return Right(review.toDomain());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Project>>> getHistoryByUserId(String uid) async {
+    try {
+      final List<ProjectApiModel> projects =
+          await profileDatasource.getHistoryByUserId(uid);
+      return Right(projects.map((project) => project.toDomain()).toList());
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

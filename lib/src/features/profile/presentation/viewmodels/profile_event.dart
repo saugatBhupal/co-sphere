@@ -72,3 +72,9 @@ class GetReviewById extends ProfileEvent {
 
   const GetReviewById({required this.reviewId});
 }
+
+class GetHistoryByUserId extends ProfileEvent {
+  final String uid;
+
+  const GetHistoryByUserId({required this.uid});
+}

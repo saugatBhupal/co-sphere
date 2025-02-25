@@ -10,6 +10,7 @@ import 'package:cosphere/src/features/profile/data/models/remote/experience_api_
 import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 
 abstract class ProfileDatasource {
   Future<String> updateProfileImage(UpdateProfileImgageReqDto dto);
@@ -22,4 +23,5 @@ abstract class ProfileDatasource {
   Future<UserApiModel> getUserProfileById(String uid);
   Future<List<ReviewsApiModel>> getReviewsByUser(String reviewId);
   Future<ReviewsApiModel> getReviewById(String reviewId);
+  Future<List<ProjectApiModel>> getHistoryByUserId(String uid);
 }

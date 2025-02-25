@@ -15,10 +15,12 @@ import 'package:cosphere/src/features/profile/domain/usecases/add_experience_use
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_history_by_user_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_reviews_by_user_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_user_profile_by_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_intro_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_review_by_id_usecase.dart';
 import 'package:equatable/equatable.dart';
 
@@ -36,6 +38,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetUserProfileByIdUsecase getUserProfileByIdUsecase;
   final GetReviewsByUserUsecase getReviewsByUserUsecase;
   final GetReviewByIdUsecase getReviewByIdUsecase;
+  final GetHistoryByUserIdUsecase getHistoryByUserIdUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,
     required this.addSkillUsecase,
@@ -47,6 +50,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required this.getUserProfileByIdUsecase,
     required this.getReviewByIdUsecase,
     required this.getReviewsByUserUsecase,
+    required this.getHistoryByUserIdUsecase,
   }) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
       if (event is ChangeProfileModule) {
@@ -81,6 +85,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
       if (event is GetReviewById) {
         await _getReviewById(event, emit);
+      }
+      if (event is GetHistoryByUserId) {
+        await _getHistoryByUserId(event, emit);
       }
     });
   }
@@ -246,6 +253,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
     } catch (e) {
       emit(GetReviewByUserFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _getHistoryByUserId(
+      GetHistoryByUserId event, Emitter<ProfileState> emit) async {
+    emit(const GetHistoryByUserIdLoading());
+    try {
+      final result = await getHistoryByUserIdUsecase(event.uid);
+      result.fold(
+        (failure) => emit(GetHistoryByUserIdFailed(message: failure.message)),
+        (success) => emit(GetHistoryByUserIdSuccess(project: success)),
+      );
+    } catch (e) {
+      emit(GetHistoryByUserIdFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

@@ -87,7 +87,7 @@ Widget _getProfileModule(int index, User user) {
     case 2:
       return EducationView(uid: user.uid, email: user.email);
     case 3:
-      return const HistoryView();
+      return  HistoryView(uid: user.uid);
     case 4:
       return ReviewsView(uid: user.uid);
     default:

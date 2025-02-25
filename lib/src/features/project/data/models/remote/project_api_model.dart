@@ -30,6 +30,7 @@ class ProjectApiModel {
   final List<ReviewsApiModel> reviews;
   final CompletionType completionType;
   final DateTime createdAt;
+  final DateTime completionDate;
 
   const ProjectApiModel({
     required this.id,
@@ -53,6 +54,7 @@ class ProjectApiModel {
     required this.reviews,
     required this.completionType,
     required this.createdAt,
+    required this.completionDate,
   });
 
   factory ProjectApiModel.fromJson(Map<String, dynamic> json) {
@@ -123,6 +125,9 @@ class ProjectApiModel {
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'])
           : DateTime(1970, 1, 1),
+      completionDate: json['completionDate'] != null
+          ? DateTime.parse(json['completionDate'])
+          : DateTime(1970, 1, 1),
     );
   }
   Map<String, dynamic> toJson() {
@@ -149,6 +154,7 @@ class ProjectApiModel {
       'members': members.map((member) => member.toJson()).toList(),
       'completionType': completionType.toDatabaseValue(),
       'createdAt': createdAt.toIso8601String(),
+      'completionDate': completionDate.toIso8601String(),
     };
   }
 }

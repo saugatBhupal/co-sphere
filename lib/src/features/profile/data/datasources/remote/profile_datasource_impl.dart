@@ -14,6 +14,7 @@ import 'package:cosphere/src/features/profile/data/models/remote/experience_api_
 import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/skill_api_model.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
+import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:dio/dio.dart';
 
 class ProfileDatasourceImpl implements ProfileDatasource {
@@ -220,6 +221,26 @@ class ProfileDatasourceImpl implements ProfileDatasource {
       var res = await dio.get("${ApiEndpoints.review}/$reviewId");
       if (res.statusCode == 200) {
         return ReviewsApiModel.fromJson(res.data);
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<List<ProjectApiModel>> getHistoryByUserId(String uid) async {
+    try {
+      var res = await dio
+          .get("${ApiEndpoints.user}${"67b3ee32ddfc4ad8dd34e185"}/history");
+      if (res.statusCode == 200) {
+        return (res.data as List)
+            .map((json) => ProjectApiModel.fromJson(json))
+            .toList();
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

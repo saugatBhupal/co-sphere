@@ -112,3 +112,17 @@ class GetReviewByUserFailed extends ProfileState {
   final String message;
   const GetReviewByUserFailed({required this.message});
 }
+
+class GetHistoryByUserIdLoading extends ProfileState {
+  const GetHistoryByUserIdLoading();
+}
+
+class GetHistoryByUserIdSuccess extends ProfileState {
+  final List<Project> project;
+  const GetHistoryByUserIdSuccess({required this.project});
+}
+
+class GetHistoryByUserIdFailed extends ProfileState {
+  final String message;
+  const GetHistoryByUserIdFailed({required this.message});
+}

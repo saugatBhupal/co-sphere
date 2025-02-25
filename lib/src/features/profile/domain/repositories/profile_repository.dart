@@ -11,6 +11,7 @@ import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:dartz/dartz.dart';
 
 abstract interface class ProfileRepository {
@@ -26,4 +27,5 @@ abstract interface class ProfileRepository {
   Future<Either<Failure, User>> getUserProfileById(String uid);
   Future<Either<Failure, List<Reviews>>> getReviewsByUser(String uid);
   Future<Either<Failure, Reviews>> getReviewById(String reviewId);
+  Future<Either<Failure, List<Project>>> getHistoryByUserId(String uid);
 }

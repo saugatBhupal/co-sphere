@@ -37,6 +37,7 @@ extension ProjectApiModelMappers on ProjectApiModel {
         reviews: reviews.map((reviews) => reviews.toDomain()).toList(),
         completionType: completionType,
         createdAt: createdAt,
+        completionDate: completionDate,
       );
 }
 
@@ -70,5 +71,6 @@ extension ProjectMappers on Project {
         reviews: reviews.map((review) => review.fromDomain()).toList(),
         completionType: completionType,
         createdAt: createdAt,
+        completionDate: completionDate,
       );
 }

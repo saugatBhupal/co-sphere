@@ -10,6 +10,7 @@ import 'package:cosphere/src/features/profile/domain/usecases/add_experience_use
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_history_by_user_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_review_by_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_reviews_by_user_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_user_profile_by_id_usecase.dart';
@@ -46,6 +47,8 @@ void initProfile() {
       () => GetReviewByIdUsecase(profileRepository: sl()));
   sl.registerLazySingleton<GetReviewsByUserUsecase>(
       () => GetReviewsByUserUsecase(profileRepository: sl()));
+  sl.registerLazySingleton<GetHistoryByUserIdUsecase>(
+      () => GetHistoryByUserIdUsecase(profileRepository: sl()));
   sl.registerFactory<ProfileBloc>(() => ProfileBloc(
       updateProfileImageUsecase: sl(),
       addSkillUsecase: sl(),
@@ -56,5 +59,6 @@ void initProfile() {
       updateIntroUsecase: sl(),
       getUserProfileByIdUsecase: sl(),
       getReviewByIdUsecase: sl(),
-      getReviewsByUserUsecase: sl()));
+      getReviewsByUserUsecase: sl(),
+      getHistoryByUserIdUsecase: sl()));
 }
