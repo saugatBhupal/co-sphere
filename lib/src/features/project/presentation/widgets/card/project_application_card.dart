@@ -31,31 +31,45 @@ class ProjectApplicationCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleImageAvatar(
-                  radius: context.isTablet ? 24 : 18, color: AppColors.lemon),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(project.projectName,
-                        style: _textTheme.bodyLarge!.copyWith(
+              Row(
+                children: [
+                  CircleImageAvatar(
+                    radius: context.isTablet ? 24 : 18,
+                    color: AppColors.lemon,
+                  ),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: context.width * 0.5,
+                        child: Text(
+                          project.projectName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                          style: _textTheme.bodyLarge!.copyWith(
                             letterSpacing: 0,
                             height: 1.2,
-                            fontSize: context.isTablet ? 18 : 14)),
-                    Text(
-                      "Posted on ${extractDate(project.createdAt)}, by ${project.postedBy.fullname}",
-                      style: _textTheme.labelSmall!.copyWith(
+                            fontSize: context.isTablet ? 18 : 14,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Posted on ${extractDate(project.createdAt)}, by ${project.postedBy.fullname}",
+                        style: _textTheme.labelSmall!.copyWith(
                           height: 1,
                           letterSpacing: 0,
-                          fontSize: context.isTablet ? 12 : 8),
-                    ),
-                  ],
-                ),
+                          fontSize: context.isTablet ? 12 : 8,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: StatusButton(

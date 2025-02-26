@@ -15,7 +15,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TaskCard extends StatelessWidget {
   final Tasks task;
   final String projectId;
-  const TaskCard({super.key, required this.task, required this.projectId});
+  final bool postedBy;
+  const TaskCard(
+      {super.key,
+      required this.task,
+      required this.projectId,
+      required this.postedBy});
 
   @override
   Widget build(BuildContext context) {
@@ -89,14 +94,17 @@ class TaskCard extends StatelessWidget {
                         fontSize: context.isTablet ? 16 : 10,
                       ),
                     ),
-                    const Spacer(),
-                    AcceptButton(
-                      onTap: () => context.read<ProjectBloc>().add(CompleteTask(
-                          params: CompleteTaskParams(
-                              projectId: projectId, taskId: task.id))),
-                    ),
-                    const SizedBox(width: 8),
-                    const TrashButton(),
+                    if (postedBy) ...[
+                      const Spacer(),
+                      AcceptButton(
+                        onTap: () => context.read<ProjectBloc>().add(
+                            CompleteTask(
+                                params: CompleteTaskParams(
+                                    projectId: projectId, taskId: task.id))),
+                      ),
+                      const SizedBox(width: 8),
+                      const TrashButton(),
+                    ],
                   ],
                 ),
               ],

@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/jobs/data/datasources/local/job_local_datasource.dart';
 import 'package:cosphere/src/features/jobs/data/datasources/remote/job_remote_datasource.dart';
+import 'package:cosphere/src/features/jobs/data/dto/create_job/create_job_req_dto.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/job_api_model.dart';
 import 'package:dio/dio.dart';
 
@@ -31,6 +32,24 @@ class JobRemoteDatasourceImpl implements JobRemoteDatasource {
         );
       }
     } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<JobApiModel> createJob(CreateJobReqDto dto) async {
+    try {
+      var res = await dio.post(ApiEndpoints.job, data: dto.toJson());
+      if (res.statusCode == 200) {
+        return JobApiModel.fromJson(res.data);
+      } else {
+        throw Failure(
+          message: res.data['message'],
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      print("Dio Exception: ${e.response?.statusCode} ${e.response?.data}");
       return await handleErrorResponse(e);
     }
   }

@@ -5,7 +5,6 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
-import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +19,7 @@ class DurationSpan extends StatelessWidget {
     return Row(
       children: [
         const FunctionButton(icon: AppIcons.calender),
-        const SizedBox(width: 8),
+        const SizedBox(width: 2),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,7 +30,7 @@ class DurationSpan extends StatelessWidget {
               style: _textTheme.bodySmall!.copyWith(
                   height: 1,
                   color: AppColors.black,
-                  fontSize: context.isTablet ? 16 : 12,
+                  fontSize: context.isTablet ? 16 : 11,
                   fontWeight: FontThickness.regular),
             ),
             Text(

@@ -5,6 +5,7 @@ import 'package:cosphere/src/features/jobs/data/datasources/remote/job_remote_da
 import 'package:cosphere/src/features/jobs/data/datasources/remote/job_remote_datasource_impl.dart';
 import 'package:cosphere/src/features/jobs/data/repositories/job_remote_repository.dart';
 import 'package:cosphere/src/features/jobs/domain/repositories/job_repository.dart';
+import 'package:cosphere/src/features/jobs/domain/usecases/create_job_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/get_applied_jobs_usecase.dart';
 import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
 
@@ -18,5 +19,8 @@ void initJob() {
       checkInternetConnectivity: sl()));
   sl.registerLazySingleton<GetAppliedJobsUsecase>(
       () => GetAppliedJobsUsecase(jobRepository: sl()));
-  sl.registerFactory<JobBloc>(() => JobBloc(getAppliedJobsUsecase: sl()));
+  sl.registerLazySingleton<CreateJobUsecase>(
+      () => CreateJobUsecase(jobRepository: sl()));
+  sl.registerFactory<JobBloc>(
+      () => JobBloc(getAppliedJobsUsecase: sl(), createJobUsecase: sl()));
 }

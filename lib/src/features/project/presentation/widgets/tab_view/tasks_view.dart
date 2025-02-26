@@ -13,12 +13,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TasksView extends StatelessWidget {
   final String status;
   final String projectId;
+  final bool postedBy;
   final List<User> members;
 
   const TasksView({
     super.key,
     required this.status,
     required this.projectId,
+    required this.postedBy,
     required this.members,
   });
 
@@ -30,7 +32,7 @@ class TasksView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          if (status == AppStrings.active)
+          if (postedBy)
             Padding(
               padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
               child: Row(
@@ -56,10 +58,12 @@ class TasksView extends StatelessWidget {
           if (tasks.isNotEmpty)
             Expanded(
               child: ListView.separated(
-                reverse: true,
                 itemCount: tasks.length,
-                itemBuilder: (context, index) =>
-                    TaskCard(task: tasks[index], projectId: projectId),
+                itemBuilder: (context, index) => TaskCard(
+                  task: tasks[index],
+                  projectId: projectId,
+                  postedBy: postedBy,
+                ),
                 separatorBuilder: (context, index) => const SizedBox(),
               ),
             ),

@@ -37,9 +37,8 @@ class AppliedProjectList extends StatelessWidget {
               DashboardTitle(
                 title: AppStrings.projectApp,
                 option: AppStrings.view,
-                onPressed: () => Navigator.of(context).pushNamed(
-                    AppRoutes.projectApplications,
-                    arguments: projectList),
+                onPressed: () => Navigator.of(context)
+                    .pushNamed(AppRoutes.projectApplications, arguments: user),
               ),
               SizedBox(
                 child: ListView.separated(

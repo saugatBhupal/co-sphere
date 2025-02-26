@@ -1,5 +1,6 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
@@ -51,7 +52,7 @@ class HiringDashboardScreen extends StatelessWidget {
               if (state is FinishHireSuccess) {
                 buildToast(toastType: ToastType.success, msg: state.message);
                 Navigator.of(context)
-                    .popAndPushNamed(AppRoutes.active, arguments: projectId);
+                    .popAndPushNamed(AppRoutes.active, arguments: ActiveScreensArgs(projectId: projectId, userId: ""));
               }
             },
             child: BlocBuilder<ProjectBloc, ProjectState>(

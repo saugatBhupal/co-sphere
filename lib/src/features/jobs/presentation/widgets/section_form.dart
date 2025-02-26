@@ -35,6 +35,7 @@ class _SectionFormState extends State<SectionForm> {
       width: context.width,
       child: Column(
         children: [
+          gap,
           TextspanField(
             textController: _titleController,
             label: AppStrings.title,

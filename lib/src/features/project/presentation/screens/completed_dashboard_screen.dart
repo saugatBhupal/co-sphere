@@ -1,14 +1,13 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
-import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/active_completed/completed_dashboard_tabbar.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/active_completed/project_details_basics.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/active_completed/project_header.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/active_completed/active_dashboard_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,13 +39,15 @@ class CompletedDashboardScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProjectHeader(
+                    postedBy: false,
                     status: project.status.toDatabaseValue(),
                     postedOn: project.createdAt,
                     projectName: project.projectName,
                     projectId: project.id,
                     members: project.members,
                   ),
-                  ProjectDetailsBasics(project: project),
+                  ProjectDetailsBasics(
+                      project: project, postedBy: false),
                   Expanded(
                       child: CompletedDashboardTabbar(
                           status: AppStrings.completed, project: project)),

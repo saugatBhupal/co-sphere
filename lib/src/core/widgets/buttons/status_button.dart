@@ -47,6 +47,7 @@ class StatusButton extends StatelessWidget {
       case "Senior":
       case "Early":
       case "Active":
+      case "Accepted":
         background = AppColors.genie;
         foreground = AppColors.winter;
         break;

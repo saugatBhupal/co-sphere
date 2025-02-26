@@ -307,6 +307,10 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
 
   List<Project> _appliedProjects = [];
   List<Project> get appliedProjects => _appliedProjects;
+  List<Project> _acceptedProjects = [];
+  List<Project> get acceptedProjects => _acceptedProjects;
+  List<Project> _completedProjects = [];
+  List<Project> get completedProjects => _completedProjects;
   Future<void> _getAppliedProjectByUser(
       GetAppliedProject event, Emitter<ProjectState> emit) async {
     emit(const GetAppliedProjectLoading());
@@ -315,10 +319,20 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       result.fold(
           (failure) => emit(GetAppliedProjectFailed(message: failure.message)),
           (success) {
-        _appliedProjects = success;
+        _appliedProjects = success
+            .where((project) => (project.status == Status.pending ||
+                project.status == Status.rejected))
+            .toList();
+        _acceptedProjects = success
+            .where((project) => project.status == Status.accepted)
+            .toList();
+        _completedProjects = success
+            .where((project) => project.status == Status.completed)
+            .toList();
         emit(GetAppliedProjectSuccess(
-            projects:
-                success.length >= 3 ? success.take(3).toList() : success));
+            projects: _appliedProjects.length >= 3
+                ? _appliedProjects.take(3).toList()
+                : _appliedProjects));
       });
     } catch (e) {
       emit(GetAppliedProjectFailed(message: "Error: ${e.toString()}"));
@@ -379,7 +393,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         },
       );
     } catch (e) {
-      emit(CreateTaskFailed(message: "Error: ${e.toString()}"));
+      emit(CreateProjectFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

@@ -26,7 +26,6 @@ import 'package:cosphere/src/features/profile/presentation/screens/edit_profile_
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/authentication/presentation/screens/interest_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
-import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/screens/active_dashboard_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/applicants_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/completed_dashboard_screen.dart';
@@ -166,7 +165,7 @@ class AppRouter {
             builder: (context) => BlocProvider.value(
                 value: _projectBloc,
                 child: ProjectApplicationsScreen(
-                    projects: settings.arguments as List<Project>)));
+                    user: settings.arguments as User)));
       case AppRoutes.createdProjects:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
@@ -187,7 +186,7 @@ class AppRouter {
             builder: (context) => BlocProvider.value(
                 value: _projectBloc,
                 child: ActiveDashboardScreen(
-                    projectId: settings.arguments as String)));
+                    screensArgs: settings.arguments as ActiveScreensArgs)));
       case AppRoutes.completed:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
@@ -202,7 +201,8 @@ class AppRouter {
       case AppRoutes.createProject:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-                value: _projectBloc, child: const CreateProjectScreen()));
+                value: _projectBloc,
+                child: CreateProjectScreen(user: settings.arguments as User)));
       case AppRoutes.search:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(

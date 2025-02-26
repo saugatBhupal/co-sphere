@@ -13,8 +13,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ActiveDashboardTabbar extends StatelessWidget {
   final String status;
   final Project project;
-  const ActiveDashboardTabbar(
-      {super.key, required this.status, required this.project});
+  final bool postedBy;
+  const ActiveDashboardTabbar({
+    super.key,
+    required this.status,
+    required this.project,
+    required this.postedBy,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +69,7 @@ class ActiveDashboardTabbar extends StatelessWidget {
                     TasksView(
                         status: status,
                         projectId: project.id,
+                        postedBy: postedBy,
                         members: project.members),
                     const CompletedTaskView(),
                   ],

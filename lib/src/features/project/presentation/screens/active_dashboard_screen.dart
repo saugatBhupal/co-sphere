@@ -1,4 +1,5 @@
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
@@ -12,14 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActiveDashboardScreen extends StatelessWidget {
-  final String projectId;
-  const ActiveDashboardScreen({super.key, required this.projectId});
+  final ActiveScreensArgs screensArgs;
+  const ActiveDashboardScreen({super.key, required this.screensArgs});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          sl<ProjectBloc>()..add(GetProjectByID(projectId: projectId)),
+      create: (context) => sl<ProjectBloc>()
+        ..add(GetProjectByID(projectId: screensArgs.projectId)),
       child: Scaffold(
         appBar: const CommonAppbar(
             title: "${AppStrings.project} ${AppStrings.details}"),
@@ -37,6 +38,9 @@ class ActiveDashboardScreen extends StatelessWidget {
             builder: (context, state) {
               final projectBloc = context.read<ProjectBloc>();
               final Project? project = projectBloc.project;
+              bool postedBy = (project!.status == Status.active) &&
+                  (screensArgs.userId == project.postedBy.uid);
+              // print(postedBy);
               if (state is GetProjectLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -45,16 +49,20 @@ class ActiveDashboardScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProjectHeader(
+                      postedBy: postedBy,
                       status: AppStrings.active,
                       postedOn: project.createdAt,
                       projectName: project.projectName,
                       projectId: project.id,
                       members: project.members,
                     ),
-                    ProjectDetailsBasics(project: project),
+                    ProjectDetailsBasics(project: project, postedBy: postedBy),
                     Expanded(
                         child: ActiveDashboardTabbar(
-                            status: AppStrings.active, project: project)),
+                      status: AppStrings.active,
+                      project: project,
+                      postedBy: postedBy,
+                    )),
                   ],
                 );
               }

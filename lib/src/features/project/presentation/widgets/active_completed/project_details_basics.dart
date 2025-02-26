@@ -13,7 +13,9 @@ import 'package:flutter/material.dart';
 
 class ProjectDetailsBasics extends StatelessWidget {
   final Project project;
-  const ProjectDetailsBasics({super.key, required this.project});
+  final bool postedBy;
+  const ProjectDetailsBasics(
+      {super.key, required this.project, required this.postedBy});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class ProjectDetailsBasics extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                if (project.status == Status.active) const TrashButton(),
+                if (postedBy) const TrashButton(),
               ],
             ),
           )

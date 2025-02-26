@@ -41,7 +41,7 @@ class CompletedView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: state.projects.length,
                 itemBuilder: (context, index) =>
-                    CompletedCard(project: state.projects[index]),
+                    CompletedCard(project: state.projects[index], uid: uid),
                 separatorBuilder: (context, index) => const SizedBox(height: 4),
               ),
             );

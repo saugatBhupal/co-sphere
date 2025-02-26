@@ -13,12 +13,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProjectHeader extends StatelessWidget {
   final String status;
+  final bool postedBy;
   final String projectId;
   final String projectName;
   final DateTime postedOn;
   final List<User> members;
   const ProjectHeader({
     super.key,
+    required this.postedBy,
     required this.status,
     required this.projectId,
     required this.projectName,
@@ -49,7 +51,7 @@ class ProjectHeader extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 10)),
               const Spacer(),
-              if (status == AppStrings.active)
+              if (postedBy)
                 SizedBox(
                   width: context.width / 4,
                   child: DarkRoundedButton(

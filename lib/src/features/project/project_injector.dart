@@ -8,6 +8,7 @@ import 'package:cosphere/src/features/project/domain/repositories/project_reposi
 import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_project_usecse.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
+import 'package:cosphere/src/features/jobs/domain/usecases/create_job_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_project_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';

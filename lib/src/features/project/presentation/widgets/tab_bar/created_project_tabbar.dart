@@ -3,9 +3,9 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/tab_view/active_view.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/tab_view/completed_view.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/tab_view/hiring_view.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/tab_view/active_view.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/tab_view/completed_view.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/tab_view/hiring_view.dart';
 import 'package:flutter/material.dart';
 
 class CreatedProjectTabbar extends StatelessWidget {

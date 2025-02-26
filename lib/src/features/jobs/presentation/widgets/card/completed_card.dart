@@ -1,4 +1,5 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ import 'package:cosphere/src/features/jobs/presentation/widgets/card/cards_heade
 
 class CompletedCard extends StatelessWidget {
   final Project project;
-  const CompletedCard({super.key, required this.project});
+  final String uid;
+  const CompletedCard({super.key, required this.project, required this.uid});
 
   @override
   Widget build(BuildContext context) {

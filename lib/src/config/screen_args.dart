@@ -41,3 +41,20 @@ class MembersScreensArgs {
     );
   }
 }
+
+class ActiveScreensArgs {
+  final String projectId;
+  final String userId;
+
+  ActiveScreensArgs({required this.projectId, required this.userId});
+
+  ActiveScreensArgs copyWith({
+    String? projectId,
+    String? userId,
+  }) {
+    return ActiveScreensArgs(
+      projectId: projectId ?? this.projectId,
+      userId: userId ?? this.userId,
+    );
+  }
+}

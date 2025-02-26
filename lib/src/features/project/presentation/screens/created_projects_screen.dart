@@ -2,7 +2,7 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/widgets/appbar/search_field_appbar.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/created_project_tabbar.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/tab_bar/created_project_tabbar.dart';
 import 'package:flutter/material.dart';
 
 class CreatedProjectsScreen extends StatelessWidget {

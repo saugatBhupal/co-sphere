@@ -20,7 +20,7 @@ class CreateProjectReqDto {
     required this.position,
     required this.address,
     required this.postedBy,
-    required this.skills,
+    required this.skills, 
     required this.site,
     required this.salary,
   });

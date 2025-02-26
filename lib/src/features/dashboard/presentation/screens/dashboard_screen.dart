@@ -43,9 +43,9 @@ class DashboardScreen extends StatelessWidget {
       case 0:
         return DashboardBody(user: user);
       case 1:
-        return const CreateProjectScreen();
+        return CreateProjectScreen(user: user);
       case 2:
-        return const CreateProjectScreen();
+        return CreateProjectScreen(user: user);
       case 3:
         return const AddTaskForm(
           members: [],

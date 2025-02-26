@@ -58,8 +58,8 @@ class CreatedByMeGrid extends StatelessWidget {
                     return project.status == Status.hiring
                         ? HiringCard(project: project)
                         : project.status == Status.active
-                            ? ActiveCard(project: project)
-                            : CompletedCard(project: project);
+                            ? ActiveCard(project: project, uid: user.uid)
+                            : CompletedCard(project: project, uid: user.uid);
                   },
                 ),
               ),
