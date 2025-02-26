@@ -6,6 +6,7 @@ import 'package:cosphere/src/features/project/data/datasources/remote/project_re
 import 'package:cosphere/src/features/project/data/repositories/project_remote_repository.dart';
 import 'package:cosphere/src/features/project/domain/repositories/project_repository.dart';
 import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/apply_to_project_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_project_usecse.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/create_job_usecase.dart';
@@ -65,6 +66,8 @@ void initProject() {
       () => CreateProjectUsecase(projectRepository: sl()));
   sl.registerLazySingleton<GetExploreProjectUsecase>(
       () => GetExploreProjectUsecase(projectRepository: sl()));
+  sl.registerLazySingleton<ApplyToProjectUsecase>(
+      () => ApplyToProjectUsecase(projectRepository: sl()));
   sl.registerFactory<ProjectBloc>(() => ProjectBloc(
       getHiringProjectsUserUsecase: sl(),
       getActiveProjectUserUsecase: sl(),
@@ -81,5 +84,6 @@ void initProject() {
       completeProjectUsecse: sl(),
       getReviewByIdUsecase: sl(),
       createProjectUsecase: sl(),
-      getExploreProjectUsecase: sl()));
+      getExploreProjectUsecase: sl(),
+      applyToProjectUsecase: sl()));
 }

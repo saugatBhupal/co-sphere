@@ -59,4 +59,5 @@ class ApiEndpoints {
   static const String getProjectUser = "$baseUrl/project/user/";
   static const String getAppliedProject = "$baseUrl/project/applied-projects/";
   static const String getExploreProjects = "$baseUrl/project/explore/";
+  static const String applyToProject = "$baseUrl/project/apply";
 }

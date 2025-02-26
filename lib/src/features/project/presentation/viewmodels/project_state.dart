@@ -201,3 +201,17 @@ class GetExploreProjectsFailed extends ProjectState {
   final String message;
   const GetExploreProjectsFailed({required this.message});
 }
+
+class ApplyToProjectLoading extends ProjectState {
+  const ApplyToProjectLoading();
+}
+
+class ApplyToProjectSuccess extends ProjectState {
+  final Project project;
+  const ApplyToProjectSuccess({required this.project});
+}
+
+class ApplyToProjectFailed extends ProjectState {
+  final String message;
+  const ApplyToProjectFailed({required this.message});
+}

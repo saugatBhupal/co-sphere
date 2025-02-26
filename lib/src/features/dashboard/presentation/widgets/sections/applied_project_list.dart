@@ -44,7 +44,7 @@ class AppliedProjectList extends StatelessWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: projectList.length,
+                  itemCount: projectList.length > 3 ? 3 : projectList.length,
                   itemBuilder: (context, index) => ProjectApplicationCard(
                     project: projectList[index],
                   ),

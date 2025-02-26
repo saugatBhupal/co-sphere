@@ -1,4 +1,3 @@
-import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/applied_job_list.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/applied_project_list.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/sections/assigned_to_me_grid.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/card/job_application_card.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_functions.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_metrics.dart';
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_title.dart';

@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/apply_project/apply_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/complete_project/complete_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task/create_task_req_dto.dart';
@@ -10,6 +11,7 @@ import 'package:cosphere/src/features/project/data/dto/hire_user/hire_user_req_d
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/apply_to_project_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_project_usecse.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_project_usecase.dart';
@@ -47,6 +49,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final GetReviewByIdUsecase getReviewByIdUsecase;
   final CreateProjectUsecase createProjectUsecase;
   final GetExploreProjectUsecase getExploreProjectUsecase;
+  final ApplyToProjectUsecase applyToProjectUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -64,6 +67,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.getReviewByIdUsecase,
     required this.createProjectUsecase,
     required this.getExploreProjectUsecase,
+    required this.applyToProjectUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -113,6 +117,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is GetExploreProjects) {
         await _getExploreProjects(event, emit);
+      }
+      if (event is ApplyToProject) {
+        await _applyToProject(event, emit);
       }
     });
   }
@@ -325,6 +332,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       result.fold(
           (failure) => emit(GetAppliedProjectFailed(message: failure.message)),
           (success) {
+        print(success.length);
         _appliedProjects = success
             .where((project) => (project.status == Status.pending ||
                 project.status == Status.rejected))
@@ -335,10 +343,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         _completedProjects = success
             .where((project) => project.status == Status.completed)
             .toList();
-        emit(GetAppliedProjectSuccess(
-            projects: _appliedProjects.length >= 3
-                ? _appliedProjects.take(3).toList()
-                : _appliedProjects));
+        emit(GetAppliedProjectSuccess(projects: _appliedProjects));
       });
     } catch (e) {
       emit(GetAppliedProjectFailed(message: "Error: ${e.toString()}"));
@@ -419,6 +424,24 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       );
     } catch (e) {
       emit(GetExploreProjectsFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _applyToProject(
+      ApplyToProject event, Emitter<ProjectState> emit) async {
+    emit(const ApplyToProjectLoading());
+    try {
+      final result = await applyToProjectUsecase(event.dto);
+      result.fold(
+        (failure) => emit(ApplyToProjectFailed(message: failure.message)),
+        (success) {
+          _exploreProjects.removeWhere((e) => e.id == success.id);
+          _appliedProjects.add(success);
+          emit(ApplyToProjectSuccess(project: success));
+        },
+      );
+    } catch (e) {
+      emit(ApplyToProjectFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

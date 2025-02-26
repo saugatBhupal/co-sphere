@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 
 class ExploreProjectDetails extends StatelessWidget {
   final Project project;
-  const ExploreProjectDetails({super.key, required this.project});
+
+  const ExploreProjectDetails(
+      {super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {

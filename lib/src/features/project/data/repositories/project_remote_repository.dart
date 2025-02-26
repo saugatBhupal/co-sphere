@@ -9,6 +9,7 @@ import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/apply_project/apply_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/complete_project/complete_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task/create_task_req_dto.dart';
@@ -220,6 +221,17 @@ class ProjectRemoteRepository implements ProjectRepository {
       final List<ProjectApiModel> projects =
           await datasource.getExploreProjects(uid);
       return Right(projects.map((project) => project.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Project>> applyToProject(
+      ApplyProjectReqDto dto) async {
+    try {
+      final ProjectApiModel project = await datasource.applyToProject(dto);
+      return Right(project.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

@@ -102,3 +102,8 @@ class GetExploreProjects extends ProjectEvent {
 
   const GetExploreProjects({required this.uid});
 }
+class ApplyToProject extends ProjectEvent {
+  final ApplyProjectReqDto dto;
+
+  const ApplyToProject({required this.dto});
+}

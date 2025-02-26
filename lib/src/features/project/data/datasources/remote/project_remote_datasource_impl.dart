@@ -6,6 +6,7 @@ import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_mod
 import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review/add_review_req_dto.dart';
+import 'package:cosphere/src/features/project/data/dto/apply_project/apply_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/complete_project/complete_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task/create_task_req_dto.dart';
@@ -337,6 +338,23 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
         //   projectLocalDatasource.addAppliedProject(projects);
         // }
         return projects;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<ProjectApiModel> applyToProject(ApplyProjectReqDto dto) async {
+    try {
+      var res = await dio.post(ApiEndpoints.applyToProject, data: dto.toJson());
+      if (res.statusCode == 200) {
+        return ProjectApiModel.fromJson(res.data['project']);
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

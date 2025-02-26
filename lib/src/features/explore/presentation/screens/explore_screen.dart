@@ -4,7 +4,7 @@ import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/features/explore/presentation/widgets/explore_project_details.dart';
-import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
+import 'package:cosphere/src/features/project/data/dto/apply_project/apply_project_req_dto.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +62,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   void _onHorizontalSwipe(String direction) {
     if (direction == 'left') {
-      _applyToProject(_currentPage);
+      // _applyToProject(_currentPage);
 
       if (_currentPage < _projects.length - 1) {
         setState(() {
@@ -81,12 +81,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     }
   }
 
-  void _applyToProject(int index) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Applied to the project! $index")),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -98,54 +92,64 @@ class _ExploreScreenState extends State<ExploreScreen> {
             if (state is GetExploreProjectsFailed) {
               buildToast(toastType: ToastType.error, msg: state.message);
             }
+            if (state is ApplyToProjectFailed) {
+              buildToast(toastType: ToastType.error, msg: state.message);
+            }
+            if (state is ApplyToProjectSuccess) {
+              buildToast(toastType: ToastType.success, msg: "Applied to Job");
+            }
             if (context.read<ProjectBloc>().exploreProjects.isNotEmpty) {
               _projects = context.read<ProjectBloc>().exploreProjects;
-              return GestureDetector(
-                onVerticalDragEnd: (details) {
-                  _updateScrollDirection(Axis.vertical);
-                  if (details.primaryVelocity != null) {
-                    if (details.primaryVelocity! < 0) {
-                      _onVerticalSwipe("up");
-                    } else {
-                      _onVerticalSwipe("down");
-                    }
-                  }
-                },
-                onHorizontalDragEnd: (details) {
-                  _updateScrollDirection(Axis.horizontal);
-                  if (details.primaryVelocity != null) {
-                    if (details.primaryVelocity! > 0) {
-                      _onHorizontalSwipe("right");
-                    } else {
-                      _onHorizontalSwipe("left");
-                    }
-                  }
-                },
-                child: SizedBox(
-                  height: context.height,
-                  width: context.width,
-                  child: _projects.isEmpty
-                      ? const Center(
-                          child: Text(
-                            "No Projects",
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      : PageView(
-                          scrollDirection: _scrollDirection,
-                          controller: _pageController,
-                          onPageChanged: (index) {
-                            setState(() {
-                              _currentPage = index;
-                              print(_currentPage);
-                            });
-                          },
-                          children: _projects.map((project) {
-                            return ExploreProjectDetails(project: project);
-                          }).toList(),
+              return SizedBox(
+                height: context.height,
+                width: context.width,
+                child: _projects.isEmpty
+                    ? const Center(
+                        child: Text(
+                          "No Projects",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                ),
+                      )
+                    : PageView(
+                        scrollDirection: _scrollDirection,
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentPage = index;
+                            print(_currentPage);
+                          });
+                        },
+                        children: _projects.map((project) {
+                          return GestureDetector(
+                            onVerticalDragEnd: (details) {
+                              _updateScrollDirection(Axis.vertical);
+                              if (details.primaryVelocity != null) {
+                                if (details.primaryVelocity! < 0) {
+                                  _onVerticalSwipe("up");
+                                } else {
+                                  _onVerticalSwipe("down");
+                                }
+                              }
+                            },
+                            onHorizontalDragEnd: (details) {
+                              _updateScrollDirection(Axis.horizontal);
+                              context.read<ProjectBloc>().add(ApplyToProject(
+                                  dto: ApplyProjectReqDto(
+                                      userId: widget.user.uid,
+                                      projectId: project.id)));
+                              if (details.primaryVelocity != null) {
+                                if (details.primaryVelocity! > 0) {
+                                  _onHorizontalSwipe("right");
+                                } else {
+                                  _onHorizontalSwipe("left");
+                                }
+                              }
+                            },
+                            child: ExploreProjectDetails(project: project),
+                          );
+                        }).toList(),
+                      ),
               );
             }
             return const SizedBox.shrink();
