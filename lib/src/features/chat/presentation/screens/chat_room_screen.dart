@@ -47,7 +47,6 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     _textController = TextEditingController();
   }
 
-
   void _setupSocketListeners() {
     final socket = _socketService.socket;
     if (socket == null) return;
@@ -55,6 +54,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     socket.on("receiveMessage", (data) {
       if (data["conversationId"] == widget.chatScreensArgs.conversationID) {
         final message = MessageApiModel.fromJson(data).toDomain();
+        print(message);
         setState(() {
           messages.add(message);
         });
