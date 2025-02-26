@@ -96,3 +96,9 @@ class CreateProject extends ProjectEvent {
 
   const CreateProject({required this.dto});
 }
+
+class GetExploreProjects extends ProjectEvent {
+  final String uid;
+
+  const GetExploreProjects({required this.uid});
+}

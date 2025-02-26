@@ -27,4 +27,5 @@ abstract interface class ProjectRepository {
   Future<Either<Failure, String>> completeProject(CompleteProjectReqDto dto);
   Future<Either<Failure, Reviews>> getReviewById(String reviewId);
   Future<Either<Failure, Project>> createProject(CreateProjectReqDto dto);
+  Future<Either<Failure, List<Project>>> getExploreProjects(String uid);
 }

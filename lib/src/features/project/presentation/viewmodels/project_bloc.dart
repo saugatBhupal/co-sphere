@@ -18,6 +18,7 @@ import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usec
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_applied_projects_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_explore_project_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_hiring_projects_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_project_by_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_projects_user_usecase.dart';
@@ -45,6 +46,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final CompleteProjectUsecse completeProjectUsecse;
   final GetReviewByIdUsecase getReviewByIdUsecase;
   final CreateProjectUsecase createProjectUsecase;
+  final GetExploreProjectUsecase getExploreProjectUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -61,6 +63,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.completeProjectUsecse,
     required this.getReviewByIdUsecase,
     required this.createProjectUsecase,
+    required this.getExploreProjectUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -107,6 +110,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is CreateProject) {
         await _createProject(event, emit);
+      }
+      if (event is GetExploreProjects) {
+        await _getExploreProjects(event, emit);
       }
     });
   }
@@ -394,6 +400,25 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       );
     } catch (e) {
       emit(CreateProjectFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  List<Project> _exploreProjects = [];
+  List<Project> get exploreProjects => _exploreProjects;
+  Future<void> _getExploreProjects(
+      GetExploreProjects event, Emitter<ProjectState> emit) async {
+    emit(const GetExploreProjectsLoading());
+    try {
+      final result = await getExploreProjectUsecase(event.uid);
+      result.fold(
+        (failure) => emit(GetExploreProjectsFailed(message: failure.message)),
+        (success) {
+          _exploreProjects = success;
+          emit(GetExploreProjectsSuccess(projects: success));
+        },
+      );
+    } catch (e) {
+      emit(GetExploreProjectsFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

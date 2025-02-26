@@ -3,9 +3,11 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_basics.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_header.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_section.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
 
 class JobDetailsScreen extends StatelessWidget {
@@ -19,29 +21,34 @@ class JobDetailsScreen extends StatelessWidget {
           const CommonAppbar(title: "${AppStrings.job} ${AppStrings.details}"),
       body: Stack(
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(bottom: 80),
+              padding: const EdgeInsets.only(bottom: 80),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  JobDetailsHeader(),
-                  JobDetailsBasics(),
-                  JobDetailsSection(
+                  JobDetailsHeader(
+                    title: "Develop a Mobile App for Food Delivery",
+                    postedOn: DateTime.now(),
+                    salary: Salary.initial(),
+                  ),
+                  JobDetailsBasics(project: Project.initial()),
+                  const JobDetailsSection(
                     section: JobSection(
                       title: "What I Need?",
                       description:
                           "We’re looking for a skilled and creative freelance developer to bring our app idea to life! If you thrive on challenges and have experience building user-friendly, robust mobile applications, we’d love to hear from you.",
                     ),
                   ),
-                  JobDetailsSection(
+                  const JobDetailsSection(
                     section: JobSection(
                       title: "Platform",
                       lstDescription: ["iOS", "Android"],
                     ),
                   ),
-                  JobDetailsSection(
+                  const JobDetailsSection(
                     section: JobSection(
                       title: "Features",
                       lstDescription: [
@@ -50,7 +57,7 @@ class JobDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  JobDetailsSection(
+                  const JobDetailsSection(
                     section: JobSection(
                       title: "Deliverables",
                       lstDescription: [
@@ -60,7 +67,7 @@ class JobDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  JobDetailsSection(
+                  const JobDetailsSection(
                     section: JobSection(
                       title: "Requirements",
                       lstDescription: [

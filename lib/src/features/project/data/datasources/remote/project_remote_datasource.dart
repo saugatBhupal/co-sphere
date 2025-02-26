@@ -25,4 +25,5 @@ abstract interface class ProjectRemoteDatasource {
   Future<String> completeProject(CompleteProjectReqDto dto);
   Future<ReviewsApiModel> getReviewById(String reviewId);
   Future<ProjectApiModel> createProject(CreateProjectReqDto dto);
+  Future<List<ProjectApiModel>> getExploreProjects(String uid);
 }

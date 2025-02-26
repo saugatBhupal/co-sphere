@@ -1,5 +1,4 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';

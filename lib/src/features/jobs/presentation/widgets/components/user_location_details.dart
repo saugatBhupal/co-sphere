@@ -1,5 +1,4 @@
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';

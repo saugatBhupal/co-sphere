@@ -213,4 +213,15 @@ class ProjectRemoteRepository implements ProjectRepository {
       return Left(Failure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Project>>> getExploreProjects(String uid) async {
+    try {
+      final List<ProjectApiModel> projects =
+          await datasource.getExploreProjects(uid);
+      return Right(projects.map((project) => project.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
 }

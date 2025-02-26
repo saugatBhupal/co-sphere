@@ -322,4 +322,29 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
       return await handleErrorResponse(e);
     }
   }
+
+  @override
+  Future<List<ProjectApiModel>> getExploreProjects(String uid) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.getExploreProjects}$uid");
+      if (res.statusCode == 200) {
+        final List<ProjectApiModel> projects = (res.data as List<dynamic>)
+            .map((json) =>
+                ProjectApiModel.fromJson(json as Map<String, dynamic>))
+            .toList();
+        print(projects);
+        // if (projects.isNotEmpty) {
+        //   projectLocalDatasource.addAppliedProject(projects);
+        // }
+        return projects;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
 }

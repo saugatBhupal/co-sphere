@@ -15,6 +15,7 @@ import 'package:cosphere/src/features/chat/presentation/screens/chat_room_screen
 import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:cosphere/src/features/explore/presentation/screens/explore_screen.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/create_project_screen.dart';
@@ -208,6 +209,11 @@ class AppRouter {
             builder: (context) => BlocProvider.value(
                 value: _searchBloc,
                 child: SearchScreen(user: settings.arguments as User)));
+      case AppRoutes.explore:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                value: _projectBloc,
+                child: ExploreScreen(user: settings.arguments as User)));
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

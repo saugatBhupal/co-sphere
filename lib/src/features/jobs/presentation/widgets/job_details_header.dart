@@ -1,5 +1,6 @@
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/buttons/function_button.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
@@ -7,7 +8,15 @@ import 'package:cosphere/src/features/jobs/presentation/widgets/components/poste
 import 'package:flutter/material.dart';
 
 class JobDetailsHeader extends StatelessWidget {
-  const JobDetailsHeader({super.key});
+  final String title;
+  final DateTime postedOn;
+  final Salary salary;
+  const JobDetailsHeader({
+    super.key,
+    required this.title,
+    required this.postedOn,
+    required this.salary,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +25,17 @@ class JobDetailsHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Develop a Mobile App for Food Delivery",
+          title,
           style: _textTheme.headlineSmall!
               .copyWith(height: 1.2, fontSize: context.isTablet ? 24 : 20),
         ),
         const SizedBox(height: 6),
         Row(
           children: [
-            const PostedSpan(),
+            PostedSpan(posted: timeAgo(postedOn)),
             const SizedBox(width: 12),
             BudgetContainer(
-              salary: Salary.initial(),
+              salary: salary,
             ),
             const Spacer(),
             const FunctionButton(icon: AppIcons.heart),
