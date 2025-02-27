@@ -45,7 +45,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final GetProjectsUserUsecase getProjectsUserUsecase;
   final GetAppliedProjectsUsecase getAppliedProjectsUsecase;
   final AddReviewUsecase addReviewUsecase;
-  final CompleteProjectUsecse completeProjectUsecse;
+  final CompleteProjectUsecase completeProjectUsecse;
   final GetReviewByIdUsecase getReviewByIdUsecase;
   final CreateProjectUsecase createProjectUsecase;
   final GetExploreProjectUsecase getExploreProjectUsecase;

@@ -57,8 +57,8 @@ void initProject() {
       () => GetAppliedProjectsUsecase(projectRepository: sl()));
   sl.registerLazySingleton<AddReviewUsecase>(
       () => AddReviewUsecase(projectRepository: sl()));
-  sl.registerLazySingleton<CompleteProjectUsecse>(
-      () => CompleteProjectUsecse(projectRepository: sl()));
+  sl.registerLazySingleton<CompleteProjectUsecase>(
+      () => CompleteProjectUsecase(projectRepository: sl()));
   sl.registerLazySingleton<GetReviewByIdUsecase>(
       () => GetReviewByIdUsecase(projectRepository: sl()));
   sl.registerLazySingleton<CreateProjectUsecase>(

@@ -11,7 +11,7 @@ import 'get_users_usecase_test.mocks.dart';
 
 @GenerateMocks([SearchRepository])
 void main() {
-  late MockSearchRepository mockSearchRepository;
+  late MockSearchRepository mockSearchRepository; 
   late GetUsersByNameUsecase getUsersByNameUsecase;
 
   setUp(() {

@@ -4,11 +4,11 @@ import 'package:cosphere/src/features/project/data/dto/complete_project/complete
 import 'package:cosphere/src/features/project/domain/repositories/project_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class CompleteProjectUsecse
+class CompleteProjectUsecase
     implements UsecaseWithParams<String, CompleteProjectReqDto> {
   final ProjectRepository projectRepository;
 
-  CompleteProjectUsecse({required this.projectRepository});
+  CompleteProjectUsecase({required this.projectRepository});
 
   @override
   Future<Either<Failure, String>> call(CompleteProjectReqDto params) {
