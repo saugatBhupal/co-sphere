@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cosphere/src/config/socket_config/socket_service.dart';
 import 'package:cosphere/src/features/chat/data/dto/send_message_request_dto.dart';
 import 'package:cosphere/src/features/chat/domain/entities/conversation.dart';
 import 'package:cosphere/src/features/chat/domain/entities/message.dart';
@@ -12,6 +13,7 @@ part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
+  final SocketService _socketService = SocketService();
   final GetConversationUsecase getConversationUsecase;
   final GetAllConversationUsecase getAllConversationUsecase;
   final GetMessagesFromConversationUsecase getMessagesFromConversationUsecase;
@@ -72,15 +74,19 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
   }
 
+  List<Message> _message = [];
+  List<Message> get message => _message;
+
   Future<void> _getMessages(GetMessages event, Emitter<ChatState> emit) async {
     emit(GetMessagesLoading());
     try {
       final result =
           await getMessagesFromConversationUsecase(event.conversationID);
-      result.fold(
-        (failure) => emit(GetMessageFailed(failure.message)),
-        (success) => emit(GetMessageSuccess(messages: success)),
-      );
+      result.fold((failure) => emit(GetMessageFailed(failure.message)),
+          (success) {
+        _message = success;
+        emit(GetMessageSuccess(messages: success));
+      });
     } catch (e) {
       emit(GetConversationFailed("Error: ${e.toString()}"));
     }

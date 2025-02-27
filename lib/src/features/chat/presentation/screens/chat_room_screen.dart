@@ -1,4 +1,5 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
@@ -37,24 +38,20 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<ChatBloc>().add(
-        GetMessages(conversationID: widget.chatScreensArgs.conversationID));
     _setupSocketListeners();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToBottom();
     });
     _textController = TextEditingController();
   }
 
-  void _setupSocketListeners() {
+  void _setupSocketListeners() {  
     final socket = _socketService.socket;
     if (socket == null) return;
 
     socket.on("receiveMessage", (data) {
       if (data["conversationId"] == widget.chatScreensArgs.conversationID) {
         final message = MessageApiModel.fromJson(data).toDomain();
-        print(message);
         setState(() {
           messages.add(message);
         });
@@ -87,90 +84,93 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
 
-    return Scaffold(
-      appBar: AppBar(
-        shape: const Border(
-            bottom: BorderSide(color: AppColors.plaster, width: 1)),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.black),
-          onPressed: () {
-            Navigator.popAndPushNamed(context, AppRoutes.chatLogs,
-                arguments: widget.chatScreensArgs.user);
-          },
+    return BlocProvider(
+      create: (context) => sl<ChatBloc>()
+        ..add(
+            GetMessages(conversationID: widget.chatScreensArgs.conversationID)),
+      child: Scaffold(
+        appBar: AppBar(
+          shape: const Border(
+              bottom: BorderSide(color: AppColors.plaster, width: 1)),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: AppColors.black),
+            onPressed: () {
+              Navigator.popAndPushNamed(context, AppRoutes.chatLogs,
+                  arguments: widget.chatScreensArgs.user);
+            },
+          ),
+          title: Text(
+            widget.chatScreensArgs.receipient.fullname,
+            style: _textTheme.titleLarge!.copyWith(
+                fontWeight: FontThickness.medium, color: AppColors.black),
+          ),
+          actions: const [Icon(Icons.more_vert)],
         ),
-        title: Text(
-          widget.chatScreensArgs.receipient.fullname,
-          style: _textTheme.titleLarge!.copyWith(
-              fontWeight: FontThickness.medium, color: AppColors.black),
-        ),
-        actions: const [Icon(Icons.more_vert)],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: BlocListener<ChatBloc, ChatState>(
-              listener: (context, state) {
-                if (state is GetMessageSuccess) {
-                  setState(() {
-                    messages =
-                        state.messages.map((message) => message).toList();
-                  });
-                  _scrollToBottom();
-                }
-                if (state is SendMessageSuccess) {
-                  setState(() {
-                    messages.add(state.message);
-                  });
-                  _scrollToBottom();
-                }
-                if (state is GetMessageFailed) {
-                  buildToast(toastType: ToastType.error, msg: state.message);
-                }
-                if (state is SendMessageFailed) {
-                  buildToast(toastType: ToastType.error, msg: state.message);
-                }
-              },
-              child: ListView.builder(
-                controller: _scrollController,
-                padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                itemCount: messages.length,
-                itemBuilder: (context, index) {
-                  final message = messages[index];
-                  return message.sender.uid != widget.chatScreensArgs.user.uid
-                      ? ReceivedTile(
-                          message: message.content,
-                          sent: extractTime(message.sent),
-                          profileImage:
-                              widget.chatScreensArgs.receipient.profileImage,
-                        )
-                      : SentTile(
-                          message: message.content,
-                          sent: extractTime(message.sent),
-                          profileImage:
-                              widget.chatScreensArgs.user.profileImage,
-                        );
+        body: Column(
+          children: [
+            Expanded(
+              child: BlocListener<ChatBloc, ChatState>(
+                listener: (context, state) {
+                  if (state is GetMessageSuccess) {
+                    setState(() {
+                      messages =
+                          state.messages.map((message) => message).toList();
+                    });
+                    _scrollToBottom();
+                  }
+                  if (state is SendMessageSuccess) {
+                    _scrollToBottom();
+                  }
+                  if (state is GetMessageFailed) {
+                    buildToast(toastType: ToastType.error, msg: state.message);
+                  }
+                  if (state is SendMessageFailed) {
+                    buildToast(toastType: ToastType.error, msg: state.message);
+                  }
                 },
+                child: ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    final message = messages[index];
+                    return message.sender.uid != widget.chatScreensArgs.user.uid
+                        ? ReceivedTile(
+                            message: message.content,
+                            sent: extractTime(message.sent),
+                            profileImage:
+                                widget.chatScreensArgs.receipient.profileImage,
+                          )
+                        : SentTile(
+                            message: message.content,
+                            sent: extractTime(message.sent),
+                            profileImage:
+                                widget.chatScreensArgs.user.profileImage,
+                          );
+                  },
+                ),
               ),
             ),
-          ),
-          MessageTextField(
-            controller: _textController,
-            onSend: (text) {
-              if (text.isNotEmpty) {
-                context.read<ChatBloc>().add(
-                      SendMessage(
-                        dto: SendMessageRequestDto(
-                          conversationID: widget.chatScreensArgs.conversationID,
-                          content: text,
-                          senderID: widget.chatScreensArgs.user.uid,
+            MessageTextField(
+              controller: _textController,
+              onSend: (text) {
+                if (text.isNotEmpty) {
+                  context.read<ChatBloc>().add(
+                        SendMessage(
+                          dto: SendMessageRequestDto(
+                            conversationID:
+                                widget.chatScreensArgs.conversationID,
+                            content: text,
+                            senderID: widget.chatScreensArgs.user.uid,
+                          ),
                         ),
-                      ),
-                    );
-                _textController.clear();
-              }
-            },
-          )
-        ],
+                      );
+                  _textController.clear();
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }

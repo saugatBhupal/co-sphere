@@ -36,3 +36,9 @@ class SearchConversation extends ChatEvent {
 
   const SearchConversation({required this.searchQuery});
 }
+
+class MessageReceived extends ChatEvent {
+  final String conversationID;
+
+  const MessageReceived({required this.conversationID});
+}

@@ -10,7 +10,7 @@ Future<void> main() async {
   await HiveService.init();
   await initDependencies();
   SocketService().initialize();
-  // await initializeNotifications();
+  await initializeNotifications();
   // await UserSharedPref.deleteUser();
   runApp(const App());
 }
