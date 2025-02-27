@@ -30,8 +30,15 @@ class GetExploreJobs extends JobEvent {
 
   const GetExploreJobs({required this.uid});
 }
+
 class ApplyToJob extends JobEvent {
   final ApplyJobReqDto dto;
 
   const ApplyToJob({required this.dto});
+}
+
+class CreatedJobs extends JobEvent {
+  final String uid;
+
+  const CreatedJobs({required this.uid});
 }

@@ -45,7 +45,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     _textController = TextEditingController();
   }
 
-  void _setupSocketListeners() {  
+  void _setupSocketListeners() {
     final socket = _socketService.socket;
     if (socket == null) return;
 
@@ -119,6 +119,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                     _scrollToBottom();
                   }
                   if (state is SendMessageSuccess) {
+                    messages.add(state.message);
                     _scrollToBottom();
                   }
                   if (state is GetMessageFailed) {

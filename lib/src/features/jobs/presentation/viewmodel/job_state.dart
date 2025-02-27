@@ -44,9 +44,11 @@ class CreateJobFailed extends JobState {
   final String message;
   const CreateJobFailed({required this.message});
 }
+
 class GetExploreJobsLoading extends JobState {
   const GetExploreJobsLoading();
 }
+
 class GetExploreJobsSuccess extends JobState {
   final List<Job> jobs;
   const GetExploreJobsSuccess({required this.jobs});
@@ -69,4 +71,18 @@ class ApplyToJobSuccess extends JobState {
 class ApplyToJobFailed extends JobState {
   final String message;
   const ApplyToJobFailed({required this.message});
+}
+
+class CreatedJobsLoading extends JobState {
+  const CreatedJobsLoading();
+}
+
+class CreatedJobsSuccess extends JobState {
+  final List<Job> job;
+  const CreatedJobsSuccess({required this.job});
+}
+
+class CreatedJobsFailed extends JobState {
+  final String message;
+  const CreatedJobsFailed({required this.message});
 }

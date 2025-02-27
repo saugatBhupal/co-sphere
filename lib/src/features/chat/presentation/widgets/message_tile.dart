@@ -26,9 +26,10 @@ class MessageTile extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     final recipient =
         conversation.members.firstWhere((member) => member.uid != user.uid);
-    final lastMessage = conversation.messages?.isNotEmpty == true
+    final lastMessage = (conversation.messages?.isNotEmpty ?? false)
         ? conversation.messages!.last
         : null;
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).popAndPushNamed(AppRoutes.chatRoom,
@@ -78,7 +79,7 @@ class MessageTile extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    extractTime(lastMessage!.sent),
+                    lastMessage != null ? extractTime(lastMessage.sent) : "",
                     style: _textTheme.bodySmall!.copyWith(
                       fontSize: context.isTablet ? 16 : 12,
                     ),
@@ -88,7 +89,7 @@ class MessageTile extends StatelessWidget {
               const SizedBox(height: 6),
               Row(
                 children: [
-                  if (lastMessage.sender.uid == user.uid)
+                  if (lastMessage != null && lastMessage.sender.uid == user.uid)
                     SizedBox(
                       width: context.isTablet ? 48 : 36,
                       child: Text(
@@ -105,7 +106,7 @@ class MessageTile extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
-                      lastMessage.content,
+                      lastMessage?.content ?? "Start messaging today",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: _textTheme.bodyLarge!.copyWith(

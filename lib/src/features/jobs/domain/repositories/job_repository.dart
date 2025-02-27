@@ -9,4 +9,5 @@ abstract interface class JobRepository {
   Future<Either<Failure, Job>> createJob(CreateJobReqDto dto);
   Future<Either<Failure, List<Job>>> getExploreJobs(String uid);
   Future<Either<Failure, Job>> applyToJob(ApplyJobReqDto dto);
+  Future<Either<Failure, List<Job>>> createdJobs(String uid);
 }

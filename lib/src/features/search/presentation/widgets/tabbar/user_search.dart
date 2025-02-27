@@ -1,5 +1,11 @@
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/functions/build_toast.dart';
+import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart';
 import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/cards/user_search_card.dart';
@@ -7,9 +13,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserSearch extends StatelessWidget {
   final String query;
+  final User user;
   const UserSearch({
     super.key,
     required this.query,
+    required this.user,
   });
 
   @override
@@ -33,8 +41,10 @@ class UserSearch extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.users.length,
-                  itemBuilder: (context, index) =>
-                      UserSearchCard(user: state.users[index]),
+                  itemBuilder: (context, index) => UserSearchCard(
+                    searchUser: state.users[index],
+                    user: user,
+                  ),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

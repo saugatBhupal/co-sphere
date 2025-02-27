@@ -14,7 +14,7 @@ class ChatRemoteDatasourceImpl implements ChatRemoteDatasource {
   @override
   Future<ConversationApiModel> getConversation(List<String> members) async {
     try {
-      var res = await dio.get(
+      var res = await dio.post(
         ApiEndpoints.createConversation,
         data: {"members": members},
         options: Options(

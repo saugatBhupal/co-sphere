@@ -41,7 +41,7 @@ class RecentSearches extends StatelessWidget {
                     SizedBox(
                       height: context.height * 0.5,
                       child: SearchResultsTabbar(
-                          query: searchQuery, uid: user.uid),
+                          query: searchQuery, user: user),
                     ),
                   ],
                 );

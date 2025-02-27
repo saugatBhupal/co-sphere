@@ -20,7 +20,7 @@ class HiringApplicationView extends StatelessWidget {
         return SizedBox(
           child: ListView.separated(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             itemCount: appliedProjects.length,
             itemBuilder: (context, index) =>
                 ProjectApplicationCard(project: appliedProjects[index]),

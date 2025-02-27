@@ -1,21 +1,17 @@
-import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
-import 'package:cosphere/src/features/search/presentation/widgets/tabbar/jobs_search.dart';
-import 'package:cosphere/src/features/search/presentation/widgets/tabbar/projects_search_card.dart';
-import 'package:cosphere/src/features/search/presentation/widgets/tabbar/user_search.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/tab_view/applications_view.dart';
+import 'package:cosphere/src/features/jobs/presentation/widgets/tab_view/created_job_view.dart';
+import 'package:flutter/material.dart';
 
-class SearchResultsTabbar extends StatelessWidget {
-  final String query;
+class JobsTabbar extends StatelessWidget {
   final User user;
-  const SearchResultsTabbar({
-    super.key,
-    required this.query,
-    required this.user,
-  });
+  final List<Job> appliedJobs;
+  const JobsTabbar({super.key, required this.user, required this.appliedJobs});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +20,21 @@ class SearchResultsTabbar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2.0),
         child: DefaultTabController(
-          length: 3,
+          length: 2,
           child: Column(
             children: [
               TabBar(
-                onTap: (index) {},
                 isScrollable: false,
                 indicator: const BoxDecoration(),
                 dividerHeight: 0,
+                padding: const EdgeInsets.only(top: 4),
                 tabAlignment: TabAlignment.center,
                 unselectedLabelColor: AppColors.grey,
                 labelStyle: _textTheme.bodySmall!.copyWith(
-                    fontWeight: FontThickness.semiBold,
-                    fontSize: context.isTablet ? 16 : 12,
-                    color: AppColors.midnight),
+                  fontWeight: FontThickness.semiBold,
+                  color: AppColors.midnight,
+                  fontSize: context.isTablet ? 16 : 12,
+                ),
                 unselectedLabelStyle: _textTheme.bodySmall!.copyWith(
                     fontWeight: FontThickness.medium,
                     fontSize: context.isTablet ? 16 : 12,
@@ -46,17 +43,18 @@ class SearchResultsTabbar extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),
                 splashFactory: NoSplash.splashFactory,
                 tabs: const [
-                  Tab(text: AppStrings.users),
-                  Tab(text: AppStrings.job),
-                  Tab(text: AppStrings.project),
+                  Tab(text: AppStrings.application),
+                  Tab(text: AppStrings.created),
                 ],
               ),
               Expanded(
                 child: TabBarView(
                   children: [
-                    UserSearch(query: query, user: user),
-                    JobsSearch(query: query),
-                    ProjectsSearch(query: query, uid: user.uid),
+                    ApplicationsView(jobs: appliedJobs),
+                    CreatedJobView(uid: user.uid),
+                    // HiringApplicationView(uid: user.uid),
+                    // ActiveApplicationView(uid: user.uid),
+                    // CompletedApplicationView(uid: user.uid),
                   ],
                 ),
               ),

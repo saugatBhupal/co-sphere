@@ -16,8 +16,7 @@ import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:cosphere/src/features/explore/presentation/screens/explore_project_screen.dart';
-import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
-import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
+import 'package:cosphere/src/features/jobs/presentation/screens/user_job_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/create_job_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/created_projects_screen.dart';
@@ -48,10 +47,8 @@ class AppRouter {
   static final _signInBloc = sl<SignInBloc>();
   static final _profileBloc = sl<ProfileBloc>();
   static final _dashBloc = sl<DashboardBloc>();
-  static final _jobBloc = sl<JobBloc>();
   static final _projectBloc = sl<ProfileBloc>();
   static final _chatBloc = sl<ChatBloc>();
-  static final _searchBloc = sl<SearchBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splash:
@@ -158,10 +155,10 @@ class AppRouter {
       case AppRoutes.notifications:
         return MaterialPageRoute(
             builder: (context) => const NotificationsScreen());
-      case AppRoutes.jobApplications:
+      case AppRoutes.userJobs:
         return MaterialPageRoute(
-            builder: (context) =>
-                ApplicationsScreen(jobs: settings.arguments as List<Job>));
+            builder: (context) => UserJobScreen(
+                screenArgs: settings.arguments as UserJobsScreenArgs));
       case AppRoutes.projectApplications:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
@@ -200,7 +197,8 @@ class AppRouter {
                     projectId: settings.arguments as String)));
       case AppRoutes.applicants:
         return MaterialPageRoute(
-            builder: (context) => const ApplicantsScreen());
+            builder: (context) => ApplicantsScreen(
+                screenArgs: settings.arguments as ApplicantsScreenArgs));
       case AppRoutes.members:
         return MaterialPageRoute(builder: (context) => const MembersScreen());
       case AppRoutes.createProject:
@@ -215,9 +213,21 @@ class AppRouter {
                 child: CreateJobScreen(user: settings.arguments as User)));
       case AppRoutes.search:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-                value: _searchBloc,
-                child: SearchScreen(user: settings.arguments as User)));
+          // builder: (context) => BlocProvider.value(
+          //     value: _searchBloc,
+          //     child: SearchScreen(user: settings.arguments as User)));
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => sl<SearchBloc>(),
+              ),
+              BlocProvider(
+                create: (context) => sl<ChatBloc>(),
+              ),
+            ],
+            child: SearchScreen(user: settings.arguments as User),
+          ),
+        );
       case AppRoutes.explore:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(

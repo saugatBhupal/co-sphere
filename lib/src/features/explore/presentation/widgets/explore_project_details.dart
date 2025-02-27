@@ -5,7 +5,6 @@ import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_header.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_section.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/active_completed/project_details_basics.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/project_explore_basic_details.dart';
 import 'package:flutter/material.dart';
 

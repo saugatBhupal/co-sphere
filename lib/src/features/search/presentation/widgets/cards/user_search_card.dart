@@ -8,15 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 
 class UserSearchCard extends StatelessWidget {
+  final User searchUser;
   final User user;
-  const UserSearchCard({super.key, required this.user});
+  const UserSearchCard(
+      {super.key, required this.searchUser, required this.user});
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () => Navigator.of(context)
-          .pushNamed(AppRoutes.profile, arguments: user.uid),
+          .pushNamed(AppRoutes.profile, arguments: searchUser.uid),
       child: IntrinsicHeight(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -45,7 +47,7 @@ class UserSearchCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(user.fullname,
+                        Text(searchUser.fullname,
                             style: _textTheme.bodySmall!.copyWith(
                               letterSpacing: 0,
                               fontSize: context.isTablet ? 16 : 12,
@@ -53,7 +55,7 @@ class UserSearchCard extends StatelessWidget {
                               fontWeight: FontThickness.regular,
                             )),
                         Text(
-                          "${user.city} ${user.country}",
+                          "${searchUser.city} ${searchUser.country}",
                           style: _textTheme.labelLarge!.copyWith(
                             height: 1,
                             fontSize: context.isTablet ? 14 : 10,
@@ -63,17 +65,21 @@ class UserSearchCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const StartChatButton()
+                  StartChatButton(
+                    user: user,
+                    searchUser: searchUser,
+                  )
                 ],
               ),
-              if (user.skills != null && user.skills!.isNotEmpty) ...[
+              if (searchUser.skills != null &&
+                  searchUser.skills!.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 Row(
                   children: [
                     Wrap(
                       spacing: 6,
                       runSpacing: 6,
-                      children: user.skills!
+                      children: searchUser.skills!
                           .take(2)
                           .map((skill) => SkillsButton(
                                 name: skill.name,
@@ -85,10 +91,10 @@ class UserSearchCard extends StatelessWidget {
                           .toList(),
                     ),
                     const SizedBox(width: 6),
-                    if (user.skills!.length > 2) ...[
+                    if (searchUser.skills!.length > 2) ...[
                       const SizedBox(width: 6),
                       SkillsButton(
-                        name: "+${user.skills!.length - 2} more",
+                        name: "+${searchUser.skills!.length - 2} more",
                         borderRadius: 4,
                         fontSize: context.isTablet ? 14 : 10,
                         padding: const EdgeInsets.symmetric(
@@ -98,10 +104,10 @@ class UserSearchCard extends StatelessWidget {
                   ],
                 ),
               ],
-              if (user.about != null && user.about!.isNotEmpty) ...[
+              if (searchUser.about != null && searchUser.about!.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 Text(
-                  user.about!,
+                  searchUser.about!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: _textTheme.bodySmall!.copyWith(

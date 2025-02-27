@@ -25,10 +25,12 @@ class JobDetailsBasics extends StatelessWidget {
               DurationSpan(postedOn: job.createdAt),
             ],
           ),
-          const SizedBox(height: 10),
-          ProjectSkillsList(
-            skills: job.skills,
-          ),
+          if (job.skills.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            ProjectSkillsList(
+              skills: job.skills,
+            ),
+          ],
         ],
       ),
     );

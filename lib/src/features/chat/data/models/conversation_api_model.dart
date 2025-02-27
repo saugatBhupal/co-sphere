@@ -24,14 +24,17 @@ class ConversationApiModel extends Equatable {
             ? UserApiModel.fromJson(member)
             : UserApiModel.initial().copyWith(uid: member);
       }).toList(),
-      messages: json['messages'] is List?
+      messages: json['messages'] is List<dynamic>
           ? (json['messages'] as List<dynamic>)
               .map((message) =>
                   MessageApiModel.fromJson(message as Map<String, dynamic>))
               .toList()
-          : [
-              MessageApiModel.fromJson(json['messages'] as Map<String, dynamic>)
-            ],
+          : (json['messages'] is Map<String, dynamic>
+              ? [
+                  MessageApiModel.fromJson(
+                      json['messages'] as Map<String, dynamic>)
+                ]
+              : []),
     );
   }
 

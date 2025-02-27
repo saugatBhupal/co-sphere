@@ -4,6 +4,7 @@ import 'package:cosphere/src/features/jobs/data/dto/create_job/create_job_req_dt
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/apply_to_job_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/create_job_usecase.dart';
+import 'package:cosphere/src/features/jobs/domain/usecases/created_job_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/get_applied_jobs_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/get_explore_jobs_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -16,11 +17,13 @@ class JobBloc extends Bloc<JobEvent, JobState> {
   final CreateJobUsecase createJobUsecase;
   final GetExploreJobsUsecase getExploreJobsUsecase;
   final ApplyToJobUsecase applyToJobUsecase;
+  final CreatedJobUsecase createdJobUsecase;
   JobBloc({
     required this.getAppliedJobsUsecase,
     required this.createJobUsecase,
     required this.getExploreJobsUsecase,
     required this.applyToJobUsecase,
+    required this.createdJobUsecase,
   }) : super(JobInitial()) {
     on<JobEvent>((event, emit) async {
       if (event is ChangeCreatedModule) {
@@ -37,6 +40,9 @@ class JobBloc extends Bloc<JobEvent, JobState> {
       }
       if (event is ApplyToJob) {
         await _applyToJob(event, emit);
+      }
+      if (event is CreatedJobs) {
+        await _allCreatedJobs(event, emit);
       }
     });
   }
@@ -114,6 +120,23 @@ class JobBloc extends Bloc<JobEvent, JobState> {
       );
     } catch (e) {
       emit(ApplyToJobFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _allCreatedJobs(
+      CreatedJobs event, Emitter<JobState> emit) async {
+    emit(const CreatedJobsLoading());
+    try {
+      final result = await createdJobUsecase(event.uid);
+      result.fold(
+        (failure) => emit(CreatedJobsFailed(message: failure.message)),
+        (success) {
+          _createdJobs = success;
+          emit(CreatedJobsSuccess(job: success));
+        },
+      );
+    } catch (e) {
+      emit(CreatedJobsFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

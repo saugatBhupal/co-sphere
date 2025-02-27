@@ -1,11 +1,13 @@
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
-import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
+
 import 'package:cosphere/src/features/project/presentation/widgets/card/applicants_card.dart';
 import 'package:flutter/material.dart';
 
 class ApplicantsScreen extends StatelessWidget {
-  const ApplicantsScreen({super.key});
+  final ApplicantsScreenArgs screenArgs;
+  const ApplicantsScreen({super.key, required this.screenArgs});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +15,10 @@ class ApplicantsScreen extends StatelessWidget {
       appBar: const CommonAppbar(
           title: "${AppStrings.all} ${AppStrings.applicants}"),
       body: ListView.separated(
-        itemCount: 8,
+        itemCount: screenArgs.applicants.length,
         itemBuilder: (context, index) => ApplicantsCard(
-          applicant: Applicants.initial(),
-          projectId: "67b83064af55b52f8d7b4580",
+          applicant: screenArgs.applicants[index],
+          projectId: screenArgs.projectId,
         ),
         separatorBuilder: (context, index) => const SizedBox(),
       ),

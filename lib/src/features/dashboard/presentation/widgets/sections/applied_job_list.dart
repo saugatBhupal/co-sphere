@@ -1,3 +1,4 @@
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
@@ -36,14 +37,15 @@ class AppliedJobList extends StatelessWidget {
               DashboardTitle(
                 title: AppStrings.application,
                 option: AppStrings.view,
-                onPressed: () => Navigator.of(context)
-                    .pushNamed(AppRoutes.jobApplications, arguments: jobList),
+                onPressed: () => Navigator.of(context).pushNamed(
+                    AppRoutes.userJobs,
+                    arguments: UserJobsScreenArgs(jobs: jobList, user: user)),
               ),
               SizedBox(
                 child: ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: jobList.length,
+                  itemCount: jobList.length >= 3 ? 3 : jobList.length,
                   itemBuilder: (context, index) => JobApplicationCard(
                     job: jobList[index],
                   ),

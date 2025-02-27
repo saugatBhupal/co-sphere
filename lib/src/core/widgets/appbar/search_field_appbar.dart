@@ -13,6 +13,10 @@ class SearchFieldAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       iconTheme: const IconThemeData(color: AppColors.black),
       centerTitle: true,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () => Navigator.pop(context),
+      ),
       title: Center(
         child: SearchTextField(
           hintText: hintext,

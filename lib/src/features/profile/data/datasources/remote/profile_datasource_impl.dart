@@ -235,8 +235,7 @@ class ProfileDatasourceImpl implements ProfileDatasource {
   @override
   Future<List<ProjectApiModel>> getHistoryByUserId(String uid) async {
     try {
-      var res = await dio
-          .get("${ApiEndpoints.user}${"67b3ee32ddfc4ad8dd34e185"}/history");
+      var res = await dio.get("${ApiEndpoints.user}$uid/history");
       if (res.statusCode == 200) {
         return (res.data as List)
             .map((json) => ProjectApiModel.fromJson(json))

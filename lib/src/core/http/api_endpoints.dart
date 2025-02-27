@@ -44,6 +44,7 @@ class ApiEndpoints {
   static const String getAppliedJobs = "$baseUrl/job/applied-jobs/";
   static const String getExploreJobs = "$baseUrl/job/explore/";
   static const String applyToJob = "$baseUrl/job/apply";
+  static const String createdJobs = "$baseUrl/job/user/";
 
   // ====================== Review Routes ======================
   static const String review = "$baseUrl/review/";

@@ -91,4 +91,24 @@ class JobRemoteDatasourceImpl implements JobRemoteDatasource {
       return await handleErrorResponse(e);
     }
   }
+
+  @override
+  Future<List<JobApiModel>> createdJobs(String uid) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.createdJobs}$uid");
+      if (res.statusCode == 200) {
+        final List<JobApiModel> jobs = (res.data as List<dynamic>)
+            .map((json) => JobApiModel.fromJson(json as Map<String, dynamic>))
+            .toList();
+        return jobs;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
 }

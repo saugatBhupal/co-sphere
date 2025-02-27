@@ -76,7 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   Expanded(
                     child: SearchResultsTabbar(
-                        query: _searchQuery, uid: widget.user.uid),
+                        query: _searchQuery, user: widget.user),
                   ),
                 ],
               );

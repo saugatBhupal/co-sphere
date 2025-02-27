@@ -25,7 +25,7 @@ class HiringView extends StatelessWidget {
           if (state is GetProjectLoading) {
             return const SizedBox.shrink();
           }
-          if (state is GetHireProjectSuccess) {
+      if (state is GetHireProjectSuccess) {
             if (state.projects.isEmpty) {
               return Center(
                 child: Text(

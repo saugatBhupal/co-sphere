@@ -64,4 +64,14 @@ class JobRemoteRepository implements JobRepository {
       return Left(Failure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Job>>> createdJobs(String uid) async {
+    try {
+      final List<JobApiModel> jobs = await datasource.createdJobs(uid);
+      return Right(jobs.map((job) => job.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
 }
