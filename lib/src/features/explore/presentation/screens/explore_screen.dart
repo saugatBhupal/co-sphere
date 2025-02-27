@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';

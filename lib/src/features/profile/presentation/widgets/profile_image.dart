@@ -23,6 +23,16 @@ class ProfileImage extends StatelessWidget {
               color: AppColors.midnight,
               height: context.height / 6,
               width: context.width,
+              // child: Align(
+              //   alignment: Alignment.topLeft,
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(top: 16, left: 16),
+              //     child: IconButton(
+              //       icon: const Icon(Icons.arrow_back, color: Colors.white),
+              //       onPressed: () => Navigator.pop(context),
+              //     ),
+              //   ),
+              // ),
             ),
             Positioned(
               bottom: -50,

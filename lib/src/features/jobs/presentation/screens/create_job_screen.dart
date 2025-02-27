@@ -10,24 +10,24 @@ import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/textspan_field.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:cosphere/src/features/jobs/data/dto/create_job/create_job_req_dto.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
+import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/button/add_section_button.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/create_project_skills.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/section_form.dart';
-import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
-import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateProjectScreen extends StatefulWidget {
+class CreateJobScreen extends StatefulWidget {
   final User user;
-  const CreateProjectScreen({super.key, required this.user});
+  const CreateJobScreen({super.key, required this.user});
 
   @override
-  State<CreateProjectScreen> createState() => _CreateProjectScreenState();
+  State<CreateJobScreen> createState() => _CreateJobScreenState();
 }
 
-class _CreateProjectScreenState extends State<CreateProjectScreen> {
+class _CreateJobScreenState extends State<CreateJobScreen> {
   late final TextEditingController _titleController;
   late final TextEditingController _companyController;
   late final TextEditingController _addressController;
@@ -42,13 +42,13 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: "4th try");
+    _titleController = TextEditingController(text: "1st Job try");
     _companyController = TextEditingController(text: "Code Kumbh");
-    _addressController = TextEditingController(text: "Darjeeling, New City");
-    _minController = TextEditingController(text: "30000");
-    _maxController = TextEditingController(text: "35000");
-    _fromController = TextEditingController(text: "03-09-2023");
-    _toController = TextEditingController(text: "09-09-2023");
+    _addressController = TextEditingController(text: "Manhattan, New City");
+    _minController = TextEditingController(text: "80000");
+    _maxController = TextEditingController(text: "96000");
+    _fromController = TextEditingController(text: "03-09-2024");
+    _toController = TextEditingController(text: "09-09-2025");
     _siteController = TextEditingController(text: "Remote");
   }
 
@@ -77,15 +77,14 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
 
     String? selectedValue = posts[0];
     const gap = SizedBox(height: 18);
-    return BlocListener<ProjectBloc, ProjectState>(
+    return BlocListener<JobBloc, JobState>(
       listener: (context, state) {
-        if (state is CreateProjectSuccess) {
+        if (state is CreateJobSuccess) {
           buildToast(
-              toastType: ToastType.success,
-              msg: "Project Created Successfully");
+              toastType: ToastType.success, msg: "Job Created Successfully");
           context.read<DashboardBloc>().add(const ChangeScreenModule(0));
         }
-        if (state is CreateProjectFailed) {
+        if (state is CreateJobFailed) {
           buildToast(toastType: ToastType.error, msg: state.message);
         }
       },
@@ -101,7 +100,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                 gap,
                 TextspanField(
                   textController: _titleController,
-                  label: AppStrings.projectName,
+                  label: AppStrings.jobName,
                   minLines: 2,
                   charCount: 100,
                 ),
@@ -234,8 +233,8 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                 DarkRoundedButton(
                   title: AppStrings.create,
                   onPressed: () {
-                    CreateProjectReqDto dto = CreateProjectReqDto(
-                      projectName: _titleController.text,
+                    CreateJobReqDto dto = CreateJobReqDto(
+                      jobName: _titleController.text,
                       companyName: _companyController.text,
                       position: selectedValue!,
                       address: _addressController.text,
@@ -246,8 +245,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                           min: int.parse(_minController.text),
                           max: int.parse(_maxController.text)),
                     );
-                    print(dto.toJson());
-                    context.read<ProjectBloc>().add(CreateProject(dto: dto));
+                    context.read<JobBloc>().add(CreateJob(dto: dto));
                   },
                 ),
               ],

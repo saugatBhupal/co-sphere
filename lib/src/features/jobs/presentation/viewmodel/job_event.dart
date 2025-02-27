@@ -24,3 +24,14 @@ class CreateJob extends JobEvent {
 
   const CreateJob({required this.dto});
 }
+
+class GetExploreJobs extends JobEvent {
+  final String uid;
+
+  const GetExploreJobs({required this.uid});
+}
+class ApplyToJob extends JobEvent {
+  final ApplyJobReqDto dto;
+
+  const ApplyToJob({required this.dto});
+}

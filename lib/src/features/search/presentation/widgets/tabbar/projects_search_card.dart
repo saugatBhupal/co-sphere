@@ -9,9 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProjectsSearch extends StatelessWidget {
   final String query;
+  final String uid;
   const ProjectsSearch({
     super.key,
     required this.query,
+    required this.uid,
   });
 
   @override
@@ -39,8 +41,8 @@ class ProjectsSearch extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.projects.length,
-                  itemBuilder: (context, index) =>
-                      ProjectSearchCard(project: state.projects[index]),
+                  itemBuilder: (context, index) => ProjectSearchCard(
+                      project: state.projects[index], uid: uid),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

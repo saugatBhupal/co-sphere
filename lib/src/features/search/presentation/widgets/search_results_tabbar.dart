@@ -9,9 +9,11 @@ import 'package:cosphere/src/features/search/presentation/widgets/tabbar/user_se
 
 class SearchResultsTabbar extends StatelessWidget {
   final String query;
+  final String uid;
   const SearchResultsTabbar({
     super.key,
     required this.query,
+    required this.uid,
   });
 
   @override
@@ -53,7 +55,7 @@ class SearchResultsTabbar extends StatelessWidget {
                   children: [
                     UserSearch(query: query),
                     JobsSearch(query: query),
-                    ProjectsSearch(query: query),
+                    ProjectsSearch(query: query, uid: uid),
                   ],
                 ),
               ),

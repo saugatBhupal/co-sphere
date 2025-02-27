@@ -22,7 +22,7 @@ class JobsSearchCard extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     final List<String> tag = [job.site, "Full Time", "Company"];
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.hiring),
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         margin: const EdgeInsets.symmetric(vertical: 4),
@@ -117,7 +117,7 @@ class JobsSearchCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: _textTheme.bodySmall!.copyWith(
                   letterSpacing: 0,
-                  fontSize: context.isTablet ? 16 : 14,
+                  fontSize: context.isTablet ? 16 : 12,
                   fontWeight: FontThickness.light,
                   color: AppColors.grey,
                 ),

@@ -15,7 +15,8 @@ class UserSearchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.profile),
+      onTap: () => Navigator.of(context)
+          .pushNamed(AppRoutes.profile, arguments: user.uid),
       child: IntrinsicHeight(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),

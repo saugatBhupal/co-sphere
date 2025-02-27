@@ -2,6 +2,7 @@ import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc
 import 'package:cosphere/src/features/explore/presentation/screens/explore_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
+import 'package:cosphere/src/features/project/presentation/screens/create_screen.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/form/add_task_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
@@ -46,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
       case 1:
         return ExploreScreen(user: user);
       case 2:
-        return CreateProjectScreen(user: user);
+        return CreateScreen(user: user);
       case 3:
         return const AddTaskForm(
           members: [],

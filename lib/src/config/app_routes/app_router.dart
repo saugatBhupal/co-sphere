@@ -18,6 +18,7 @@ import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_s
 import 'package:cosphere/src/features/explore/presentation/screens/explore_screen.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/applications_screen.dart';
+import 'package:cosphere/src/features/jobs/presentation/screens/create_job_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/created_projects_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/job_details_screen.dart';
@@ -176,6 +177,9 @@ class AppRouter {
       case AppRoutes.jobDetails:
         return MaterialPageRoute(
             builder: (context) => const JobDetailsScreen());
+      case AppRoutes.projectDetails:
+        return MaterialPageRoute(
+            builder: (context) => const JobDetailsScreen());
       case AppRoutes.hiring:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
@@ -204,6 +208,11 @@ class AppRouter {
             builder: (context) => BlocProvider.value(
                 value: _projectBloc,
                 child: CreateProjectScreen(user: settings.arguments as User)));
+      case AppRoutes.createJob:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                value: _projectBloc,
+                child: CreateJobScreen(user: settings.arguments as User)));
       case AppRoutes.search:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(

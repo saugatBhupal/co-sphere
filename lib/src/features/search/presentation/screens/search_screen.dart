@@ -3,7 +3,6 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/features/search/data/dto/add_search_history_req_dto/add_search_history_req_dto.dart';
 import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/recent_searches.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/search_app_bar_field.dart';
@@ -76,7 +75,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   Expanded(
-                    child: SearchResultsTabbar(query: _searchQuery),
+                    child: SearchResultsTabbar(
+                        query: _searchQuery, uid: widget.user.uid),
                   ),
                 ],
               );

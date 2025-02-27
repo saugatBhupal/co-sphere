@@ -164,6 +164,7 @@ class AppStrings {
       "Add a final review before completing the project.";
   static const String completionLabel = "Did the project complete on time";
   static const String projectName = "Project Name";
+  static const String jobName = "Job Name";
   static const String companyName = "Company Name";
   static const String position = "Position";
   static const String site = "Site";

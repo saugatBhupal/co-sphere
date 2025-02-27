@@ -35,10 +35,10 @@ class AboutView extends StatelessWidget {
           ),
           const SizedBox(height: 22),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildInfo(AppStrings.address,
                   "${user.city} ${user.province} ${user.country}", context),
-              const SizedBox(width: 40),
               _buildInfo(
                   AppStrings.joined, formatDate(user.createdAt!), context),
             ],

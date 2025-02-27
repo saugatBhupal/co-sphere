@@ -46,7 +46,7 @@ class _CreateProjectSkillsState extends State<CreateProjectSkills> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.skills.isNotEmpty)
+          if (widget.skills.isNotEmpty) ...[
             Wrap(
               spacing: 6,
               runSpacing: 6,
@@ -70,6 +70,8 @@ class _CreateProjectSkillsState extends State<CreateProjectSkills> {
                   )
                   .toList(),
             ),
+            const SizedBox(height: 12),
+          ],
           Form(
             child: Row(
               children: [

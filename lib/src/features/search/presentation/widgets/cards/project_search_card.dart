@@ -15,7 +15,9 @@ import 'package:flutter_svg/svg.dart';
 
 class ProjectSearchCard extends StatelessWidget {
   final Project project;
-  const ProjectSearchCard({super.key, required this.project});
+  final String uid;
+  const ProjectSearchCard(
+      {super.key, required this.project, required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,14 @@ class ProjectSearchCard extends StatelessWidget {
     final List<String> tag = [project.site, "Full Time", "Company"];
 
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.hiring),
+      onTap: () {
+        if (project.postedBy.uid == uid) {
+          Navigator.of(context)
+              .pushNamed(AppRoutes.hiring, arguments: project.id);
+        } else {
+          Navigator.of(context).pushNamed(AppRoutes.projectDetails);
+        }
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         margin: const EdgeInsets.symmetric(vertical: 4),
@@ -118,7 +127,7 @@ class ProjectSearchCard extends StatelessWidget {
                 style: _textTheme.bodySmall!.copyWith(
                   letterSpacing: 0,
                   fontWeight: FontThickness.light,
-                  fontSize: context.isTablet ? 16 : 14,
+                  fontSize: context.isTablet ? 16 : 12,
                   color: AppColors.grey,
                 ),
               ),

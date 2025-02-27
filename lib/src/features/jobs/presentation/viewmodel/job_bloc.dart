@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:cosphere/src/features/jobs/data/dto/apply_job/apply_job_req_dto.dart';
 import 'package:cosphere/src/features/jobs/data/dto/create_job/create_job_req_dto.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
+import 'package:cosphere/src/features/jobs/domain/usecases/apply_to_job_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/create_job_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/get_applied_jobs_usecase.dart';
-import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
+import 'package:cosphere/src/features/jobs/domain/usecases/get_explore_jobs_usecase.dart';
 import 'package:equatable/equatable.dart';
 
 part 'job_event.dart';
@@ -12,9 +14,13 @@ part 'job_state.dart';
 class JobBloc extends Bloc<JobEvent, JobState> {
   final GetAppliedJobsUsecase getAppliedJobsUsecase;
   final CreateJobUsecase createJobUsecase;
+  final GetExploreJobsUsecase getExploreJobsUsecase;
+  final ApplyToJobUsecase applyToJobUsecase;
   JobBloc({
     required this.getAppliedJobsUsecase,
     required this.createJobUsecase,
+    required this.getExploreJobsUsecase,
+    required this.applyToJobUsecase,
   }) : super(JobInitial()) {
     on<JobEvent>((event, emit) async {
       if (event is ChangeCreatedModule) {
@@ -25,6 +31,12 @@ class JobBloc extends Bloc<JobEvent, JobState> {
       }
       if (event is CreateJob) {
         await _createJob(event, emit);
+      }
+      if (event is GetExploreJobs) {
+        await _getExploreJobs(event, emit);
+      }
+      if (event is ApplyToJob) {
+        await _applyToJob(event, emit);
       }
     });
   }
@@ -66,6 +78,42 @@ class JobBloc extends Bloc<JobEvent, JobState> {
       );
     } catch (e) {
       emit(CreateJobFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  List<Job> _exploreJobs = [];
+  List<Job> get exploreJobs => _exploreJobs;
+  Future<void> _getExploreJobs(
+      GetExploreJobs event, Emitter<JobState> emit) async {
+    emit(const GetExploreJobsLoading());
+    try {
+      final result = await getExploreJobsUsecase(event.uid);
+      result.fold(
+        (failure) => emit(GetExploreJobsFailed(message: failure.message)),
+        (success) {
+          _exploreJobs = success;
+          emit(GetExploreJobsSuccess(jobs: success));
+        },
+      );
+    } catch (e) {
+      emit(GetExploreJobsFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  Future<void> _applyToJob(ApplyToJob event, Emitter<JobState> emit) async {
+    emit(const ApplyToJobLoading());
+    try {
+      final result = await applyToJobUsecase(event.dto);
+      result.fold(
+        (failure) => emit(ApplyToJobFailed(message: failure.message)),
+        (success) {
+          _exploreJobs.removeWhere((e) => e.id == success.id);
+          _appliedJobs.add(success);
+          emit(ApplyToJobSuccess(job: success));
+        },
+      );
+    } catch (e) {
+      emit(ApplyToJobFailed(message: "Error: ${e.toString()}"));
     }
   }
 }
