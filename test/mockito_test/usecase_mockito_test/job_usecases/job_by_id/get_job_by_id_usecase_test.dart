@@ -1,7 +1,6 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/repositories/job_repository.dart';
-import 'package:cosphere/src/features/jobs/domain/usecases/get_explore_jobs_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/get_job_by_id_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
