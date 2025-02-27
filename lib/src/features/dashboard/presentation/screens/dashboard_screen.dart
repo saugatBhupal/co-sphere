@@ -1,9 +1,8 @@
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:cosphere/src/features/explore/presentation/screens/explore_screen.dart';
-import 'package:cosphere/src/features/project/presentation/screens/create_project_screen.dart';
+import 'package:cosphere/src/features/explore/presentation/screens/explore_job_screen.dart';
+import 'package:cosphere/src/features/explore/presentation/screens/explore_project_screen.dart';
 import 'package:cosphere/src/features/profile/presentation/screens/profile_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/create_screen.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/form/add_task_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_body.dart';
@@ -45,14 +44,11 @@ class DashboardScreen extends StatelessWidget {
       case 0:
         return DashboardBody(user: user);
       case 1:
-        return ExploreScreen(user: user);
+        return ExploreProjectScreen(user: user);
       case 2:
         return CreateScreen(user: user);
       case 3:
-        return const AddTaskForm(
-          members: [],
-          projectId: "",
-        );
+        return ExploreJobScreen(user: user);
       case 4:
         return ProfileScreen(uid: user.uid);
       default:

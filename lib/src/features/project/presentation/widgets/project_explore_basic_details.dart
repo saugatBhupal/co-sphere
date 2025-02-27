@@ -1,12 +1,12 @@
-import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/duration_span.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/user_location_details.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/project_skills_list.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
 
-class JobDetailsBasics extends StatelessWidget {
-  final Job job;
-  const JobDetailsBasics({super.key, required this.job});
+class ProjectExploreBasicDetails extends StatelessWidget {
+  final Project project;
+  const ProjectExploreBasicDetails({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +20,14 @@ class JobDetailsBasics extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              UserLocationDetails(user: job.postedBy),
+              UserLocationDetails(user: project.postedBy),
               Spacer(),
-              DurationSpan(postedOn: job.createdAt),
+              DurationSpan(postedOn: project.createdAt),
             ],
           ),
           const SizedBox(height: 10),
           ProjectSkillsList(
-            skills: job.skills,
+            skills: project.skills,
           ),
         ],
       ),

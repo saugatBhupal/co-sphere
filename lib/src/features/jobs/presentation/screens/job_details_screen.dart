@@ -2,12 +2,12 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_basics.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_header.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_section.dart';
-import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
 
 class JobDetailsScreen extends StatelessWidget {
@@ -34,7 +34,7 @@ class JobDetailsScreen extends StatelessWidget {
                     postedOn: DateTime.now(),
                     salary: Salary.initial(),
                   ),
-                  JobDetailsBasics(project: Project.initial()),
+                  JobDetailsBasics(job: Job.initial()),
                   const JobDetailsSection(
                     section: JobSection(
                       title: "What I Need?",

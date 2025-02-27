@@ -12,15 +12,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
-class ExploreScreen extends StatefulWidget {
+class ExploreProjectScreen extends StatefulWidget {
   final User user;
-  const ExploreScreen({super.key, required this.user});
+  const ExploreProjectScreen({super.key, required this.user});
 
   @override
-  State<ExploreScreen> createState() => _ExploreScreenState();
+  State<ExploreProjectScreen> createState() => _ExploreProjectScreenState();
 }
 
-class _ExploreScreenState extends State<ExploreScreen> {
+class _ExploreProjectScreenState extends State<ExploreProjectScreen> {
   final PageController _pageController = PageController();
   List<Project> _projects = [];
   int _currentPage = 0;
