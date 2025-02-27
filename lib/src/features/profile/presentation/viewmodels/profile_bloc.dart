@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
 import 'package:cosphere/src/features/profile/data/dto/education/add_education_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/experience/add_experience_req_dto.dart';
 import 'package:cosphere/src/features/profile/data/dto/intro/update_intro_req_dto.dart';
@@ -213,15 +214,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   User _user = User.initial();
   User get user => _user;
+  User? _storedUser = User.initial();
+  User? get storedUser => _storedUser;
   Future<void> _getUserProfileById(
       GetUserProfileById event, Emitter<ProfileState> emit) async {
     emit(GetProfileInfoLoading());
     try {
       final result = await getUserProfileByIdUsecase(event.uid);
+      _storedUser = await UserSharedPref.getUser();
       result.fold((failure) => emit(GetProfileInfoFailed(failure.message)),
           (success) {
         _user = success;
-        emit(GetProfileInfoSuccess(user: success));
+        emit(GetProfileInfoSuccess(user: success, storedUser: storedUser));
       });
     } catch (e) {
       emit(UpdateProfileImageFailed("Error: ${e.toString()}"));

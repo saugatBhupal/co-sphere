@@ -1,3 +1,4 @@
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
@@ -9,8 +10,10 @@ import 'package:cosphere/src/features/project/domain/entities/project.dart';
 
 class HiringCard extends StatelessWidget {
   final Project project;
+  final String uid;
   const HiringCard({
     super.key,
+    required this.uid,
     required this.project,
   });
 
@@ -21,8 +24,8 @@ class HiringCard extends StatelessWidget {
         project.pendingApplicants.length;
 
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed(AppRoutes.hiring, arguments: project.id),
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.hiring,
+          arguments: ProjectScreenArgs(projectId: project.id, userId: uid)),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         margin: const EdgeInsets.symmetric(vertical: 4),
@@ -36,6 +39,7 @@ class HiringCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CardsHeaderInfo(
+              postedBy: project.postedBy.profileImage!,
               title: project.projectName,
               postedOn: extractDate(project.createdAt),
             ),

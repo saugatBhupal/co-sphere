@@ -6,47 +6,54 @@ import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
-import 'package:cosphere/src/features/jobs/data/dto/apply_job/apply_job_req_dto.dart';
-import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
-import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_basics.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_header.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/job_details_section.dart';
+import 'package:cosphere/src/features/project/data/dto/apply_project/apply_project_req_dto.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
+import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
+import 'package:cosphere/src/features/project/presentation/widgets/project_explore_basic_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class JobDetailsScreen extends StatelessWidget {
-  final JobScreenArgs screenArgs;
+class ProjectDetailsScreen extends StatelessWidget {
+  final ProjectScreenArgs screenArgs;
 
-  const JobDetailsScreen({super.key, required this.screenArgs});
+  const ProjectDetailsScreen({super.key, required this.screenArgs});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<JobBloc>()..add(GetJobById(id: screenArgs.jobId)),
-      child: BlocBuilder<JobBloc, JobState>(
+      create: (context) => sl<ProjectBloc>()
+        ..add(GetProjectByID(projectId: screenArgs.projectId)),
+      child: BlocBuilder<ProjectBloc, ProjectState>(
         builder: (context, state) {
-          if (state is GetJobByIdFailed) {
+          if (state is GetProjectFailed) {
             buildToast(toastType: ToastType.error, msg: state.message);
           }
-          if (state is ApplyToJobFailed) {
+          if (state is ApplyToProjectFailed) {
             buildToast(toastType: ToastType.error, msg: state.message);
           }
-          if (state is ApplyToJobSuccess) {
+          if (state is ApplyToProjectSuccess) {
             buildToast(
                 toastType: ToastType.success,
-                msg: "Applied to ${state.job.jobName}");
+                msg: "Applied to ${state.project.projectName}");
           }
-          if (context.read<JobBloc>().job != Job.initial()) {
-            final Job job = context.read<JobBloc>().job;
-            final bool hasApplied = job.applicants
-                .any((applicant) => applicant.user.uid == screenArgs.userId);
+          if (context.read<ProjectBloc>().project != Project.initial()) {
+            final Project project = context.read<ProjectBloc>().project;
+            final bool hasApplied = project.acceptedApplicants.any(
+                    (applicant) => applicant.user.uid == screenArgs.userId) ||
+                project.pendingApplicants.any(
+                    (applicant) => applicant.user.uid == screenArgs.userId) ||
+                project.rejectedApplicants.any(
+                    (applicant) => applicant.user.uid == screenArgs.userId) ||
+                project.members
+                    .any((member) => member.uid == screenArgs.userId);
 
             return Scaffold(
               backgroundColor: AppColors.white,
               appBar: const CommonAppbar(
-                  title: "${AppStrings.job} ${AppStrings.details}"),
+                  title: "${AppStrings.project} ${AppStrings.details}"),
               body: Stack(
                 children: [
                   Padding(
@@ -58,11 +65,11 @@ class JobDetailsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           JobDetailsHeader(
-                            title: job.jobName,
-                            postedOn: job.createdAt,
-                            salary: job.salary,
+                            title: project.projectName,
+                            postedOn: project.createdAt,
+                            salary: project.salary,
                           ),
-                          JobDetailsBasics(job: job),
+                          ProjectExploreBasicDetails(project: project),
                           const JobDetailsSection(
                             section: JobSection(
                               title: "What I Need?",
@@ -109,7 +116,7 @@ class JobDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (job.postedBy.uid != screenArgs.userId)
+                  if (project.postedBy.uid != screenArgs.userId)
                     Positioned(
                       bottom: 0,
                       left: 0,
@@ -125,10 +132,11 @@ class JobDetailsScreen extends StatelessWidget {
                           onPressed: () {
                             hasApplied
                                 ? print(hasApplied)
-                                : context.read<JobBloc>().add(ApplyToJob(
-                                    dto: ApplyJobReqDto(
-                                        userId: screenArgs.userId,
-                                        jobId: job.id)));
+                                : context.read<ProjectBloc>().add(
+                                    ApplyToProject(
+                                        dto: ApplyProjectReqDto(
+                                            userId: screenArgs.userId,
+                                            projectId: project.id)));
                             ;
                           },
                         ),

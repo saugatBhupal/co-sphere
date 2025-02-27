@@ -49,7 +49,8 @@ class GetProfileInfoLoading extends ProfileState {}
 
 class GetProfileInfoSuccess extends ProfileState {
   final User user;
-  const GetProfileInfoSuccess({required this.user});
+  final User? storedUser;
+  const GetProfileInfoSuccess({required this.user, required this.storedUser});
 }
 
 class GetEducationSuccess extends ProfileState {

@@ -56,7 +56,7 @@ class CreatedByMeGrid extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final project = projectList[index];
                     return project.status == Status.hiring
-                        ? HiringCard(project: project)
+                        ? HiringCard(project: project, uid: user.uid)
                         : project.status == Status.active
                             ? ActiveCard(project: project, uid: user.uid)
                             : CompletedCard(project: project, uid: user.uid);

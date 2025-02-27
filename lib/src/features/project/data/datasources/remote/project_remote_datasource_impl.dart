@@ -3,7 +3,6 @@ import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
 import 'package:cosphere/src/features/jobs/data/models/remote/applicants_api_model.dart';
 import 'package:cosphere/src/features/profile/data/models/remote/reviews_api_model.dart';
-import 'package:cosphere/src/features/project/data/datasources/local/project_local_datasource.dart';
 import 'package:cosphere/src/features/project/data/datasources/remote/project_remote_datasource.dart';
 import 'package:cosphere/src/features/project/data/dto/add_review/add_review_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/apply_project/apply_project_req_dto.dart';
@@ -18,9 +17,7 @@ import 'package:dio/dio.dart';
 
 class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
   final Dio dio;
-  final ProjectLocalDatasource projectLocalDatasource;
-  ProjectRemoteDatasourceImpl(
-      {required this.dio, required this.projectLocalDatasource});
+  ProjectRemoteDatasourceImpl({required this.dio});
 
   @override
   Future<String> finishHiring(String projectId) async {
@@ -207,9 +204,6 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
             .map((json) =>
                 ProjectApiModel.fromJson(json as Map<String, dynamic>))
             .toList();
-        if (projects.isNotEmpty) {
-          projectLocalDatasource.addCreatedProjects(projects);
-        }
         return projects;
       } else {
         throw Failure(
@@ -231,10 +225,6 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
             .map((json) =>
                 ProjectApiModel.fromJson(json as Map<String, dynamic>))
             .toList();
-        print(projects);
-        if (projects.isNotEmpty) {
-          projectLocalDatasource.addAppliedProject(projects);
-        }
         return projects;
       } else {
         throw Failure(

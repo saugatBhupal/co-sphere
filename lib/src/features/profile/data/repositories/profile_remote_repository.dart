@@ -28,6 +28,7 @@ import 'package:cosphere/src/features/profile/domain/entities/reviews.dart';
 import 'package:cosphere/src/features/profile/domain/entities/skill.dart';
 import 'package:cosphere/src/features/profile/domain/repositories/profile_repository.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.dart';
+import 'package:cosphere/src/features/project/data/models/mappers/project_local_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/mappers/project_mappers.dart';
 import 'package:cosphere/src/features/project/data/models/remote/project_api_model.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
@@ -205,12 +206,20 @@ class ProfileRemoteRepository implements ProfileRepository {
 
   @override
   Future<Either<Failure, List<Project>>> getHistoryByUserId(String uid) async {
-    try {
-      final List<ProjectApiModel> projects =
-          await profileDatasource.getHistoryByUserId(uid);
-      return Right(projects.map((project) => project.toDomain()).toList());
-    } catch (e) {
-      return Left(Failure(message: e.toString()));
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final List<ProjectApiModel> projects =
+            await profileDatasource.getHistoryByUserId(uid);
+        if (projects.isNotEmpty) {
+          profileLocalDatasource.addHistory(projects);
+        }
+        return Right(projects.map((project) => project.toDomain()).toList());
+      } catch (e) {
+        return Left(Failure(message: e.toString()));
+      }
+    } else {
+      final projects = await profileLocalDatasource.getHistory();
+      return Right(projects.map((e) => e.toDomain()).toList());
     }
   }
 }

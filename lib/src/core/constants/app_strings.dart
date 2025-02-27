@@ -170,4 +170,5 @@ class AppStrings {
   static const String site = "Site";
   static const String min = "Min";
   static const String max = "Max";
+  static const String applied = "Applied";
 }

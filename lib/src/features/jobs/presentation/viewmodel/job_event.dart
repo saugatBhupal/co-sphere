@@ -42,3 +42,9 @@ class CreatedJobs extends JobEvent {
 
   const CreatedJobs({required this.uid});
 }
+
+class GetJobById extends JobEvent {
+  final String id;
+
+  const GetJobById({required this.id});
+}

@@ -2,6 +2,7 @@ import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/start_chat_button.dart';
 import 'package:flutter/material.dart';
@@ -34,14 +35,10 @@ class UserSearchCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    height: context.isTablet ? 50 : 40,
-                    width: context.isTablet ? 50 : 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.frog,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                  PlaceholderImage(
+                      title: searchUser.fullname,
+                      imageUrl: searchUser.profileImage,
+                      isSquare: true),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 12),
                     child: Column(

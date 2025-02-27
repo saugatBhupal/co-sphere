@@ -50,11 +50,8 @@ class JobsTabbar extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    ApplicationsView(jobs: appliedJobs),
+                    ApplicationsView(jobs: appliedJobs, uid: user.uid),
                     CreatedJobView(uid: user.uid),
-                    // HiringApplicationView(uid: user.uid),
-                    // ActiveApplicationView(uid: user.uid),
-                    // CompletedApplicationView(uid: user.uid),
                   ],
                 ),
               ),

@@ -343,6 +343,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         _completedProjects = success
             .where((project) => project.status == Status.completed)
             .toList();
+        print("Complete Project $success");
         emit(GetAppliedProjectSuccess(projects: _appliedProjects));
       });
     } catch (e) {

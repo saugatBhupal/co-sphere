@@ -170,7 +170,7 @@ class _ExploreJobScreenState extends State<ExploreJobScreen> {
                 height: context.height,
                 width: context.width,
                 child: _jobs.isEmpty
-                    ? const Center(
+                  ? const Center(
                         child: Text(
                           "No Jobs",
                           style: TextStyle(

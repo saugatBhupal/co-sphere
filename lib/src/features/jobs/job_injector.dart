@@ -10,12 +10,13 @@ import 'package:cosphere/src/features/jobs/domain/usecases/create_job_usecase.da
 import 'package:cosphere/src/features/jobs/domain/usecases/created_job_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/get_applied_jobs_usecase.dart';
 import 'package:cosphere/src/features/jobs/domain/usecases/get_explore_jobs_usecase.dart';
+import 'package:cosphere/src/features/jobs/domain/usecases/get_job_by_id_usecase.dart';
 import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
 
 void initJob() {
   sl.registerLazySingleton<JobLocalDatasource>(() => JobLocalDatasourceImpl());
   sl.registerLazySingleton<JobRemoteDatasource>(
-      () => JobRemoteDatasourceImpl(dio: sl(), localDatasource: sl()));
+      () => JobRemoteDatasourceImpl(dio: sl()));
   sl.registerLazySingleton<JobRepository>(() => JobRemoteRepository(
       datasource: sl(),
       localDatasource: sl(),
@@ -30,10 +31,13 @@ void initJob() {
       () => ApplyToJobUsecase(jobRepository: sl()));
   sl.registerLazySingleton<CreatedJobUsecase>(
       () => CreatedJobUsecase(jobRepository: sl()));
+  sl.registerLazySingleton<GetJobByIdUsecase>(
+      () => GetJobByIdUsecase(jobRepository: sl()));
   sl.registerFactory<JobBloc>(() => JobBloc(
       getAppliedJobsUsecase: sl(),
       createJobUsecase: sl(),
       getExploreJobsUsecase: sl(),
       applyToJobUsecase: sl(),
-      createdJobUsecase: sl()));
+      createdJobUsecase: sl(),
+      getJobByIdUsecase: sl()));
 }

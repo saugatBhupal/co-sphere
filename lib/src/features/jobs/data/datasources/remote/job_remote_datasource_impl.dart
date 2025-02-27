@@ -1,7 +1,6 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/core/http/api_endpoints.dart';
 import 'package:cosphere/src/core/http/handle_error_response.dart';
-import 'package:cosphere/src/features/jobs/data/datasources/local/job_local_datasource.dart';
 import 'package:cosphere/src/features/jobs/data/datasources/remote/job_remote_datasource.dart';
 import 'package:cosphere/src/features/jobs/data/dto/apply_job/apply_job_req_dto.dart';
 import 'package:cosphere/src/features/jobs/data/dto/create_job/create_job_req_dto.dart';
@@ -10,8 +9,7 @@ import 'package:dio/dio.dart';
 
 class JobRemoteDatasourceImpl implements JobRemoteDatasource {
   final Dio dio;
-  final JobLocalDatasource localDatasource;
-  JobRemoteDatasourceImpl({required this.dio, required this.localDatasource});
+  JobRemoteDatasourceImpl({required this.dio});
 
   @override
   Future<List<JobApiModel>> getAppliedJobs(String uid) async {
@@ -21,10 +19,6 @@ class JobRemoteDatasourceImpl implements JobRemoteDatasource {
         final List<JobApiModel> jobs = (res.data as List<dynamic>)
             .map((json) => JobApiModel.fromJson(json as Map<String, dynamic>))
             .toList();
-        print(jobs);
-        if (jobs.isNotEmpty) {
-          localDatasource.addAppliedJobs(jobs);
-        }
         return jobs;
       } else {
         throw Failure(
@@ -101,6 +95,23 @@ class JobRemoteDatasourceImpl implements JobRemoteDatasource {
             .map((json) => JobApiModel.fromJson(json as Map<String, dynamic>))
             .toList();
         return jobs;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<JobApiModel> getJobById(String id) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.job}$id");
+      if (res.statusCode == 200) {
+        return JobApiModel.fromJson(res.data);
       } else {
         throw Failure(
           message: res.statusMessage.toString(),

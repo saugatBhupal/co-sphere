@@ -86,3 +86,17 @@ class CreatedJobsFailed extends JobState {
   final String message;
   const CreatedJobsFailed({required this.message});
 }
+
+class GetJobByIdLoading extends JobState {
+  const GetJobByIdLoading();
+}
+
+class GetJobByIdSuccess extends JobState {
+  final Job job;
+  const GetJobByIdSuccess({required this.job});
+}
+
+class GetJobByIdFailed extends JobState {
+  final String message;
+  const GetJobByIdFailed({required this.message});
+}

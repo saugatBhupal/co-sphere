@@ -93,3 +93,37 @@ class ApplicantsScreenArgs {
     );
   }
 }
+
+class JobScreenArgs {
+  final String jobId;
+  final String userId;
+
+  JobScreenArgs({required this.jobId, required this.userId});
+
+  JobScreenArgs copyWith({
+    String? jobId,
+    String? userId,
+  }) {
+    return JobScreenArgs(
+      jobId: jobId ?? this.jobId,
+      userId: userId ?? this.userId,
+    );
+  }
+}
+
+class ProjectScreenArgs {
+  final String projectId;
+  final String userId;
+
+  ProjectScreenArgs({required this.projectId, required this.userId});
+
+  ProjectScreenArgs copyWith({
+    String? projectId,
+    String? userId,
+  }) {
+    return ProjectScreenArgs(
+      projectId: projectId ?? this.projectId,
+      userId: userId ?? this.userId,
+    );
+  }
+}

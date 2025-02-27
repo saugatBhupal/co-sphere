@@ -1,5 +1,4 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
-import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +34,7 @@ class CompletedCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CardsHeaderInfo(
+              postedBy: project.postedBy.profileImage!,
               title: project.projectName,
               postedOn: extractDate(project.createdAt),
             ),

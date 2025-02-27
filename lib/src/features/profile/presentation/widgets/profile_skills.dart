@@ -14,11 +14,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileSkills extends StatelessWidget {
   final String uid;
+  final String loggedUId;
   final List<Skill> skills;
   const ProfileSkills({
     Key? key,
     required this.uid,
     required this.skills,
+    required this.loggedUId,
   }) : super(key: key);
   static final _profileBloc = sl<ProfileBloc>();
 
@@ -82,20 +84,20 @@ class ProfileSkills extends StatelessWidget {
                           return SkillsButton(name: skillsLst[index].name);
                         },
                       ),
-                      MoreButton(
-                        title: "+ ${AppStrings.more}",
-                        onPressed: () {
-                          showEditDialog(
-                            profileBloc: _profileBloc,
-                            context: context,
-                            child: EditSkills(
-                              uid: uid,
-                              skills: skillsLst,
-                            ),
-                            // child: AddTaskForm(),
-                          );
-                        },
-                      ),
+                      if (loggedUId == uid)
+                        MoreButton(
+                          title: "+ ${AppStrings.more}",
+                          onPressed: () {
+                            showEditDialog(
+                              profileBloc: _profileBloc,
+                              context: context,
+                              child: EditSkills(
+                                uid: uid,
+                                skills: skillsLst,
+                              ),
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),

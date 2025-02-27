@@ -1,23 +1,27 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class JobApplicationCard extends StatelessWidget {
   final Job job;
-  const JobApplicationCard({super.key, required this.job});
+  final String uid;
+  const JobApplicationCard({super.key, required this.job, required this.uid});
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     final List tag = [(job.site), "Full Time", "Company"];
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails),
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails,
+          arguments: JobScreenArgs(jobId: job.id, userId: uid)),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         margin: const EdgeInsets.symmetric(vertical: 4),
@@ -31,15 +35,10 @@ class JobApplicationCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: AppColors.frog,
-                    border: Border.all(width: 1, color: AppColors.plaster),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                PlaceholderImage(
+                    title: job.jobName,
+                    imageUrl: job.postedBy.profileImage,
+                    isSquare: true),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(

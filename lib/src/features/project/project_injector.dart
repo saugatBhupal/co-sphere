@@ -9,7 +9,6 @@ import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase
 import 'package:cosphere/src/features/project/domain/usecases/apply_to_project_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_project_usecse.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
-import 'package:cosphere/src/features/jobs/domain/usecases/create_job_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_project_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
@@ -28,8 +27,8 @@ import 'package:cosphere/src/features/project/presentation/viewmodels/project_bl
 void initProject() {
   sl.registerLazySingleton<ProjectLocalDatasource>(
       () => ProjectLocalDatasourceImpl());
-  sl.registerLazySingleton<ProjectRemoteDatasource>(() =>
-      ProjectRemoteDatasourceImpl(dio: sl(), projectLocalDatasource: sl()));
+  sl.registerLazySingleton<ProjectRemoteDatasource>(
+      () => ProjectRemoteDatasourceImpl(dio: sl()));
   sl.registerLazySingleton<ProjectRepository>(() => ProjectRemoteRepository(
       datasource: sl(),
       projectLocalDatasource: sl(),

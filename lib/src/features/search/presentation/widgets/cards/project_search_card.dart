@@ -1,9 +1,11 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
 import 'package:cosphere/src/features/profile/presentation/widgets/button/skills_button.dart';
@@ -27,10 +29,11 @@ class ProjectSearchCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (project.postedBy.uid == uid) {
-          Navigator.of(context)
-              .pushNamed(AppRoutes.hiring, arguments: project.id);
+          Navigator.of(context).pushNamed(AppRoutes.hiring,
+              arguments: ProjectScreenArgs(projectId: project.id, userId: uid));
         } else {
-          Navigator.of(context).pushNamed(AppRoutes.projectDetails);
+          Navigator.of(context).pushNamed(AppRoutes.projectDetails,
+              arguments: ProjectScreenArgs(projectId: project.id, userId: uid));
         }
       },
       child: Container(
@@ -47,14 +50,11 @@ class ProjectSearchCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
-                  height: context.isTablet ? 64 : 52,
-                  width: context.isTablet ? 64 : 52,
-                  decoration: BoxDecoration(
-                    color: AppColors.frog,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                PlaceholderImage(
+                    title: project.projectName[0],
+                    height: 48,
+                    isSquare: true,
+                    imageUrl: project.postedBy.profileImage),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 12),
                   child: Column(

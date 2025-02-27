@@ -9,9 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class JobsSearch extends StatelessWidget {
   final String query;
+  final String uid;
   const JobsSearch({
     super.key,
     required this.query,
+    required this.uid,
   });
 
   @override
@@ -39,7 +41,7 @@ class JobsSearch extends StatelessWidget {
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.jobs.length,
                   itemBuilder: (context, index) =>
-                      JobsSearchCard(job: state.jobs[index]),
+                      JobsSearchCard(job: state.jobs[index], uid: uid),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

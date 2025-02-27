@@ -1,7 +1,7 @@
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 
 class UserLocationDetails extends StatelessWidget {
   final User user;
@@ -15,8 +15,7 @@ class UserLocationDetails extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Row(
       children: [
-        CircleImageAvatar(
-            imageUrl: user.profileImage, radius: context.isTablet ? 26 : 20),
+        PlaceholderImage(title: user.fullname[0], imageUrl: user.profileImage),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

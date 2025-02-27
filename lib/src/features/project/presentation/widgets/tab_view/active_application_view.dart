@@ -13,8 +13,8 @@ class ActiveApplicationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectBloc, ProjectState>(
       builder: (context, state) {
-        final appliedProjects = context.watch<ProjectBloc>().acceptedProjects;
-        if (appliedProjects.isEmpty) {
+        final acceptedProjects = context.watch<ProjectBloc>().acceptedProjects;
+        if (acceptedProjects.isEmpty) {
           return const Center(child: Text("No active projects found"));
         }
 
@@ -22,12 +22,13 @@ class ActiveApplicationView extends StatelessWidget {
           child: ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: appliedProjects.length,
+            itemCount: acceptedProjects.length,
             itemBuilder: (context, index) => GestureDetector(
                 onTap: () => Navigator.of(context).pushNamed(AppRoutes.active,
                     arguments: ActiveScreensArgs(
-                        projectId: appliedProjects[index].id, userId: uid)),
-                child: ProjectApplicationCard(project: appliedProjects[index])),
+                        projectId: acceptedProjects[index].id, userId: uid)),
+                child:
+                    ProjectApplicationCard(project: acceptedProjects[index])),
             separatorBuilder: (context, index) => const SizedBox(height: 4),
           ),
         );

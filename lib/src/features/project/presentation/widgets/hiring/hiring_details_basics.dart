@@ -1,4 +1,5 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
@@ -15,12 +16,15 @@ import 'package:flutter/material.dart';
 
 class HiringDetailsBasics extends StatelessWidget {
   final Project project;
-  const HiringDetailsBasics({super.key, required this.project});
+  final String uid;
+  const HiringDetailsBasics(
+      {super.key, required this.project, required this.uid});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails),
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.projectDetails,
+          arguments: ProjectScreenArgs(projectId: project.id, userId: uid)),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         margin: const EdgeInsets.symmetric(vertical: 4),

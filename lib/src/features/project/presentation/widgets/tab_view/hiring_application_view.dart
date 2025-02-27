@@ -1,3 +1,5 @@
+import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/card/project_application_card.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +24,12 @@ class HiringApplicationView extends StatelessWidget {
             shrinkWrap: true,
             physics: const AlwaysScrollableScrollPhysics(),
             itemCount: appliedProjects.length,
-            itemBuilder: (context, index) =>
-                ProjectApplicationCard(project: appliedProjects[index]),
+            itemBuilder: (context, index) => GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed(
+                    AppRoutes.projectDetails,
+                    arguments: ProjectScreenArgs(
+                        projectId: appliedProjects[index].id, userId: uid)),
+                child: ProjectApplicationCard(project: appliedProjects[index])),
             separatorBuilder: (context, index) => const SizedBox(height: 4),
           ),
         );

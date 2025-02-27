@@ -25,6 +25,9 @@ class JobRemoteRepository implements JobRepository {
     if (await checkInternetConnectivity.isConnected()) {
       try {
         final List<JobApiModel> jobs = await datasource.getAppliedJobs(uid);
+        if (jobs.isNotEmpty) {
+          localDatasource.addAppliedJobs(jobs);
+        }
         return Right(jobs.map((job) => job.toDomain()).toList());
       } catch (e) {
         return Left(Failure(message: e.toString()));
@@ -67,9 +70,27 @@ class JobRemoteRepository implements JobRepository {
 
   @override
   Future<Either<Failure, List<Job>>> createdJobs(String uid) async {
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final List<JobApiModel> jobs = await datasource.createdJobs(uid);
+        if (jobs.isNotEmpty) {
+          localDatasource.addCreatedJobs(jobs);
+        }
+        return Right(jobs.map((job) => job.toDomain()).toList());
+      } catch (e) {
+        return Left(Failure(message: e.toString()));
+      }
+    } else {
+      final jobs = await localDatasource.getCreatedJobs();
+      return Right(jobs.map((e) => e.toDomain()).toList());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Job>> getJobById(String id) async {
     try {
-      final List<JobApiModel> jobs = await datasource.createdJobs(uid);
-      return Right(jobs.map((job) => job.toDomain()).toList());
+      final JobApiModel job = await datasource.getJobById(id);
+      return Right(job.toDomain());
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

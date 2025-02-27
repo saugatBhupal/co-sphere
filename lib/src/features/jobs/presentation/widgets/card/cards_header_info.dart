@@ -1,15 +1,17 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:flutter/material.dart';
 
 class CardsHeaderInfo extends StatelessWidget {
   final String title;
   final String postedOn;
+  final String? postedBy;
   const CardsHeaderInfo({
     super.key,
     this.postedOn = "10-11-2025",
     this.title = "Assignment Helper Needed",
+    this.postedBy,
   });
 
   @override
@@ -25,10 +27,7 @@ class CardsHeaderInfo extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleImageAvatar(
-            color: AppColors.lemon,
-            radius: context.isTablet ? 22 : null,
-          ),
+          PlaceholderImage(title: title[0], imageUrl: postedBy),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

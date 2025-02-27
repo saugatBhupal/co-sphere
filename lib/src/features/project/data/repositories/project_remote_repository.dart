@@ -65,12 +65,17 @@ class ProjectRemoteRepository implements ProjectRepository {
   @override
   Future<Either<Failure, List<Project>>> getCompletedProjectsByUser(
       String uid) async {
-    try {
-      final List<ProjectApiModel> projects =
-          await datasource.getCompletedProjectsByUser(uid);
-      return Right(projects.map((project) => project.toDomain()).toList());
-    } catch (e) {
-      return Left(Failure(message: e.toString()));
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final List<ProjectApiModel> projects =
+            await datasource.getCompletedProjectsByUser(uid);
+        return Right(projects.map((project) => project.toDomain()).toList());
+      } catch (e) {
+        return Left(Failure(message: e.toString()));
+      }
+    } else {
+      final projects = await projectLocalDatasource.getCompletedProjects();
+      return Right(projects.map((e) => e.toDomain()).toList());
     }
   }
 
@@ -148,6 +153,9 @@ class ProjectRemoteRepository implements ProjectRepository {
       try {
         final List<ProjectApiModel> projects =
             await datasource.getProjectsByUser(uid);
+        if (projects.isNotEmpty) {
+          projectLocalDatasource.addCreatedProjects(projects);
+        }
         return Right(projects.map((project) => project.toDomain()).toList());
       } catch (e) {
         return Left(Failure(message: e.toString()));
@@ -164,6 +172,9 @@ class ProjectRemoteRepository implements ProjectRepository {
       try {
         final List<ProjectApiModel> projects =
             await datasource.getAppliedProjects(uid);
+        if (projects.isNotEmpty) {
+          projectLocalDatasource.addAppliedProject(projects);
+        }
         return Right(projects.map((project) => project.toDomain()).toList());
       } catch (e) {
         return Left(Failure(message: e.toString()));

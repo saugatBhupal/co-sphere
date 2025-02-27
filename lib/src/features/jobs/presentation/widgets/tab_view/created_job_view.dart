@@ -36,7 +36,7 @@ class CreatedJobView extends StatelessWidget {
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: jobs.length,
                   itemBuilder: (context, index) =>
-                      JobApplicationCard(job: jobs[index]),
+                      JobApplicationCard(job: jobs[index], uid: uid),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

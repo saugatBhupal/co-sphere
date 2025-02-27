@@ -8,4 +8,5 @@ abstract interface class JobRemoteDatasource {
   Future<List<JobApiModel>> getExploreJobs(String uid);
   Future<JobApiModel> applyToJob(ApplyJobReqDto dto);
   Future<List<JobApiModel>> createdJobs(String uid);
+  Future<JobApiModel> getJobById(String id);
 }

@@ -54,19 +54,21 @@ class ProjectLocalDatasourceImpl implements ProjectLocalDatasource {
     var box =
         await Hive.openBox<ProjectHiveModel>(AppBoxesName.appliedProjects);
     List<ProjectHiveModel> storedProjects = box.values.toList();
-    print("Stored Projects: $storedProjects");
-
     storedProjects = storedProjects
         .where((project) => project.status == Status.pending)
         .toList();
-    print("Filtered Projects (Status.hiring): $storedProjects");
     return storedProjects;
   }
 
   @override
-  Future<List<ProjectHiveModel>> getCompletedProjects() {
-    // TODO: implement getCompletedProjects
-    throw UnimplementedError();
+  Future<List<ProjectHiveModel>> getCompletedProjects() async {
+    var box =
+        await Hive.openBox<ProjectHiveModel>(AppBoxesName.appliedProjects);
+    List<ProjectHiveModel> storedProjects = box.values.toList();
+    storedProjects = storedProjects
+        .where((project) => project.status == Status.completed)
+        .toList();
+    return storedProjects;
   }
 
   @override
@@ -74,12 +76,9 @@ class ProjectLocalDatasourceImpl implements ProjectLocalDatasource {
     var box =
         await Hive.openBox<ProjectHiveModel>(AppBoxesName.appliedProjects);
     List<ProjectHiveModel> storedProjects = box.values.toList();
-    print("Stored Projects: $storedProjects");
-
     storedProjects = storedProjects
         .where((project) => project.status == Status.pending)
         .toList();
-    print("Filtered Projects (Status.hiring): $storedProjects");
     return storedProjects;
   }
 }

@@ -55,7 +55,7 @@ class SearchResultsTabbar extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     UserSearch(query: query, user: user),
-                    JobsSearch(query: query),
+                    JobsSearch(query: query, uid: user.uid),
                     ProjectsSearch(query: query, uid: user.uid),
                   ],
                 ),

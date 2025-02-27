@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class ApplicationsView extends StatelessWidget {
   final List<Job> jobs;
-  const ApplicationsView({super.key, required this.jobs});
+  final String uid;
+  const ApplicationsView({super.key, required this.jobs, required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,10 @@ class ApplicationsView extends StatelessWidget {
           shrinkWrap: true,
           physics: const AlwaysScrollableScrollPhysics(),
           itemCount: jobs.length,
-          itemBuilder: (context, index) => JobApplicationCard(job: jobs[index]),
+          itemBuilder: (context, index) => JobApplicationCard(
+            job: jobs[index],
+            uid: uid,
+          ),
           separatorBuilder: (context, index) {
             return const SizedBox(height: 4);
           },

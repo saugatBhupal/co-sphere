@@ -16,14 +16,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HiringDashboardScreen extends StatelessWidget {
-  final String projectId;
-  const HiringDashboardScreen({super.key, required this.projectId});
+  final ProjectScreenArgs screenArgs;
+
+  const HiringDashboardScreen({super.key, required this.screenArgs});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          sl<ProjectBloc>()..add(GetProjectByID(projectId: projectId)),
+      create: (context) => sl<ProjectBloc>()
+        ..add(GetProjectByID(projectId: screenArgs.projectId)),
       child: Scaffold(
         appBar: const CommonAppbar(
             title: "${AppStrings.project} ${AppStrings.details}"),
@@ -51,8 +52,9 @@ class HiringDashboardScreen extends StatelessWidget {
               }
               if (state is FinishHireSuccess) {
                 buildToast(toastType: ToastType.success, msg: state.message);
-                Navigator.of(context)
-                    .popAndPushNamed(AppRoutes.active, arguments: ActiveScreensArgs(projectId: projectId, userId: ""));
+                Navigator.of(context).popAndPushNamed(AppRoutes.active,
+                    arguments: ActiveScreensArgs(
+                        projectId: screenArgs.projectId, userId: ""));
               }
             },
             child: BlocBuilder<ProjectBloc, ProjectState>(
@@ -70,6 +72,7 @@ class HiringDashboardScreen extends StatelessWidget {
                       ),
                       HiringDetailsBasics(
                         project: project,
+                        uid: screenArgs.userId,
                       ),
                       if (projectBloc.applicants.isNotEmpty) ...[
                         ApplicantsList(projectId: project.id),

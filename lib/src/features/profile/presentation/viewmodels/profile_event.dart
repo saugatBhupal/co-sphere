@@ -78,3 +78,4 @@ class GetHistoryByUserId extends ProfileEvent {
 
   const GetHistoryByUserId({required this.uid});
 }
+

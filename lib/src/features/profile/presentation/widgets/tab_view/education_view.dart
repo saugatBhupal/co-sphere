@@ -16,11 +16,12 @@ import 'package:cosphere/src/features/profile/presentation/widgets/cards/educati
 class EducationView extends StatelessWidget {
   final String uid;
   final String email;
-  const EducationView({
-    super.key,
-    required this.uid,
-    required this.email,
-  });
+  final String loggedUId;
+  const EducationView(
+      {super.key,
+      required this.uid,
+      required this.email,
+      required this.loggedUId});
   static final _profileBloc = sl<ProfileBloc>();
 
   @override
@@ -76,17 +77,18 @@ class EducationView extends StatelessWidget {
                 return const SizedBox.shrink();
               },
             ),
-            Center(
-              child: MoreButton(
-                title: "${AppStrings.add} ${AppStrings.more}",
-                onPressed: () {
-                  showEditDialog(
-                      context: context,
-                      child: EditEducation(email: email),
-                      profileBloc: _profileBloc);
-                },
+            if (loggedUId == uid)
+              Center(
+                child: MoreButton(
+                  title: "${AppStrings.add} ${AppStrings.more}",
+                  onPressed: () {
+                    showEditDialog(
+                        context: context,
+                        child: EditEducation(email: email),
+                        profileBloc: _profileBloc);
+                  },
+                ),
               ),
-            ),
           ],
         ),
       ),

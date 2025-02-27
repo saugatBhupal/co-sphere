@@ -1,9 +1,11 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_assets.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/components/budget_container.dart';
@@ -15,14 +17,16 @@ import 'package:flutter_svg/svg.dart';
 
 class JobsSearchCard extends StatelessWidget {
   final Job job;
-  const JobsSearchCard({super.key, required this.job});
+  final String uid;
+  const JobsSearchCard({super.key, required this.job, required this.uid});
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     final List<String> tag = [job.site, "Full Time", "Company"];
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails),
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.jobDetails,
+          arguments: JobScreenArgs(jobId: job.id, userId: uid)),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         margin: const EdgeInsets.symmetric(vertical: 4),
@@ -36,16 +40,12 @@ class JobsSearchCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 52,
-                  width: 52,
-                  decoration: BoxDecoration(
-                    color: AppColors.frog,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                PlaceholderImage(
+                    title: job.jobName[0],
+                    height: 48,
+                    isSquare: true,
+                    imageUrl: job.postedBy.profileImage),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 12),
                   child: Column(

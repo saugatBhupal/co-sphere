@@ -5,7 +5,7 @@ import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
@@ -36,10 +36,10 @@ class ProjectApplicationCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CircleImageAvatar(
-                    radius: context.isTablet ? 24 : 18,
-                    color: AppColors.lemon,
-                  ),
+                  PlaceholderImage(
+                      title: project.projectName[0],
+                      imageUrl: project.postedBy.profileImage,
+                      isSquare: true),
                   const SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

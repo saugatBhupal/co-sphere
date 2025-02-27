@@ -46,9 +46,8 @@ class AppliedJobList extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: jobList.length >= 3 ? 3 : jobList.length,
-                  itemBuilder: (context, index) => JobApplicationCard(
-                    job: jobList[index],
-                  ),
+                  itemBuilder: (context, index) =>
+                      JobApplicationCard(job: jobList[index], uid: user.uid),
                   separatorBuilder: (context, index) {
                     return const SizedBox(height: 4);
                   },

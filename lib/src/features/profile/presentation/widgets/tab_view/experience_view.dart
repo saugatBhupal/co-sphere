@@ -16,10 +16,12 @@ import 'package:cosphere/src/features/profile/presentation/widgets/cards/experie
 class ExperienceView extends StatelessWidget {
   final String uid;
   final String email;
+    final String loggedUId;
   const ExperienceView({
     super.key,
     required this.uid,
     required this.email,
+    required this.loggedUId
   });
   static final _profileBloc = sl<ProfileBloc>();
   @override
@@ -125,7 +127,7 @@ class ExperienceView extends StatelessWidget {
               },
             ),
 
-            /// More Button
+            if(loggedUId == uid)
             Center(
               child: MoreButton(
                 title: "${AppStrings.add} ${AppStrings.more}",

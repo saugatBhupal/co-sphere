@@ -1,7 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/core/widgets/image_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,8 +15,10 @@ import 'package:cosphere/src/features/profile/presentation/widgets/tab_view/revi
 
 class ProfileTabbar extends StatelessWidget {
   final User user;
+  final String loggedUId;
   const ProfileTabbar({
     super.key,
+    required this.loggedUId,
     required this.user,
   });
 
@@ -68,7 +68,7 @@ class ProfileTabbar extends StatelessWidget {
                 ),
                 state is! ProfileModuleChanged
                     ? AboutView(user: user)
-                    : _getProfileModule(state.index, user),
+                    : _getProfileModule(state.index, user, loggedUId),
               ],
             ),
           ),
@@ -78,16 +78,18 @@ class ProfileTabbar extends StatelessWidget {
   }
 }
 
-Widget _getProfileModule(int index, User user) {
+Widget _getProfileModule(int index, User user, String loggedUId) {
   switch (index) {
     case 0:
       return AboutView(user: user);
     case 1:
-      return ExperienceView(uid: user.uid, email: user.email);
+      return ExperienceView(
+          uid: user.uid, email: user.email, loggedUId: loggedUId);
     case 2:
-      return EducationView(uid: user.uid, email: user.email);
+      return EducationView(
+          uid: user.uid, email: user.email, loggedUId: loggedUId);
     case 3:
-      return  HistoryView(uid: user.uid);
+      return HistoryView(uid: user.uid);
     case 4:
       return ReviewsView(uid: user.uid);
     default:
