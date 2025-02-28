@@ -20,7 +20,7 @@ void main() {
     getSearchHistoryUsecase =
         GetSearchHistoryUsecase(searchRepository: mockSearchRepository);
   });
-  final String uid = Uuid().v4();
+  final String uid = const Uuid().v4();
   test('should return search history of the User', () async {
     final searchResults = [
       Search.initial(),
