@@ -1,8 +1,10 @@
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/usecases/complete_task_usecase.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
@@ -14,13 +16,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TaskCard extends StatelessWidget {
   final Tasks task;
-  final String projectId;
+  final ActiveScreensArgs screensArgs;
   final bool postedBy;
+  final List<User> projectMembers;
   const TaskCard(
       {super.key,
       required this.task,
-      required this.projectId,
-      required this.postedBy});
+      required this.screensArgs,
+      required this.postedBy,
+      required this.projectMembers});
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +83,18 @@ class TaskCard extends StatelessWidget {
                           task.members.length,
                           (index) => Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: CircleImageAvatar(
-                                  radius: 10,
-                                  imageUrl: task.members[index].profileImage,
+                                child: PlaceholderImage(
+                                  height: 20,
+                                  imageUrl: projectMembers
+                                      .where((member) =>
+                                          member.uid == task.members[index].uid)
+                                      .first
+                                      .profileImage,
+                                  title: projectMembers
+                                      .where((member) =>
+                                          member.uid == task.members[index].uid)
+                                      .first
+                                      .fullname[0],
                                 ),
                               )),
                     ),
@@ -94,17 +107,27 @@ class TaskCard extends StatelessWidget {
                         fontSize: context.isTablet ? 16 : 10,
                       ),
                     ),
+                    const Spacer(),
                     if (postedBy) ...[
-                      const Spacer(),
                       AcceptButton(
                         onTap: () => context.read<ProjectBloc>().add(
                             CompleteTask(
                                 params: CompleteTaskParams(
-                                    projectId: projectId, taskId: task.id))),
+                                    projectId: screensArgs.projectId,
+                                    taskId: task.id))),
                       ),
                       const SizedBox(width: 8),
                       const TrashButton(),
                     ],
+                    if (task.members
+                        .any((member) => member.uid == screensArgs.userId))
+                      AcceptButton(
+                        onTap: () => context.read<ProjectBloc>().add(
+                            CompleteTask(
+                                params: CompleteTaskParams(
+                                    projectId: screensArgs.projectId,
+                                    taskId: task.id))),
+                      ),
                   ],
                 ),
               ],

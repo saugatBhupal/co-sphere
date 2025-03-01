@@ -3,7 +3,6 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/utils/auto_hypen_formattor.dart';
-import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,13 +11,14 @@ class DobField extends StatelessWidget {
   final String? hintText;
   final Color? color;
   final String? labelText;
-
+  final FormFieldValidator<String>? validator;
   const DobField({
     super.key,
     required this.dobController,
     this.hintText,
     this.color,
     this.labelText,
+    this.validator,
   });
 
   @override
@@ -50,9 +50,7 @@ class DobField extends StatelessWidget {
         ),
         labelText: labelText ?? AppStrings.dob,
       ),
-      validator: (val) {
-        return FormValidator.validateDOB(val);
-      },
+      validator: validator
     );
   }
 }

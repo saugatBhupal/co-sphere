@@ -48,12 +48,12 @@ class EducationCard extends StatelessWidget {
                   children: [
                     TextSpan(
                         text:
-                            "${formatMonth(education.from)} - ${formatMonth(education.to)}",
+                            "${formatMonth(education.from)} - ${education.to == DateTime(1970, 1, 1) ? "Present" : formatMonth(education.to)}",
                         style: _textTheme.labelLarge!
                             .copyWith(fontSize: context.isTablet ? 14 : 10)),
                     TextSpan(
                       text:
-                          " (${calculateDuration(education.from, education.to)})",
+                          " (${calculateDuration(education.from, education.to == DateTime(1970, 1, 1) ? DateTime.now() : education.to)})",
                       style: _textTheme.labelLarge!.copyWith(
                           color: AppColors.midnight,
                           fontSize: context.isTablet ? 14 : 10),

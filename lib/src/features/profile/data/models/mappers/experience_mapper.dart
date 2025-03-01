@@ -2,7 +2,7 @@ import 'package:cosphere/src/features/profile/data/models/remote/experience_api_
 import 'package:cosphere/src/features/profile/domain/entities/experience.dart';
 
 extension ExperienceApiModelExtension on ExperienceApiModel {
-  Experience toDomain() => Experience(
+  Experience toDomain() => Experience.initial().copywith(
         id: id,
         position: position,
         organization: organization,

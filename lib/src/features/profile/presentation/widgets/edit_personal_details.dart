@@ -76,6 +76,9 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
                 child: DobField(
                   dobController: _dobController,
                   color: AppColors.black.withOpacity(0.68),
+                  validator: (value) {
+                    return FormValidator.validateDOB(value);
+                  },
                 ),
               ),
               const SizedBox(width: 8),

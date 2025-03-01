@@ -1,3 +1,4 @@
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
@@ -12,16 +13,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TasksView extends StatelessWidget {
   final String status;
-  final String projectId;
   final bool postedBy;
+  final ActiveScreensArgs screensArgs;
   final List<User> members;
 
   const TasksView({
     super.key,
     required this.status,
-    required this.projectId,
     required this.postedBy,
     required this.members,
+    required this.screensArgs,
   });
 
   @override
@@ -43,8 +44,8 @@ class TasksView extends StatelessWidget {
                       addTaskDialog(
                         context: context,
                         projectBloc: context.read<ProjectBloc>(),
-                        child:
-                            AddTaskForm(members: members, projectId: projectId),
+                        child: AddTaskForm(
+                            members: members, projectId: screensArgs.projectId),
                       );
                     },
                     icon: AppIcons.edit,
@@ -61,8 +62,9 @@ class TasksView extends StatelessWidget {
                 itemCount: tasks.length,
                 itemBuilder: (context, index) => TaskCard(
                   task: tasks[index],
-                  projectId: projectId,
+                  screensArgs: screensArgs,
                   postedBy: postedBy,
+                  projectMembers: members,
                 ),
                 separatorBuilder: (context, index) => const SizedBox(),
               ),

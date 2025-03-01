@@ -2,6 +2,7 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:flutter/material.dart';
 
 class ReceivedTile extends StatelessWidget {
@@ -10,11 +11,13 @@ class ReceivedTile extends StatelessWidget {
     required this.message,
     required this.sent,
     this.profileImage,
+    this.username,
   });
 
   final String message;
   final String sent;
   final String? profileImage;
+  final String? username;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +32,11 @@ class ReceivedTile extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
-              child: CircleImageAvatar(
-                radius: context.isTablet ? 24 : 18,
-                imageUrl: profileImage ?? '',
+
+              child: PlaceholderImage(
+                title: username![0],
+                imageUrl: profileImage,
+                height: context.isTablet ? 46 : 32,
               ),
             ),
             const SizedBox(width: 12),

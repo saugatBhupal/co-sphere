@@ -155,15 +155,9 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
         List<TasksApiModel> tasks = (res.data['task'] as List)
             .map((json) => TasksApiModel.fromJson(json))
             .toList();
-        return tasks.firstWhere(
-          (task) => task.id == params.taskId,
-          orElse: () => throw Failure(
-            message: "Task with ID ${params.taskId} not found",
-            statusCode: res.statusCode?.toString() ?? "Unknown",
-          ),
-        );
+        return tasks[0];
       } else {
-        throw Failure(
+        throw Failure( 
           message: res.statusMessage ?? "Unknown error",
           statusCode: res.statusCode?.toString() ?? "Unknown",
         );

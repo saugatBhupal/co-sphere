@@ -36,7 +36,7 @@ class JobApplicationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PlaceholderImage(
-                    title: job.jobName,
+                    title: job.jobName[0],
                     imageUrl: job.postedBy.profileImage,
                     isSquare: true),
                 Padding(

@@ -1,17 +1,19 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/components/due_date_span.dart';
 import 'package:flutter/material.dart';
 
 class CompletedTaskCard extends StatelessWidget {
   final Tasks task;
-  const CompletedTaskCard({super.key, required this.task});
+  final List<User> projectMembers;
+  const CompletedTaskCard({super.key, required this.task, required this.projectMembers});
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +72,18 @@ class CompletedTaskCard extends StatelessWidget {
                           task.members.length,
                           (index) => Padding(
                                 padding: const EdgeInsets.only(right: 2),
-                                child: CircleImageAvatar(
-                                  radius: 10,
-                                  imageUrl: task.members[index].profileImage,
+                                child: PlaceholderImage(
+                                  height: 20,
+                                  imageUrl: projectMembers
+                                      .where((member) =>
+                                          member.uid == task.members[index].uid)
+                                      .first
+                                      .profileImage,
+                                  title: projectMembers
+                                      .where((member) =>
+                                          member.uid == task.members[index].uid)
+                                      .first
+                                      .fullname[0],
                                 ),
                               )),
                     ),

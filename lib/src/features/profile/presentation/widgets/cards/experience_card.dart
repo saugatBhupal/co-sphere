@@ -26,7 +26,8 @@ class ExperienceCard extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Row(
       children: [
-        PlaceholderImage(title: organization[0], height: context.isTablet ? 52 : 46),
+        PlaceholderImage(
+            title: organization[0], height: context.isTablet ? 52 : 46),
         const SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,11 +53,13 @@ class ExperienceCard extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                      text: "${formatMonth(from)} - ${formatMonth(to)}",
+                      text:
+                          "${formatMonth(from)} - ${to == DateTime(1970, 1, 1) ? "Present" : formatMonth(to)}",
                       style: _textTheme.labelLarge!
                           .copyWith(fontSize: context.isTablet ? 14 : 10)),
                   TextSpan(
-                    text: " (${calculateDuration(from, to)})",
+                    text:
+                        " (${calculateDuration(from, to == DateTime(1970, 1, 1) ? DateTime.now() : to)})",
                     style: _textTheme.labelLarge!.copyWith(
                         color: AppColors.midnight,
                         fontSize: context.isTablet ? 14 : 10),

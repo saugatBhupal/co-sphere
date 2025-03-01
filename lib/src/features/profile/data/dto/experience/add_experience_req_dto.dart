@@ -10,7 +10,7 @@ class AddExperienceReqDto extends Equatable {
   final String organization;
   final String status;
   final DateTime from;
-  final DateTime to;
+  final DateTime? to;
 
   const AddExperienceReqDto({
     required this.email,
@@ -18,7 +18,7 @@ class AddExperienceReqDto extends Equatable {
     required this.organization,
     required this.status,
     required this.from,
-    required this.to,
+    this.to,
   });
   factory AddExperienceReqDto.fromJson(Map<String, dynamic> json) =>
       _$AddExperienceReqDtoFromJson(json);
@@ -26,6 +26,6 @@ class AddExperienceReqDto extends Equatable {
   Map<String, dynamic> toJson() => _$AddExperienceReqDtoToJson(this);
   @override
   List<Object> get props {
-    return [email, position, status, organization, from, to];
+    return [email, position, status, organization, from];
   }
 }

@@ -12,7 +12,7 @@ AddEducationReqDto _$AddEducationReqDtoFromJson(Map<String, dynamic> json) =>
       degree: json['degree'] as String,
       organization: json['organization'] as String,
       from: DateTime.parse(json['from'] as String),
-      to: DateTime.parse(json['to'] as String),
+      to: json['to'] == null ? null : DateTime.parse(json['to'] as String),
     );
 
 Map<String, dynamic> _$AddEducationReqDtoToJson(AddEducationReqDto instance) =>
@@ -21,5 +21,5 @@ Map<String, dynamic> _$AddEducationReqDtoToJson(AddEducationReqDto instance) =>
       'degree': instance.degree,
       'organization': instance.organization,
       'from': instance.from.toIso8601String(),
-      'to': instance.to.toIso8601String(),
+      'to': instance.to?.toIso8601String(),
     };

@@ -13,7 +13,7 @@ AddExperienceReqDto _$AddExperienceReqDtoFromJson(Map<String, dynamic> json) =>
       organization: json['organization'] as String,
       status: json['status'] as String,
       from: DateTime.parse(json['from'] as String),
-      to: DateTime.parse(json['to'] as String),
+      to: json['to'] == null ? null : DateTime.parse(json['to'] as String),
     );
 
 Map<String, dynamic> _$AddExperienceReqDtoToJson(
@@ -24,5 +24,5 @@ Map<String, dynamic> _$AddExperienceReqDtoToJson(
       'organization': instance.organization,
       'status': instance.status,
       'from': instance.from.toIso8601String(),
-      'to': instance.to.toIso8601String(),
+      'to': instance.to?.toIso8601String(),
     };

@@ -62,6 +62,7 @@ class ActiveDashboardScreen extends StatelessWidget {
                       status: AppStrings.active,
                       project: project,
                       postedBy: postedBy,
+                      screensArgs: screensArgs,
                     )),
                   ],
                 );

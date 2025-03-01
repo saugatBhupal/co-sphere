@@ -3,6 +3,7 @@ import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
+import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
@@ -87,6 +88,9 @@ class _EditEducationState extends State<EditEducation> {
                   Flexible(
                     flex: 1,
                     child: DobField(
+                      validator: (val) {
+                        return FormValidator.validateDOB(val);
+                      },
                       dobController: _fromController,
                       labelText: AppStrings.from,
                       hintText: "dd-mm-yyyy",
@@ -114,8 +118,10 @@ class _EditEducationState extends State<EditEducation> {
                             organization: _organizationController.text,
                             from: DateFormat('dd-MM-yyyy')
                                 .parse(_fromController.text),
-                            to: DateFormat('dd-MM-yyyy')
-                                .parse(_toController.text),
+                            to: _toController.text.isNotEmpty
+                                ? DateFormat('dd-MM-yyyy')
+                                    .parse(_toController.text)
+                                : null,
                           ),
                         ));
                   }

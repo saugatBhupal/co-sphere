@@ -7,6 +7,7 @@ import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/chat/domain/entities/conversation.dart';
 import 'package:flutter/material.dart';
 
@@ -59,12 +60,9 @@ class MessageTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CircleImageAvatar(
-                    imageUrl: recipient.profileImage != null &&
-                            recipient.profileImage!.isNotEmpty
-                        ? recipient.profileImage
-                        : '',
-                    radius: context.isTablet ? 26 : 18,
+                  PlaceholderImage(
+                    title: recipient.fullname[0],
+                    imageUrl: recipient.profileImage,
                   ),
                   const SizedBox(width: 8),
                   Text(

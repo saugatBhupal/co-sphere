@@ -78,7 +78,12 @@ class _SignupFormState extends State<SignupForm> {
                 },
               ),
               const SizedBox(height: 25),
-              DobField(dobController: _dobController),
+              DobField(
+                dobController: _dobController,
+                validator: (val) {
+                  return FormValidator.validateDOB(val);
+                },
+              ),
               const SizedBox(height: 45),
               DarkRoundedButton(
                 title: AppStrings.continueBtn,

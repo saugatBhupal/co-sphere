@@ -62,7 +62,7 @@ class FormValidator {
 
   static String? validateDOB(String? val) {
     if (val == null || val.isEmpty) {
-      return "${AppStrings.dob} ${AppStrings.fieldRequired}";
+      return "${AppStrings.field} ${AppStrings.fieldRequired}";
     }
     final regex = RegExp(r'^\d{2}\s?-\s?\d{2}\s?-\s?\d{4}$');
     if (!regex.hasMatch(val)) {

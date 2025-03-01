@@ -4,6 +4,7 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
+import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/custom_dropdown.dart';
 import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
@@ -157,6 +158,9 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                         dobController: _fromController,
                         labelText: AppStrings.from,
                         hintText: "dd-mm-yyyy",
+                        validator: (value) {
+                          return FormValidator.validateDOB(value);
+                        },
                       ),
                     ),
                     const SizedBox(width: 20),
@@ -166,6 +170,9 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                         dobController: _toController,
                         labelText: AppStrings.to,
                         hintText: "dd-mm-yyyy",
+                        validator: (value) {
+                          return FormValidator.validateDOB(value);
+                        },
                       ),
                     ),
                   ],

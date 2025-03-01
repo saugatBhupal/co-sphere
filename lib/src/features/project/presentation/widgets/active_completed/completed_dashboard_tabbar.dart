@@ -64,7 +64,7 @@ class CompletedDashboardTabbar extends StatelessWidget {
                     MembersView(members: project.members),
                     MemberReviewsView(
                         reviews: project.reviews, projectId: project.id),
-                    const CompletedTaskView(),
+                    CompletedTaskView(members: project.members),
                   ],
                 ),
               ),

@@ -50,21 +50,6 @@ class ChatLogsScreen extends StatelessWidget {
           },
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     context.read<ChatBloc>().add(const GetConversation(members: [
-      //           "67b05057151bd4f0a904a0ba",
-      //           "67b1a95051c826113195e095"
-      //         ]));
-      //   },
-      //   splashColor: AppColors.genie,
-      //   shape: const CircleBorder(),
-      //   elevation: 2,
-      //   backgroundColor: AppColors.plaster,
-      //   child: SvgPicture.asset(
-      //     AppIcons.chat,
-      //   ),
-      // ),
     );
   }
 }

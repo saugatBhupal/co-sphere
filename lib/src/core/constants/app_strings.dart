@@ -36,6 +36,7 @@ class AppStrings {
   static const String forgot = "Forgot Password?";
   static const String fullName = "Full $name";
   static const String dob = "Date of Birth";
+  static const String field = "Field";
   static const String code = "+977";
   static const String enter = "Enter your";
   static const String continueBtn = "Continue";

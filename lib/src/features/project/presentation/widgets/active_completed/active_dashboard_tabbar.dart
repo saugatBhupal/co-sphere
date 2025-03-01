@@ -1,3 +1,4 @@
+import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
@@ -14,11 +15,13 @@ class ActiveDashboardTabbar extends StatelessWidget {
   final String status;
   final Project project;
   final bool postedBy;
+  final ActiveScreensArgs screensArgs;
   const ActiveDashboardTabbar({
     super.key,
     required this.status,
     required this.project,
     required this.postedBy,
+    required this.screensArgs,
   });
 
   @override
@@ -67,11 +70,14 @@ class ActiveDashboardTabbar extends StatelessWidget {
                   children: [
                     MembersView(members: project.members),
                     TasksView(
-                        status: status,
-                        projectId: project.id,
-                        postedBy: postedBy,
-                        members: project.members),
-                    const CompletedTaskView(),
+                      status: status,
+                      postedBy: postedBy,
+                      members: project.members,
+                      screensArgs: screensArgs,
+                    ),
+                    CompletedTaskView(
+                      members: project.members,
+                    ),
                   ],
                 ),
               ),

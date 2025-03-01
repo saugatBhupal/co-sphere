@@ -5,7 +5,7 @@ import 'package:cosphere/src/features/project/data/dto/hire_user/hire_user_req_d
 import 'package:cosphere/src/features/project/domain/repositories/project_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class HireUserUsecase implements UsecaseWithParams<Applicants, HireUserReqDto> {
+class  HireUserUsecase implements UsecaseWithParams<Applicants, HireUserReqDto> {
   final ProjectRepository projectRepository;
 
   HireUserUsecase({required this.projectRepository});

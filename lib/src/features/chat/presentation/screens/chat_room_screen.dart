@@ -141,12 +141,15 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                             sent: extractTime(message.sent),
                             profileImage:
                                 widget.chatScreensArgs.receipient.profileImage,
+                            username:
+                                widget.chatScreensArgs.receipient.fullname,
                           )
                         : SentTile(
                             message: message.content,
                             sent: extractTime(message.sent),
                             profileImage:
                                 widget.chatScreensArgs.user.profileImage,
+                            username: widget.chatScreensArgs.user.fullname,
                           );
                   },
                 ),

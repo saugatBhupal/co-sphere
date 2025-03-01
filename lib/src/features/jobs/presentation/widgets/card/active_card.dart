@@ -35,7 +35,7 @@ class ActiveCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CardsHeaderInfo(
-              postedBy: project.postedBy.profileImage!,
+              postedBy: project.postedBy.profileImage,
               title: project.projectName,
               postedOn: extractDate(project.createdAt),
             ),

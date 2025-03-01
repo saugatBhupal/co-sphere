@@ -9,14 +9,14 @@ class AddEducationReqDto extends Equatable {
   final String degree;
   final String organization;
   final DateTime from;
-  final DateTime to;
+  final DateTime? to;
 
   const AddEducationReqDto({
     required this.email,
     required this.degree,
     required this.organization,
     required this.from,
-    required this.to,
+    this.to,
   });
   factory AddEducationReqDto.fromJson(Map<String, dynamic> json) =>
       _$AddEducationReqDtoFromJson(json);
@@ -24,6 +24,6 @@ class AddEducationReqDto extends Equatable {
   Map<String, dynamic> toJson() => _$AddEducationReqDtoToJson(this);
   @override
   List<Object> get props {
-    return [email, degree, organization, from, to];
+    return [email, degree, organization, from];
   }
 }
