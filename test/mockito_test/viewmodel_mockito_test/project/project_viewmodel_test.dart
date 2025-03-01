@@ -137,7 +137,7 @@ void main() {
         bloc.add(GetHiringProject(uid: userId));
 
         // Get Active Project
-        when(mockGetActiveProjectUserUsecase.call(userId))
+        when(mockGetActiveProjectUserUsecase.call(userId ))
             .thenAnswer((_) async => Right(projectLst));
         bloc.add(GetActiveProject(uid: userId));
 

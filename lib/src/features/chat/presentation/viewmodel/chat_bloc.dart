@@ -88,7 +88,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         emit(GetMessageSuccess(messages: success));
       });
     } catch (e) {
-      emit(GetConversationFailed("Error: ${e.toString()}"));
+      emit(GetMessageFailed("Error: ${e.toString()}"));
     }
   }
 
