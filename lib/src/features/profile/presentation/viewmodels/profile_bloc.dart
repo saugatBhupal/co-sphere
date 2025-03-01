@@ -17,12 +17,12 @@ import 'package:cosphere/src/features/profile/domain/usecases/add_skill_usecase.
 import 'package:cosphere/src/features/profile/domain/usecases/get_education_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_experience_by_userID_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_history_by_user_id_usecase.dart';
+import 'package:cosphere/src/features/profile/domain/usecases/get_review_by_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_reviews_by_user_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/get_user_profile_by_id_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_intro_usecase.dart';
 import 'package:cosphere/src/features/profile/domain/usecases/update_profile_image_usecase.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
-import 'package:cosphere/src/features/project/domain/usecases/get_review_by_id_usecase.dart';
 import 'package:equatable/equatable.dart';
 
 part 'profile_event.dart';
@@ -38,7 +38,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final UpdateIntroUsecase updateIntroUsecase;
   final GetUserProfileByIdUsecase getUserProfileByIdUsecase;
   final GetReviewsByUserUsecase getReviewsByUserUsecase;
-  final GetReviewByIdUsecase getReviewByIdUsecase;
+  final GetUserReviewByIdUsecase getReviewByIdUsecase;
   final GetHistoryByUserIdUsecase getHistoryByUserIdUsecase;
   ProfileBloc({
     required this.updateProfileImageUsecase,

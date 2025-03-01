@@ -13,12 +13,12 @@ import 'get_review_by_id_usecase_profile_test.mocks.dart';
 @GenerateMocks([ProfileRepository])
 void main() {
   late MockProfileRepository mockProfileRepository;
-  late GetReviewByIdUsecase getReviewByIdUsecase;
+  late GetUserReviewByIdUsecase getReviewByIdUsecase;
 
   setUp(() {
     mockProfileRepository = MockProfileRepository();
     getReviewByIdUsecase =
-        GetReviewByIdUsecase(profileRepository: mockProfileRepository);
+        GetUserReviewByIdUsecase(profileRepository: mockProfileRepository);
   });
 
   final reviewId = const Uuid().v4();

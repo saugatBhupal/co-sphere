@@ -43,8 +43,8 @@ void initProfile() {
       () => UpdateIntroUsecase(profileRepository: sl()));
   sl.registerLazySingleton<GetUserProfileByIdUsecase>(
       () => GetUserProfileByIdUsecase(profileRepository: sl()));
-  sl.registerLazySingleton<GetReviewByIdUsecase>(
-      () => GetReviewByIdUsecase(profileRepository: sl()));
+  sl.registerLazySingleton<GetUserReviewByIdUsecase>(
+      () => GetUserReviewByIdUsecase(profileRepository: sl()));
   sl.registerLazySingleton<GetReviewsByUserUsecase>(
       () => GetReviewsByUserUsecase(profileRepository: sl()));
   sl.registerLazySingleton<GetHistoryByUserIdUsecase>(
