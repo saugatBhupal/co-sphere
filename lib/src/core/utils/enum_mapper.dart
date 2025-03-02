@@ -59,7 +59,33 @@ extension CompletionExtension on CompletionType {
       case "Early":
         return CompletionType.early;
       default:
-        throw ArgumentError("Invalid status value: $value");
+        throw ArgumentError("Invalid completion value: $value");
+    }
+  }
+}
+
+extension NotificationExtension on NotificationType {
+  String toDatabaseValue() {
+    switch (this) {
+      case NotificationType.chat:
+        return "Chat";
+      case NotificationType.recommendation:
+        return "Recommendation";
+      case NotificationType.project:
+        return "Project";
+    }
+  }
+
+  static NotificationType fromDatabaseValue(String value) {
+    switch (value) {
+      case "Chat":
+        return NotificationType.chat;
+      case "Recommendation":
+        return NotificationType.recommendation;
+      case "Project":
+        return NotificationType.project;
+      default:
+        throw ArgumentError("Invalid notification value: $value");
     }
   }
 }

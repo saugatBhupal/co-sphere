@@ -13,3 +13,5 @@ enum OtpType { verifyUser, verifyPassword }
 enum Status { pending, accepted, rejected, active, hiring, completed }
 
 enum CompletionType { delayed, ontime, early }
+
+enum NotificationType { chat, recommendation, project }
