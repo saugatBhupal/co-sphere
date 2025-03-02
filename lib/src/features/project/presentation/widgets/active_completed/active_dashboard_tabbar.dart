@@ -1,4 +1,5 @@
 import 'package:cosphere/src/config/screen_args.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
@@ -14,19 +15,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ActiveDashboardTabbar extends StatelessWidget {
   final String status;
   final Project project;
-  final bool postedBy;
+  // final bool postedBy;
   final ActiveScreensArgs screensArgs;
   const ActiveDashboardTabbar({
     super.key,
     required this.status,
     required this.project,
-    required this.postedBy,
+    // required this.postedBy,
     required this.screensArgs,
   });
 
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
+    bool postedBy = (project!.status == Status.active) &&
+        (screensArgs.userId == project.postedBy.uid);
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2.0),

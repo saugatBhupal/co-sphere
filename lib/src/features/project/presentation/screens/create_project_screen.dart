@@ -232,7 +232,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                   title: AppStrings.newSec,
                   onPressed: () {
                     setState(() {
-                      sectionWidgets.add(const SectionForm());
+                      // sectionWidgets.add(SectionForm());
                     });
                   },
                 ),

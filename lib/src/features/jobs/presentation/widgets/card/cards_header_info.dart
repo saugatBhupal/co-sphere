@@ -25,6 +25,7 @@ class CardsHeaderInfo extends StatelessWidget {
         ),
       ),
       child: Row(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           PlaceholderImage(title: title[0], imageUrl: postedBy),
@@ -33,12 +34,17 @@ class CardsHeaderInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: _textTheme.bodyLarge!.copyWith(
-                      letterSpacing: 0.4,
-                      height: 1,
-                      fontSize: context.isTablet ? 18 : 14),
+                SizedBox(
+                  width: context.width / 1.8,
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: _textTheme.bodyLarge!.copyWith(
+                        letterSpacing: 0.4,
+                        height: 1,
+                        fontSize: context.isTablet ? 18 : 14),
+                  ),
                 ),
                 Text(
                   "Posted on $postedOn",

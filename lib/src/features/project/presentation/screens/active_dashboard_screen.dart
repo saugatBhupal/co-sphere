@@ -40,7 +40,7 @@ class ActiveDashboardScreen extends StatelessWidget {
               final Project? project = projectBloc.project;
               bool postedBy = (project!.status == Status.active) &&
                   (screensArgs.userId == project.postedBy.uid);
-              // print(postedBy);
+              print("Posted By : $postedBy");
               if (state is GetProjectLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -61,7 +61,7 @@ class ActiveDashboardScreen extends StatelessWidget {
                         child: ActiveDashboardTabbar(
                       status: AppStrings.active,
                       project: project,
-                      postedBy: postedBy,
+                      // postedBy: postedBy,
                       screensArgs: screensArgs,
                     )),
                   ],

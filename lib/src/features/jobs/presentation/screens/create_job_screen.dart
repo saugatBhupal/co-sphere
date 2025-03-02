@@ -12,6 +12,7 @@ import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/textspan_field.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/jobs/data/dto/create_job/create_job_req_dto.dart';
+import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/button/add_section_button.dart';
@@ -75,8 +76,19 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     List<String> posts = ["Intern", "Associate", "Junior", "Mid", "Senior"];
-
+    List<JobSection> jobSection = [];
     String? selectedValue = posts[0];
+
+    void _addSection(JobSection section) {
+      setState(() {
+        jobSection.add(section);
+      });
+
+      for (var job in jobSection) {
+        print(job.toString());
+      }
+    }
+
     const gap = SizedBox(height: 18);
     return BlocListener<JobBloc, JobState>(
       listener: (context, state) {
@@ -231,27 +243,34 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                   title: AppStrings.newSec,
                   onPressed: () {
                     setState(() {
-                      sectionWidgets.add(const SectionForm());
+                      sectionWidgets.add(SectionForm(onSectionAdded: (section) {
+                        _addSection(section);
+                      }));
                     });
                   },
                 ),
                 gap,
                 DarkRoundedButton(
                   title: AppStrings.create,
+                  // onPressed: () {
+                  //   CreateJobReqDto dto = CreateJobReqDto(
+                  //     jobName: _titleController.text,
+                  //     companyName: _companyController.text,
+                  //     position: selectedValue!,
+                  //     address: _addressController.text,
+                  //     postedBy: widget.user.uid,
+                  //     skills: skills,
+                  //     site: _siteController.text,
+                  //     salary: Salary(
+                  //         min: int.parse(_minController.text),
+                  //         max: int.parse(_maxController.text)),
+                  //   );
+                  //   context.read<JobBloc>().add(CreateJob(dto: dto));
+                  // },
                   onPressed: () {
-                    CreateJobReqDto dto = CreateJobReqDto(
-                      jobName: _titleController.text,
-                      companyName: _companyController.text,
-                      position: selectedValue!,
-                      address: _addressController.text,
-                      postedBy: widget.user.uid,
-                      skills: skills,
-                      site: _siteController.text,
-                      salary: Salary(
-                          min: int.parse(_minController.text),
-                          max: int.parse(_maxController.text)),
-                    );
-                    context.read<JobBloc>().add(CreateJob(dto: dto));
+                    for (var job in jobSection) {
+                      print("Final${jobSection.toString()}");
+                    }
                   },
                 ),
               ],

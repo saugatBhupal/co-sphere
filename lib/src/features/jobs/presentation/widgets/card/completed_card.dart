@@ -1,4 +1,5 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:flutter/material.dart';
@@ -52,21 +53,27 @@ class CompletedCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: CardsGridInfo(
-                    title: "20",
+                    title: project.tasks.length.toString(),
                     subtitle: AppStrings.tasks,
                     border: true,
                   ),
                 ),
                 Expanded(
                   child: CardsGridInfo(
-                    title: "20",
+                    title: project.tasks
+                        .where((task) => task.status == Status.completed)
+                        .length
+                        .toString(),
                     subtitle: AppStrings.completed,
                     border: true,
                   ),
                 ),
                 Expanded(
                   child: CardsGridInfo(
-                    title: "20",
+                    title: project.completionDate
+                        .difference(project.createdAt)
+                        .inDays
+                        .toString(),
                     subtitle: AppStrings.duration,
                     border: false,
                   ),

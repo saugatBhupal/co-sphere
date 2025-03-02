@@ -50,7 +50,7 @@ class PlaceholderImage extends StatelessWidget {
   Widget _buildFallback(double size) {
     return Center(
       child: Text(
-        title.isNotEmpty ? title.toUpperCase() : "?",
+        title.isNotEmpty ? title[0].toUpperCase() : "?",
         style: TextStyle(
           fontSize: size * 0.5,
           fontWeight: FontWeight.w500,

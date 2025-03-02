@@ -54,7 +54,9 @@ class ProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ProfileImage(profileImage: user.profileImage ?? ''),
+                      ProfileImage(
+                          profileImage: user.profileImage,
+                          username: user.fullname),
                       const SizedBox(height: 55),
                       ProfileData(
                           name: user.fullname,

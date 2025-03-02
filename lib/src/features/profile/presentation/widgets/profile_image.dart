@@ -1,13 +1,15 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/profile/presentation/viewmodels/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileImage extends StatelessWidget {
   final String? profileImage;
-  const ProfileImage({super.key, this.profileImage});
+  final String username;
+  const ProfileImage({super.key, this.profileImage, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +38,11 @@ class ProfileImage extends StatelessWidget {
             ),
             Positioned(
               bottom: -50,
-              left: context.width / 2 - 48,
-              child: CircleImageAvatar(
-                radius: context.isTablet ? 54 : 48,
-                imageUrl: image ?? '',
+              left: context.width / 2 - 38,
+              child: PlaceholderImage(
+                title: username[0],
+                imageUrl: profileImage,
+                height: context.isTablet ? 96 : 78,
               ),
             ),
           ],

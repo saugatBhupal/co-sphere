@@ -36,7 +36,7 @@ class UserSearchCard extends StatelessWidget {
               Row(
                 children: [
                   PlaceholderImage(
-                      title: searchUser.fullname,
+                      title: searchUser.fullname[0],
                       imageUrl: searchUser.profileImage,
                       isSquare: true),
                   Padding(

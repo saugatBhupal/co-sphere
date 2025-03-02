@@ -1,11 +1,6 @@
-import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
-import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
-import 'package:cosphere/src/core/functions/build_toast.dart';
-import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart';
 import 'package:cosphere/src/features/search/presentation/viewmodels/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:cosphere/src/features/search/presentation/widgets/cards/user_search_card.dart';
