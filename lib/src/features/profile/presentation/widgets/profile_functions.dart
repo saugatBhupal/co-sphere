@@ -106,6 +106,30 @@ class ProfileFunctions extends StatelessWidget {
               ],
             ),
           ),
+          if (loggedUser.uid == user.uid) ...[
+            const SizedBox(width: 26),
+            GestureDetector(
+              onTap: () => Navigator.of(context)
+                  .pushNamed(AppRoutes.editProfile, arguments: user),
+              child: Column(
+                children: [
+                  SvgPicture.asset(
+                    AppIcons.editUser,
+                    height: context.isTablet ? 32 : 26,
+                  ),
+                  Text(
+                    "Edit",
+                    style: _textTheme.labelLarge!.copyWith(
+                      fontWeight: FontThickness.medium,
+                      height: 1.8,
+                      color: AppColors.grey,
+                      fontSize: context.isTablet ? 14 : 10,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ]
         ],
       ),
     );

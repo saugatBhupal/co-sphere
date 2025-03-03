@@ -42,7 +42,7 @@ class CreatedByMeGrid extends StatelessWidget {
               ),
               SizedBox(
                 height: context.isTablet
-                    ? context.height * 0.13
+                    ? context.height * 0.119
                     : context.height * 0.17,
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),

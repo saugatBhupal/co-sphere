@@ -3,7 +3,6 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/utils/enum_mapper.dart';
 import 'package:cosphere/src/core/utils/from_to_date.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:cosphere/src/core/widgets/buttons/status_button.dart';
 import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';

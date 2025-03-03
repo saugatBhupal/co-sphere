@@ -174,7 +174,6 @@ class ProfileRemoteRepository implements ProfileRepository {
     } else {
       User? userPref = await UserSharedPref.getUser();
       if (userPref!.uid == uid) {
-        print("$userPref is this");
         return Right(userPref);
       } else {
         return const Left(Failure(message: "User not found locally"));

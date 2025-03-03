@@ -37,7 +37,6 @@ class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
     try {
       var res = await dio.get("${ApiEndpoints.searchJob}$query");
       if (res.statusCode == 200) {
-        print("${res.data} +++");
         return (res.data as List)
             .map((json) => JobApiModel.fromJson(json))
             .toList();

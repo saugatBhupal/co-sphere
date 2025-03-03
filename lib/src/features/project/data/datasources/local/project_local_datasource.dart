@@ -9,4 +9,6 @@ abstract class ProjectLocalDatasource {
   Future<List<ProjectHiveModel>> getHiringProjects();
   Future<List<ProjectHiveModel>> getCompletedProjects();
   Future<List<ProjectHiveModel>> getActiveProjects();
+  void addAssignedTasks(List<ProjectApiModel> projects);
+  Future<List<ProjectHiveModel>> getAssignedTasks();
 }

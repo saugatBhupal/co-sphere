@@ -19,6 +19,7 @@ class AppRoutes {
   static const String userJobs = "/userJobs";
   static const String projectApplications = "/projectApplications";
   static const String createdProjects = "/createdProjects";
+  static const String assignedTasks = "/assignedTasks";
   static const String jobDetails = "/jobDetails";
   static const String projectDetails = "/projectDetails";
   static const String hiring = "/hiring";

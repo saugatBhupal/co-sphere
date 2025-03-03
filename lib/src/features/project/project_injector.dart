@@ -13,6 +13,7 @@ import 'package:cosphere/src/features/project/domain/usecases/create_project_use
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_active_task_by_user_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_applied_projects_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_explore_project_usecase.dart';
@@ -67,6 +68,8 @@ void initProject() {
       () => GetExploreProjectUsecase(projectRepository: sl()));
   sl.registerLazySingleton<ApplyToProjectUsecase>(
       () => ApplyToProjectUsecase(projectRepository: sl()));
+  sl.registerLazySingleton<GetActiveTaskByUserIdUsecase>(
+      () => GetActiveTaskByUserIdUsecase(projectRepository: sl()));
   sl.registerFactory<ProjectBloc>(() => ProjectBloc(
       getHiringProjectsUserUsecase: sl(),
       getActiveProjectUserUsecase: sl(),
@@ -84,5 +87,6 @@ void initProject() {
       getReviewByIdUsecase: sl(),
       createProjectUsecase: sl(),
       getExploreProjectUsecase: sl(),
-      applyToProjectUsecase: sl()));
+      applyToProjectUsecase: sl(),
+      getActiveTaskByUserIdUsecase: sl()));
 }

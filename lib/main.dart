@@ -12,6 +12,6 @@ Future<void> main() async {
   await initDependencies();
   SocketService().initialize();
   await initializeNotifications();
-  await UserSharedPref.deleteUser();
+  // await UserSharedPref.deleteUser();
   runApp(const App());
 }

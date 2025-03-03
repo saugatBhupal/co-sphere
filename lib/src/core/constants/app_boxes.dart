@@ -16,6 +16,7 @@ class AppBoxesName {
   static const String createdProjects = 'createdProjects';
   static const String appliedProjects = 'appliedProjects';
   static const String historyProjects = 'historyProjects';
+  static const String assignedTasks = 'assignedTasks';
   static const String appliedJobs = 'appliedJobs';
   static const String createdJobs = 'createdJobs';
   static const String searchHistory = 'searchHistory';

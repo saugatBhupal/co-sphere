@@ -70,7 +70,7 @@ class AppStrings {
   static const String likes = "Likes";
   static const String created = "Created By Me";
   static const String assigned = "Assigned To Me";
-  static const String application = "My Applications";
+  static const String application = "My Job Applications";
   static const String projectApp = "My $project Applications";
   static const String deadline = "Deadline";
   static const String timeSpent = "Time Spent";
@@ -172,4 +172,5 @@ class AppStrings {
   static const String min = "Min";
   static const String max = "Max";
   static const String applied = "Applied";
+  static const String assignedOn = "Assigned On";
 }

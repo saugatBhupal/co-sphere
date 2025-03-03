@@ -116,7 +116,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(AddingSkill());
     try {
       final result = await addSkillUsecase(event.params);
-      print("result $result");
       result.fold(
         (failure) => emit(AddSkillFailed(failure.message)),
         (success) => emit(AddSkillSuccess(skills: success)),
@@ -190,7 +189,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       result.fold((failure) => emit(GetProfileInfoFailed(failure.message)),
           (data) {
         _experience.add(data);
-        print(_experience);
         emit(AddExperienceSuccess(experience: data));
       });
     } catch (e) {

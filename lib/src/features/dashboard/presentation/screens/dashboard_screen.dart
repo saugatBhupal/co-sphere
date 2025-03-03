@@ -1,3 +1,7 @@
+import 'package:cosphere/src/config/socket_config/socket_service.dart';
+import 'package:cosphere/src/core/constants/app_enums.dart';
+import 'package:cosphere/src/core/functions/build_toast.dart';
+import 'package:cosphere/src/core/functions/show_notification.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/explore/presentation/screens/explore_job_screen.dart';
 import 'package:cosphere/src/features/explore/presentation/screens/explore_project_screen.dart';
@@ -10,12 +14,39 @@ import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_b
 import 'package:cosphere/src/features/dashboard/presentation/widgets/dashboard_header.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   final User user;
   const DashboardScreen({
     super.key,
     required this.user,
   });
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  final SocketService _socketService = SocketService();
+  @override
+  void initState() {
+    super.initState();
+    _setupSocketListeners();
+  }
+
+  void _setupSocketListeners() {
+    final socket = _socketService.socket;
+    if (socket == null) return;
+
+    socket.on("receiveNotification", (data) {
+      showNotification(data);
+    }); 
+  }
+
+  @override
+  void dispose() {
+    _socketService.socket?.off("receiveNotification");
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +62,7 @@ class DashboardScreen extends StatelessWidget {
               ? null
               : const DashboardAppbar(),
           body: state is! ScreenModuleChanged
-              ? DashboardBody(user: user)
+              ? DashboardBody(user: widget.user)
               : _getHomeBodyModule(state.index),
           bottomNavigationBar: const DashboardBottomNavBar(),
         );
@@ -42,17 +73,17 @@ class DashboardScreen extends StatelessWidget {
   Widget _getHomeBodyModule(int index) {
     switch (index) {
       case 0:
-        return DashboardBody(user: user);
+        return DashboardBody(user: widget.user);
       case 1:
-        return ExploreProjectScreen(user: user);
+        return ExploreProjectScreen(user: widget.user);
       case 2:
-        return CreateScreen(user: user);
+        return CreateScreen(user: widget.user);
       case 3:
-        return ExploreJobScreen(user: user);
+        return ExploreJobScreen(user: widget.user);
       case 4:
-        return ProfileScreen(uid: user.uid);
+        return ProfileScreen(uid: widget.user.uid);
       default:
-        return DashboardBody(user: user);
+        return DashboardBody(user: widget.user);
     }
   }
 }

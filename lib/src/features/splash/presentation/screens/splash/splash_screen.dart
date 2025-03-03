@@ -57,7 +57,6 @@ class _SplashScreenState extends State<SplashScreen>
         }
         if ((state is DashboardGetUserSuccess && state.user == null) ||
             state is DashboardGetUserFailed) {
-          print("User Info ${state}");
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppRoutes.onboarding,
             (route) => false,

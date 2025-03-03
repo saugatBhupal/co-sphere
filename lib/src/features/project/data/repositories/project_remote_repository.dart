@@ -247,4 +247,19 @@ class ProjectRemoteRepository implements ProjectRepository {
       return Left(Failure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Project>>> getActiveTasksByUserId(
+      String uid) async {
+    try {
+      final List<ProjectApiModel> projects =
+          await datasource.getActiveTasksByUserId(uid);
+      if (projects.isNotEmpty) {
+        projectLocalDatasource.addAssignedTasks(projects);
+      }
+      return Right(projects.map((project) => project.toDomain()).toList());
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
 }

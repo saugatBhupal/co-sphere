@@ -6,8 +6,7 @@ import 'package:cosphere/src/features/jobs/presentation/widgets/button/add_secti
 import 'package:flutter/material.dart';
 
 class SectionForm extends StatefulWidget {
-  final Function(JobSection) onSectionAdded;
-  const SectionForm({super.key, required this.onSectionAdded});
+  const SectionForm({super.key});
 
   @override
   State<SectionForm> createState() => _SectionFormState();
@@ -56,8 +55,6 @@ class _SectionFormState extends State<SectionForm> {
                 title: _titleController.text,
                 description: _descController.text,
               );
-
-              widget.onSectionAdded(newSection);
             },
           )
         ],

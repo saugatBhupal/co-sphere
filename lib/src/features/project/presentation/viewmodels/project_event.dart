@@ -102,8 +102,15 @@ class GetExploreProjects extends ProjectEvent {
 
   const GetExploreProjects({required this.uid});
 }
+
 class ApplyToProject extends ProjectEvent {
   final ApplyProjectReqDto dto;
 
   const ApplyToProject({required this.dto});
+}
+
+class GetActiveTask extends ProjectEvent {
+  final String uid;
+
+  const GetActiveTask({required this.uid});
 }

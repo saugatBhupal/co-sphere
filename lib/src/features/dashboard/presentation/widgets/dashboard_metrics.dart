@@ -17,7 +17,7 @@ class DashboardMetrics extends StatelessWidget {
           margin: const EdgeInsets.only(top: 18),
           width: context.width,
           height:
-              context.isTablet ? context.height / 4.5 : context.height / 3.8,
+              context.isTablet ? context.height / 4.8 : context.height / 3.8,
           decoration: BoxDecoration(
             color: AppColors.white,
             border: Border.all(width: 1, color: AppColors.plaster),
@@ -47,7 +47,7 @@ class DashboardMetrics extends StatelessWidget {
               _buildGridItem(
                 context,
                 title: AppStrings.success,
-                subtitle: "6",
+                subtitle: "0",
                 bottom: true,
                 widget: const CompletionContainer(
                   total: 10,
@@ -58,8 +58,9 @@ class DashboardMetrics extends StatelessWidget {
               _buildGridItem(
                 context,
                 title: AppStrings.rating,
-                subtitle: "4.0",
+                subtitle: "N/A",
                 right: true,
+                font: 20,
                 widget: const CompletionContainer(
                   total: 20,
                   completed: 4,
@@ -69,8 +70,8 @@ class DashboardMetrics extends StatelessWidget {
               _buildGridItem(
                 context,
                 title: AppStrings.tasks,
-                subtitle: "6",
-                total: "8",
+                subtitle: "0",
+                total: "0",
               ),
             ],
           ),
@@ -103,7 +104,7 @@ Widget _buildGridItem(
 }) {
   return Container(
     padding: context.isTablet
-        ? const EdgeInsets.all(26)
+        ? const EdgeInsets.all(20)
         : const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
     decoration: BoxDecoration(
       border: Border(
@@ -120,6 +121,7 @@ Widget _buildGridItem(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

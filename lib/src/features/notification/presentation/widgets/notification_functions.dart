@@ -3,12 +3,14 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/image_builder.dart';
+import 'package:cosphere/src/features/notification/presentation/viewmodel/notification_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NotificationFunctions extends StatelessWidget {
-  const NotificationFunctions({super.key});
+  final String uid;
+  const NotificationFunctions({super.key, required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -51,31 +53,36 @@ class NotificationFunctions extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: AppColors.garden,
-                  borderRadius: BorderRadius.circular(8),
-                  border:
-                      Border.all(color: AppColors.pumpkin.withOpacity(0.2))),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 6.5),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    AppIcons.trash,
-                    height: context.isTablet ? 26 : null,
-                  ),
-                  const SizedBox(width: 2),
-                  Text(
-                    AppStrings.clear,
-                    style: _textTheme.bodySmall!.copyWith(
-                      fontWeight: FontThickness.medium,
-                      letterSpacing: 0,
-                      color: AppColors.pumpkin,
-                      fontSize: context.isTablet ? 16 : 12,
+            GestureDetector(
+              onTap: () => context
+                  .read<NotificationBloc>()
+                  .add(DeleteNotificationsByUserId(uid: uid)),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: AppColors.garden,
+                    borderRadius: BorderRadius.circular(8),
+                    border:
+                        Border.all(color: AppColors.pumpkin.withOpacity(0.2))),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6.5),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      AppIcons.trash,
+                      height: context.isTablet ? 26 : null,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 2),
+                    Text(
+                      AppStrings.clear,
+                      style: _textTheme.bodySmall!.copyWith(
+                        fontWeight: FontThickness.medium,
+                        letterSpacing: 0,
+                        color: AppColors.pumpkin,
+                        fontSize: context.isTablet ? 16 : 12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

@@ -84,19 +84,6 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //     Navigator.of(context).pushNamed(AppRoutes.editProfile,
-        //         arguments: context.read<ProfileBloc>().user);
-        //   },
-        //   splashColor: AppColors.genie,
-        //   shape: const CircleBorder(),
-        //   elevation: 2,
-        //   backgroundColor: AppColors.plaster,
-        //   child: SvgPicture.asset(
-        //     AppIcons.editUser,
-        //   ),
-        // ),
       ),
     );
   }

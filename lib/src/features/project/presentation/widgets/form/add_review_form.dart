@@ -66,10 +66,10 @@ class _AddReviewFormState extends State<AddReviewForm> {
       submittedReviews
           .add(_reviews[i].copyWith(review: review, rating: rating));
     }
-    AddReviewReqDto reqDto = AddReviewReqDto(
-        projectId: widget.projectId,
-        reviews: submittedReviews.map((e) => e.fromDomain()).toList());
-    print(reqDto.reviews.map((e) => e.review));
+    // AddReviewReqDto reqDto = AddReviewReqDto(
+    //     projectId: widget.projectId,
+    //     reviews: submittedReviews.map((e) => e.fromDomain()).toList());
+    // print(reqDto.reviews.map((e) => e.review));
     context.read<ProjectBloc>().add(AddReview(
             dto: AddReviewReqDto(
           projectId: widget.projectId,
@@ -137,7 +137,6 @@ class _AddReviewFormState extends State<AddReviewForm> {
                   onChanged: (value) {
                     setState(() {
                       completionType = value;
-                      print(completionType);
                     });
                   },
                 ),
@@ -167,7 +166,6 @@ class _AddReviewFormState extends State<AddReviewForm> {
                           onRatingChanged: (value) {
                             setState(() {
                               _ratings[index] = value;
-                              print(_ratings[index]);
                             });
                           },
                         ),

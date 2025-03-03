@@ -46,6 +46,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   }
 
   void _setupSocketListeners() {
+    _socketService.socket?.off("receiveNotification");
     final socket = _socketService.socket;
     if (socket == null) return;
 
@@ -75,6 +76,10 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   @override
   void dispose() {
     _socketService.socket?.off("receiveMessage");
+    _socketService.socket?.on(
+        "receiveNotification",
+        (data) =>
+            {buildToast(toastType: ToastType.success, msg: "${data['data']}")});
     _scrollController.dispose();
     _textController.dispose();
     super.dispose();

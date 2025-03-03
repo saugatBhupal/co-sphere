@@ -18,6 +18,7 @@ import 'package:cosphere/src/features/project/domain/usecases/create_project_use
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_active_task_by_user_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_applied_projects_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_explore_project_usecase.dart';
@@ -50,6 +51,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   final CreateProjectUsecase createProjectUsecase;
   final GetExploreProjectUsecase getExploreProjectUsecase;
   final ApplyToProjectUsecase applyToProjectUsecase;
+  final GetActiveTaskByUserIdUsecase getActiveTaskByUserIdUsecase;
   ProjectBloc({
     required this.getHiringProjectsUserUsecase,
     required this.getActiveProjectUserUsecase,
@@ -68,6 +70,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     required this.createProjectUsecase,
     required this.getExploreProjectUsecase,
     required this.applyToProjectUsecase,
+    required this.getActiveTaskByUserIdUsecase,
   }) : super(ProjectInitial()) {
     on<ProjectEvent>((event, emit) async {
       if (event is GetHiringProject) {
@@ -120,6 +123,9 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
       if (event is ApplyToProject) {
         await _applyToProject(event, emit);
+      }
+      if (event is GetActiveTask) {
+        await _getActiveTask(event, emit);
       }
     });
   }
@@ -289,7 +295,6 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       result.fold(
         (failure) => emit(CreateTaskFailed(message: failure.message)),
         (success) {
-          print(success);
           _activeTasks.add(success);
           emit(CreateTaskSuccess(task: success));
         },
@@ -332,7 +337,6 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       result.fold(
           (failure) => emit(GetAppliedProjectFailed(message: failure.message)),
           (success) {
-        print(success.length);
         _appliedProjects = success
             .where((project) => (project.status == Status.pending ||
                 project.status == Status.rejected))
@@ -343,7 +347,6 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         _completedProjects = success
             .where((project) => project.status == Status.completed)
             .toList();
-        print("Complete Project $success");
         emit(GetAppliedProjectSuccess(projects: _appliedProjects));
       });
     } catch (e) {
@@ -443,6 +446,25 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       );
     } catch (e) {
       emit(ApplyToProjectFailed(message: "Error: ${e.toString()}"));
+    }
+  }
+
+  List<Project> _assignedProjects = [];
+  List<Project> get assignedProjects => _assignedProjects;
+  Future<void> _getActiveTask(
+      GetActiveTask event, Emitter<ProjectState> emit) async {
+    emit(const GetActiveTaskLoading());
+    try {
+      final result = await getActiveTaskByUserIdUsecase(event.uid);
+      result.fold(
+        (failure) => emit(GetActiveTaskFailed(message: failure.message)),
+        (success) {
+          _assignedProjects = success;
+          emit(GetActiveTaskSuccess(projects: success));
+        },
+      );
+    } catch (e) {
+      emit(GetActiveTaskFailed(message: "Error: ${e.toString()}"));
     }
   }
 }

@@ -54,7 +54,8 @@ class HiringDashboardScreen extends StatelessWidget {
                 buildToast(toastType: ToastType.success, msg: state.message);
                 Navigator.of(context).popAndPushNamed(AppRoutes.active,
                     arguments: ActiveScreensArgs(
-                        projectId: screenArgs.projectId, userId: ""));
+                        projectId: screenArgs.projectId,
+                        userId: screenArgs.userId));
               }
             },
             child: BlocBuilder<ProjectBloc, ProjectState>(

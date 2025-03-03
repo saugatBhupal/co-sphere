@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 
 class CardsHeaderInfo extends StatelessWidget {
   final String title;
+  final String subtitle;
   final String postedOn;
   final String? postedBy;
   const CardsHeaderInfo({
     super.key,
     this.postedOn = "10-11-2025",
     this.title = "Assignment Helper Needed",
+    this.subtitle = "Posted on",
     this.postedBy,
   });
 
@@ -25,36 +27,33 @@ class CardsHeaderInfo extends StatelessWidget {
         ),
       ),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           PlaceholderImage(title: title[0], imageUrl: postedBy),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const SizedBox(width: 8), // Add spacing
+          Expanded(
+            // Ensures text does not overflow
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: context.width / 1.8,
-                  child: Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: _textTheme.bodyLarge!.copyWith(
-                        letterSpacing: 0.4,
-                        height: 1,
-                        fontSize: context.isTablet ? 18 : 14),
+                Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: _textTheme.bodyLarge!.copyWith(
+                    letterSpacing: 0.4,
+                    height: 1,
+                    fontSize: context.isTablet ? 16 : 14,
                   ),
                 ),
                 Text(
-                  "Posted on $postedOn",
+                  "$subtitle $postedOn",
                   style: _textTheme.labelSmall!
                       .copyWith(fontSize: context.isTablet ? 12 : 8),
                 ),
               ],
             ),
           ),
-          const Spacer(),
           const Icon(Icons.more_horiz),
         ],
       ),

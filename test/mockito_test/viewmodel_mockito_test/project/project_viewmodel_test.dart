@@ -10,6 +10,7 @@ import 'package:cosphere/src/features/project/data/dto/complete_project/complete
 import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/create_task/create_task_req_dto.dart';
 import 'package:cosphere/src/features/project/data/dto/hire_user/hire_user_req_dto.dart';
+import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/entities/tasks.dart';
 import 'package:cosphere/src/features/project/domain/usecases/add_review_usecase.dart';
@@ -20,6 +21,7 @@ import 'package:cosphere/src/features/project/domain/usecases/create_project_use
 import 'package:cosphere/src/features/project/domain/usecases/create_task_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart';
+import 'package:cosphere/src/features/project/domain/usecases/get_active_task_by_user_id_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_applied_projects_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart';
 import 'package:cosphere/src/features/project/domain/usecases/get_explore_project_usecase.dart';
@@ -56,6 +58,7 @@ import 'project_viewmodel_test.mocks.dart';
   MockSpec<GetReviewByIdUsecase>(),
   MockSpec<HireUserUsecase>(),
   MockSpec<RejectUserUsecase>(),
+  MockSpec<GetActiveTaskByUserIdUsecase>(),
 ])
 void main() {
   group('ProjectViewmodels', () {
@@ -76,6 +79,7 @@ void main() {
     late GetReviewByIdUsecase mockGetReviewByIdUsecase;
     late HireUserUsecase mockHireUserUsecase;
     late RejectUserUsecase mockRejectUserUsecase;
+    late GetActiveTaskByUserIdUsecase mockGetActiveTaskByUserIdUsecase;
 
     setUp(() {
       mockAddReviewUsecase = MockAddReviewUsecase();
@@ -95,6 +99,7 @@ void main() {
       mockGetReviewByIdUsecase = MockGetReviewByIdUsecase();
       mockHireUserUsecase = MockHireUserUsecase();
       mockRejectUserUsecase = MockRejectUserUsecase();
+      mockGetActiveTaskByUserIdUsecase = MockGetActiveTaskByUserIdUsecase();
     });
 
     blocTest<ProjectBloc, ProjectState>(
@@ -117,6 +122,7 @@ void main() {
         createProjectUsecase: mockCreateProjectUsecase,
         getExploreProjectUsecase: mockGetExploreProjectUsecase,
         applyToProjectUsecase: mockApplyToProjectUsecase,
+        getActiveTaskByUserIdUsecase: mockGetActiveTaskByUserIdUsecase,
       ),
       act: (bloc) async {
         // Get Hiring Projects
@@ -229,7 +235,9 @@ void main() {
           postedBy: const Uuid().v4(),
           skills: ['skill1', 'skill2'],
           site: 'site',
+          description: 'description',
           salary: Salary.initial(),
+          duration: DurationTime.initial(),
         );
         when(mockCreateProjectUsecase.call(createDto))
             .thenAnswer((_) async => Right(projectLst.first));

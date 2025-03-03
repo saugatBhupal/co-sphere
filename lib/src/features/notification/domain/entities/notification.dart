@@ -3,14 +3,14 @@ import 'package:uuid/uuid.dart';
 
 import 'package:cosphere/src/core/constants/app_enums.dart';
 
-class Notification extends Equatable {
+class NotificationEntity extends Equatable {
   final String id;
   final NotificationType notificationType;
   final String data;
   final String chatData;
   final DateTime date;
 
-  const Notification({
+  const NotificationEntity({
     required this.id,
     required this.notificationType,
     required this.data,
@@ -18,8 +18,8 @@ class Notification extends Equatable {
     required this.date,
   });
 
-  factory Notification.initial() {
-    return Notification(
+  factory NotificationEntity.initial() {
+    return NotificationEntity(
       id: const Uuid().v4(),
       notificationType: NotificationType.chat,
       data: '',
@@ -27,14 +27,14 @@ class Notification extends Equatable {
       date: DateTime.now(),
     );
   }
-  Notification copyWith({
+  NotificationEntity copyWith({
     String? id,
     NotificationType? notificationType,
     String? data,
     String? chatData,
     DateTime? date,
   }) {
-    return Notification(
+    return NotificationEntity(
       id: id ?? this.id,
       notificationType: notificationType ?? this.notificationType,
       data: data ?? this.data,

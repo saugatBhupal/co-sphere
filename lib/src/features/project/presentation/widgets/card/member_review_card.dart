@@ -17,7 +17,6 @@ class MemberReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-    print(reviewId);
     return BlocProvider(
       create: (context) =>
           sl<ProjectBloc>()..add(GetReviewById(reviewId: reviewId)),

@@ -4,18 +4,15 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
-import 'package:cosphere/src/core/utils/form_validator.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
 import 'package:cosphere/src/core/widgets/input_fields/custom_dropdown.dart';
-import 'package:cosphere/src/core/widgets/input_fields/dob_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/textspan_field.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/button/add_section_button.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/create_project_skills.dart';
-import 'package:cosphere/src/features/jobs/presentation/widgets/section_form.dart';
 import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
+import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/presentation/viewmodels/project_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,21 +33,20 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   late final TextEditingController _maxController;
   late final TextEditingController _fromController;
   late final TextEditingController _toController;
-  late final TextEditingController _siteController;
-  List<Widget> sectionWidgets = [];
+  late final TextEditingController _descController;
   List<String> skills = [];
 
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: "4th try");
-    _companyController = TextEditingController(text: "Code Kumbh");
-    _addressController = TextEditingController(text: "Darjeeling, New City");
-    _minController = TextEditingController(text: "30000");
-    _maxController = TextEditingController(text: "35000");
-    _fromController = TextEditingController(text: "03-09-2023");
-    _toController = TextEditingController(text: "09-09-2023");
-    _siteController = TextEditingController(text: "Remote");
+    _titleController = TextEditingController();
+    _companyController = TextEditingController();
+    _addressController = TextEditingController();
+    _minController = TextEditingController();
+    _maxController = TextEditingController();
+    _fromController = TextEditingController();
+    _toController = TextEditingController();
+    _descController = TextEditingController();
   }
 
   @override
@@ -61,7 +57,7 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
     _maxController.dispose();
     _fromController.dispose();
     _toController.dispose();
-    _siteController.dispose();
+    _descController.dispose();
     super.dispose();
   }
 
@@ -75,8 +71,10 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     List<String> posts = ["Intern", "Associate", "Junior", "Mid", "Senior"];
+    List<String> site = ["On-Site", "Hybrid", "Remote"];
 
     String? selectedValue = posts[0];
+    String? selectedSite = site[0];
     const gap = SizedBox(height: 18);
     return BlocListener<ProjectBloc, ProjectState>(
       listener: (context, state) {
@@ -154,25 +152,19 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                   children: [
                     Flexible(
                       flex: 1,
-                      child: DobField(
-                        dobController: _fromController,
-                        labelText: AppStrings.from,
-                        hintText: "dd-mm-yyyy",
-                        validator: (value) {
-                          return FormValidator.validateDOB(value);
-                        },
+                      child: InputField(
+                        textController: _fromController,
+                        label: AppStrings.min,
+                        hintText: "2",
                       ),
                     ),
                     const SizedBox(width: 20),
                     Flexible(
                       flex: 1,
-                      child: DobField(
-                        dobController: _toController,
-                        labelText: AppStrings.to,
-                        hintText: "dd-mm-yyyy",
-                        validator: (value) {
-                          return FormValidator.validateDOB(value);
-                        },
+                      child: InputField(
+                        textController: _toController,
+                        label: AppStrings.min,
+                        hintText: "5",
                       ),
                     ),
                   ],
@@ -199,9 +191,12 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                     const SizedBox(width: 20),
                     Flexible(
                       flex: 1,
-                      child: InputField(
-                        textController: _siteController,
+                      child: CustomDropdown(
                         label: AppStrings.site,
+                        items: site,
+                        onChanged: (value) {
+                          selectedSite = value;
+                        },
                       ),
                     ),
                   ],
@@ -218,41 +213,32 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                   onSkillAdded: _addSkill,
                 ),
                 gap,
-                Text(
-                  AppStrings.description,
-                  style: _textTheme.bodyLarge!
-                      .copyWith(fontWeight: FontThickness.medium),
-                ),
-                if (sectionWidgets.isNotEmpty)
-                  Column(
-                    children: sectionWidgets,
-                  ),
-                gap,
-                AddSectionButton(
-                  title: AppStrings.newSec,
-                  onPressed: () {
-                    setState(() {
-                      // sectionWidgets.add(SectionForm());
-                    });
-                  },
+                TextspanField(
+                  textController: _descController,
+                  label: AppStrings.description,
+                  minLines: 8,
+                  charCount: 500,
                 ),
                 gap,
                 DarkRoundedButton(
                   title: AppStrings.create,
                   onPressed: () {
                     CreateProjectReqDto dto = CreateProjectReqDto(
-                      projectName: _titleController.text,
-                      companyName: _companyController.text,
-                      position: selectedValue!,
-                      address: _addressController.text,
-                      postedBy: widget.user.uid,
-                      skills: skills,
-                      site: _siteController.text,
-                      salary: Salary(
-                          min: int.parse(_minController.text),
-                          max: int.parse(_maxController.text)),
-                    );
-                    print(dto.toJson());
+                        projectName: _titleController.text,
+                        companyName: _companyController.text,
+                        position: selectedValue!,
+                        address: _addressController.text,
+                        postedBy: widget.user.uid,
+                        description: _descController.text,
+                        skills: skills,
+                        site: selectedSite!,
+                        salary: Salary(
+                            min: int.parse(_minController.text),
+                            max: int.parse(_maxController.text)),
+                        duration: DurationTime(
+                          from: int.parse(_fromController.text),
+                          to: int.parse(_toController.text),
+                        ));
                     context.read<ProjectBloc>().add(CreateProject(dto: dto));
                   },
                 ),

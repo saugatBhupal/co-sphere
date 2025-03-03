@@ -29,47 +29,48 @@ class ExperienceCard extends StatelessWidget {
         PlaceholderImage(
             title: organization[0], height: context.isTablet ? 52 : 46),
         const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              position,
-              style: _textTheme.bodyLarge!.copyWith(
-                fontWeight: FontThickness.semiBold,
-                color: AppColors.midnight,
-                height: 1,
-                fontSize: context.isTablet ? 18 : 14,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                position,
+                style: _textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontThickness.semiBold,
+                  color: AppColors.midnight,
+                  height: 1,
+                  fontSize: context.isTablet ? 18 : 14,
+                ),
               ),
-            ),
-            Text(
-              organization,
-              style: _textTheme.bodyLarge!.copyWith(
-                fontWeight: FontThickness.light,
-                color: AppColors.grey,
-                fontSize: context.isTablet ? 18 : 14,
+              Text(
+                organization,
+                style: _textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontThickness.light,
+                  color: AppColors.grey,
+                  fontSize: context.isTablet ? 18 : 14,
+                ),
               ),
-            ),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                        text:
+                            "${formatMonth(from)} - ${to == DateTime(1970, 1, 1) ? "Present" : formatMonth(to)}",
+                        style: _textTheme.labelLarge!
+                            .copyWith(fontSize: context.isTablet ? 14 : 10)),
+                    TextSpan(
                       text:
-                          "${formatMonth(from)} - ${to == DateTime(1970, 1, 1) ? "Present" : formatMonth(to)}",
-                      style: _textTheme.labelLarge!
-                          .copyWith(fontSize: context.isTablet ? 14 : 10)),
-                  TextSpan(
-                    text:
-                        " (${calculateDuration(from, to == DateTime(1970, 1, 1) ? DateTime.now() : to)})",
-                    style: _textTheme.labelLarge!.copyWith(
-                        color: AppColors.midnight,
-                        fontSize: context.isTablet ? 14 : 10),
-                  ),
-                ],
+                          " (${calculateDuration(from, to == DateTime(1970, 1, 1) ? DateTime.now() : to)})",
+                      style: _textTheme.labelLarge!.copyWith(
+                          color: AppColors.midnight,
+                          fontSize: context.isTablet ? 14 : 10),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        const Spacer(),
         StatusButton(label: status)
       ],
     );

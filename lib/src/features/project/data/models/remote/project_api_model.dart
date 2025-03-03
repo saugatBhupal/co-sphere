@@ -20,6 +20,7 @@ class ProjectApiModel {
   final List<SkillApiModel> skills;
   final String companyName;
   final String site;
+  final String description;
   final Status status;
   final Salary salary;
   final DurationTime duration;
@@ -44,6 +45,7 @@ class ProjectApiModel {
     required this.skills,
     required this.companyName,
     required this.site,
+    required this.description,
     required this.status,
     required this.salary,
     required this.duration,
@@ -77,7 +79,8 @@ class ProjectApiModel {
           [],
       companyName: json['companyName'] as String? ?? '',
       site: json['site'] as String? ?? '',
-      status: StatusExtension.fromDatabaseValue(json["status"]),
+      description: json['description'] as String? ?? '',
+      status: StatusExtension.fromDatabaseValue(json["status"] ?? "Active"),
       salary: json['salary'] != null && json['salary'] is Map<String, dynamic>
           ? Salary.fromJson(json['salary'] as Map<String, dynamic>)
           : Salary.initial(),
@@ -108,11 +111,19 @@ class ProjectApiModel {
               .map((app) => ApplicantsApiModel.fromJson(app))
               .toList() ??
           [],
-      tasks: (json['tasks'] as List?)
-              ?.map((task) =>
-                  TasksApiModel.fromJson(task as Map<String, dynamic>))
-              .toList() ??
-          [],
+      // tasks: (json['tasks'] as List?)
+      //         ?.map((task) =>
+      //             TasksApiModel.fromJson(task as Map<String, dynamic>))
+      //         .toList() ??
+      //     [],
+      tasks: json['tasks'] == null
+          ? []
+          : (json['tasks'] is List)
+              ? (json['tasks'] as List)
+                  .map((task) =>
+                      TasksApiModel.fromJson(task as Map<String, dynamic>))
+                  .toList()
+              : [TasksApiModel.fromJson(json['tasks'] as Map<String, dynamic>)],
       members: json['members'] != null && json['members'] is List
           ? (json['members'] as List)
               .map((member) => member is Map<String, dynamic>

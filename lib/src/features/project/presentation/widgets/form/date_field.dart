@@ -21,7 +21,6 @@ class DateField extends StatelessWidget {
   });
 
   Future<void> _selectDate(BuildContext context) async {
-    print("dfss");
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),

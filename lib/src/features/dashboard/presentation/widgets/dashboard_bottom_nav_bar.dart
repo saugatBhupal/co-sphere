@@ -26,7 +26,6 @@ class DashboardBottomNavBar extends StatelessWidget {
           selectedItemColor: AppColors.white,
           unselectedItemColor: AppColors.black,
           onTap: (index) {
-            print(index);
             context.read<DashboardBloc>().add(ChangeScreenModule(index));
           },
           items: [

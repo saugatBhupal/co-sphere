@@ -31,9 +31,7 @@ class DashboardBody extends StatelessWidget {
               DashboardFunctions(user: user),
               const DashboardMetrics(),
               CreatedByMeGrid(user: user),
-              const DashboardTitle(
-                  title: AppStrings.assigned, option: AppStrings.view),
-              const AssignedToMeGrid(),
+              AssignedToMeGrid(user: user),
               AppliedJobList(user: user),
               AppliedProjectList(user: user),
             ],

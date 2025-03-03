@@ -40,6 +40,10 @@ String timeAgo(DateTime inputTime) {
   }
 }
 
+int getDaysDifference(DateTime start, DateTime end) {
+  return end.difference(start).inDays;
+}
+
 String extractCreatedDate(String createdAt) {
   DateTime dateTime = DateTime.parse(createdAt);
   String formattedDate =

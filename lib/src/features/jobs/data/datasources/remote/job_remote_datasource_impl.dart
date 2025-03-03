@@ -54,6 +54,7 @@ class JobRemoteDatasourceImpl implements JobRemoteDatasource {
     try {
       var res = await dio.post(ApiEndpoints.applyToJob, data: dto.toJson());
       if (res.statusCode == 200) {
+        
         return JobApiModel.fromJson(res.data['job']);
       } else {
         throw Failure(

@@ -32,27 +32,10 @@ class ExploreProjectDetails extends StatelessWidget {
                 salary: project.salary,
               ),
               ProjectExploreBasicDetails(project: project),
-              const JobDetailsSection(
+              JobDetailsSection(
                 section: JobSection(
-                  title: "What I Need?",
-                  description:
-                      "We’re looking for a skilled and creative freelance developer to bring our app idea to life! If you thrive on challenges and have experience building user-friendly, robust mobile applications, we’d love to hear from you.",
-                ),
-              ),
-              const JobDetailsSection(
-                section: JobSection(
-                  title: "Platform",
-                  lstDescription: ["iOS", "Android"],
-                ),
-              ),
-              const JobDetailsSection(
-                section: JobSection(
-                  title: "Features",
-                  lstDescription: [
-                    "Insect Identification: Upload or capture an image to identify pests (e.g., fruit flies) using image classification APIs.",
-                    "Detailed Pest Information: Provide causes, harmful effects, and recommended fertilizers in English and Nepali.",
-                  ],
-                ),
+                    title: AppStrings.description,
+                    description: project.description),
               ),
             ],
           ),

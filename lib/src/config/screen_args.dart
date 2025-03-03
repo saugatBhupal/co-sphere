@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/applicants.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 
 class ChatScreensArgs {
   final String conversationID;
@@ -124,6 +125,23 @@ class ProjectScreenArgs {
     return ProjectScreenArgs(
       projectId: projectId ?? this.projectId,
       userId: userId ?? this.userId,
+    );
+  }
+}
+
+class AssignedTaskScreenArgs {
+  final List<Project> projects;
+  final User user;
+
+  AssignedTaskScreenArgs({required this.projects, required this.user});
+
+  AssignedTaskScreenArgs copyWith({
+    List<Project>? projects,
+    User? user,
+  }) {
+    return AssignedTaskScreenArgs(
+      projects: projects ?? this.projects,
+      user: user ?? this.user,
     );
   }
 }

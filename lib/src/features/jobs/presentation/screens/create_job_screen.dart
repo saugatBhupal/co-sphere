@@ -12,7 +12,6 @@ import 'package:cosphere/src/core/widgets/input_fields/input_field.dart';
 import 'package:cosphere/src/core/widgets/input_fields/textspan_field.dart';
 import 'package:cosphere/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:cosphere/src/features/jobs/data/dto/create_job/create_job_req_dto.dart';
-import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/jobs/presentation/viewmodel/job_bloc.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/button/add_section_button.dart';
@@ -37,21 +36,19 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
   late final TextEditingController _maxController;
   late final TextEditingController _fromController;
   late final TextEditingController _toController;
-  late final TextEditingController _siteController;
   List<Widget> sectionWidgets = [];
   List<String> skills = [];
 
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: "1st Job try");
-    _companyController = TextEditingController(text: "Code Kumbh");
-    _addressController = TextEditingController(text: "Manhattan, New City");
-    _minController = TextEditingController(text: "80000");
-    _maxController = TextEditingController(text: "96000");
-    _fromController = TextEditingController(text: "03-09-2024");
-    _toController = TextEditingController(text: "09-09-2025");
-    _siteController = TextEditingController(text: "Remote");
+    _titleController = TextEditingController();
+    _companyController = TextEditingController();
+    _addressController = TextEditingController();
+    _minController = TextEditingController();
+    _maxController = TextEditingController();
+    _fromController = TextEditingController();
+    _toController = TextEditingController();
   }
 
   @override
@@ -62,7 +59,6 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
     _maxController.dispose();
     _fromController.dispose();
     _toController.dispose();
-    _siteController.dispose();
     super.dispose();
   }
 
@@ -76,18 +72,9 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
     List<String> posts = ["Intern", "Associate", "Junior", "Mid", "Senior"];
-    List<JobSection> jobSection = [];
+    List<String> site = ["On-Site", "Hybrid", "Remote"];
     String? selectedValue = posts[0];
-
-    void _addSection(JobSection section) {
-      setState(() {
-        jobSection.add(section);
-      });
-
-      for (var job in jobSection) {
-        print(job.toString());
-      }
-    }
+    String? selectedSite = site[0];
 
     const gap = SizedBox(height: 18);
     return BlocListener<JobBloc, JobState>(
@@ -165,25 +152,19 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                   children: [
                     Flexible(
                       flex: 1,
-                      child: DobField(
-                        dobController: _fromController,
-                        labelText: AppStrings.from,
-                        hintText: "dd-mm-yyyy",
-                        validator: (value) {
-                          return FormValidator.validateDOB(value);
-                        },
+                      child: InputField(
+                        textController: _fromController,
+                        label: AppStrings.min,
+                        hintText: "2",
                       ),
                     ),
                     const SizedBox(width: 20),
                     Flexible(
                       flex: 1,
-                      child: DobField(
-                        dobController: _toController,
-                        labelText: AppStrings.to,
-                        hintText: "dd-mm-yyyy",
-                        validator: (value) {
-                          return FormValidator.validateDOB(value);
-                        },
+                      child: InputField(
+                        textController: _toController,
+                        label: AppStrings.min,
+                        hintText: "5",
                       ),
                     ),
                   ],
@@ -210,9 +191,12 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                     const SizedBox(width: 20),
                     Flexible(
                       flex: 1,
-                      child: InputField(
-                        textController: _siteController,
+                      child: CustomDropdown(
                         label: AppStrings.site,
+                        items: site,
+                        onChanged: (value) {
+                          selectedSite = value;
+                        },
                       ),
                     ),
                   ],
@@ -243,34 +227,27 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                   title: AppStrings.newSec,
                   onPressed: () {
                     setState(() {
-                      sectionWidgets.add(SectionForm(onSectionAdded: (section) {
-                        _addSection(section);
-                      }));
+                      sectionWidgets.add(SectionForm());
                     });
                   },
                 ),
                 gap,
                 DarkRoundedButton(
                   title: AppStrings.create,
-                  // onPressed: () {
-                  //   CreateJobReqDto dto = CreateJobReqDto(
-                  //     jobName: _titleController.text,
-                  //     companyName: _companyController.text,
-                  //     position: selectedValue!,
-                  //     address: _addressController.text,
-                  //     postedBy: widget.user.uid,
-                  //     skills: skills,
-                  //     site: _siteController.text,
-                  //     salary: Salary(
-                  //         min: int.parse(_minController.text),
-                  //         max: int.parse(_maxController.text)),
-                  //   );
-                  //   context.read<JobBloc>().add(CreateJob(dto: dto));
-                  // },
                   onPressed: () {
-                    for (var job in jobSection) {
-                      print("Final${jobSection.toString()}");
-                    }
+                    CreateJobReqDto dto = CreateJobReqDto(
+                      jobName: _titleController.text,
+                      companyName: _companyController.text,
+                      position: selectedValue!,
+                      address: _addressController.text,
+                      postedBy: widget.user.uid,
+                      skills: skills,
+                      site: selectedSite!,
+                      salary: Salary(
+                          min: int.parse(_minController.text),
+                          max: int.parse(_maxController.text)),
+                    );
+                    context.read<JobBloc>().add(CreateJob(dto: dto));
                   },
                 ),
               ],

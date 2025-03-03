@@ -70,46 +70,16 @@ class ProjectDetailsScreen extends StatelessWidget {
                             salary: project.salary,
                           ),
                           ProjectExploreBasicDetails(project: project),
-                          const JobDetailsSection(
+                          JobDetailsSection(
                             section: JobSection(
-                              title: "What I Need?",
-                              description:
-                                  "We’re looking for a skilled and creative freelance developer to bring our app idea to life! If you thrive on challenges and have experience building user-friendly, robust mobile applications, we’d love to hear from you.",
+                              title: AppStrings.description,
+                              description: project.description,
                             ),
                           ),
                           const JobDetailsSection(
                             section: JobSection(
                               title: "Platform",
                               lstDescription: ["iOS", "Android"],
-                            ),
-                          ),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "Features",
-                              lstDescription: [
-                                "Insect Identification: Upload or capture an image to identify pests (e.g., fruit flies) using image classification APIs.",
-                                "Detailed Pest Information: Provide causes, harmful effects, and recommended fertilizers in English and Nepali.",
-                              ],
-                            ),
-                          ),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "Deliverables",
-                              lstDescription: [
-                                "Fully functional mobile app.",
-                                "User-friendly UI/UX design.",
-                                "Backend integration with cloud services.",
-                              ],
-                            ),
-                          ),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "Requirements",
-                              lstDescription: [
-                                "Experience with Flutter or React Native.",
-                                "Understanding of image processing APIs.",
-                                "Ability to implement multi-language support.",
-                              ],
                             ),
                           ),
                         ],
@@ -125,7 +95,7 @@ class ProjectDetailsScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 12),
                         color: AppColors.white,
-                        child: DarkRoundedButton(
+                      child: DarkRoundedButton(
                           title: hasApplied
                               ? AppStrings.applied
                               : AppStrings.apply,

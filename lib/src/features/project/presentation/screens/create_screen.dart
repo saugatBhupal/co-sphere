@@ -44,15 +44,15 @@ class CreateScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 6.8),
                   splashFactory: NoSplash.splashFactory,
                   tabs: const [
-                    Tab(text: AppStrings.job),
                     Tab(text: AppStrings.project),
+                    Tab(text: AppStrings.job),
                   ],
                 ),
                 Expanded(
                   child: TabBarView(
                     children: [
-                      CreateJobScreen(user: user),
                       CreateProjectScreen(user: user),
+                      CreateJobScreen(user: user),
                     ],
                   ),
                 ),

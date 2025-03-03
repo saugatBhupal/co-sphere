@@ -9,7 +9,6 @@ import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/tab_view/completed_task_view.dart';
 import 'package:cosphere/src/features/project/presentation/widgets/tab_view/members_view.dart';
-import 'package:cosphere/src/features/project/presentation/widgets/tab_view/tasks_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CompletedDashboardTabbar extends StatelessWidget {
@@ -21,7 +20,6 @@ class CompletedDashboardTabbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
-    print(project.reviews.map((re) => re.id));
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2.0),

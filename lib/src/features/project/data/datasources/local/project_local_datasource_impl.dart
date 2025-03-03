@@ -81,4 +81,22 @@ class ProjectLocalDatasourceImpl implements ProjectLocalDatasource {
         .toList();
     return storedProjects;
   }
+
+  @override
+  void addAssignedTasks(List<ProjectApiModel> projects) async {
+    var box = await Hive.openBox<ProjectHiveModel>(AppBoxesName.assignedTasks);
+    await box.clear();
+    List<ProjectHiveModel> projectHiveModels =
+        projects.map((e) => e.fromApi()).toList();
+    for (var project in projectHiveModels) {
+      await box.add(project);
+    }
+  }
+
+  @override
+  Future<List<ProjectHiveModel>> getAssignedTasks() async {
+    var box = await Hive.openBox<ProjectHiveModel>(AppBoxesName.assignedTasks);
+    List<ProjectHiveModel> storedProjects = box.values.toList();
+    return storedProjects;
+  }
 }

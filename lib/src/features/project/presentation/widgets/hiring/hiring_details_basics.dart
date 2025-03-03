@@ -25,51 +25,53 @@ class HiringDetailsBasics extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(AppRoutes.projectDetails,
           arguments: ProjectScreenArgs(projectId: project.id, userId: uid)),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        margin: const EdgeInsets.symmetric(vertical: 4),
-        height: context.height / 5,
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          border: Border.all(width: 0.5, color: AppColors.plaster),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                UserLocationDetails(user: project.postedBy),
-                if (project.salary != Salary.initial()) ...[
-                  const SizedBox(width: 6),
-                  BudgetContainer(
-                    salary: project.salary,
-                  ),
-                ],
-                const Spacer(),
-                DurationSpan(
-                    postedOn: project.createdAt, duration: project.duration),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: ProjectSkillsList(skills: project.skills),
-            ),
-            const Expanded(
-              child: Row(
+      child: IntrinsicHeight(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            border: Border.all(width: 0.5, color: AppColors.plaster),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  FunctionButton(
-                    icon: AppIcons.edit,
-                    title: "${AppStrings.edit} ${AppStrings.details}",
-                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  ),
-                  Spacer(),
-                  FunctionButton(icon: AppIcons.share),
-                  SizedBox(width: 12),
-                  TrashButton(),
+                  UserLocationDetails(user: project.postedBy),
+                  const Spacer(),
+                  DurationSpan(
+                      postedOn: project.createdAt, duration: project.duration),
                 ],
               ),
-            )
-          ],
+              if (project.salary != Salary.initial()) ...[
+                const SizedBox(width: 6, height: 8),
+                BudgetContainer(
+                  salary: project.salary,
+                ),
+              ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: ProjectSkillsList(skills: project.skills),
+              ),
+              const Expanded(
+                child: Row(
+                  children: [
+                    FunctionButton(
+                      icon: AppIcons.edit,
+                      title: "${AppStrings.edit} ${AppStrings.details}",
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    ),
+                    Spacer(),
+                    FunctionButton(icon: AppIcons.share),
+                    SizedBox(width: 12),
+                    TrashButton(),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

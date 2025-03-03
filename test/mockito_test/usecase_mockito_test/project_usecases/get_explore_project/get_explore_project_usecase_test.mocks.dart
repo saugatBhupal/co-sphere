@@ -372,4 +372,23 @@ class MockProjectRepository extends _i1.Mock implements _i3.ProjectRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Project>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Project>>> getActiveTasksByUserId(
+          String? uid) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getActiveTasksByUserId,
+          [uid],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, List<_i6.Project>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i6.Project>>(
+          this,
+          Invocation.method(
+            #getActiveTasksByUserId,
+            [uid],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.Project>>>);
 }

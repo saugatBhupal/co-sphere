@@ -1,11 +1,19 @@
+import 'package:cosphere/src/core/functions/date_time_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/card/cards_grid_info.dart';
 import 'package:cosphere/src/features/jobs/presentation/widgets/card/cards_header_info.dart';
-import 'package:flutter/material.dart';
+import 'package:cosphere/src/features/project/domain/entities/project.dart';
 
 class AssignedCard extends StatelessWidget {
-  const AssignedCard({super.key});
+  final Project project;
+  final String uid;
+  const AssignedCard({
+    Key? key,
+    required this.project,
+    required this.uid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +26,22 @@ class AssignedCard extends StatelessWidget {
           border: Border.all(width: 1, color: AppColors.plaster),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: const Column(
+        child: Column(
           children: [
-            CardsHeaderInfo(),
-            SizedBox(height: 8),
+            CardsHeaderInfo(
+              title: project.tasks.first.taskName,
+              subtitle: AppStrings.assignedOn,
+              postedOn: extractDate(project.tasks.first.createdDate),
+            ),
+            const SizedBox(height: 8),
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: CardsGridInfo(
-                      title: "20",
+                      title:
+                          "${project.tasks.first.deadline.difference(DateTime.now()).inDays.toString()} (D)",
                       subtitle: AppStrings.deadline,
                       color: AppColors.red,
                       padding: 32,
@@ -36,13 +49,14 @@ class AssignedCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: CardsGridInfo(
-                      title: "20",
+                      title:
+                          "${project.tasks.first.createdDate.difference(DateTime.now()).inDays.toString()} (D)",
                       subtitle: AppStrings.timeSpent,
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: CardsGridInfo(
-                      title: "20",
+                      title: "2",
                       subtitle: AppStrings.completion,
                       border: false,
                     ),

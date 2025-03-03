@@ -18,6 +18,7 @@ class Project extends Equatable {
   final List<Skill> skills;
   final String companyName;
   final String site;
+  final String description;
   final Status status;
   final Salary salary;
   final int likesCount;
@@ -42,6 +43,7 @@ class Project extends Equatable {
     required this.skills,
     required this.companyName,
     required this.site,
+    required this.description,
     required this.status,
     required this.salary,
     required this.duration,
@@ -67,6 +69,7 @@ class Project extends Equatable {
       skills: const [],
       companyName: '',
       site: '',
+      description: '',
       status: Status.pending,
       salary: Salary.initial(),
       duration: DurationTime.initial(),
@@ -92,6 +95,7 @@ class Project extends Equatable {
     List<Skill>? skills,
     String? companyName,
     String? site,
+    String? description,
     Status? status,
     Salary? salary,
     DurationTime? duration,
@@ -117,6 +121,7 @@ class Project extends Equatable {
       skills: skills ?? this.skills,
       companyName: companyName ?? this.companyName,
       site: site ?? this.site,
+      description: description ?? this.description,
       status: status ?? this.status,
       salary: salary ?? this.salary,
       duration: duration ?? this.duration,

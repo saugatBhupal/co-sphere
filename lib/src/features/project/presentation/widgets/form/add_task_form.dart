@@ -60,7 +60,6 @@ class _AddTaskFormState extends State<AddTaskForm> {
     return BlocListener<ProjectBloc, ProjectState>(
       listener: (context, state) {
         if (state is CreateTaskSuccess) {
-          print(state);
           buildToast(
               toastType: ToastType.success, msg: "Task Added Successfully");
           Navigator.of(context).pop();

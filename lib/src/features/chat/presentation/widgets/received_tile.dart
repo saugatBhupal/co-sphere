@@ -1,7 +1,6 @@
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
 import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +31,6 @@ class ReceivedTile extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
-
               child: PlaceholderImage(
                 title: username![0],
                 imageUrl: profileImage,

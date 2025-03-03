@@ -2,7 +2,7 @@ import 'package:cosphere/src/features/notification/data/models/notification_api_
 import 'package:cosphere/src/features/notification/domain/entities/notification.dart';
 
 extension NotificationApiModelMappers on NotificationApiModel {
-  Notification toDomain() => Notification.initial().copyWith(
+  NotificationEntity toDomain() => NotificationEntity.initial().copyWith(
         id: id,
         notificationType: notificationType,
         data: data,
@@ -11,7 +11,7 @@ extension NotificationApiModelMappers on NotificationApiModel {
       );
 }
 
-extension NotificationMappers on Notification {
+extension NotificationMappers on NotificationEntity {
   NotificationApiModel toDomain() => NotificationApiModel(
         id: id,
         notificationType: notificationType,

@@ -149,7 +149,6 @@ class _EditImagesState extends State<EditImages> {
                                 );
                                 return;
                               }
-                              print(_media!.path);
                               context.read<ProfileBloc>().add(
                                     UpdateProfileImage(
                                       dto: UpdateProfileImgageReqDto(

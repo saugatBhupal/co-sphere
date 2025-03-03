@@ -1,6 +1,7 @@
 import 'package:cosphere/src/core/error/failure.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/salary.dart';
 import 'package:cosphere/src/features/project/data/dto/create_project/create_project_req_dto.dart';
+import 'package:cosphere/src/features/project/domain/entities/durations.dart';
 import 'package:cosphere/src/features/project/domain/entities/project.dart';
 import 'package:cosphere/src/features/project/domain/repositories/project_repository.dart';
 import 'package:cosphere/src/features/project/domain/usecases/create_project_usecase.dart';
@@ -31,7 +32,9 @@ void main() {
     postedBy: const Uuid().v4(),
     skills: ['skill1', 'skill2'],
     site: 'site',
+    description: 'description',
     salary: Salary.initial(),
+    duration: DurationTime.initial()
   );
   test('should return the project after adding the project to database',
       () async {

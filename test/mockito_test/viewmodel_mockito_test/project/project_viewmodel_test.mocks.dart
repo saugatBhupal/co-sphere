@@ -44,6 +44,8 @@ import 'package:cosphere/src/features/project/domain/usecases/finish_hiring_usec
     as _i20;
 import 'package:cosphere/src/features/project/domain/usecases/get_active_project_user_usecase.dart'
     as _i21;
+import 'package:cosphere/src/features/project/domain/usecases/get_active_task_by_user_id_usecase.dart'
+    as _i33;
 import 'package:cosphere/src/features/project/domain/usecases/get_applied_projects_usecase.dart'
     as _i22;
 import 'package:cosphere/src/features/project/domain/usecases/get_completed_project_user_usecase.dart'
@@ -879,4 +881,51 @@ class MockRejectUserUsecase extends _i1.Mock implements _i32.RejectUserUsecase {
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i30.Applicants>>);
+}
+
+/// A class which mocks [GetActiveTaskByUserIdUsecase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetActiveTaskByUserIdUsecase extends _i1.Mock
+    implements _i33.GetActiveTaskByUserIdUsecase {
+  @override
+  _i2.ProjectRepository get projectRepository => (super.noSuchMethod(
+        Invocation.getter(#projectRepository),
+        returnValue: _FakeProjectRepository_0(
+          this,
+          Invocation.getter(#projectRepository),
+        ),
+        returnValueForMissingStub: _FakeProjectRepository_0(
+          this,
+          Invocation.getter(#projectRepository),
+        ),
+      ) as _i2.ProjectRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i10.Project>>> call(
+          String? params) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [params],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i10.Project>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i10.Project>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i10.Project>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i10.Project>>(
+          this,
+          Invocation.method(
+            #call,
+            [params],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i10.Project>>>);
 }

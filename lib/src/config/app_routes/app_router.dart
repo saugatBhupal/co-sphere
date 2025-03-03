@@ -18,6 +18,8 @@ import 'package:cosphere/src/features/dashboard/presentation/screens/dashboard_s
 import 'package:cosphere/src/features/explore/presentation/screens/explore_project_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/user_job_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/create_job_screen.dart';
+import 'package:cosphere/src/features/notification/presentation/viewmodel/notification_bloc.dart';
+import 'package:cosphere/src/features/project/presentation/screens/assigned_task_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/create_project_screen.dart';
 import 'package:cosphere/src/features/project/presentation/screens/created_projects_screen.dart';
 import 'package:cosphere/src/features/jobs/presentation/screens/job_details_screen.dart';
@@ -51,6 +53,7 @@ class AppRouter {
   static final _projectBloc = sl<ProfileBloc>();
   static final _jobBloc = sl<JobBloc>();
   static final _chatBloc = sl<ChatBloc>();
+  static final _notificationBloc = sl<NotificationBloc>();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.splash:
@@ -121,6 +124,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => sl<JobBloc>(),
               ),
+              BlocProvider(
+                create: (context) => sl<NotificationBloc>(),
+              ),
             ],
             child: DashboardScreen(user: settings.arguments as User),
           ),
@@ -163,7 +169,9 @@ class AppRouter {
         );
       case AppRoutes.notifications:
         return MaterialPageRoute(
-            builder: (context) => const NotificationsScreen());
+            builder: (context) => BlocProvider.value(
+                value: _notificationBloc,
+                child: NotificationsScreen(user: settings.arguments as User)));
       case AppRoutes.userJobs:
         return MaterialPageRoute(
             builder: (context) => UserJobScreen(
@@ -180,6 +188,12 @@ class AppRouter {
                 value: _projectBloc,
                 child:
                     CreatedProjectsScreen(user: settings.arguments as User)));
+      case AppRoutes.assignedTasks:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                value: _projectBloc,
+                child: AssignedTaskScreen(
+                    screenArgs: settings.arguments as AssignedTaskScreenArgs)));
       case AppRoutes.jobDetails:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(

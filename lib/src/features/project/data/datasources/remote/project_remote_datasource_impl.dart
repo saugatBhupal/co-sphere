@@ -157,7 +157,7 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
             .toList();
         return tasks[0];
       } else {
-        throw Failure( 
+        throw Failure(
           message: res.statusMessage ?? "Unknown error",
           statusCode: res.statusCode?.toString() ?? "Unknown",
         );
@@ -237,7 +237,6 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
       var res = await dio.post("${ApiEndpoints.addReviews}${dto.projectId}",
           data: dto.toJson());
       if (res.statusCode == 200) {
-        print(res.data['reviews']);
         return (res.data['reviews'] as List)
             .map((json) => ReviewsApiModel.fromJson(json))
             .toList();
@@ -317,10 +316,6 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
             .map((json) =>
                 ProjectApiModel.fromJson(json as Map<String, dynamic>))
             .toList();
-        print(projects);
-        // if (projects.isNotEmpty) {
-        //   projectLocalDatasource.addAppliedProject(projects);
-        // }
         return projects;
       } else {
         throw Failure(
@@ -346,6 +341,28 @@ class ProjectRemoteDatasourceImpl implements ProjectRemoteDatasource {
         );
       }
     } on DioException catch (e) {
+      return await handleErrorResponse(e);
+    }
+  }
+
+  @override
+  Future<List<ProjectApiModel>> getActiveTasksByUserId(String uid) async {
+    try {
+      var res = await dio.get("${ApiEndpoints.user}$uid/task");
+      if (res.statusCode == 200) {
+        final List<ProjectApiModel> projects = (res.data as List<dynamic>)
+            .map((json) =>
+                ProjectApiModel.fromJson(json as Map<String, dynamic>))
+            .toList();
+        return projects;
+      } else {
+        throw Failure(
+          message: res.statusMessage.toString(),
+          statusCode: res.statusMessage.toString(),
+        );
+      }
+    } on DioException catch (e) {
+      print("Dio Exception: ${e.response?.statusCode} ${e.response?.data}");
       return await handleErrorResponse(e);
     }
   }

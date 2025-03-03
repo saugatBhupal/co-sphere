@@ -2,6 +2,7 @@ import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
+import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
@@ -12,9 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditIntro extends StatefulWidget {
-  final String about;
-  final String overview;
-  const EditIntro({super.key, required this.about, required this.overview});
+  final User user;
+  const EditIntro({super.key, required this.user});
 
   @override
   State<EditIntro> createState() => _EditIntroState();
@@ -27,8 +27,8 @@ class _EditIntroState extends State<EditIntro> {
   @override
   void initState() {
     super.initState();
-    _aboutController = TextEditingController(text: widget.about);
-    _overviewController = TextEditingController(text: widget.overview);
+    _aboutController = TextEditingController(text: widget.user.about);
+    _overviewController = TextEditingController(text: widget.user.overview);
   }
 
   @override
@@ -67,9 +67,11 @@ class _EditIntroState extends State<EditIntro> {
               TextspanField(
                 textController: _aboutController,
                 label: AppStrings.about,
+                charCount: 500,
               ),
               _gap,
               TextspanField(
+                charCount: 500,
                 textController: _overviewController,
                 label: "${AppStrings.professional} ${AppStrings.overview}",
               ),

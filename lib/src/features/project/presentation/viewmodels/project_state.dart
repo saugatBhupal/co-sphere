@@ -215,3 +215,17 @@ class ApplyToProjectFailed extends ProjectState {
   final String message;
   const ApplyToProjectFailed({required this.message});
 }
+
+class GetActiveTaskLoading extends ProjectState {
+  const GetActiveTaskLoading();
+}
+
+class GetActiveTaskSuccess extends ProjectState {
+  final List<Project> projects;
+  const GetActiveTaskSuccess({required this.projects});
+}
+
+class GetActiveTaskFailed extends ProjectState {
+  final String message;
+  const GetActiveTaskFailed({required this.message});
+}

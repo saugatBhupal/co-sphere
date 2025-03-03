@@ -10,7 +10,6 @@ class MemberReviewsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(reviews);
     return ListView.separated(
       itemCount: reviews.length,
       itemBuilder: (context, index) => MemberReviewCard(
