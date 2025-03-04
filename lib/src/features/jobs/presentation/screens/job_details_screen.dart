@@ -3,9 +3,11 @@ import 'package:cosphere/src/config/screen_args.dart';
 import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
 import 'package:cosphere/src/core/constants/app_strings.dart';
+import 'package:cosphere/src/core/constants/media_query_values.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/widgets/appbar/common_appbar.dart';
 import 'package:cosphere/src/core/widgets/buttons/dark_rounded_button.dart';
+import 'package:cosphere/src/core/widgets/buttons/light_rounded_button.dart';
 import 'package:cosphere/src/features/jobs/data/dto/apply_job/apply_job_req_dto.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job.dart';
 import 'package:cosphere/src/features/jobs/domain/entities/job_section.dart';
@@ -47,91 +49,74 @@ class JobDetailsScreen extends StatelessWidget {
               backgroundColor: AppColors.white,
               appBar: const CommonAppbar(
                   title: "${AppStrings.job} ${AppStrings.details}"),
-              body: Stack(
+              body: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 16.0),
+                  Expanded(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.only(bottom: 80),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          JobDetailsHeader(
-                            title: job.jobName,
-                            postedOn: job.createdAt,
-                            salary: job.salary,
-                          ),
-                          JobDetailsBasics(job: job),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "What I Need?",
-                              description:
-                                  "We’re looking for a skilled and creative freelance developer to bring our app idea to life! If you thrive on challenges and have experience building user-friendly, robust mobile applications, we’d love to hear from you.",
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            JobDetailsHeader(
+                              title: job.jobName,
+                              postedOn: job.createdAt,
+                              salary: job.salary,
                             ),
-                          ),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "Platform",
-                              lstDescription: ["iOS", "Android"],
+                            JobDetailsBasics(job: job),
+                            const JobDetailsSection(
+                              section: JobSection(
+                                title: "What I Need?",
+                                description:
+                                    "We’re looking for a skilled and creative freelance developer...",
+                              ),
                             ),
-                          ),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "Features",
-                              lstDescription: [
-                                "Insect Identification: Upload or capture an image to identify pests (e.g., fruit flies) using image classification APIs.",
-                                "Detailed Pest Information: Provide causes, harmful effects, and recommended fertilizers in English and Nepali.",
-                              ],
+                            const JobDetailsSection(
+                              section: JobSection(
+                                title: "Platform",
+                                lstDescription: ["iOS", "Android"],
+                              ),
                             ),
-                          ),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "Deliverables",
-                              lstDescription: [
-                                "Fully functional mobile app.",
-                                "User-friendly UI/UX design.",
-                                "Backend integration with cloud services.",
-                              ],
+                            const JobDetailsSection(
+                              section: JobSection(
+                                title: "Features",
+                                lstDescription: [
+                                  "Insect Identification: Upload or capture an image...",
+                                  "Detailed Pest Information: Provide causes, harmful effects...",
+                                ],
+                              ),
                             ),
-                          ),
-                          const JobDetailsSection(
-                            section: JobSection(
-                              title: "Requirements",
-                              lstDescription: [
-                                "Experience with Flutter or React Native.",
-                                "Understanding of image processing APIs.",
-                                "Ability to implement multi-language support.",
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   if (job.postedBy.uid != screenArgs.userId)
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
+                    SafeArea(
                       child: Container(
+                        width: double.infinity,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 12),
                         color: AppColors.white,
-                        child: DarkRoundedButton(
-                          title: hasApplied
-                              ? AppStrings.applied
-                              : AppStrings.apply,
-                          onPressed: () {
-                            hasApplied
-                                ? print(hasApplied)
-                                : context.read<JobBloc>().add(ApplyToJob(
-                                    dto: ApplyJobReqDto(
-                                        userId: screenArgs.userId,
-                                        jobId: job.id)));
-                            ;
-                          },
-                        ),
+                        child: hasApplied
+                            ? LightRoundedButton(
+                                fontSize: context.isTablet ? 20 : 16,
+                                title:
+                                    "${AppStrings.applied}: +${job.applicants.length} ${job.applicants.length == 1 ? AppStrings.applicant : AppStrings.applicants}",
+                              )
+                            : DarkRoundedButton(
+                                title: AppStrings.apply,
+                                onPressed: () {
+                                  context.read<JobBloc>().add(ApplyToJob(
+                                        dto: ApplyJobReqDto(
+                                          userId: screenArgs.userId,
+                                          jobId: job.id,
+                                        ),
+                                      ));
+                                },
+                              ),
                       ),
                     ),
                 ],

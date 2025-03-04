@@ -3,6 +3,9 @@ class AppImages {
   static const String _imagesPath = "assets/images";
   static const String appLogo = "$_imagesPath/app-logo.png";
   static const String carousel1 = "$_imagesPath/carousel-1.png";
+  static const String carousel2 = "$_imagesPath/carousel-2.png";
+  static const String carousel3 = "$_imagesPath/carousel-3.png";
+  static const String carousel4 = "$_imagesPath/carousel-4.png";
   static const String user = "$_imagesPath/user-default.png";
   static const String profile =
       "https://static.vecteezy.com/system/resources/thumbnails/053/189/214/small/black-cat-with-intense-gaze-against-a-dark-background-free-photo.jpg";

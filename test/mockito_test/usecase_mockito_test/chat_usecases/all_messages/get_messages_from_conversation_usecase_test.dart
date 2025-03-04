@@ -24,13 +24,17 @@ void main() {
   final dto = const Uuid().v4();
   test('should return the list of conversations', () async {
     final messages = [Message.initial(), Message.initial()];
+    final messagesData = [
+      Message.initial().copyWith(id: const Uuid().v4()),
+      Message.initial()
+    ];
 
     when(mockChatRepository.getMessagesFromConversation(dto))
         .thenAnswer((_) async => Right(messages));
 
     final result = await getMessagesFromConversationUsecase(dto);
 
-    expect(result, Right(messages));
+    expect(result, Right(messagesData));
     verify(mockChatRepository.getMessagesFromConversation(dto)).called(1);
     verifyNoMoreInteractions(mockChatRepository);
   });

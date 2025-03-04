@@ -14,6 +14,7 @@ class ReviewCard extends StatelessWidget {
     Key? key,
     required this.reviewId,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
@@ -27,15 +28,13 @@ class ReviewCard extends StatelessWidget {
           }
           if (state is GetReviewByIdSuccess) {
             return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(
+                Expanded(
                   child: Text(
                     state.review.review,
                     style: _textTheme.bodySmall!.copyWith(
                       color: AppColors.grey,
-                      height: 0,
                       fontSize: context.isTablet ? 16 : 12,
                     ),
                   ),
@@ -43,8 +42,10 @@ class ReviewCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 6.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: List.generate(5, (index) {
                           Color circleColor = index < state.review.rating
                               ? AppColors.midnight
@@ -65,16 +66,15 @@ class ReviewCard extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         state.review.reviewedBy.fullname,
-                        style: _textTheme.bodySmall!.copyWith(
+                        style: _textTheme.labelLarge!.copyWith(
                           color: AppColors.grey,
                           fontWeight: FontThickness.medium,
-                          height: 0,
-                          fontSize: context.isTablet ? 16 : 12,
+                          fontSize: context.isTablet ? 14 : 10,
                         ),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             );
           }

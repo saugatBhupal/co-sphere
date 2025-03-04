@@ -16,7 +16,7 @@ class UserJobScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: [ 
             Expanded(
                 child: JobsTabbar(
                     user: screenArgs.user, appliedJobs: screenArgs.jobs))

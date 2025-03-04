@@ -41,7 +41,7 @@ class ActiveView extends StatelessWidget {
             return SizedBox(
               child: ListView.separated(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: state.projects.length,
                 itemBuilder: (context, index) =>
                     ActiveCard(project: state.projects[index], uid: uid),

@@ -28,13 +28,12 @@ class StartChatButton extends StatelessWidget {
           buildToast(toastType: ToastType.error, msg: state.message);
         }
         if (state is GetConversationSuccess) {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(AppRoutes.chatRoom, (route) => false,
-                  arguments: ChatScreensArgs(
-                    conversationID: state.conversation.id,
-                    user: user,
-                    receipient: searchUser,
-                  ));
+          Navigator.of(context).pushNamed(AppRoutes.chatRoom,
+              arguments: ChatScreensArgs(
+                conversationID: state.conversation.id,
+                user: user,
+                receipient: searchUser,
+              ));
         }
       },
       child: GestureDetector(

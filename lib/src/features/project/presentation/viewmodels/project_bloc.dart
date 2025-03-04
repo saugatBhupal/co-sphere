@@ -329,6 +329,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   List<Project> get acceptedProjects => _acceptedProjects;
   List<Project> _completedProjects = [];
   List<Project> get completedProjects => _completedProjects;
+  List<Project> _applicationProjects = [];
+  List<Project> get applicationProjects => _applicationProjects;
   Future<void> _getAppliedProjectByUser(
       GetAppliedProject event, Emitter<ProjectState> emit) async {
     emit(const GetAppliedProjectLoading());
@@ -337,6 +339,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       result.fold(
           (failure) => emit(GetAppliedProjectFailed(message: failure.message)),
           (success) {
+        _applicationProjects = success;
         _appliedProjects = success
             .where((project) => (project.status == Status.pending ||
                 project.status == Status.rejected))
@@ -347,7 +350,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         _completedProjects = success
             .where((project) => project.status == Status.completed)
             .toList();
-        emit(GetAppliedProjectSuccess(projects: _appliedProjects));
+        emit(GetAppliedProjectSuccess(projects: success));
       });
     } catch (e) {
       emit(GetAppliedProjectFailed(message: "Error: ${e.toString()}"));

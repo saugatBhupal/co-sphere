@@ -37,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
                                 ? _textTheme.headlineLarge!.copyWith(
                                     color: AppColors.grey,
                                     fontWeight: FontThickness.medium)
-                                : _textTheme.bodyLarge!
+                                : _textTheme.titleSmall!
                                     .copyWith(color: AppColors.grey),
                           ),
                           TextSpan(
@@ -46,7 +46,7 @@ class OnboardingScreen extends StatelessWidget {
                                 ? _textTheme.headlineLarge!.copyWith(
                                     color: AppColors.midnight,
                                     fontWeight: FontThickness.medium)
-                                : _textTheme.bodyLarge!
+                                : _textTheme.titleMedium!
                                     .copyWith(color: AppColors.midnight),
                           ),
                         ],

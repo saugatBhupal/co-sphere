@@ -38,7 +38,7 @@ class CompletedView extends StatelessWidget {
             return SizedBox(
               child: ListView.separated(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: state.projects.length,
                 itemBuilder: (context, index) =>
                     CompletedCard(project: state.projects[index], uid: uid),

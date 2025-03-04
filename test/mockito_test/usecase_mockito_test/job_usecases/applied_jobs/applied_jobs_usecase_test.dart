@@ -24,13 +24,14 @@ void main() {
   final dto = const Uuid().v4();
   test('should return the List job applied by the user', () async {
     final job = [Job.initial(), Job.initial()];
+    final jobData = [Job.initial().copyWith(id: const Uuid().v4()), Job.initial()];
 
     when(mockJobRepository.getAppliedJobs(dto))
         .thenAnswer((_) async => Right(job));
 
     final result = await appliedJobsUsecase(dto);
 
-    expect(result, Right(job));
+    expect(result, Right(jobData));
     verify(mockJobRepository.getAppliedJobs(dto)).called(1);
     verifyNoMoreInteractions(mockJobRepository);
   });

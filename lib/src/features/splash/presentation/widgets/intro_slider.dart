@@ -16,7 +16,8 @@ class _IntroSliderState extends State<IntroSlider> {
 
   @override
   Widget build(BuildContext context) {
-    final imageHeight = context.isTablet ? context.height * 0.6 : context.height * 0.4;
+    final imageHeight =
+        context.isTablet ? context.height * 0.6 : context.height / 1.9;
     return Column(
       children: [
         SizedBox(
@@ -29,15 +30,23 @@ class _IntroSliderState extends State<IntroSlider> {
               });
             },
             children: [
-              buildPage(AppImages.appLogo),
-              buildPage(AppImages.carousel1),
-              buildPage(AppImages.appLogo),
-              buildPage(AppImages.carousel1),
+              buildPage(
+                  AppImages.carousel2,
+                  context.isTablet
+                      ? context.height / 1.8
+                      : context.height / 2.1),
+              buildPage(AppImages.carousel1, context.height),
+              buildPage(AppImages.carousel3, context.height),
+              buildPage(
+                  AppImages.carousel4,
+                  context.isTablet
+                      ? context.height / 1.8
+                      : context.height / 2.1),
             ],
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 14.0),
+          padding: const EdgeInsets.only(top: 4.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(4, (index) {
@@ -58,21 +67,21 @@ class _IntroSliderState extends State<IntroSlider> {
     );
   }
 
-  Widget buildPage(String imagePath) {
+  Widget buildPage(String imagePath, double? size) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6),
       child: Center(
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.urban,
+            color: AppColors.satin,
             borderRadius: BorderRadius.circular(22),
           ),
-          // child: Image(
-          //   width: 380,
-          //   height: MediaQuery.of(context).size.height * 0.4,
-          //   fit: BoxFit.contain,
-          //   image: AssetImage(imagePath),
-          // ),
+          child: Image(
+            width: size,
+            height: size,
+            fit: BoxFit.fitHeight,
+            image: AssetImage(imagePath),
+          ),
         ),
       ),
     );

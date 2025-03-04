@@ -28,7 +28,7 @@ class AppliedProjectList extends StatelessWidget {
             buildToast(toastType: ToastType.error, msg: state.message);
             return const SizedBox.shrink();
           }
-          final projectList = context.watch<ProjectBloc>().appliedProjects;
+          final projectList = context.watch<ProjectBloc>().applicationProjects;
           if (projectList.isEmpty) {
             return const SizedBox.shrink();
           }

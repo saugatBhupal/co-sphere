@@ -51,7 +51,7 @@ class DashboardMetrics extends StatelessWidget {
                 bottom: true,
                 widget: const CompletionContainer(
                   total: 10,
-                  completed: 9,
+                  completed: 1,
                   color: AppColors.midnight,
                 ),
               ),
@@ -62,8 +62,8 @@ class DashboardMetrics extends StatelessWidget {
                 right: true,
                 font: 20,
                 widget: const CompletionContainer(
-                  total: 20,
-                  completed: 4,
+                  total: 10,
+                  completed: 1,
                   color: AppColors.blue,
                 ),
               ),
@@ -79,13 +79,13 @@ class DashboardMetrics extends StatelessWidget {
         _buildListItem(
           context,
           title: AppStrings.clients,
-          completed: "6",
-          total: "12",
+          completed: "0",
+          total: "1",
         ),
         _buildListItem(context,
             title: AppStrings.applicants,
-            completed: "3",
-            total: "11",
+            completed: "1",
+            total: "2",
             bottomLeft: true),
       ],
     );

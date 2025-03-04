@@ -50,7 +50,7 @@ class AssignedCard extends StatelessWidget {
                   Expanded(
                     child: CardsGridInfo(
                       title:
-                          "${project.tasks.first.createdDate.difference(DateTime.now()).inDays.toString()} (D)",
+                          "${DateTime.now().difference(project.tasks.first.createdDate).inDays.toString()} (D)",
                       subtitle: AppStrings.timeSpent,
                     ),
                   ),

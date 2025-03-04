@@ -65,6 +65,7 @@ class AppStrings {
   static const String tasks = "Tasks";
   static const String clients = "Unique Clients";
   static const String applicants = "Applicants";
+  static const String applicant = "Applicant";
   static const String rejected = "Rejected";
   static const String hired = "Hired";
   static const String likes = "Likes";

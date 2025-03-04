@@ -25,13 +25,14 @@ void main() {
       ApplyJobReqDto(userId: const Uuid().v4(), jobId: const Uuid().v4());
   test('should return the applied job', () async {
     final job = Job.initial();
+    final jobData = Job.initial().copyWith(id: const Uuid().v4());
 
     when(mockProjectRepository.applyToJob(dto))
         .thenAnswer((_) async => Right(job));
 
     final result = await applyToJobUsecase(dto);
 
-    expect(result, Right(job));
+    expect(result, Right(jobData));
     verify(mockProjectRepository.applyToJob(dto)).called(1);
     verifyNoMoreInteractions(mockProjectRepository);
   });
