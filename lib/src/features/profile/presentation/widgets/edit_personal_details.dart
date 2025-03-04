@@ -27,12 +27,11 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: "Saugat Bhupal Singh");
-    _phoneController = TextEditingController(text: "9800809909");
-    _dobController = TextEditingController(text: "13-07-2002");
-    _emailController = TextEditingController(text: "saugat@gmail.com");
-    _addressController =
-        TextEditingController(text: "Kalanki, Kathmandu, Nepal");
+    _nameController = TextEditingController();
+    _phoneController = TextEditingController();
+    _dobController = TextEditingController();
+    _emailController = TextEditingController();
+    _addressController = TextEditingController();
   }
 
   @override
@@ -47,8 +46,8 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final _gap = SizedBox(height: 20);
-    final _textTheme = Theme.of(context).textTheme;
+    const gap = SizedBox(height: 20);
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       width: context.width,
       padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 16),
@@ -68,7 +67,7 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
               return FormValidator.validateTitle(val, AppStrings.fullName);
             },
           ),
-          _gap,
+          gap,
           Row(
             children: [
               SizedBox(
@@ -96,7 +95,7 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
               ),
             ],
           ),
-          _gap,
+          gap,
           EmailField(
             emailController: _emailController,
             label: AppStrings.email,
@@ -105,7 +104,7 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
               return FormValidator.validateEmail(val);
             },
           ),
-          _gap,
+          gap,
           InputField(
             textController: _addressController,
             label: AppStrings.address,
@@ -119,7 +118,7 @@ class _EditPersonalDetailsState extends State<EditPersonalDetails> {
             child: CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
               title: Text(AppStrings.contactPer,
-                  style: _textTheme.titleSmall!.copyWith(letterSpacing: 0)),
+                  style: textTheme.titleSmall!.copyWith(letterSpacing: 0)),
               value: showContact,
               dense: true,
               onChanged: (newValue) {

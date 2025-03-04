@@ -4,8 +4,10 @@ class ApiEndpoints {
   static const Duration connectionTimeout = Duration(seconds: 1000);
   static const Duration receiveTimeout = Duration(seconds: 1000);
   // For Andriod
-  static const String baseUrl = "http://10.0.2.2:3000/api/v1";
-  // static const String baseUrl = "http://192.168.1.128:3000/api/v1";
+  // static const String baseUrl = "http://192.168.101.3 :3000/api/v1";
+  // static const String baseUrl = "http://10.0.2.2:3000/api/v1";
+  static const String baseUrl =
+      "https://a960-2404-7c00-44-f6d-197a-458a-7150-2199.ngrok-free.app/api/v1";
   // For iOS
   // static const String baseUrl = "http://localhost:3000/api/v1";
 

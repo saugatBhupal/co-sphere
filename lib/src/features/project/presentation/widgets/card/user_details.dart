@@ -1,20 +1,26 @@
-import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/media_query_values.dart';
-import 'package:cosphere/src/core/widgets/circle_image_avatar.dart';
+import 'package:cosphere/src/core/widgets/square_image_builder.dart';
 import 'package:flutter/material.dart';
 
 class UserDetails extends StatelessWidget {
   final String name;
   final String applied;
-  const UserDetails({super.key, this.applied = "1h ago", this.name = "Saugat"});
+  final String? imageUrl;
+  const UserDetails(
+      {super.key,
+      this.applied = "1h ago",
+      this.name = "Saugat",
+      this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
     return Row(
       children: [
-        CircleImageAvatar(
-            color: AppColors.midnight, radius: context.isTablet ? 24 : 20),
+        PlaceholderImage(
+            title: name[0],
+            imageUrl: imageUrl,
+            height: context.isTablet ? 40 : 32),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -22,14 +28,14 @@ class UserDetails extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: _textTheme.bodyLarge!.copyWith(
+                style: textTheme.bodyLarge!.copyWith(
                     letterSpacing: 0.4,
                     height: 1,
                     fontSize: context.isTablet ? 18 : 14),
               ),
               Text(
                 applied,
-                style: _textTheme.labelLarge!
+                style: textTheme.labelLarge!
                     .copyWith(fontSize: context.isTablet ? 14 : 10),
               ),
             ],

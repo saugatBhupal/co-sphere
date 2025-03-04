@@ -1,6 +1,6 @@
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:cosphere/src/core/domain/entities/user.dart';
 import 'package:cosphere/src/core/shared_prefs.dart/user_shared_pref.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketService {
   static final SocketService _instance = SocketService._internal();
@@ -15,8 +15,9 @@ class SocketService {
     String userId = user?.uid ?? 'undefined';
 
     _socket = IO.io(
-      'http://10.0.2.2:3000',
-      // 'http://192.168.1.128:3000',
+      // 'http://10.0.2.2:3000',
+      //'http://192.168.101.3:3000',
+      'https://a960-2404-7c00-44-f6d-197a-458a-7150-2199.ngrok-free.app',
       // 'http://localhost:3000',
       IO.OptionBuilder()
           .setQuery({'userId': userId})

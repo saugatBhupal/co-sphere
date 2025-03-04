@@ -49,14 +49,10 @@ class _SplashScreenState extends State<SplashScreen>
     return BlocListener<DashboardBloc, DashboardState>(
       listener: (context, state) {
         if (state is DashboardGetUserSuccess && state.user != null) {
-          // Navigator.of(context).pushNamedAndRemoveUntil(
-          //   AppRoutes.dashboard,
-          //   (route) => false,
-          //   arguments: state.user,
-          // );
           Navigator.of(context).pushNamedAndRemoveUntil(
-            AppRoutes.onboarding,
+            AppRoutes.dashboard,
             (route) => false,
+            arguments: state.user,
           );
         }
         if ((state is DashboardGetUserSuccess && state.user == null) ||

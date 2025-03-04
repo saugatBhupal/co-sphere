@@ -1,22 +1,23 @@
 import 'package:cosphere/src/config/app_routes/app_routes.dart';
 import 'package:cosphere/src/config/dependency_injection/dependency_injector.dart';
 import 'package:cosphere/src/config/screen_args.dart';
+import 'package:cosphere/src/config/socket_config/socket_service.dart';
+import 'package:cosphere/src/core/constants/app_colors.dart';
 import 'package:cosphere/src/core/constants/app_enums.dart';
+import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/core/functions/build_toast.dart';
 import 'package:cosphere/src/core/functions/date_time_utils.dart';
+import 'package:cosphere/src/core/functions/show_notification.dart';
 import 'package:cosphere/src/features/chat/data/dto/send_message_request_dto.dart';
 import 'package:cosphere/src/features/chat/data/models/mapppers/message_mappers.dart';
 import 'package:cosphere/src/features/chat/data/models/message_api_model.dart';
 import 'package:cosphere/src/features/chat/domain/entities/message.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cosphere/src/config/socket_config/socket_service.dart';
-import 'package:cosphere/src/core/constants/app_colors.dart';
-import 'package:cosphere/src/core/constants/app_fonts.dart';
 import 'package:cosphere/src/features/chat/presentation/viewmodel/chat_bloc.dart';
 import 'package:cosphere/src/features/chat/presentation/widgets/message_text_field.dart';
 import 'package:cosphere/src/features/chat/presentation/widgets/received_tile.dart';
 import 'package:cosphere/src/features/chat/presentation/widgets/sent_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatRoomScreen extends StatefulWidget {
   final ChatScreensArgs chatScreensArgs;
@@ -76,10 +77,8 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   @override
   void dispose() {
     _socketService.socket?.off("receiveMessage");
-    _socketService.socket?.on(
-        "receiveNotification",
-        (data) =>
-            {buildToast(toastType: ToastType.success, msg: "${data['data']}")});
+    _socketService.socket
+        ?.on("receiveNotification", (data) => {showNotification(data)});
     _scrollController.dispose();
     _textController.dispose();
     super.dispose();
@@ -87,7 +86,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return BlocProvider(
       create: (context) => sl<ChatBloc>()
@@ -106,7 +105,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
           ),
           title: Text(
             widget.chatScreensArgs.receipient.fullname,
-            style: _textTheme.titleLarge!.copyWith(
+            style: textTheme.titleLarge!.copyWith(
                 fontWeight: FontThickness.medium, color: AppColors.black),
           ),
           actions: const [Icon(Icons.more_vert)],

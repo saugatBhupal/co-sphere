@@ -36,6 +36,7 @@ class RejectedMembersCard extends StatelessWidget {
           child: Row(
             children: [
               UserDetails(
+                     imageUrl: screensArgs.applicant.user.profileImage,
                   name: screensArgs.applicant.user.fullname,
                   applied: timeAgo(screensArgs.applicant.date)),
               const Spacer(),

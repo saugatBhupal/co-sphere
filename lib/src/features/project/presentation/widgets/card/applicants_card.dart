@@ -20,7 +20,7 @@ class ApplicantsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _textTheme = Theme.of(context).textTheme;
+    final textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () => Navigator.of(context)
           .pushNamed(AppRoutes.profile, arguments: applicant.user.uid),
@@ -38,6 +38,7 @@ class ApplicantsCard extends StatelessWidget {
           child: Row(
             children: [
               UserDetails(
+                  imageUrl: applicant.user.profileImage,
                   name: applicant.user.fullname,
                   applied: timeAgo(applicant.date)),
               const Spacer(),
@@ -69,7 +70,7 @@ class ApplicantsCard extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Text(
                         AppStrings.tap,
-                        style: _textTheme.labelLarge!
+                        style: textTheme.labelLarge!
                             .copyWith(fontSize: context.isTablet ? 14 : 10),
                       ),
                     ),
